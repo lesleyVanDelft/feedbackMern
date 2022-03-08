@@ -6,6 +6,7 @@ const FeedbackItem = ({ feedback }) => {
 	const dispatch = useDispatch();
 	return (
 		<div className="feedback">
+			<p className="text">{feedback.title}</p>
 			<p className="text">{feedback.text}</p>
 			<button onClick={() => dispatch(deleteFeedback(feedback._id))}>
 				delete me

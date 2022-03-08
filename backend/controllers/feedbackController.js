@@ -21,6 +21,7 @@ const setFeedback = asyncHandler(async (req, res) => {
 	}
 
 	const feedback = await Feedback.create({
+		title: req.body.title,
 		text: req.body.text,
 		user: req.user.id,
 	});

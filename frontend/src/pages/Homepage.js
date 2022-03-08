@@ -7,6 +7,8 @@ import Spinner from '../components/Spinner';
 import { getFeedbacks, reset } from '../features/feedbacks/feedbackSlice';
 import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 import Dashboard from '../components/Dashboard/Dashboard';
+import Suggestions from '../components/Suggestions/Suggestions';
+import './Pages.css';
 
 const Homepage = () => {
 	const navigate = useNavigate();
@@ -47,7 +49,9 @@ const Homepage = () => {
 			</section> */}
 			{/* <FeedbackForm /> */}
 			<Dashboard />
+
 			<section className="Homepage__content">
+				<Suggestions />
 				{feedbacks.length > 0 ? (
 					<div className="feedbacks">
 						{feedbacks.map(feedback => {

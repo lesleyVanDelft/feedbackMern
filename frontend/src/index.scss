@@ -32,4 +32,16 @@ a {
 	margin: 0 auto;
 	background: $lightGray;
 	height: 100%;
+
+	.btn {
+		border: none;
+		padding: 0.7rem 1.5rem;
+		border-radius: 10px;
+		font-size: 14px;
+		font-weight: 500;
+		&-purple {
+			background: $purple;
+			color: $white;
+		}
+	}
 }

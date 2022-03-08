@@ -26,6 +26,7 @@
 		li {
 			// width: 100%;
 			// background-color: red;
+			position: relative;
 			&:nth-child(1) {
 				&::marker {
 					color: hsl(14, 83%, 74%);
@@ -42,8 +43,9 @@
 				}
 			}
 			span {
-				// width: 50%;
+				position: absolute;
 				margin-left: auto;
+				right: 0;
 			}
 		}
 	}
