@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // these get used in redux service files
-app.use('/api/goals', require('./routes/goalRoutes'));
+app.use('/api/feedbacks', require('./routes/feedbackRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 
 // potential fix
@@ -37,4 +37,6 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(errorHandler);
 
-app.listen(port, host, () => console.log(`running on ${port}`));
+app.listen(port, host, () =>
+	console.log(`Feedbackmern backend is running on port ${port}`)
+);

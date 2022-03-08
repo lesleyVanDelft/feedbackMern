@@ -1,0 +1,50 @@
+@import '../../../sass/main.scss';
+
+.Roadmap {
+	width: 255px;
+	height: 166px;
+	padding: 1rem 2rem;
+	background: $white;
+	border-radius: 10px;
+	&__title {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		a {
+			text-decoration: underline;
+			color: $blue;
+		}
+	}
+
+	&__list {
+		padding-top: 1.5rem;
+		padding-left: 1rem;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		li {
+			// width: 100%;
+			// background-color: red;
+			&:nth-child(1) {
+				&::marker {
+					color: hsl(14, 83%, 74%);
+				}
+			}
+			&:nth-child(2) {
+				&::marker {
+					color: $purple;
+				}
+			}
+			&:nth-child(3) {
+				&::marker {
+					color: $skyBlue;
+				}
+			}
+			span {
+				// width: 50%;
+				margin-left: auto;
+			}
+		}
+	}
+}

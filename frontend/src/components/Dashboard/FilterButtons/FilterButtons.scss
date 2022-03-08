@@ -1,0 +1,22 @@
+@import '../../../sass/main.scss';
+
+.FilterButtons {
+	width: 255px;
+	height: 166px;
+	background-color: $white;
+	padding: 2rem;
+	border-radius: 10px;
+	margin: 1.5rem 0;
+
+	button {
+		margin-right: 0.5rem;
+		margin-bottom: 0.8rem;
+		border: none;
+		border-radius: 10px;
+		padding: 0.2rem 0.8rem;
+		cursor: pointer;
+		font-weight: 500;
+		color: $blue;
+		font-size: 13px;
+	}
+}

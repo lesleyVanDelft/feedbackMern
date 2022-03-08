@@ -1,0 +1,26 @@
+@import '../../sass/main.scss';
+
+.Dashboard {
+	&__logo {
+		height: 8.5625rem;
+		width: 15.9375rem;
+		border-radius: 10px;
+		background: url('../../assets/suggestions/desktop/background-header.png')
+			no-repeat center center / cover;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		padding: 2rem 1rem;
+
+		h2 {
+			font-size: 1.25rem;
+			letter-spacing: -0.25px;
+			color: $white;
+		}
+
+		p {
+			color: $white;
+			opacity: 0.8;
+		}
+	}
+}

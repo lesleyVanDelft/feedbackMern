@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const {
-	getGoals,
-	setGoal,
-	editGoal,
-	deleteGoal,
-} = require('../controllers/goalController');
+	getFeedbacks,
+	setFeedback,
+	editFeedback,
+	deleteFeedback,
+} = require('../controllers/feedbackController');
 const { protect } = require('../middleware/authMiddleware');
 
-router.route('/').get(protect, getGoals).post(protect, setGoal);
-router.route('/:id').delete(protect, deleteGoal).put(protect, editGoal);
+router.route('/').get(protect, getFeedbacks).post(protect, setFeedback);
+router.route('/:id').delete(protect, deleteFeedback).put(protect, editFeedback);
 
 // SAME AS 2 lines above ^^^
 // router.get('/', getGoals);
