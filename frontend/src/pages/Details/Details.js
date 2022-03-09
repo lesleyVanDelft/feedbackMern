@@ -10,6 +10,7 @@ import {
 import { useParams } from 'react-router-dom';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import './Details.css';
+import CommentSection from '../../components/CommentSection/CommentSection';
 
 // import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 // import Dashboard from '../components/Dashboard/Dashboard';
@@ -62,7 +63,7 @@ const Details = () => {
 				return <FeedbackItem feedback={feedback} key={feedback._id} />;
 			})}
 
-			<div className="Details__comments"></div>
+			<CommentSection feedbackData={feedbacks} />
 		</main>
 	);
 };
