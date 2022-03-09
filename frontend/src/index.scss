@@ -18,6 +18,7 @@ body {
 
 #root {
 	height: 100%;
+	width: 100%;
 	background: $lightGray;
 }
 
@@ -43,6 +44,10 @@ a {
 		cursor: pointer;
 		&-purple {
 			background: $purple;
+			color: $white;
+		}
+		&-blue {
+			background: $blue;
 			color: $white;
 		}
 	}

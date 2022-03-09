@@ -25,7 +25,6 @@ const getSingleFeedback = asyncHandler(async (req, res) => {
 	const feedback = await Feedback.find({ _id: req.params.id });
 
 	res.status(200).json(feedback);
-	console.log(feedback);
 });
 
 //@desc   update feedbacks

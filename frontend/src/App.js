@@ -3,7 +3,7 @@ import Header from './components/Header/Header';
 import Homepage from './pages/Homepage';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Details from './pages/Details';
+import Details from './pages/Details/Details';
 
 function App() {
 	return (

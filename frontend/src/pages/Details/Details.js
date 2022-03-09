@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-// import GoalForm from '../components/GoalForm';
-// import FeedbackForm from '../components/FeedbackForm/FeedbackForm';
-import Spinner from '../components/Spinner';
-import { getSingleFeedback, reset } from '../features/feedbacks/feedbackSlice';
-import { useRouteMatch, useParams } from 'react-router-dom';
-import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
+import { FaChevronLeft } from 'react-icons/fa';
+import Spinner from '../../components/Spinner';
+import {
+	getSingleFeedback,
+	reset,
+} from '../../features/feedbacks/feedbackSlice';
+import { useParams } from 'react-router-dom';
+import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
+import './Details.css';
 
 // import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 // import Dashboard from '../components/Dashboard/Dashboard';
@@ -22,7 +25,6 @@ const Details = () => {
 	// get user state from auth redux store
 	const { user } = useSelector(state => state.auth);
 	const { feedbacks, isLoading, isError, message } = useSelector(state => {
-		console.log(state);
 		return state.feedbacks;
 	});
 
@@ -40,19 +42,28 @@ const Details = () => {
 		return () => {
 			dispatch(reset());
 		};
-	}, [user, navigate, isError, message, dispatch]);
+	}, [user, navigate, isError, message, dispatch, id]);
 
 	if (isLoading) {
 		return <Spinner />;
 	}
 
 	return (
-		<>
-			<h1>details</h1>
-			{feedbacks.map((fb, i) => {
-				return <FeedbackItem feedback={fb} />;
+		<main className="Details">
+			<div className="Details__buttons">
+				<button className="back">
+					<Link to="/">
+						<FaChevronLeft /> <span>Go Back</span>
+					</Link>
+				</button>
+				<button className="btn btn-blue edit">Edit Feedback</button>
+			</div>
+			{feedbacks.map(feedback => {
+				return <FeedbackItem feedback={feedback} key={feedback._id} />;
 			})}
-		</>
+
+			<div className="Details__comments"></div>
+		</main>
 	);
 };
 
