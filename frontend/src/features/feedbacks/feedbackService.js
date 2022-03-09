@@ -24,6 +24,19 @@ const getFeedbacks = async token => {
 	};
 
 	const response = await axios.get(API_URL, config);
+
+	return response.data;
+};
+
+// get single feedback
+const getSingleFeedback = async (feedbackId, token) => {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+
+	const response = await axios.get(API_URL + feedbackId, config);
 	return response.data;
 };
 
@@ -43,6 +56,7 @@ const feedbackService = {
 	createFeedback,
 	getFeedbacks,
 	deleteFeedback,
+	getSingleFeedback,
 };
 
 export default feedbackService;

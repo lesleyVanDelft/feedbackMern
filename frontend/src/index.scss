@@ -32,6 +32,7 @@ a {
 	margin: 0 auto;
 	background: $lightGray;
 	height: 100%;
+	padding: 0 8rem;
 
 	.btn {
 		border: none;
@@ -39,6 +40,7 @@ a {
 		border-radius: 10px;
 		font-size: 14px;
 		font-weight: 500;
+		cursor: pointer;
 		&-purple {
 			background: $purple;
 			color: $white;

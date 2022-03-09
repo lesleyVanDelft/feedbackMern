@@ -5,8 +5,8 @@ const FilterButtons = () => {
 
 	return (
 		<div className="FilterButtons">
-			{types.map(type => {
-				return <button>{type}</button>;
+			{types.map((type, i) => {
+				return <button key={i}>{type}</button>;
 			})}
 		</div>
 	);

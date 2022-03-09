@@ -42,19 +42,16 @@ const Homepage = () => {
 
 	return (
 		<main className="Homepage">
-			{/* <section className="Homepage__heading">
-				<h1>{user && user.name}</h1>
-				<h5>{user && user.username}</h5>
-				<p>Goals Dashboards</p>
-			</section> */}
 			{/* <FeedbackForm /> */}
 			<Dashboard />
 
 			<section className="Homepage__content">
 				<Suggestions />
+
 				{feedbacks.length > 0 ? (
 					<div className="feedbacks">
 						{feedbacks.map(feedback => {
+							// console.log(feedback);
 							return <FeedbackItem key={feedback._id} feedback={feedback} />;
 						})}
 					</div>

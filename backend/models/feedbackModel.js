@@ -15,10 +15,24 @@ const feedbackModel = mongoose.Schema(
 			type: String,
 			required: [true, 'Please add a text value'],
 		},
+		feedbackType: {
+			type: String,
+			required: [true, 'Please select a feedbacktype'],
+		},
+		comments: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Comment',
+			},
+		],
 	},
 	{
 		timestamps: true,
 	}
 );
+
+// feedbackModel.virtual('url').get(function(){
+// 	return '/post/' +  this._id;
+// })
 
 module.exports = mongoose.model('Feedback', feedbackModel);

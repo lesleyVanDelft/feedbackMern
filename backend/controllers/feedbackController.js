@@ -6,12 +6,29 @@ const User = require('../models/userModel');
 //@route  GET /api/Feedbacks
 //@access Private
 const getFeedbacks = asyncHandler(async (req, res) => {
-	const feedbacks = await Feedback.find({ user: req.user.id });
-
+	// const feedbacks = await Feedback.find({ user: req.user.id });
+	const feedbacks = await Feedback.find({});
+	// console.log(res);
 	res.status(200).json(feedbacks);
 });
 
-//@desc  update feedbacks
+//@desc   get single feedback
+//@route  GET /api/feedbacks
+//@access Private
+
+// const getFeedbackDetails = asyncHandler(async (req, res) => {
+// 	const feedback = await Feedback.find({ _id: req.params.id });
+// 	console.log(req.params.id);
+// 	res.status(200).json(feedback);
+// });
+const getSingleFeedback = asyncHandler(async (req, res) => {
+	const feedback = await Feedback.find({ _id: req.params.id });
+
+	res.status(200).json(feedback);
+	console.log(feedback);
+});
+
+//@desc   update feedbacks
 //@route  POST /api/feedbacks
 //@access Private
 const setFeedback = asyncHandler(async (req, res) => {
@@ -24,12 +41,13 @@ const setFeedback = asyncHandler(async (req, res) => {
 		title: req.body.title,
 		text: req.body.text,
 		user: req.user.id,
+		feedbackType: req.body.feedbackType,
 	});
 
 	res.status(200).json(feedback);
 });
 
-//@desc  edit feedbacks
+//@desc   edit feedbacks
 //@route  PUT /api/feedbacks/:id
 //@access Private
 const editFeedback = asyncHandler(async (req, res) => {
@@ -96,4 +114,5 @@ module.exports = {
 	setFeedback,
 	editFeedback,
 	deleteFeedback,
+	getSingleFeedback,
 };

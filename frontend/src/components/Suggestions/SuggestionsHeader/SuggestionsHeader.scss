@@ -3,11 +3,12 @@
 .SuggestionsHeader {
 	display: flex;
 	align-items: center;
-	background: $darkBlueGray2;
+	background: $darkBlue2;
 	color: $white;
 	width: 100%;
 	padding: 1rem;
 	padding-right: 1rem;
+	padding-left: 2rem;
 	border-radius: 10px;
 	&__total {
 		display: flex;
@@ -50,7 +51,7 @@
 		}
 	}
 
-	.btn {
+	.btnLink {
 		margin-left: auto;
 	}
 }

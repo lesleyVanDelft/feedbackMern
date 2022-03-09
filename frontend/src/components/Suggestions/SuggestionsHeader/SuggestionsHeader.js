@@ -1,4 +1,5 @@
 import { HiOutlineLightBulb, HiChevronDown, HiChevronUp } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 import './SuggestionsHeader.css';
 
 const SuggestionsHeader = () => {
@@ -15,7 +16,9 @@ const SuggestionsHeader = () => {
 				<button>Most Upvotes {<HiChevronDown />}</button>
 			</div>
 
-			<button className="btn btn-purple">+ Add Feedback</button>
+			<Link to="/create" className="btnLink">
+				<button className="btn btn-purple">+ Add Feedback</button>
+			</Link>
 		</header>
 	);
 };
