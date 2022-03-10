@@ -1,0 +1,24 @@
+@import '../../sass/main.scss';
+
+.CreateFeedbackForm {
+	background: $white;
+	position: relative;
+	padding: 0 2.625rem;
+	padding-top: 3.25rem;
+	border-radius: 10px;
+	&__title {
+		color: $darkBlue2;
+	}
+
+	&__image {
+		width: 56px;
+		height: 56px;
+		position: absolute;
+		top: -28px;
+		left: 42px;
+	}
+
+	.btn-darkBlue {
+		margin-right: 1rem;
+	}
+}

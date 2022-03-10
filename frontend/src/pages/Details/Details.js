@@ -57,8 +57,11 @@ const Details = () => {
 						<FaChevronLeft /> <span>Go Back</span>
 					</Link>
 				</button>
-				<button className="btn btn-blue edit">Edit Feedback</button>
+				<Link to={`/edit/${id}`}>
+					<button className="btn btn-blue edit">Edit Feedback</button>
+				</Link>
 			</div>
+
 			{feedbacks.map(feedback => {
 				return <FeedbackItem feedback={feedback} key={feedback._id} />;
 			})}

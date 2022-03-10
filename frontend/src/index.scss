@@ -51,5 +51,66 @@ a {
 			background: $blue;
 			color: $white;
 		}
+		&-darkBlue {
+			background: $darkBlue1;
+			color: $white;
+		}
+
+		&:hover {
+			opacity: 0.9;
+		}
+	}
+}
+
+// Form group
+.Form__group {
+	display: flex;
+	flex-direction: column;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	&:first-child {
+		padding-top: 40px;
+	}
+
+	h3 {
+		color: $darkBlue2;
+		letter-spacing: -0.19px;
+		font-size: 0.875rem;
+		font-weight: bold;
+	}
+
+	label {
+		font-size: 0.875rem;
+		color: $darkBlue1;
+		margin-bottom: 1rem;
+	}
+
+	input {
+		border: none;
+		background: $inputGray2;
+		padding-bottom: 1rem;
+		padding-left: 1rem;
+		border-radius: 10px;
+		&.title {
+			width: 456px;
+			height: 48px;
+			border-radius: 10px;
+		}
+
+		&.text {
+			width: 456px;
+			height: 96px;
+			text-align: start;
+			padding: 0rem;
+			padding-bottom: 3rem;
+			padding-left: 1rem;
+		}
+	}
+
+	&--buttons {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 1rem;
+		padding-bottom: 40px;
 	}
 }
