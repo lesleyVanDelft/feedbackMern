@@ -1,0 +1,47 @@
+@import '../../../sass/main.scss';
+
+.AddComment {
+	width: 100%;
+	padding: 0 2.125rem;
+	padding-bottom: 2rem;
+	margin-top: 1.5rem;
+	background: $white;
+	&__title {
+		font-size: 18px;
+		color: $darkBlue1;
+		letter-spacing: -0.25px;
+		font-weight: bold;
+		padding-top: 1.5rem;
+		padding-bottom: 1.5rem;
+	}
+
+	input {
+		border: none;
+		background: $inputGray;
+		width: 100%;
+		padding: 1rem 30.1875rem 2.625rem 1rem;
+		margin-bottom: 1rem;
+		outline: none;
+		border-radius: 10px;
+
+		&::placeholder {
+			opacity: 0.8;
+		}
+
+		&:focus {
+			outline: 1px solid $blue;
+		}
+	}
+
+	&__bottom {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		// justify-content: center;
+		span.letterCount {
+			color: $lightBlueGray;
+			font-size: 15px;
+			margin-right: auto;
+		}
+	}
+}

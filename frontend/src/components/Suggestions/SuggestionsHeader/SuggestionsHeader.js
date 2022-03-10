@@ -2,13 +2,13 @@ import { HiOutlineLightBulb, HiChevronDown, HiChevronUp } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import './SuggestionsHeader.css';
 
-const SuggestionsHeader = () => {
+const SuggestionsHeader = ({ suggestionCount }) => {
 	return (
 		<header className="SuggestionsHeader">
 			<div className="SuggestionsHeader__total">
 				<HiOutlineLightBulb />
 				<h2>
-					<span>6</span>Suggestions
+					<span>{suggestionCount}</span>Suggestions
 				</h2>
 			</div>
 			<div className="SuggestionsHeader__sort">

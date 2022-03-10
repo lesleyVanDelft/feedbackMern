@@ -46,7 +46,7 @@ const Homepage = () => {
 			<Dashboard />
 
 			<section className="Homepage__content">
-				<Suggestions />
+				<Suggestions suggestionCount={feedbacks.length} />
 
 				{feedbacks.length > 0 ? (
 					<div className="feedbacks">

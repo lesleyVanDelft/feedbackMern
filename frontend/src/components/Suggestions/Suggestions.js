@@ -1,10 +1,10 @@
 import SuggestionsHeader from './SuggestionsHeader/SuggestionsHeader';
 import './Suggestions.css';
 
-const Suggestions = () => {
+const Suggestions = ({ suggestionCount }) => {
 	return (
 		<section className="Suggestions">
-			<SuggestionsHeader />
+			<SuggestionsHeader suggestionCount={suggestionCount} />
 		</section>
 	);
 };
