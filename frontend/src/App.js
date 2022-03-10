@@ -5,7 +5,6 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Details from './pages/Details/Details';
 import Edit from './pages/Edit/Edit';
-import Create from './pages/Create/Create';
 
 function App() {
 	return (
@@ -19,7 +18,6 @@ function App() {
 						<Route path="/register" element={<Register />} />
 						<Route path="/:id" element={<Details />} />
 						<Route path="/edit/:id" element={<Edit />} />
-						<Route path="/create" element={<Create />} />
 					</Routes>
 				</div>
 			</Router>

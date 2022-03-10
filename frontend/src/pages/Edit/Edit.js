@@ -1,7 +1,7 @@
 import './Edit.css';
 
 const Edit = () => {
-	return null;
+	return <h1>edit page</h1>;
 };
 
 export default Edit;

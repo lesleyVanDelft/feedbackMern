@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaChevronLeft } from 'react-icons/fa';
 import Spinner from '../../components/Spinner';
@@ -19,7 +19,7 @@ import CommentSection from '../../components/CommentSection/CommentSection';
 const Details = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	// let match = useRouteMatch('/:id')
+
 	let { id } = useParams();
 
 	// useSelector(state => console.log(state));
@@ -39,11 +39,12 @@ const Details = () => {
 		}
 
 		dispatch(getSingleFeedback(id));
+		// console.log(feedbacks);
 
 		return () => {
 			dispatch(reset());
 		};
-	}, [user, navigate, isError, message, dispatch, id]);
+	}, [user, navigate, isError, message, dispatch]);
 
 	if (isLoading) {
 		return <Spinner />;

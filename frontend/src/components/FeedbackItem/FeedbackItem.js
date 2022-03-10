@@ -6,6 +6,9 @@ import './FeedbackItem.css';
 
 const FeedbackItem = ({ feedback }) => {
 	const dispatch = useDispatch();
+
+	// const useContext =
+
 	return (
 		<div className="FeedbackItem">
 			<div className="FeedbackItem__left">

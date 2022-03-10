@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux';
 import { createFeedback } from '../../features/feedbacks/feedbackSlice';
 import CreateImg from '../../assets/shared/icon-new-feedback.svg';
 import './CreateFeedbackForm.css';
+import { useNavigate } from 'react-router-dom';
 
 const CreateFeedbackForm = () => {
 	const [text, setText] = useState('');
 	const [title, setTitle] = useState('');
 	const [feedbackType, setFeedbackType] = useState('UI');
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const onSubmit = e => {
 		e.preventDefault();
@@ -17,6 +19,7 @@ const CreateFeedbackForm = () => {
 		setText('');
 		setTitle('');
 		setFeedbackType('UI');
+		navigate('/');
 	};
 	return (
 		<section className="CreateFeedbackForm">

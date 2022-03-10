@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { createContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // import GoalForm from '../components/GoalForm';
-import FeedbackForm from '../components/FeedbackForm/FeedbackForm';
+// import FeedbackForm from '../components/FeedbackForm/FeedbackForm';
 import Spinner from '../components/Spinner';
 import { getFeedbacks, reset } from '../features/feedbacks/feedbackSlice';
 import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
@@ -13,10 +13,12 @@ import './Pages.css';
 const Homepage = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const Context = createContext();
 
 	// get user state from auth redux store
 	const { user } = useSelector(state => state.auth);
 	const { feedbacks, isLoading, isError, message } = useSelector(state => {
+		console.log(state.feedbacks.feedbacks);
 		return state.feedbacks;
 	});
 
@@ -52,7 +54,12 @@ const Homepage = () => {
 					<div className="feedbacks">
 						{feedbacks.map(feedback => {
 							// console.log(feedback);
-							return <FeedbackItem key={feedback._id} feedback={feedback} />;
+							let value = feedback;
+							return (
+								<Context.Provider value={value} key={feedback._id}>
+									<FeedbackItem feedback={feedback} />
+								</Context.Provider>
+							);
 						})}
 					</div>
 				) : (

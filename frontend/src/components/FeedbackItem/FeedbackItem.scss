@@ -9,6 +9,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
+	// animation: border 4s ease-in-out;
 
 	&__left {
 		display: flex;
@@ -46,7 +47,7 @@
 			.text {
 				font-size: 1rem;
 				color: $lightBlueGray;
-				margin-bottom: 0.5rem;
+				margin-bottom: 0.65rem;
 				margin-top: 0.2rem;
 			}
 			.feedbackTypeBtn {
@@ -74,3 +75,15 @@
 		}
 	}
 }
+
+// @keyframes border {
+// 	0% {
+// 		outline: none;
+// 	}
+// 	50% {
+// 		outline: 2px solid green;
+// 	}
+// 	100% {
+// 		outline: none;
+// 	}
+// }

@@ -132,6 +132,7 @@ export const feedbackSlice = createSlice({
 				state.isLoading = false;
 				state.isSuccess = true;
 				state.feedbacks = action.payload;
+				// console.log(action.payload);
 			})
 			.addCase(deleteFeedback.pending, state => {
 				state.isLoading = true;
