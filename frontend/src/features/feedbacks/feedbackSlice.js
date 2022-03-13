@@ -66,6 +66,26 @@ export const getSingleFeedback = createAsyncThunk(
 	}
 );
 
+// edit feedback
+export const editFeedback = createAsyncThunk(
+	'feedback/edit',
+	async (data, thunkAPI) => {
+		try {
+			const token = thunkAPI.getState().auth.user.token;
+			console.log(data);
+			return await feedbackService.editFeedback(data, token);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
 // delete feedback
 export const deleteFeedback = createAsyncThunk(
 	'feedback/delete',
@@ -120,11 +140,6 @@ export const feedbackSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 			})
-			.addCase(getSingleFeedback.rejected, (state, action) => {
-				state.isLoading = false;
-				state.isError = true;
-				state.message = action.payload;
-			})
 			.addCase(getSingleFeedback.pending, state => {
 				state.isLoading = true;
 			})
@@ -133,6 +148,26 @@ export const feedbackSlice = createSlice({
 				state.isSuccess = true;
 				state.feedbacks = action.payload;
 				// console.log(action.payload);
+			})
+			.addCase(getSingleFeedback.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			.addCase(editFeedback.pending, state => {
+				state.isLoading = true;
+			})
+			.addCase(editFeedback.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				// state.feedbacks.id = action.payload;
+				state.feedbacks = action.payload;
+				// console.log(action.payload)
+			})
+			.addCase(editFeedback.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
 			})
 			.addCase(deleteFeedback.pending, state => {
 				state.isLoading = true;

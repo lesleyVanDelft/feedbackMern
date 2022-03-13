@@ -40,6 +40,22 @@ const getSingleFeedback = async (feedbackId, token) => {
 	return response.data;
 };
 
+// Edit feedback
+// let user = JSON.parse(sessionStorage.getItem())
+const editFeedback = async (data, token) => {
+	// console.log(updateData);
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+	// console.log(config.headers);
+	// needs updated data
+	const response = await axios.put(API_URL + data._id, data, config);
+	console.log(response.data);
+	return response.data;
+};
+
 // delete feedback
 const deleteFeedback = async (feedbackId, token) => {
 	const config = {
@@ -57,6 +73,7 @@ const feedbackService = {
 	getFeedbacks,
 	deleteFeedback,
 	getSingleFeedback,
+	editFeedback,
 };
 
 export default feedbackService;

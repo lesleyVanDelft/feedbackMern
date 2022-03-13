@@ -1,3 +1,51 @@
 @import '../../sass/main.scss';
+
 .EditFeedbackForm {
+	background: $white;
+	position: relative;
+	padding: 0 2.625rem;
+	padding-top: 3.25rem;
+	border-radius: 10px;
+
+	.backButton {
+		margin-bottom: 40px;
+		margin-top: 30px;
+		.back {
+			cursor: pointer;
+			border: none;
+			background: none;
+
+			color: $lightBlueGray;
+			display: flex;
+			align-items: center;
+			font-size: 14px;
+			font-weight: bold;
+
+			svg {
+				color: $blue;
+				width: 16px;
+				height: 12px;
+				margin-right: 0.3rem;
+			}
+		}
+	}
+	&__title {
+		color: $darkBlue2;
+	}
+
+	&__image {
+		width: 56px;
+		height: 56px;
+		position: absolute;
+		top: -28px;
+		left: 42px;
+	}
+
+	.btn-red {
+		margin-right: auto;
+	}
+
+	.btn-darkBlue {
+		margin-right: 1rem;
+	}
 }

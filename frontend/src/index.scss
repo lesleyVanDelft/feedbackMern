@@ -43,17 +43,18 @@ a {
 		font-size: 14px;
 		font-weight: 500;
 		cursor: pointer;
+		color: $white;
 		&-purple {
 			background: $purple;
-			color: $white;
 		}
 		&-blue {
 			background: $blue;
-			color: $white;
 		}
 		&-darkBlue {
 			background: $darkBlue1;
-			color: $white;
+		}
+		&-red {
+			background: $red;
 		}
 
 		&:hover {

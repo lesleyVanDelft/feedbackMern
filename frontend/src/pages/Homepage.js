@@ -13,12 +13,12 @@ import './Pages.css';
 const Homepage = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const Context = createContext();
+	// const Context = createContext();
 
 	// get user state from auth redux store
 	const { user } = useSelector(state => state.auth);
 	const { feedbacks, isLoading, isError, message } = useSelector(state => {
-		console.log(state.feedbacks.feedbacks);
+		// console.log(state.feedbacks.feedbacks);
 		return state.feedbacks;
 	});
 
@@ -54,11 +54,11 @@ const Homepage = () => {
 					<div className="feedbacks">
 						{feedbacks.map(feedback => {
 							// console.log(feedback);
-							let value = feedback;
+							// let value = feedback;
 							return (
-								<Context.Provider value={value} key={feedback._id}>
-									<FeedbackItem feedback={feedback} />
-								</Context.Provider>
+								// <Context.Provider value={feedback} key={feedback._id}>
+								<FeedbackItem feedback={feedback} key={feedback._id} />
+								// </Context.Provider
 							);
 						})}
 					</div>

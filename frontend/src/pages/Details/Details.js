@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaChevronLeft } from 'react-icons/fa';
 import Spinner from '../../components/Spinner';
@@ -11,16 +11,20 @@ import { useParams } from 'react-router-dom';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import './Details.css';
 import CommentSection from '../../components/CommentSection/CommentSection';
+import EditFeedbackForm from '../../components/EditFeedbackForm/EditFeedbackForm';
 
 // import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 // import Dashboard from '../components/Dashboard/Dashboard';
 // import Suggestions from '../components/Suggestions/Suggestions';
 
 const Details = () => {
+	// const [isEditing, setIsEditing] = useState(false);
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	let { id } = useParams();
+	// console.log(id);
 
 	// useSelector(state => console.log(state));
 	// get user state from auth redux store
@@ -28,6 +32,7 @@ const Details = () => {
 	const { feedbacks, isLoading, isError, message } = useSelector(state => {
 		return state.feedbacks;
 	});
+	// console.log(feedbacks);
 
 	useEffect(() => {
 		if (isError) {
@@ -44,7 +49,7 @@ const Details = () => {
 		return () => {
 			dispatch(reset());
 		};
-	}, [user, navigate, isError, message, dispatch]);
+	}, [user, navigate, isError, message, dispatch, id]);
 
 	if (isLoading) {
 		return <Spinner />;
@@ -63,9 +68,11 @@ const Details = () => {
 				</Link>
 			</div>
 
-			{feedbacks.map(feedback => {
-				return <FeedbackItem feedback={feedback} key={feedback._id} />;
-			})}
+			{feedbacks.length > 0
+				? feedbacks.map(feedback => {
+						return <FeedbackItem feedback={feedback} key={feedback._id} />;
+				  })
+				: 'loading'}
 
 			<CommentSection feedbackData={feedbacks} />
 		</main>

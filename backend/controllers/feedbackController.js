@@ -23,6 +23,8 @@ const getFeedbacks = asyncHandler(async (req, res) => {
 // });
 const getSingleFeedback = asyncHandler(async (req, res) => {
 	const feedback = await Feedback.find({ _id: req.params.id });
+	// console.log(req.params.id);
+	console.log(req.body);
 
 	res.status(200).json(feedback);
 });
@@ -51,35 +53,44 @@ const setFeedback = asyncHandler(async (req, res) => {
 //@access Private
 const editFeedback = asyncHandler(async (req, res) => {
 	const feedback = await Feedback.findById(req.params.id);
+	// console.log(req.body);
 
 	if (!feedback) {
 		res.status(400);
 		throw new Error('Feedback not found');
 	}
 
-	// check for user
 	if (!req.user) {
-		res.status(401);
+		res.status(400);
 		throw new Error('User not found');
 	}
 
-	// make sure the logged in user matches the feedback user
 	if (feedback.user.toString() !== req.user.id) {
 		res.status(401);
-		throw new Error('User not authorized');
+		throw new Error('User not authorized(feedbackController)');
 	}
 
-	const updatedFeedback = await Feedback.findByIdAndUpdate(
+	const updatedFeedback = await Feedback.findOneAndUpdate(
 		req.params.id,
 		req.body,
-		{
-			new: true,
-		}
+		{ new: true }
 	);
-
+	// console.log(updatedFeedback);
 	res.status(200).json(updatedFeedback);
 });
+// const editFeedback = asyncHandler(async (req, res, next) => {
+// 	try {
+// 		const id = req.params.id;
+// 		const updates = req.body;
+// 		const options = { new: true };
 
+// 		const response = await Feedback.findByIdAndUpdate(id, updates, options);
+
+// 		res.status(200).json(response);
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// });
 //@desc  delete goals
 //@route  DELETE /api/goals/:id
 //@access Private

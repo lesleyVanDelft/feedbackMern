@@ -1,4 +1,29 @@
 @import '../../sass/main.scss';
 
 .Edit {
+	max-width: 33.75rem;
+	margin: 0 auto;
+
+	&__backButton {
+		margin-bottom: 40px;
+		margin-top: 30px;
+		.back {
+			border: none;
+			background: none;
+			a {
+				color: $lightBlueGray;
+				display: flex;
+				align-items: center;
+				font-size: 14px;
+				font-weight: bold;
+
+				svg {
+					color: $blue;
+					width: 16px;
+					height: 12px;
+					margin-right: 0.3rem;
+				}
+			}
+		}
+	}
 }
