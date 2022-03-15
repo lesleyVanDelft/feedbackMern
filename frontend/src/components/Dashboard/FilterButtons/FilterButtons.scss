@@ -18,6 +18,16 @@
 		font-weight: 600;
 		color: $blue;
 		font-size: 13px;
+		text-transform: capitalize;
+		&:nth-child(2),
+		&:nth-child(3) {
+			text-transform: uppercase;
+		}
+	}
+
+	&__button.active {
+		background: $blue;
+		color: $white;
 	}
 }
 

@@ -114,6 +114,7 @@ export const feedbackSlice = createSlice({
 	},
 	extraReducers: builder => {
 		builder
+
 			.addCase(createFeedback.pending, state => {
 				state.isLoading = true;
 			})

@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-// import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import EditImg from '../../assets/shared/icon-edit-feedback.svg';
 // import Spinner from '../Spinner';
 import {
 	// getSingleFeedback,
-	// reset,
+	reset,
 	editFeedback,
 	deleteFeedback,
 	getSingleFeedback,
 } from '../../features/feedbacks/feedbackSlice';
 import { useParams } from 'react-router-dom';
-// import { FaChevronLeft } from 'react-icons/fa';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import './EditFeedbackForm.css';
 
 // 01:25 11-3-2022, needs edit form and functionality. Create button gives errors ._.' nvm fixed it, somehow got removed from app.js routes -.-
@@ -22,8 +21,6 @@ const EditFeedbackForm = ({ feedbackData }) => {
 	const [titleContent, setTitleContent] = useState('');
 	const [category, setCategory] = useState('');
 	const [detailContent, setDetailContent] = useState('');
-	// console.log(feedbackData);
-	// console.log(titleContent);
 
 	// get user state from auth redux store
 	const { user } = useSelector(state => state.auth);
@@ -38,17 +35,11 @@ const EditFeedbackForm = ({ feedbackData }) => {
 
 	// let data = {};
 	useEffect(() => {
-		// const { title, feedbackType, text } = feedbackData[0];
-		// console.log(title, feedbackType, text);
-		// dispatch()
 		setTitleContent(feedbacks[0].title);
 		setCategory(feedbacks[0].feedbackType);
 		setDetailContent(feedbacks[0].text);
-		// console.log(id);
 	}, []);
 
-	// console.log(data);
-	// _id: id.toString(),
 	let data = {
 		_id: id,
 		title: titleContent,
@@ -59,6 +50,17 @@ const EditFeedbackForm = ({ feedbackData }) => {
 	const onSubmit = e => {
 		e.preventDefault();
 		dispatch(editFeedback(data));
+	};
+
+	const handleDelete = () => {
+		// e.preventDefault();
+		dispatch(deleteFeedback(feedbackData[0]._id));
+		// setTimeout(navigate('/'), 1000);
+		// dispatch(reset());
+		navigate('/');
+
+		// dispatch(feedbackData)
+		// console.log(feedbackData);
 	};
 
 	return (
@@ -116,11 +118,6 @@ const EditFeedbackForm = ({ feedbackData }) => {
 				</div>
 
 				<div className="Form__group--buttons">
-					<button
-						className="btn btn-red"
-						onClick={() => dispatch(deleteFeedback(id))}>
-						Delete
-					</button>
 					<button className="btn btn-darkBlue" onClick={() => navigate('/')}>
 						Cancel
 					</button>
@@ -129,6 +126,13 @@ const EditFeedbackForm = ({ feedbackData }) => {
 					</button>
 				</div>
 			</form>
+			<button
+				className="btn btn-red"
+				onClick={() => {
+					handleDelete();
+				}}>
+				Delete
+			</button>
 		</section>
 	);
 };

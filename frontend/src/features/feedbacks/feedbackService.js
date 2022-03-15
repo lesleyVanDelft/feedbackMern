@@ -52,7 +52,7 @@ const editFeedback = async (data, token) => {
 	// console.log(config.headers);
 	// needs updated data
 	const response = await axios.put(API_URL + data._id, data, config);
-	console.log(response.data);
+	// console.log(response.data);
 	return response.data;
 };
 
@@ -65,6 +65,7 @@ const deleteFeedback = async (feedbackId, token) => {
 	};
 
 	const response = await axios.delete(API_URL + feedbackId, config);
+	console.log(response);
 	return response.data;
 };
 

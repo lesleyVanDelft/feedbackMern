@@ -1,12 +1,32 @@
+import { useEffect, useState } from 'react';
 import './FilterButtons.css';
 
-const FilterButtons = () => {
-	const types = ['All', 'UI', 'UX', 'Enhancement', 'Bug', 'Feature'];
+const FilterButtons = ({ category }) => {
+	const types = ['all', 'ui', 'ux', 'enhancement', 'bug', 'feature'];
+	const [active, setActive] = useState('all');
+
+	// const handleClick = type => {
+	// 	// setActive(type);
+	// 	category(active);
+	// };
+
+	useEffect(() => {
+		category(active);
+	}, [category, active]);
 
 	return (
 		<div className="FilterButtons">
 			{types.map((type, i) => {
-				return <button key={i}>{type}</button>;
+				return (
+					<button
+						key={i}
+						onClick={() => setActive(type)}
+						className={`FilterButtons__button ${
+							active === type ? 'active' : null
+						}`}>
+						{type}
+					</button>
+				);
 			})}
 		</div>
 	);

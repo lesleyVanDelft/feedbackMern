@@ -1,4 +1,4 @@
-import { createContext, useEffect } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // import GoalForm from '../components/GoalForm';
@@ -9,6 +9,7 @@ import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 import Dashboard from '../components/Dashboard/Dashboard';
 import Suggestions from '../components/Suggestions/Suggestions';
 import './Pages.css';
+import EmptyFeedback from '../components/EmptyFeedback/EmptyFeedback';
 
 const Homepage = () => {
 	const navigate = useNavigate();
@@ -22,6 +23,13 @@ const Homepage = () => {
 		return state.feedbacks;
 	});
 
+	const [categoryState, setCategoryState] = useState('all');
+	const getCategoryState = catState => {
+		setCategoryState(catState);
+	};
+
+	// console.log(feedbacks);
+
 	useEffect(() => {
 		if (isError) {
 			console.log(message);
@@ -31,39 +39,58 @@ const Homepage = () => {
 			navigate('/login');
 		}
 
-		dispatch(getFeedbacks());
+		// dispatch(getFeedbacks(feedbacks));
+		setTimeout(() => {
+			dispatch(getFeedbacks(feedbacks));
+			// console.log('homepage log');
+		}, 100);
 
-		return () => {
-			dispatch(reset());
-		};
-	}, [user, navigate, isError, message, dispatch]);
+		// return () => {
+		// 	dispatch(reset());
+		// };
+	}, [user, navigate, dispatch]);
 
 	if (isLoading) {
 		return <Spinner />;
 	}
 
+	const filteredFeedbacks = feedbacks.filter(feedback => {
+		return feedback.feedbackType.toLowerCase() === categoryState;
+	});
+	// console.log(categoryState);
+
 	return (
 		<main className="Homepage">
-			{/* <FeedbackForm /> */}
-			<Dashboard />
+			<Dashboard category={getCategoryState} />
 
 			<section className="Homepage__content">
-				<Suggestions suggestionCount={feedbacks.length} />
+				<Suggestions
+					suggestionCount={
+						categoryState === 'all'
+							? feedbacks.length
+							: filteredFeedbacks.length
+					}
+				/>
 
-				{feedbacks.length > 0 ? (
+				{/* Check for empty feedback lists and render empty component */}
+				{feedbacks.length <= 0 ? <EmptyFeedback /> : null}
+				{categoryState !== 'all' && filteredFeedbacks.length <= 0 ? (
+					<EmptyFeedback />
+				) : null}
+
+				{/* Loop over all feedbacks if category state is all, else loop over filtered feedbacks*/}
+				{feedbacks.length > 0 && categoryState === 'all' ? (
 					<div className="feedbacks">
 						{feedbacks.map(feedback => {
-							// console.log(feedback);
-							// let value = feedback;
-							return (
-								// <Context.Provider value={feedback} key={feedback._id}>
-								<FeedbackItem feedback={feedback} key={feedback._id} />
-								// </Context.Provider
-							);
+							return <FeedbackItem feedback={feedback} key={feedback._id} />;
 						})}
 					</div>
 				) : (
-					<h3>You have not set any feedbacks</h3>
+					<div className="feedbacks">
+						{filteredFeedbacks.map(feedback => {
+							return <FeedbackItem feedback={feedback} key={feedback._id} />;
+						})}
+					</div>
 				)}
 			</section>
 		</main>

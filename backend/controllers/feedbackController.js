@@ -24,7 +24,7 @@ const getFeedbacks = asyncHandler(async (req, res) => {
 const getSingleFeedback = asyncHandler(async (req, res) => {
 	const feedback = await Feedback.find({ _id: req.params.id });
 	// console.log(req.params.id);
-	console.log(req.body);
+	// console.log(req.body);
 
 	res.status(200).json(feedback);
 });
@@ -70,7 +70,7 @@ const editFeedback = asyncHandler(async (req, res) => {
 		throw new Error('User not authorized(feedbackController)');
 	}
 
-	const updatedFeedback = await Feedback.findOneAndUpdate(
+	const updatedFeedback = await Feedback.findByIdAndUpdate(
 		req.params.id,
 		req.body,
 		{ new: true }
@@ -96,6 +96,7 @@ const editFeedback = asyncHandler(async (req, res) => {
 //@access Private
 const deleteFeedback = asyncHandler(async (req, res) => {
 	const feedback = await Feedback.findById(req.params.id);
+	// console.log(feedback);
 
 	if (!feedback) {
 		res.status(400);
@@ -114,9 +115,9 @@ const deleteFeedback = asyncHandler(async (req, res) => {
 		throw new Error('User not authorized');
 	}
 
-	await feedback.remove();
+	await Feedback.findByIdAndRemove(req.params.id);
 
-	res.status(200).json({ id: req.params.id });
+	res.status(202);
 });
 
 module.exports = {
