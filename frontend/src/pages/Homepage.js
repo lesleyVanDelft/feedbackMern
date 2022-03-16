@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion';
 // import GoalForm from '../components/GoalForm';
 // import FeedbackForm from '../components/FeedbackForm/FeedbackForm';
 import Spinner from '../components/Spinner';
@@ -23,12 +24,23 @@ const Homepage = () => {
 		return state.feedbacks;
 	});
 
+	// category filter button state
 	const [categoryState, setCategoryState] = useState('all');
 	const getCategoryState = catState => {
 		setCategoryState(catState);
 	};
 
-	// console.log(feedbacks);
+	// mobile menu open or closed, needed for darkened modal
+	const [mobileState, setMobileState] = useState(false);
+	const getMobileState = mobile => {
+		setMobileState(!mobile);
+	};
+	// console.log(mobileState);
+
+	const menuVisibility = {
+		visible: { opacity: 1 },
+		hidden: { opacity: 0 },
+	};
 
 	useEffect(() => {
 		if (isError) {
@@ -48,7 +60,7 @@ const Homepage = () => {
 		// return () => {
 		// 	dispatch(reset());
 		// };
-	}, [user, navigate, dispatch]);
+	}, [user, navigate, dispatch, isError, message]);
 
 	if (isLoading) {
 		return <Spinner />;
@@ -58,12 +70,17 @@ const Homepage = () => {
 		return feedback.feedbackType.toLowerCase() === categoryState;
 	});
 	// console.log(categoryState);
-
+	// <Dashboard category={getCategoryState} mobileOpen={getMobileState} />
 	return (
 		<main className="Homepage">
-			<Dashboard category={getCategoryState} />
+			<Dashboard category={getCategoryState} mobileOpen={getMobileState} />
 
-			<section className="Homepage__content">
+			<section className={`Homepage__content`}>
+				<motion.div
+					className={`overlay ${mobileState ? 'active' : null}`}
+					variants={menuVisibility}
+					initial="hidden"
+					animate="visible"></motion.div>
 				<Suggestions
 					suggestionCount={
 						categoryState === 'all'
@@ -91,6 +108,7 @@ const Homepage = () => {
 							return <FeedbackItem feedback={feedback} key={feedback._id} />;
 						})}
 					</div>
+					// <h3>no shit</h3>
 				)}
 			</section>
 		</main>

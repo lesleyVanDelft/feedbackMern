@@ -115,3 +115,15 @@ a {
 		padding-bottom: 40px;
 	}
 }
+
+@media screen and(max-width: 1024px) {
+	.App {
+		padding: 0 1.5rem;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.App {
+		padding: 0;
+	}
+}

@@ -10,6 +10,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		color: $darkBlue2;
 
 		a {
 			text-decoration: underline;
@@ -26,7 +27,10 @@
 		li {
 			// width: 100%;
 			// background-color: red;
+			color: $lightBlueGray;
+
 			position: relative;
+
 			&:nth-child(1) {
 				&::marker {
 					color: hsl(14, 83%, 74%);
@@ -46,7 +50,25 @@
 				position: absolute;
 				margin-left: auto;
 				right: 0;
+				color: $darkBlue2;
+				font-weight: bold;
+				opacity: 0.9;
 			}
 		}
+	}
+}
+
+@media screen and(max-width: 1024px) {
+	.Roadmap {
+		width: 13.9375rem;
+		height: 11.125rem;
+		padding: 1.5rem;
+		flex: 1;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.Roadmap {
+		flex: 0;
 	}
 }

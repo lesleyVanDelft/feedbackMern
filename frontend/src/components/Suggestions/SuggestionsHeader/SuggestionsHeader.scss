@@ -55,3 +55,16 @@
 		margin-left: auto;
 	}
 }
+
+@media screen and (max-width: 768px) {
+	.SuggestionsHeader {
+		border-radius: 0px;
+	}
+}
+@media screen and (max-width: 550px) {
+	.SuggestionsHeader {
+		&__total {
+			display: none;
+		}
+	}
+}

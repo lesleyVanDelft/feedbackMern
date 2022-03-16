@@ -31,8 +31,21 @@
 	}
 }
 
-@media screen and(max-width: 768px) {
+@media screen and(max-width: 1024px) {
 	.FilterButtons {
-		margin: 0;
+		margin: 0 0rem;
+		width: 13.9375rem;
+		height: 11.125rem;
+		display: flex;
+		flex-wrap: wrap;
+		padding: 1.5rem 1.125rem 2.25rem 1.5rem;
+		// flex: 1;
+		// overflow-y: scroll;
+
+		button {
+			padding: 0.3rem 0.9rem;
+			line-height: 1.5;
+			align-self: flex-start;
+		}
 	}
 }
