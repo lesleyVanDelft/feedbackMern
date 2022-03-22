@@ -93,14 +93,16 @@ a {
 		padding-left: 1rem;
 		border-radius: 10px;
 		&.title {
-			width: 456px;
+			// width: 456px;
 			height: 48px;
+			padding: 0;
+			padding-left: 1rem;
 			border-radius: 10px;
 		}
 
 		&.text {
-			width: 456px;
-			height: 96px;
+			// width: 456px;
+			// height: 96px;
 			text-align: start;
 			padding: 0rem;
 			padding-bottom: 3rem;
@@ -125,5 +127,12 @@ a {
 @media screen and (max-width: 768px) {
 	.App {
 		padding: 0;
+	}
+
+	.Form__group {
+		&--buttons {
+			display: flex;
+			flex-direction: column-reverse;
+		}
 	}
 }

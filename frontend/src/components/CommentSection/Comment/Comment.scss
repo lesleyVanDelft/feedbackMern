@@ -2,4 +2,16 @@
 
 .Comment {
 	width: 100%;
+	img {
+		width: 50px;
+		border-radius: 50vh;
+	}
+
+	&__userBar {
+		display: flex;
+
+		button {
+			align-self: center;
+		}
+	}
 }

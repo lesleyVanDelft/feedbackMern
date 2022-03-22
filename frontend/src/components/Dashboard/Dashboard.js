@@ -69,13 +69,11 @@ const Dashboard = ({ category, mobileOpen }) => {
 						</div>
 					</div>
 
-					{/* <div className="Dashboard__mobile--container"> */}
 					{active ? (
 						<div>
 							<MobileDashboard category={getCategoryState} isVisible={active} />
 						</div>
 					) : null}
-					{/* </div> */}
 				</div>
 			)}
 		</section>

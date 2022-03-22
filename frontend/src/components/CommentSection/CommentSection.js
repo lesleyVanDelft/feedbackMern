@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { getSingleFeedback } from '../../features/feedbacks/feedbackSlice';
+import { useDispatch } from 'react-redux';
+import { getSingleFeedback } from '../../features/feedbacks/feedbackSlice';
 import AddComment from './AddComment/AddComment';
 import Comment from './Comment/Comment';
 import './CommentSection.css';
@@ -11,20 +11,21 @@ const CommentSection = ({ feedbackData }) => {
 	// console.log(comments);
 	// const dispatch = useDispatch();
 	// useEffect(() => {
-	// 	// dispatch(getSingleFeedback(feedbackData));
-	// 	setComments(feedbackData[0].comments);
-	// }, [feedbackData]);
+	// 	dispatch(getSingleFeedback(feedbackData[0]._id));
+	// 	// setComments(feedbackData[0].comments);
+	// }, [feed]);
+	// console.log(feedbackData[0]);
 	return (
 		<section className="CommentSection">
 			<h2 className="CommentSection__count">
-				{feedbackData[0].comments.length} Comments
+				{feedbackData.comments.length} Comments
 			</h2>
 			<div className="CommentSection__comments">
-				{feedbackData[0].comments.map((com, i) => {
+				{feedbackData.comments.map((com, i) => {
 					return <Comment commentData={com} key={i} />;
 				})}
 			</div>
-			<AddComment />
+			<AddComment feedbackData={feedbackData} />
 		</section>
 	);
 };

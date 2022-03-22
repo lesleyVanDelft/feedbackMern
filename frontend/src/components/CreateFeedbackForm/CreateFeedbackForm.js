@@ -61,7 +61,7 @@ const CreateFeedbackForm = () => {
 						Include any specific comments on what should be improved, added,
 						etc.
 					</label>
-					<input
+					<textarea
 						type="text"
 						name="text"
 						id="text"

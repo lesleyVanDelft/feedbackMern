@@ -20,7 +20,7 @@ const Homepage = () => {
 	// get user state from auth redux store
 	const { user } = useSelector(state => state.auth);
 	const { feedbacks, isLoading, isError, message } = useSelector(state => {
-		// console.log(state.feedbacks.feedbacks);
+		console.log(state.feedbacks);
 		return state.feedbacks;
 	});
 
@@ -42,35 +42,41 @@ const Homepage = () => {
 		hidden: { opacity: 0 },
 	};
 
+	// const localToken = JSON.parse(localStorage.getItem('user'));
+
 	useEffect(() => {
-		if (isError) {
-			console.log(message);
-		}
-
-		if (!user) {
-			navigate('/login');
-		}
-
-		// dispatch(getFeedbacks(feedbacks));
+		dispatch(getFeedbacks(feedbacks));
 		setTimeout(() => {
 			dispatch(getFeedbacks(feedbacks));
 			// console.log('homepage log');
 		}, 100);
 
+		if (isError) {
+			console.log(message);
+		}
+
+		// console.log(localToken.token);
+
+		if (!user) {
+			navigate('/login');
+		}
+
 		// return () => {
 		// 	dispatch(reset());
 		// };
 	}, [user, navigate, dispatch, isError, message]);
-
+	// console.log(feedbacks);
 	if (isLoading) {
 		return <Spinner />;
 	}
 
-	const filteredFeedbacks = feedbacks.filter(feedback => {
-		return feedback.feedbackType.toLowerCase() === categoryState;
-	});
-	// console.log(categoryState);
-	// <Dashboard category={getCategoryState} mobileOpen={getMobileState} />
+	// const filteredFeedbacks =
+	// 	feedbacks.length > 0 &&
+	// 	feedbacks.filter(feedback => {
+	// 		return feedback.feedbackType.toLowerCase() === categoryState;
+	// 	});
+	const filteredFeedbacks = [];
+	<Dashboard category={getCategoryState} mobileOpen={getMobileState} />;
 	return (
 		<main className="Homepage">
 			<Dashboard category={getCategoryState} mobileOpen={getMobileState} />
@@ -90,26 +96,28 @@ const Homepage = () => {
 				/>
 
 				{/* Check for empty feedback lists and render empty component */}
-				{feedbacks.length <= 0 ? <EmptyFeedback /> : null}
-				{categoryState !== 'all' && filteredFeedbacks.length <= 0 ? (
-					<EmptyFeedback />
-				) : null}
+				<div className="Homepage__content--feedbacks">
+					{feedbacks.length <= 0 ? <EmptyFeedback /> : null}
+					{categoryState !== 'all' && filteredFeedbacks.length <= 0 ? (
+						<EmptyFeedback />
+					) : null}
 
-				{/* Loop over all feedbacks if category state is all, else loop over filtered feedbacks*/}
-				{feedbacks.length > 0 && categoryState === 'all' ? (
-					<div className="feedbacks">
-						{feedbacks.map(feedback => {
-							return <FeedbackItem feedback={feedback} key={feedback._id} />;
-						})}
-					</div>
-				) : (
-					<div className="feedbacks">
-						{filteredFeedbacks.map(feedback => {
-							return <FeedbackItem feedback={feedback} key={feedback._id} />;
-						})}
-					</div>
-					// <h3>no shit</h3>
-				)}
+					{/* Loop over all feedbacks if category state is all, else loop over filtered feedbacks*/}
+					{feedbacks.length > 0 && categoryState === 'all' ? (
+						<div className="feedbacks">
+							{feedbacks.map(feedback => {
+								return <FeedbackItem feedback={feedback} key={feedback._id} />;
+							})}
+						</div>
+					) : (
+						<div className="feedbacks">
+							{filteredFeedbacks.map(feedback => {
+								return <FeedbackItem feedback={feedback} key={feedback._id} />;
+							})}
+						</div>
+						// <h3>no shit</h3>
+					)}
+				</div>
 			</section>
 		</main>
 	);

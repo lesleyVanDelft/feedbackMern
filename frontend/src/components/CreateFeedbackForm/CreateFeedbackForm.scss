@@ -21,4 +21,34 @@
 	.btn-darkBlue {
 		margin-right: 1rem;
 	}
+
+	textarea {
+		border: none;
+		background: $lightGray;
+		width: 100%;
+		padding: 1rem 2rem;
+		margin-bottom: 1rem;
+		outline: none;
+		border-radius: 10px;
+
+		&::placeholder {
+			opacity: 0.8;
+		}
+
+		&:focus {
+			outline: 1px solid $blue;
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.CreateFeedbackForm {
+		padding: 0 1.5rem;
+		padding-top: 55px;
+		padding-bottom: 5px;
+		.btn-darkBlue {
+			margin: 0;
+			margin-top: 1rem;
+		}
+	}
 }

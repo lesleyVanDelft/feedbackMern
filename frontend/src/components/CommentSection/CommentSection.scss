@@ -1,6 +1,9 @@
 @import '../../sass/main.scss';
 
 .CommentSection {
+	svg {
+		width: 50px;
+	}
 	&__count {
 		color: $darkBlue1;
 	}

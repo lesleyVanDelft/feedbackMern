@@ -8,24 +8,15 @@ const User = require('../models/userModel');
 const getFeedbacks = asyncHandler(async (req, res) => {
 	// const feedbacks = await Feedback.find({ user: req.user.id });
 	const feedbacks = await Feedback.find({});
-	// console.log(res);
+
 	res.status(200).json(feedbacks);
 });
 
 //@desc   get single feedback
 //@route  GET /api/feedbacks
 //@access Private
-
-// const getFeedbackDetails = asyncHandler(async (req, res) => {
-// 	const feedback = await Feedback.find({ _id: req.params.id });
-// 	console.log(req.params.id);
-// 	res.status(200).json(feedback);
-// });
 const getSingleFeedback = asyncHandler(async (req, res) => {
 	const feedback = await Feedback.find({ _id: req.params.id });
-	// console.log(req.params.id);
-	// console.log(req.body);
-
 	res.status(200).json(feedback);
 });
 
@@ -37,6 +28,7 @@ const setFeedback = asyncHandler(async (req, res) => {
 		res.status(400);
 		throw new Error('Please add a text field');
 	}
+	// console.log(req.body);
 
 	const feedback = await Feedback.create({
 		title: req.body.title,
@@ -78,19 +70,7 @@ const editFeedback = asyncHandler(async (req, res) => {
 	// console.log(updatedFeedback);
 	res.status(200).json(updatedFeedback);
 });
-// const editFeedback = asyncHandler(async (req, res, next) => {
-// 	try {
-// 		const id = req.params.id;
-// 		const updates = req.body;
-// 		const options = { new: true };
 
-// 		const response = await Feedback.findByIdAndUpdate(id, updates, options);
-
-// 		res.status(200).json(response);
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// });
 //@desc  delete goals
 //@route  DELETE /api/goals/:id
 //@access Private
@@ -120,10 +100,45 @@ const deleteFeedback = asyncHandler(async (req, res) => {
 	res.status(202);
 });
 
+//@desc  add to Comments
+//@route  GET /api/Feedbacks
+//@access Private
+const addComment = asyncHandler(async (req, res) => {
+	const feedback = await Feedback.findById({ _id: req.params.id });
+
+	if (!feedback) {
+		res.status(400);
+		throw new Error('feedback notfound');
+	}
+
+	if (!req.user) {
+		res.status(400);
+		throw new Error('usernotfound');
+	}
+	if (feedback.user.toString() !== req.user.id) {
+		res.status(401);
+		throw new Error('User not authorized broheim -- feedback controller');
+	}
+
+	const newComment = await Feedback.findByIdAndUpdate(
+		req.params.id,
+		{ $push: { comments: req.body.text } },
+		{ new: true, upsert: true }
+	);
+
+	// console.log(req.params.id);
+	// console.log(req.body);
+	// console.log(newComment);
+	// console.log(res);
+
+	res.status(201).json(newComment);
+});
+
 module.exports = {
 	getFeedbacks,
 	setFeedback,
 	editFeedback,
 	deleteFeedback,
 	getSingleFeedback,
+	addComment,
 };

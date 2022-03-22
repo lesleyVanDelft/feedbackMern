@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux';
-import { deleteFeedback } from '../../features/feedbacks/feedbackSlice';
+// import { useDispatch } from 'react-redux';
+// import { deleteFeedback } from '../../features/feedbacks/feedbackSlice';
 import { FaChevronUp, FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './FeedbackItem.css';
@@ -25,7 +25,9 @@ const FeedbackItem = ({ feedback }) => {
 
 			<div className="FeedbackItem__right">
 				<FaComment className="commentIcon" />
-				<span className="commentLength">{feedback.comments.length}</span>
+				<span className="commentLength">
+					{feedback.comments > 0 ? feedback.comments.length : 0}
+				</span>
 			</div>
 
 			{/* <p className="FeedbackItem__text">{feedback.feedbackType}</p> */}

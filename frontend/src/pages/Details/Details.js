@@ -32,24 +32,29 @@ const Details = () => {
 	const { feedbacks, isLoading, isError, message } = useSelector(state => {
 		return state.feedbacks;
 	});
-	// console.log(feedbacks);
+	const [singleFeedback, setSingleFeedback] = useState(feedbacks);
+
+	// const filteredFeedback = feedbacks.filter(feedback => feedback._id === id);
 
 	useEffect(() => {
-		if (isError) {
-			console.log(message);
-		}
-
-		if (!user) {
-			navigate('/login');
-		}
-
-		dispatch(getSingleFeedback(id));
+		// if (isError) {
+		// 	console.log(message);
+		// }
+		// if (!user) {
+		// 	navigate('/login');
+		// }
 		// console.log(feedbacks);
-
-		return () => {
-			dispatch(reset());
-		};
+		// return () => {
+		// 	dispatch(reset());
+		// };
 	}, [user, navigate, isError, message, dispatch, id]);
+
+	useEffect(() => {
+		setSingleFeedback(feedbacks.filter(feedback => feedback._id === id));
+		dispatch(getSingleFeedback(id));
+	}, [dispatch, id]);
+
+	// console.log(setSingleFeedback);
 
 	if (isLoading) {
 		return <Spinner />;
@@ -68,13 +73,15 @@ const Details = () => {
 				</Link>
 			</div>
 
-			{feedbacks.length > 0
+			{/* {feedbacks.length > 0
 				? feedbacks.map(feedback => {
 						return <FeedbackItem feedback={feedback} key={feedback._id} />;
 				  })
-				: 'loading'}
+				: 'loading'} */}
 
-			<CommentSection feedbackData={feedbacks} />
+			{singleFeedback && <FeedbackItem feedback={singleFeedback[0]} />}
+
+			<CommentSection feedbackData={singleFeedback[0]} />
 		</main>
 	);
 };

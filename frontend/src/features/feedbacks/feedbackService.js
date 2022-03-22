@@ -6,6 +6,8 @@ const API_URL = '/api/feedbacks/';
 const createFeedback = async (feedbackData, token) => {
 	const config = {
 		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
 	};
@@ -29,12 +31,19 @@ const getFeedbacks = async token => {
 };
 
 // get single feedback
+// const localToken = JSON.parse(localStorage.getItem('user'));
 const getSingleFeedback = async (feedbackId, token) => {
+	// let currToken = localStorage.setItem('currToken', token);
 	const config = {
 		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
 	};
+	// let { _id } = localStorage.getItem('user');
+	// console.log(_id);
+	// console.log(object);
 
 	const response = await axios.get(API_URL + feedbackId, config);
 	return response.data;
@@ -46,6 +55,8 @@ const editFeedback = async (data, token) => {
 	// console.log(updateData);
 	const config = {
 		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
 	};
@@ -65,7 +76,21 @@ const deleteFeedback = async (feedbackId, token) => {
 	};
 
 	const response = await axios.delete(API_URL + feedbackId, config);
-	console.log(response);
+	// console.log(response);
+	return response.data;
+};
+
+// add a comment
+
+const addComment = async (id, token) => {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+	// Authorization:localStorage.getItem('jwtToken'
+	const response = await axios.post(API_URL + id, config);
+
 	return response.data;
 };
 
@@ -75,6 +100,7 @@ const feedbackService = {
 	deleteFeedback,
 	getSingleFeedback,
 	editFeedback,
+	addComment,
 };
 
 export default feedbackService;

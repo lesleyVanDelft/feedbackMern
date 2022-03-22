@@ -69,7 +69,7 @@ const EditFeedbackForm = ({ feedbackData }) => {
 			<h2 className="EditFeedbackForm__title">
 				Editing '{feedbackData.length > 0 ? feedbackData[0].title : null}'
 			</h2>
-			<form className="Form" onSubmit={onSubmit}>
+			<form className="Form" id="FormEdit" onSubmit={onSubmit}>
 				<div className="Form__group">
 					<h3>Feedback Title</h3>
 					<label htmlFor="title">Add a short, descriptive headline</label>
@@ -107,10 +107,11 @@ const EditFeedbackForm = ({ feedbackData }) => {
 						Include any specific comments on what should be improved, added,
 						etc.
 					</label>
-					<input
+					<textarea
 						type="text"
 						name="text"
 						id="text"
+						rows={3}
 						value={detailContent}
 						onChange={e => setDetailContent(e.target.value)}
 						className="text"
@@ -118,6 +119,13 @@ const EditFeedbackForm = ({ feedbackData }) => {
 				</div>
 
 				<div className="Form__group--buttons">
+					<button
+						className="btn btn-red"
+						onClick={() => {
+							handleDelete();
+						}}>
+						Delete
+					</button>
 					<button className="btn btn-darkBlue" onClick={() => navigate('/')}>
 						Cancel
 					</button>
@@ -126,13 +134,6 @@ const EditFeedbackForm = ({ feedbackData }) => {
 					</button>
 				</div>
 			</form>
-			<button
-				className="btn btn-red"
-				onClick={() => {
-					handleDelete();
-				}}>
-				Delete
-			</button>
 		</section>
 	);
 };

@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import feedbackService from './feedbackService';
 
+// Get user from localStorage
+const user = JSON.parse(localStorage.getItem('user'));
+
 const initialState = {
 	feedbacks: [],
 	isError: false,
@@ -8,7 +11,6 @@ const initialState = {
 	isLoading: false,
 	message: '',
 };
-
 // Create new feedback
 export const createFeedback = createAsyncThunk(
 	'feedback/create',
@@ -32,6 +34,7 @@ export const createFeedback = createAsyncThunk(
 export const getFeedbacks = createAsyncThunk(
 	'feedback/getAll',
 	async (_, thunkAPI) => {
+		console.log(thunkAPI.getState().feedbacks);
 		try {
 			const token = thunkAPI.getState().auth.user.token;
 			return await feedbackService.getFeedbacks(token);
@@ -53,6 +56,7 @@ export const getSingleFeedback = createAsyncThunk(
 	async (id, thunkAPI) => {
 		try {
 			const token = thunkAPI.getState().auth.user.token;
+
 			return await feedbackService.getSingleFeedback(id, token);
 		} catch (error) {
 			const message =
@@ -72,6 +76,7 @@ export const editFeedback = createAsyncThunk(
 	async (data, thunkAPI) => {
 		try {
 			const token = thunkAPI.getState().auth.user.token;
+			console.log(token);
 			console.log(data);
 			return await feedbackService.editFeedback(data, token);
 		} catch (error) {
@@ -105,6 +110,26 @@ export const deleteFeedback = createAsyncThunk(
 	}
 );
 
+export const addComment = createAsyncThunk(
+	'feedback/addComment',
+	async (id, thunkAPI) => {
+		try {
+			const token = thunkAPI.getState().auth.user.token;
+			// const localToken = JSON.parse(localStorage.getItem('user'));
+
+			return await feedbackService.addComment(id, token);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
+
 // feedback slice
 export const feedbackSlice = createSlice({
 	name: 'feedback',
@@ -114,7 +139,6 @@ export const feedbackSlice = createSlice({
 	},
 	extraReducers: builder => {
 		builder
-
 			.addCase(createFeedback.pending, state => {
 				state.isLoading = true;
 			})
@@ -146,8 +170,10 @@ export const feedbackSlice = createSlice({
 			})
 			.addCase(getSingleFeedback.fulfilled, (state, action) => {
 				state.isLoading = false;
+				state.isError = false;
 				state.isSuccess = true;
 				state.feedbacks = action.payload;
+				// state.feedbacks.filter(feedback => feedback._id === action.payload.id);
 				// console.log(action.payload);
 			})
 			.addCase(getSingleFeedback.rejected, (state, action) => {
@@ -181,6 +207,19 @@ export const feedbackSlice = createSlice({
 				);
 			})
 			.addCase(deleteFeedback.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			.addCase(addComment.pending, state => {
+				state.isLoading = true;
+			})
+			.addCase(addComment.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.feedbacks = state.feedbacks.push(action.payload);
+			})
+			.addCase(addComment.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
