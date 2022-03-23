@@ -51,8 +51,8 @@ const Details = () => {
 
 	useEffect(() => {
 		setSingleFeedback(feedbacks.filter(feedback => feedback._id === id));
-		dispatch(getSingleFeedback(id));
-	}, [dispatch, id]);
+		// dispatch(getSingleFeedback(id));
+	}, []);
 
 	// console.log(setSingleFeedback);
 
@@ -80,6 +80,7 @@ const Details = () => {
 				: 'loading'} */}
 
 			{singleFeedback && <FeedbackItem feedback={singleFeedback[0]} />}
+			{/* {console.log(singleFeedback)} */}
 
 			<CommentSection feedbackData={singleFeedback[0]} />
 		</main>

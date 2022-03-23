@@ -15,7 +15,7 @@ const FeedbackItem = ({ feedback }) => {
 					</button>
 				</div>
 				<div className="FeedbackItem__left--content">
-					<Link to={`/${feedback._id}`}>
+					<Link to={`/details/${feedback._id}`}>
 						<h3 className="title">{feedback.title}</h3>
 					</Link>
 					<p className="text">{feedback.text}</p>

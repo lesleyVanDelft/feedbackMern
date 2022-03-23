@@ -111,9 +111,12 @@ const Homepage = () => {
 						</div>
 					) : (
 						<div className="feedbacks">
-							{filteredFeedbacks.map(feedback => {
-								return <FeedbackItem feedback={feedback} key={feedback._id} />;
-							})}
+							{filteredFeedbacks.length > 0 &&
+								filteredFeedbacks.map(feedback => {
+									return (
+										<FeedbackItem feedback={feedback} key={feedback._id} />
+									);
+								})}
 						</div>
 						// <h3>no shit</h3>
 					)}

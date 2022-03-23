@@ -119,12 +119,12 @@ export const deleteFeedback = createAsyncThunk(
 
 export const addComment = createAsyncThunk(
 	'feedback/addComment',
-	async (id, thunkAPI) => {
+	async (data, thunkAPI) => {
 		try {
 			// const token = thunkAPI.getState().auth.user.token;
 			// const localToken = JSON.parse(localStorage.getItem('user'));
 			// const token = Cookies.get('jwt');
-			return await feedbackService.addComment(id, token);
+			return await feedbackService.addComment(data, token);
 		} catch (error) {
 			const message =
 				(error.response &&

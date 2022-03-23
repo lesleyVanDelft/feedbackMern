@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
 	addComment,
 	getSingleFeedback,
@@ -14,6 +15,7 @@ const AddComment = ({ feedbackData }) => {
 	// console.log(feedbackData);
 	const { user } = useSelector(state => state.auth);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	// console.log(user);
 
 	const { id } = useParams();
@@ -28,12 +30,17 @@ const AddComment = ({ feedbackData }) => {
 		_id: id,
 		text: commentText,
 	};
+
 	// token: user.token,
 	const onSubmit = e => {
 		// const finalComment = `${user.name}: ${commentText}`;
 		e.preventDefault();
-		// dispatch(getSingleFeedback(id));
-		dispatch(addComment(id));
+		dispatch(addComment(data));
+
+		// setTimeout(() => {
+		// 	navigate(`/details/${id}`);
+		// }, 550);
+		navigate('/');
 	};
 
 	return (

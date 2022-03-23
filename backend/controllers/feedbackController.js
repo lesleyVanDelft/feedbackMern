@@ -1,6 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Feedback = require('../models/feedbackModel');
-const Comment = require('../models/commentModel');
+// const Comment = require('../models/commentModel');
 const User = require('../models/userModel');
 
 //@desc  get Feedbacks
@@ -106,6 +106,7 @@ const deleteFeedback = asyncHandler(async (req, res) => {
 //@access Private
 const addComment = asyncHandler(async (req, res) => {
 	const feedback = await Feedback.findById({ _id: req.params.id });
+	// const user = await User.findById({ _id: req.user.id });
 
 	if (!feedback) {
 		res.status(400);
@@ -121,23 +122,23 @@ const addComment = asyncHandler(async (req, res) => {
 		throw new Error('User not authorized broheim -- feedback controller');
 	}
 
-	const newComment = await Feedback.findByIdAndUpdate(
+	// const newComment = await Comment.create({
+	// 	text: req.body.text,
+	// 	author: req.user,
+	// });
+
+	const newFeedback = await Feedback.findByIdAndUpdate(
 		req.params.id,
-		{ $push: { comments: req.body.text } }
-		// { new: true, upsert: true }
+		{ $push: { comments: { text: req.body.text } } },
+		{ new: true, upsert: true }
 	);
-	// const newComment = await Feedback.findByIdAndUpdate(
-	// 	req.params.id,
-	// 	{ $push: { comments: req.body.text } }
-	// 	// { new: true, upsert: true }
-	// );
 
 	// console.log(req.params.id);
 	// console.log(req.body);
 	// console.log(newComment);
 	// console.log(res);
 
-	res.status(201).json(newComment);
+	res.status(201).json(newFeedback);
 });
 
 module.exports = {

@@ -14,7 +14,7 @@ const Comment = ({ commentData }) => {
 				<button className="reply">Reply</button>
 			</div>
 
-			<p>{commentData}</p>
+			<p>{commentData.text}</p>
 			{/* {console.log(commentData)} */}
 		</article>
 	);

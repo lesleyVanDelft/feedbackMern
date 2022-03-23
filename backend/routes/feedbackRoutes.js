@@ -18,14 +18,15 @@ router
 	.get(protect, getFeedbacks)
 	.post(protect, setFeedback)
 	.delete(protect, deleteFeedback);
-// router.route('/create').post(protect, setFeedback);
+router.route('/details/:id').post(addComment).get(protect, getSingleFeedback);
 
 router
 	.route('/:id')
+	.get(protect, getSingleFeedback)
 	.post(protect, addComment)
 	.delete(protect, deleteFeedback)
-	.put(protect, editFeedback)
-	.get(protect, getSingleFeedback);
+	.put(protect, editFeedback);
+// router.route('/create').post(protect, setFeedback);
 
 // router.route('/:id').get(protect, getCurrentUser);
 // SAME AS 2 lines above ^^^

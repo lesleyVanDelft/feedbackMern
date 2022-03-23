@@ -83,14 +83,14 @@ const deleteFeedback = async (feedbackId, token) => {
 
 // add a comment
 
-const addComment = async id => {
+const addComment = async data => {
 	const config = {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
 	};
 	// Authorization:localStorage.getItem('jwtToken'
-	const response = await axios.post(API_URL + id, config);
+	const response = await axios.post(API_URL + data._id, { text: data.text });
 
 	return response.data;
 };
