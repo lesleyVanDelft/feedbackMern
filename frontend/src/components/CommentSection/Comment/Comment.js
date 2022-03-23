@@ -2,7 +2,7 @@ import BlankProfilePic from '../../../assets/blank-profile-picture.png';
 import './Comment.css';
 
 const Comment = ({ commentData }) => {
-	console.log(commentData);
+	// console.log(commentData);
 	return (
 		<article className="Comment">
 			<div className="Comment__userBar">
@@ -13,6 +13,9 @@ const Comment = ({ commentData }) => {
 				</div>
 				<button className="reply">Reply</button>
 			</div>
+
+			<p>{commentData}</p>
+			{/* {console.log(commentData)} */}
 		</article>
 	);
 };

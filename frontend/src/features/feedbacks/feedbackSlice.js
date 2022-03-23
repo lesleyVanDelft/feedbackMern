@@ -5,19 +5,23 @@ import Cookies from 'js-cookie';
 // Get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'));
 
+const token = Cookies.get('jwt');
+
 const initialState = {
 	feedbacks: [],
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
 	message: '',
+	// token: token ? token : '',
 };
 // Create new feedback
 export const createFeedback = createAsyncThunk(
 	'feedback/create',
 	async (feedbackData, thunkAPI) => {
 		try {
-			const token = thunkAPI.getState().auth.user.token;
+			// const token = thunkAPI.getState().auth.user.token;
+
 			return await feedbackService.createFeedback(feedbackData, token);
 		} catch (error) {
 			const message =
@@ -35,10 +39,10 @@ export const createFeedback = createAsyncThunk(
 export const getFeedbacks = createAsyncThunk(
 	'feedback/getAll',
 	async (_, thunkAPI) => {
-		console.log(thunkAPI.getState().feedbacks);
+		// console.log(thunkAPI.getState().feedbacks);
 		try {
 			// const token = thunkAPI.getState().auth.user.token;
-			const token = Cookies.get('jwt');
+
 			return await feedbackService.getFeedbacks(token);
 		} catch (error) {
 			const message =
@@ -58,7 +62,6 @@ export const getSingleFeedback = createAsyncThunk(
 	async (id, thunkAPI) => {
 		try {
 			// const token = thunkAPI.getState().auth.user.token;
-			const token = Cookies.get('jwt');
 
 			return await feedbackService.getSingleFeedback(id, token);
 		} catch (error) {
@@ -79,7 +82,7 @@ export const editFeedback = createAsyncThunk(
 	async (data, thunkAPI) => {
 		try {
 			// const token = thunkAPI.getState().auth.user.token;
-			const token = Cookies.get('jwt');
+
 			console.log(token);
 			console.log(data);
 			return await feedbackService.editFeedback(data, token);
@@ -100,7 +103,7 @@ export const deleteFeedback = createAsyncThunk(
 	'feedback/delete',
 	async (id, thunkAPI) => {
 		try {
-			const token = thunkAPI.getState().auth.user.token;
+			// const token = thunkAPI.getState().auth.user.token;
 			return await feedbackService.deleteFeedback(id, token);
 		} catch (error) {
 			const message =
@@ -120,7 +123,7 @@ export const addComment = createAsyncThunk(
 		try {
 			// const token = thunkAPI.getState().auth.user.token;
 			// const localToken = JSON.parse(localStorage.getItem('user'));
-			const token = Cookies.get('jwt');
+			// const token = Cookies.get('jwt');
 			return await feedbackService.addComment(id, token);
 		} catch (error) {
 			const message =
@@ -143,12 +146,33 @@ export const feedbackSlice = createSlice({
 	},
 	extraReducers: builder => {
 		builder
+			.addCase(addComment.pending, state => {
+				state.isLoading = true;
+			})
+			.addCase(addComment.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				// console.log(action.payload);
+				// console.log(state.feedbacks);
+				// state.feedbacks = state.feedbacks.comments.push(action.payload);
+				// console.log(state.feedbacks[0].comments);
+
+				state.feedbacks = action.payload;
+				// 	.filter(feedback => feedback._id === action.payload.id)
+				// 	.push(action.payload);
+			})
+			.addCase(addComment.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
 			.addCase(createFeedback.pending, state => {
 				state.isLoading = true;
 			})
 			.addCase(createFeedback.fulfilled, (state, action) => {
 				state.isSuccess = true;
 				state.isLoading = false;
+
 				state.feedbacks.push(action.payload);
 			})
 			.addCase(createFeedback.rejected, (state, action) => {
@@ -176,6 +200,7 @@ export const feedbackSlice = createSlice({
 				state.isLoading = false;
 				state.isError = false;
 				state.isSuccess = true;
+
 				state.feedbacks = action.payload;
 				// state.feedbacks.filter(feedback => feedback._id === action.payload.id);
 				// console.log(action.payload);
@@ -192,6 +217,7 @@ export const feedbackSlice = createSlice({
 				state.isLoading = false;
 				state.isSuccess = true;
 				// state.feedbacks.id = action.payload;
+
 				state.feedbacks = action.payload;
 				// console.log(action.payload)
 			})
@@ -211,19 +237,6 @@ export const feedbackSlice = createSlice({
 				);
 			})
 			.addCase(deleteFeedback.rejected, (state, action) => {
-				state.isLoading = false;
-				state.isError = true;
-				state.message = action.payload;
-			})
-			.addCase(addComment.pending, state => {
-				state.isLoading = true;
-			})
-			.addCase(addComment.fulfilled, (state, action) => {
-				state.isLoading = false;
-				state.isSuccess = true;
-				state.feedbacks = state.feedbacks.push(action.payload);
-			})
-			.addCase(addComment.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;

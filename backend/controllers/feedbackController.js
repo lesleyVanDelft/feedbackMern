@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Feedback = require('../models/feedbackModel');
+const Comment = require('../models/commentModel');
 const User = require('../models/userModel');
 
 //@desc  get Feedbacks
@@ -20,7 +21,7 @@ const getSingleFeedback = asyncHandler(async (req, res) => {
 	res.status(200).json(feedback);
 });
 
-//@desc   update feedbacks
+//@desc   create feedbacks
 //@route  POST /api/feedbacks
 //@access Private
 const setFeedback = asyncHandler(async (req, res) => {
@@ -30,14 +31,14 @@ const setFeedback = asyncHandler(async (req, res) => {
 	}
 	// console.log(req.body);
 
-	const feedback = await Feedback.create({
+	const newFeedback = await Feedback.create({
 		title: req.body.title,
 		text: req.body.text,
 		user: req.user.id,
 		feedbackType: req.body.feedbackType,
 	});
 
-	res.status(200).json(feedback);
+	res.status(201).json(newFeedback);
 });
 
 //@desc   edit feedbacks
@@ -122,9 +123,14 @@ const addComment = asyncHandler(async (req, res) => {
 
 	const newComment = await Feedback.findByIdAndUpdate(
 		req.params.id,
-		{ $push: { comments: req.body.text } },
-		{ new: true, upsert: true }
+		{ $push: { comments: req.body.text } }
+		// { new: true, upsert: true }
 	);
+	// const newComment = await Feedback.findByIdAndUpdate(
+	// 	req.params.id,
+	// 	{ $push: { comments: req.body.text } }
+	// 	// { new: true, upsert: true }
+	// );
 
 	// console.log(req.params.id);
 	// console.log(req.body);

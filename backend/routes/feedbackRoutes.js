@@ -8,9 +8,9 @@ const {
 	deleteFeedback,
 	getSingleFeedback,
 	addComment,
-} = require('../controllers/feedbackController');
+} = require('../controllers/feedbackController.js');
 // const { getCurrentUser } = require('../controllers/userController');
-const { protect } = require('../middleware/authMiddleware');
+const { protect } = require('../middleware/authMiddleware.js');
 // const Feedback = require('../models/feedbackModel');
 // router.get('/currentUser', protect, getCurrentUser);/
 router

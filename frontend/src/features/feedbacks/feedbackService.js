@@ -1,7 +1,8 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const API_URL = '/api/feedbacks/';
-
+const token = Cookies.get('jwt');
 // create new feedback
 const createFeedback = async (feedbackData, token) => {
 	const config = {
@@ -32,7 +33,7 @@ const getFeedbacks = async token => {
 
 // get single feedback
 // const localToken = JSON.parse(localStorage.getItem('user'));
-const getSingleFeedback = async (feedbackId, token) => {
+const getSingleFeedback = async feedbackId => {
 	// let currToken = localStorage.setItem('currToken', token);
 	const config = {
 		headers: {
@@ -82,7 +83,7 @@ const deleteFeedback = async (feedbackId, token) => {
 
 // add a comment
 
-const addComment = async (id, token) => {
+const addComment = async id => {
 	const config = {
 		headers: {
 			Authorization: `Bearer ${token}`,

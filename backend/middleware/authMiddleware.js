@@ -34,7 +34,7 @@ const protect = asyncHandler(async (req, res, next) => {
 	if (!token || token === 'expiredtoken') {
 		return res.status(401).json({
 			status: 'unauthorized',
-			message: 'You are not authorized to view this content',
+			message: 'You are not authorized to view this content 1',
 		});
 	}
 	const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -44,7 +44,7 @@ const protect = asyncHandler(async (req, res, next) => {
 	if (!user) {
 		return res.status(401).json({
 			status: 'unauthorized',
-			message: 'You are not authorized to view this content',
+			message: 'You are not authorized to view this content 2',
 		});
 	}
 	next();

@@ -20,7 +20,7 @@ const Homepage = () => {
 	// get user state from auth redux store
 	const { user } = useSelector(state => state.auth);
 	const { feedbacks, isLoading, isError, message } = useSelector(state => {
-		console.log(state.feedbacks);
+		// console.log(state.feedbacks);
 		return state.feedbacks;
 	});
 
@@ -64,18 +64,18 @@ const Homepage = () => {
 		// return () => {
 		// 	dispatch(reset());
 		// };
-	}, [user, navigate, dispatch, isError, message]);
+	}, [navigate, dispatch, isError, message]);
 	// console.log(feedbacks);
 	if (isLoading) {
 		return <Spinner />;
 	}
 
-	// const filteredFeedbacks =
-	// 	feedbacks.length > 0 &&
-	// 	feedbacks.filter(feedback => {
-	// 		return feedback.feedbackType.toLowerCase() === categoryState;
-	// 	});
-	const filteredFeedbacks = [];
+	const filteredFeedbacks =
+		feedbacks.length > 0 &&
+		feedbacks.filter(feedback => {
+			return feedback.feedbackType.toLowerCase() === categoryState;
+		});
+	// const filteredFeedbacks = [];
 	<Dashboard category={getCategoryState} mobileOpen={getMobileState} />;
 	return (
 		<main className="Homepage">

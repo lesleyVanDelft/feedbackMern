@@ -36,18 +36,18 @@ const Details = () => {
 
 	// const filteredFeedback = feedbacks.filter(feedback => feedback._id === id);
 
-	useEffect(() => {
-		// if (isError) {
-		// 	console.log(message);
-		// }
-		// if (!user) {
-		// 	navigate('/login');
-		// }
-		// console.log(feedbacks);
-		// return () => {
-		// 	dispatch(reset());
-		// };
-	}, [user, navigate, isError, message, dispatch, id]);
+	// useEffect(() => {
+	// if (isError) {
+	// 	console.log(message);
+	// }
+	// if (!user) {
+	// 	navigate('/login');
+	// }
+	// console.log(feedbacks);
+	// return () => {
+	// 	dispatch(reset());
+	// };
+	// }, [user, navigate, isError, message, dispatch, id]);
 
 	useEffect(() => {
 		setSingleFeedback(feedbacks.filter(feedback => feedback._id === id));

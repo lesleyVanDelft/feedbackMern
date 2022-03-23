@@ -29,6 +29,7 @@ const feedbackModel = mongoose.Schema(
 		comments: {
 			type: Array,
 			default: [],
+			ref: 'Comment',
 		},
 		likes: {
 			type: Array,

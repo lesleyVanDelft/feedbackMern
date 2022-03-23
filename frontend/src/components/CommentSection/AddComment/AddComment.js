@@ -33,7 +33,7 @@ const AddComment = ({ feedbackData }) => {
 		// const finalComment = `${user.name}: ${commentText}`;
 		e.preventDefault();
 		// dispatch(getSingleFeedback(id));
-		dispatch(addComment(id, { text: commentText }));
+		dispatch(addComment(id));
 	};
 
 	return (
