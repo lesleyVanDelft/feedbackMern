@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import feedbackService from './feedbackService';
+import Cookies from 'js-cookie';
 
 // Get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'));
@@ -36,7 +37,8 @@ export const getFeedbacks = createAsyncThunk(
 	async (_, thunkAPI) => {
 		console.log(thunkAPI.getState().feedbacks);
 		try {
-			const token = thunkAPI.getState().auth.user.token;
+			// const token = thunkAPI.getState().auth.user.token;
+			const token = Cookies.get('jwt');
 			return await feedbackService.getFeedbacks(token);
 		} catch (error) {
 			const message =
@@ -55,7 +57,8 @@ export const getSingleFeedback = createAsyncThunk(
 	'feedback/getOne',
 	async (id, thunkAPI) => {
 		try {
-			const token = thunkAPI.getState().auth.user.token;
+			// const token = thunkAPI.getState().auth.user.token;
+			const token = Cookies.get('jwt');
 
 			return await feedbackService.getSingleFeedback(id, token);
 		} catch (error) {
@@ -75,7 +78,8 @@ export const editFeedback = createAsyncThunk(
 	'feedback/edit',
 	async (data, thunkAPI) => {
 		try {
-			const token = thunkAPI.getState().auth.user.token;
+			// const token = thunkAPI.getState().auth.user.token;
+			const token = Cookies.get('jwt');
 			console.log(token);
 			console.log(data);
 			return await feedbackService.editFeedback(data, token);
@@ -114,9 +118,9 @@ export const addComment = createAsyncThunk(
 	'feedback/addComment',
 	async (id, thunkAPI) => {
 		try {
-			const token = thunkAPI.getState().auth.user.token;
+			// const token = thunkAPI.getState().auth.user.token;
 			// const localToken = JSON.parse(localStorage.getItem('user'));
-
+			const token = Cookies.get('jwt');
 			return await feedbackService.addComment(id, token);
 		} catch (error) {
 			const message =
