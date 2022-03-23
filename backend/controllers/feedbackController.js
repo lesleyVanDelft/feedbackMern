@@ -129,7 +129,7 @@ const addComment = asyncHandler(async (req, res) => {
 
 	const newFeedback = await Feedback.findByIdAndUpdate(
 		req.params.id,
-		{ $push: { comments: { text: req.body.text } } },
+		{ $push: { comments: { text: req.body.text, author: req.user } } },
 		{ new: true, upsert: true }
 	);
 

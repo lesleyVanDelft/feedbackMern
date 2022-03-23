@@ -68,9 +68,11 @@ const Details = () => {
 						<FaChevronLeft /> <span>Go Back</span>
 					</Link>
 				</button>
-				<Link to={`/edit/${id}`}>
-					<button className="btn btn-blue edit">Edit Feedback</button>
-				</Link>
+				{user._id === singleFeedback[0].user ? (
+					<Link to={`/edit/${id}`}>
+						<button className="btn btn-blue edit">Edit Feedback</button>
+					</Link>
+				) : null}
 			</div>
 
 			{/* {feedbacks.length > 0
