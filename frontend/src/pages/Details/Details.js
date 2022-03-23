@@ -35,6 +35,12 @@ const Details = () => {
 	// console.log(feedbacks);
 
 	useEffect(() => {
+		dispatch(getSingleFeedback(id));
+
+		if (isLoading) {
+			return <Spinner />;
+		}
+
 		if (isError) {
 			console.log(message);
 		}
@@ -43,17 +49,12 @@ const Details = () => {
 			navigate('/login');
 		}
 
-		dispatch(getSingleFeedback(id));
 		// console.log(feedbacks);
 
-		return () => {
-			dispatch(reset());
-		};
+		// return () => {
+		// 	dispatch(reset());
+		// };
 	}, [user, navigate, isError, message, dispatch, id]);
-
-	if (isLoading) {
-		return <Spinner />;
-	}
 
 	return (
 		<main className="Details">

@@ -25,7 +25,7 @@ const FeedbackItem = ({ feedback }) => {
 
 			<div className="FeedbackItem__right">
 				<FaComment className="commentIcon" />
-				<span className="commentLength">{feedback.comments.length}</span>
+				{/* <span className="commentLength">{feedback.comments.length}</span> */}
 			</div>
 
 			{/* <p className="FeedbackItem__text">{feedback.feedbackType}</p> */}

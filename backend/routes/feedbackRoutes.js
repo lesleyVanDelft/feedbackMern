@@ -22,9 +22,9 @@ router
 // 	.delete(protect, deleteFeedback);
 router
 	.route('/:id')
+	.get(protect, getSingleFeedback)
 	.delete(protect, deleteFeedback)
-	.put(protect, editFeedback)
-	.get(protect, getSingleFeedback);
+	.put(protect, editFeedback);
 
 // router
 // 	.route('edit/:id')

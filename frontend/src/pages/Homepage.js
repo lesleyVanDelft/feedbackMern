@@ -43,6 +43,7 @@ const Homepage = () => {
 	};
 
 	useEffect(() => {
+		dispatch(getFeedbacks(feedbacks));
 		if (isError) {
 			console.log(message);
 		}
@@ -51,7 +52,6 @@ const Homepage = () => {
 			navigate('/login');
 		}
 
-		// dispatch(getFeedbacks(feedbacks));
 		setTimeout(() => {
 			dispatch(getFeedbacks(feedbacks));
 			// console.log('homepage log');

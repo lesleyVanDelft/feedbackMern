@@ -7,13 +7,15 @@ import './CommentSection.css';
 
 const CommentSection = ({ feedbackData }) => {
 	// const [comments, setComments] = useState([]);
+	const [feedback, setFeedback] = useState([]);
 	// const { comments } = feedbackData.comments;
 	// console.log(comments);
 	// const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	// dispatch(getSingleFeedback(feedbackData));
-	// 	setComments(feedbackData[0].comments);
-	// }, [feedbackData]);
+	useEffect(() => {
+		// dispatch(getSingleFeedback(feedbackData));
+		setFeedback(feedbackData[0]);
+	}, []);
+	console.log(feedback);
 	return (
 		<section className="CommentSection">
 			<h2 className="CommentSection__count">
