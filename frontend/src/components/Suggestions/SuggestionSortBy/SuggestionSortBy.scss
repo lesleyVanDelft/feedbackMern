@@ -1,0 +1,59 @@
+@import '../../../sass/main.scss';
+.SuggestionSortBy {
+	position: relative;
+	background: none;
+	border: none;
+	&:hover {
+		span.sortBy,
+		button {
+			opacity: 0.85;
+		}
+	}
+	span {
+		color: $white;
+	}
+	ul.dropdown {
+		display: none;
+		position: absolute;
+		list-style: none;
+		z-index: 48;
+		color: black;
+		background: $white;
+		left: 0;
+		top: 60px;
+		// padding: 1rem;
+		width: 255px;
+		border-radius: 10px;
+		box-shadow: 0px 10px 21px -1px rgba(0, 0, 0, 0.31);
+
+		&.active {
+			display: block;
+		}
+
+		li {
+			width: 100%;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 1rem;
+			padding: 0.7rem 1.2rem;
+			cursor: pointer;
+			span {
+				color: $lightBlueGray;
+			}
+			svg {
+				color: $purple;
+			}
+			&:hover {
+				span {
+					color: $purple;
+				}
+			}
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+}

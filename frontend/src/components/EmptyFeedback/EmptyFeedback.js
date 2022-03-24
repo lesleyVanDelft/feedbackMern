@@ -1,10 +1,29 @@
 import EmptyImage from '../../assets/suggestions/illustration-empty.svg';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './EmptyFeedback.css';
+
+const framerList = {
+	hidden: {
+		opacity: 0,
+		translateX: 40,
+	},
+	show: {
+		opacity: 1,
+		translateX: 0,
+		transition: {
+			delay: 0.2,
+		},
+	},
+};
 
 const EmptyFeedback = () => {
 	return (
-		<section className="EmptyFeedback">
+		<motion.div
+			variants={framerList}
+			initial="hidden"
+			animate="show"
+			className="EmptyFeedback">
 			<img src={EmptyImage} alt="" className="EmptyFeedback__image" />
 
 			<h2 className="EmptyFeedback__title">There is no feedback yet.</h2>
@@ -15,7 +34,7 @@ const EmptyFeedback = () => {
 			<Link to="/create" className="btnLink">
 				<button className="btn btn-purple">+ Add Feedback</button>
 			</Link>
-		</section>
+		</motion.div>
 	);
 };
 

@@ -1,5 +1,6 @@
 import { HiOutlineLightBulb, HiChevronDown, HiChevronUp } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
+import SuggestionSortBy from '../SuggestionSortBy/SuggestionSortBy';
 import './SuggestionsHeader.css';
 
 const SuggestionsHeader = ({ suggestionCount }) => {
@@ -8,13 +9,10 @@ const SuggestionsHeader = ({ suggestionCount }) => {
 			<div className="SuggestionsHeader__total">
 				<HiOutlineLightBulb />
 				<h2>
-					<span>{suggestionCount}</span>Suggestions
+					<span className="suggestionCount">{suggestionCount}</span>Suggestions
 				</h2>
 			</div>
-			<div className="SuggestionsHeader__sort">
-				<span>Sort by: </span>
-				<button>Most Upvotes {<HiChevronDown />}</button>
-			</div>
+			<SuggestionSortBy />
 
 			<Link to="/create" className="btnLink">
 				<button className="btn btn-purple">+ Add Feedback</button>
