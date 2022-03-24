@@ -1,12 +1,32 @@
 // import { useDispatch } from 'react-redux';
 // import { deleteFeedback } from '../../features/feedbacks/feedbackSlice';
+import { motion } from 'framer-motion';
 import { FaChevronUp, FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './FeedbackItem.css';
 
-const FeedbackItem = ({ feedback }) => {
+const FeedbackItem = ({ feedback, index }) => {
+	const framerList = {
+		initial: {
+			opacity: 0,
+			translateX: -40,
+		},
+		animate: {
+			opacity: 1,
+			translateX: 0,
+		},
+		transition: {
+			duration: 0.3,
+			delay: index ? index * 0.1 : 0,
+		},
+	};
+
 	return (
-		<div className="FeedbackItem">
+		<motion.div
+			initial={framerList.initial}
+			animate={framerList.animate}
+			transition={framerList.transition}
+			className="FeedbackItem">
 			<div className="FeedbackItem__left">
 				<div className="FeedbackItem__left--voteBtn">
 					<button className="votes">
@@ -26,7 +46,9 @@ const FeedbackItem = ({ feedback }) => {
 			<div className="FeedbackItem__right">
 				<FaComment className="commentIcon" />
 				<span className="commentLength">
-					{feedback.comments > 0 ? feedback.comments.length : 0}
+					<Link to={`/details/${feedback._id}`}>
+						{feedback.comments.length > 0 ? feedback.comments.length : 0}
+					</Link>
 				</span>
 			</div>
 
@@ -34,7 +56,7 @@ const FeedbackItem = ({ feedback }) => {
 			{/* <button onClick={() => dispatch(deleteFeedback(feedback._id))}>
 				delete me
 			</button> */}
-		</div>
+		</motion.div>
 	);
 };
 

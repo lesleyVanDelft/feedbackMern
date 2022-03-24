@@ -65,16 +65,15 @@ const Register = () => {
 	}
 
 	return (
-		<>
-			<section className="heading">
-				<h1>
-					<FaUser /> Register
-				</h1>
-				<p>Please create an account</p>
-			</section>
-
-			<section className="form">
+		<main className="Register">
+			<section className="Register__form">
 				<form onSubmit={onSubmit}>
+					<div className="heading">
+						<h2>
+							<FaUser /> Register
+						</h2>
+						<p>Please create an account</p>
+					</div>
 					<div className="form-group">
 						<input
 							type="text"
@@ -130,14 +129,13 @@ const Register = () => {
 							onChange={onChange}
 						/>
 					</div>
-					<div className="form-group">
-						<button type="submit" className="btn btn-block">
-							Submit
-						</button>
-					</div>
+
+					<button type="submit" className="btn btnSubmit">
+						Submit
+					</button>
 				</form>
 			</section>
-		</>
+		</main>
 	);
 };
 

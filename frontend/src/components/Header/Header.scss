@@ -3,10 +3,37 @@
 .Header {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	width: 50%;
 	margin: 0 auto;
-	ul {
+	padding: 0.5rem 0;
+
+	button.btnLogout {
+		background: $darkBlue2;
+		display: flex;
+		align-items: center;
+		svg {
+			margin-right: 0.3rem;
+		}
+	}
+	&__content {
 		list-style: none;
+
+		&.login {
+			display: flex;
+			justify-content: flex-end;
+			width: 100%;
+			padding-top: 2rem;
+
+			button.btn {
+				border: none;
+				background: $darkBlue2;
+				margin-right: 1rem;
+				&.active {
+					background: $blue;
+				}
+			}
+		}
 	}
 }
 

@@ -54,7 +54,7 @@ const EditFeedbackForm = ({ feedbackData }) => {
 
 	const handleDelete = () => {
 		// e.preventDefault();
-		dispatch(deleteFeedback(feedbackData[0]._id));
+		dispatch(deleteFeedback(id));
 		// setTimeout(navigate('/'), 1000);
 		// dispatch(reset());
 		navigate('/');

@@ -35,14 +35,12 @@ const Homepage = () => {
 	const getMobileState = mobile => {
 		setMobileState(!mobile);
 	};
-	// console.log(mobileState);
 
+	// framer motion
 	const menuVisibility = {
 		visible: { opacity: 1 },
 		hidden: { opacity: 0 },
 	};
-
-	// const localToken = JSON.parse(localStorage.getItem('user'));
 
 	useEffect(() => {
 		dispatch(getFeedbacks(feedbacks));
@@ -50,6 +48,10 @@ const Homepage = () => {
 			dispatch(getFeedbacks(feedbacks));
 			// console.log('homepage log');
 		}, 100);
+
+		if (isLoading) {
+			return <Spinner />;
+		}
 
 		if (isError) {
 			console.log(message);
@@ -66,9 +68,35 @@ const Homepage = () => {
 		// };
 	}, [navigate, dispatch, isError, message]);
 	// console.log(feedbacks);
-	if (isLoading) {
-		return <Spinner />;
-	}
+
+	// framer motion
+	const framerList = {
+		initial: {
+			opacity: 0,
+			translateX: -50,
+		},
+		animate: {
+			opacity: 1,
+			translateX: 0,
+		},
+	};
+	// const initial = {
+	// 	opacity: 0,
+	// 	translateX: -50,
+	// };
+	// const framerAnimate = {
+	// 	opacity: 1,
+	// 	translateX: 0,
+	// };
+	// const framerContainer = {
+	// 	hidden: { opacity: 0 },
+	// 	show: {
+	// 	  opacity: 1,
+	// 	  transition: {
+	// 		staggerChildren: 2.5
+	// 	  }
+	// 	}
+	//   };
 
 	const filteredFeedbacks =
 		feedbacks.length > 0 &&
@@ -76,12 +104,15 @@ const Homepage = () => {
 			return feedback.feedbackType.toLowerCase() === categoryState;
 		});
 	// const filteredFeedbacks = [];
-	<Dashboard category={getCategoryState} mobileOpen={getMobileState} />;
+	// <Dashboard category={getCategoryState} mobileOpen={getMobileState} />;
+
+	// const feedbackList = feedbacks.map();
 	return (
 		<main className="Homepage">
 			<Dashboard category={getCategoryState} mobileOpen={getMobileState} />
 
 			<section className={`Homepage__content`}>
+				{/* mobile animation overlay */}
 				<motion.div
 					className={`overlay ${mobileState ? 'active' : null}`}
 					variants={menuVisibility}
@@ -104,21 +135,30 @@ const Homepage = () => {
 
 					{/* Loop over all feedbacks if category state is all, else loop over filtered feedbacks*/}
 					{feedbacks.length > 0 && categoryState === 'all' ? (
-						<div className="feedbacks">
-							{feedbacks.map(feedback => {
-								return <FeedbackItem feedback={feedback} key={feedback._id} />;
+						<motion.div className="feedbacks">
+							{feedbacks.map((feedback, i) => {
+								return (
+									<FeedbackItem
+										feedback={feedback}
+										key={feedback._id}
+										index={i}
+									/>
+								);
 							})}
-						</div>
+						</motion.div>
 					) : (
 						<div className="feedbacks">
 							{filteredFeedbacks.length > 0 &&
-								filteredFeedbacks.map(feedback => {
+								filteredFeedbacks.map((feedback, i) => {
 									return (
-										<FeedbackItem feedback={feedback} key={feedback._id} />
+										<FeedbackItem
+											feedback={feedback}
+											key={feedback._id}
+											index={i}
+										/>
 									);
 								})}
 						</div>
-						// <h3>no shit</h3>
 					)}
 				</div>
 			</section>

@@ -61,15 +61,18 @@ const Login = () => {
 	}
 
 	return (
-		<>
-			<section className="heading">
-				<h1>
-					<FaSignInAlt /> Login
-				</h1>
-				<p>Login and start setting goals</p>
-			</section>
+		<main className="Login">
+			{/* <section className="heading">
+				
+			</section> */}
 
-			<section className="form">
+			<section className="Login__form form">
+				<div className="heading">
+					<h2>
+						<FaSignInAlt /> Login
+					</h2>
+					<p>Login and share your feedback</p>
+				</div>
 				<form onSubmit={onSubmit}>
 					<div className="form-group">
 						<input
@@ -94,14 +97,12 @@ const Login = () => {
 						/>
 					</div>
 
-					<div className="form-group">
-						<button type="submit" className="btn btn-block">
-							Submit
-						</button>
-					</div>
+					<button type="submit" className="btn btnSubmit">
+						Submit
+					</button>
 				</form>
 			</section>
-		</>
+		</main>
 	);
 };
 

@@ -76,7 +76,7 @@ const deleteFeedback = async (feedbackId, token) => {
 		},
 	};
 
-	const response = await axios.delete(API_URL + feedbackId, config);
+	const response = await axios.delete(API_URL + feedbackId, token);
 	// console.log(response);
 	return response.data;
 };
