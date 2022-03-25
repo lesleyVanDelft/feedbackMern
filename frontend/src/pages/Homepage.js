@@ -48,7 +48,6 @@ const Homepage = () => {
 			dispatch(getFeedbacks(feedbacks));
 			// console.log('homepage log');
 		}, 100);
-
 		if (isLoading) {
 			return <Spinner />;
 		}
@@ -98,12 +97,12 @@ const Homepage = () => {
 	// 	}
 	//   };
 
+	// const filteredFeedbacks = [];
 	const filteredFeedbacks =
 		feedbacks.length > 0 &&
 		feedbacks.filter(feedback => {
 			return feedback.feedbackType.toLowerCase() === categoryState;
 		});
-	// const filteredFeedbacks = [];
 	// <Dashboard category={getCategoryState} mobileOpen={getMobileState} />;
 
 	// const feedbackList = feedbacks.map();

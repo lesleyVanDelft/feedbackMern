@@ -51,7 +51,7 @@ const Details = () => {
 
 	useEffect(() => {
 		setSingleFeedback(feedbacks.filter(feedback => feedback._id === id));
-		// dispatch(getSingleFeedback(id));
+		dispatch(getSingleFeedback(id));
 	}, []);
 
 	// console.log(setSingleFeedback);

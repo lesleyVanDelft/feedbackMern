@@ -137,6 +137,24 @@ export const addComment = createAsyncThunk(
 	}
 );
 
+// like comment
+export const likeComment = createAsyncThunk(
+	'feedback/upvote',
+	async (data, thunkAPI) => {
+		try {
+			return await feedbackService.likeComment(data, token);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message + 'likeComment');
+		}
+	}
+);
+
 // feedback slice
 export const feedbackSlice = createSlice({
 	name: 'feedback',
@@ -152,14 +170,7 @@ export const feedbackSlice = createSlice({
 			.addCase(addComment.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				// console.log(action.payload);
-				// console.log(state.feedbacks);
-				// state.feedbacks = state.feedbacks.comments.push(action.payload);
-				// console.log(state.feedbacks[0].comments);
-
 				state.feedbacks = action.payload;
-				// 	.filter(feedback => feedback._id === action.payload.id)
-				// 	.push(action.payload);
 			})
 			.addCase(addComment.rejected, (state, action) => {
 				state.isLoading = false;
@@ -182,6 +193,7 @@ export const feedbackSlice = createSlice({
 			})
 			.addCase(getFeedbacks.pending, state => {
 				state.isLoading = true;
+				state.isSuccess = false;
 			})
 			.addCase(getFeedbacks.fulfilled, (state, action) => {
 				state.isLoading = false;
@@ -200,7 +212,7 @@ export const feedbackSlice = createSlice({
 				state.isLoading = false;
 				state.isError = false;
 				state.isSuccess = true;
-
+				// console.log(action.payload);
 				state.feedbacks = action.payload;
 				// state.feedbacks.filter(feedback => feedback._id === action.payload.id);
 				// console.log(action.payload);
@@ -237,6 +249,19 @@ export const feedbackSlice = createSlice({
 				);
 			})
 			.addCase(deleteFeedback.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+			})
+			.addCase(likeComment.pending, state => {
+				state.isLoading = true;
+			})
+			.addCase(likeComment.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				// state.feedbacks = action.payload;
+			})
+			.addCase(likeComment.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;

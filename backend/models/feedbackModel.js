@@ -19,21 +19,15 @@ const feedbackModel = mongoose.Schema(
 			type: String,
 			required: [true, 'Please select a feedbacktype'],
 		},
-		// comments: [
-		// 	{
-		// 		type: mongoose.Schema.Types.ObjectId,
-		// 		ref: 'Comment',
-
-		// 	},
-		// ],
 		comments: {
 			type: Array,
 			default: [],
-			ref: 'Comment',
+			// ref: 'Comment',
 		},
 		likes: {
 			type: Array,
 			default: [],
+			// ref: 'Upvote',
 		},
 	},
 	{

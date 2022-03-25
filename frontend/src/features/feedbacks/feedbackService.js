@@ -76,7 +76,7 @@ const deleteFeedback = async (feedbackId, token) => {
 		},
 	};
 
-	const response = await axios.delete(API_URL + feedbackId, token);
+	const response = await axios.delete(API_URL + feedbackId, config);
 	// console.log(response);
 	return response.data;
 };
@@ -90,7 +90,30 @@ const addComment = async data => {
 		},
 	};
 	// Authorization:localStorage.getItem('jwtToken'
-	const response = await axios.post(API_URL + data._id, { text: data.text });
+	const response = await axios.post(
+		API_URL + data._id,
+		{ text: data.text },
+		config
+	);
+
+	return response.data;
+};
+
+// like
+const likeComment = async data => {
+	const config = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+	const response = await axios.post(
+		// API_URL + upvoteData._id + '/upvote',
+		`${API_URL + data._id}/upvote`,
+		data,
+		config
+	);
+
+	console.log(response.data);
 
 	return response.data;
 };
@@ -102,6 +125,7 @@ const feedbackService = {
 	getSingleFeedback,
 	editFeedback,
 	addComment,
+	likeComment,
 };
 
 export default feedbackService;

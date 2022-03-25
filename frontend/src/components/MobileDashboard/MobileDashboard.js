@@ -6,8 +6,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { logout, reset } from '../../features/auth/authSlice';
 
 const menuVisibility = {
-	visible: { opacity: 1, right: 0 },
 	hidden: { opacity: 0, right: -150 },
+	visible: { opacity: 1, right: 0 },
+	exit: { opacity: 0, right: -150 },
 };
 
 const MobileDashboard = ({ category, isVisible }) => {
@@ -26,7 +27,8 @@ const MobileDashboard = ({ category, isVisible }) => {
 					className="MobileDashboard"
 					variants={menuVisibility}
 					initial="hidden"
-					animate={isVisible ? 'visible' : 'hidden'}>
+					animate={isVisible ? 'visible' : 'hidden'}
+					exit="exit">
 					<FilterButtons category={category} />
 					<Roadmap />
 					<button className="btn btn-darkBlue" onClick={onLogout}>

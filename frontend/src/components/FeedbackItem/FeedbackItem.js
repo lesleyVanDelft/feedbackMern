@@ -3,9 +3,19 @@
 import { motion } from 'framer-motion';
 import { FaChevronUp, FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { likeComment } from '../../features/feedbacks/feedbackSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import './FeedbackItem.css';
+import { useEffect, useState } from 'react';
 
 const FeedbackItem = ({ feedback, index }) => {
+	const { user } = useSelector(state => state.auth);
+	// const [likedFeedbackId, setLikedFeedbackId] = useState();
+	// console.log(user);
+	// console.log(feedback._id);
+	const dispatch = useDispatch();
+
+	// console.log(likedFeedbackId);
 	const framerList = {
 		initial: {
 			opacity: 0,
@@ -20,6 +30,16 @@ const FeedbackItem = ({ feedback, index }) => {
 			delay: index ? index * 0.1 : 0,
 		},
 	};
+	const upvoteData = {
+		_id: feedback._id,
+		likedBy: user,
+	};
+
+	// console.log(upvoteData);
+	// const handleUpvote = () => {
+	// 	console.log('handleUpvote test');
+	// 	return dispatch(feedbackService.likeComment(upvoteData));
+	// };
 
 	return (
 		<motion.div
@@ -27,11 +47,14 @@ const FeedbackItem = ({ feedback, index }) => {
 			animate={framerList.animate}
 			transition={framerList.transition}
 			className="FeedbackItem">
+			{/* make this form maybe? */}
 			<div className="FeedbackItem__left">
 				<div className="FeedbackItem__left--voteBtn">
-					<button className="votes">
+					<button
+						className="votes"
+						onClick={() => dispatch(likeComment(upvoteData))}>
 						<FaChevronUp className="chevronUp" />
-						<span>0</span>
+						<span>{feedback.likes.length}</span>
 					</button>
 				</div>
 				<div className="FeedbackItem__left--content">
