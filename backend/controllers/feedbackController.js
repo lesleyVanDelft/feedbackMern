@@ -31,6 +31,7 @@ const setFeedback = asyncHandler(async (req, res) => {
 		res.status(400);
 		throw new Error('Please add a text field');
 	}
+
 	// console.log(req.body);
 
 	const newFeedback = await Feedback.create({
@@ -151,8 +152,13 @@ const likeFeedback = asyncHandler(async (req, res) => {
 		res.status(400);
 		throw new Error('usernotfound- likefeedback');
 	}
-	console.log(req.body);
 
+	const checkLikes = await Feedback.find({
+		_id: req.params.id,
+		likes: { $exists: false },
+	});
+	// console.log(checkLikes);
+	// console.log(req.body);
 	// console.log(req.body.params); undefined
 	// console.log(req.user);
 	// console.log(feedback);

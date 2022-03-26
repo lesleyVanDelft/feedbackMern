@@ -79,23 +79,6 @@ const Homepage = () => {
 			translateX: 0,
 		},
 	};
-	// const initial = {
-	// 	opacity: 0,
-	// 	translateX: -50,
-	// };
-	// const framerAnimate = {
-	// 	opacity: 1,
-	// 	translateX: 0,
-	// };
-	// const framerContainer = {
-	// 	hidden: { opacity: 0 },
-	// 	show: {
-	// 	  opacity: 1,
-	// 	  transition: {
-	// 		staggerChildren: 2.5
-	// 	  }
-	// 	}
-	//   };
 
 	// const filteredFeedbacks = [];
 	const filteredFeedbacks =
@@ -117,6 +100,7 @@ const Homepage = () => {
 					variants={menuVisibility}
 					initial="hidden"
 					animate="visible"></motion.div>
+
 				<Suggestions
 					suggestionCount={
 						categoryState === 'all'

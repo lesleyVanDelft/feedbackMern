@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoMenuSharp } from 'react-icons/io5/index.esm';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
-import { motion } from 'framer-motion';
+import { motion, LayoutGroup } from 'framer-motion';
 import MobileDashboard from '../MobileDashboard/MobileDashboard';
 import './Dashboard.css';
 import FilterButtons from './FilterButtons/FilterButtons';
@@ -10,6 +10,13 @@ import Roadmap from './Roadmap/Roadmap';
 const Dashboard = ({ category, mobileOpen }) => {
 	const [categoryState, setCategoryState] = useState('all');
 	const [active, setActive] = useState(false);
+
+	// lock body scrolling when mobile menu is open
+	useEffect(() => {
+		return active
+			? (document.body.style.overflow = 'hidden')
+			: (document.body.style.overflow = 'unset');
+	}, [active]);
 
 	// get state through onclick on category buttons
 	const getCategoryState = catState => {
@@ -92,9 +99,13 @@ const Dashboard = ({ category, mobileOpen }) => {
 					</div>
 
 					{active ? (
-						<div>
-							<MobileDashboard category={getCategoryState} isVisible={active} />
-						</div>
+						<LayoutGroup>
+							<MobileDashboard
+								category={getCategoryState}
+								isVisible={active}
+								layout
+							/>
+						</LayoutGroup>
 					) : null}
 				</div>
 			)}

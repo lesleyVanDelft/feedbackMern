@@ -21,10 +21,11 @@ const MobileDashboard = ({ category, isVisible }) => {
 		navigate('/');
 	};
 	return (
-		<AnimatePresence exitBeforeEnter>
+		<AnimatePresence>
 			{isVisible && (
 				<motion.nav
 					className="MobileDashboard"
+					key="mobileNav"
 					variants={menuVisibility}
 					initial="hidden"
 					animate={isVisible ? 'visible' : 'hidden'}

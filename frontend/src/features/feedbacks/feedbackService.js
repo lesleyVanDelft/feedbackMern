@@ -113,7 +113,7 @@ const likeComment = async data => {
 		config
 	);
 
-	console.log(response.data);
+	// console.log(response.data);
 
 	return response.data;
 };

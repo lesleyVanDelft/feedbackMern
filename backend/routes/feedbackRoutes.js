@@ -14,8 +14,6 @@ const {
 const { protect } = require('../middleware/authMiddleware.js');
 // const Feedback = require('../models/feedbackModel');
 // router.get('/currentUser', protect, getCurrentUser);/
-router.route('/details/:id').post(addComment).get(protect, getSingleFeedback);
-router.route('/:id/upvote').post(protect, likeFeedback);
 router
 	.route('/')
 	.get(protect, getFeedbacks)
@@ -30,6 +28,8 @@ router
 	.delete(protect, deleteFeedback)
 	.put(protect, editFeedback);
 
+router.route('/:id/upvote').post(protect, likeFeedback);
+router.route('/details/:id').post(addComment).get(protect, getSingleFeedback);
 // router.route('/upvote').post(protect, likeFeedback);
 // router.route('/create').post(protect, setFeedback);
 

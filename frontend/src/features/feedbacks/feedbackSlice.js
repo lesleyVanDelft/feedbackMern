@@ -83,8 +83,8 @@ export const editFeedback = createAsyncThunk(
 		try {
 			// const token = thunkAPI.getState().auth.user.token;
 
-			console.log(token);
-			console.log(data);
+			// console.log(token);
+			// console.log(data);
 			return await feedbackService.editFeedback(data, token);
 		} catch (error) {
 			const message =
@@ -259,7 +259,7 @@ export const feedbackSlice = createSlice({
 			.addCase(likeComment.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				// state.feedbacks = action.payload;
+				state.feedbacks = action.payload;
 			})
 			.addCase(likeComment.rejected, (state, action) => {
 				state.isLoading = false;

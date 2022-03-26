@@ -50,9 +50,9 @@ const Details = () => {
 	// }, [user, navigate, isError, message, dispatch, id]);
 
 	useEffect(() => {
-		setSingleFeedback(feedbacks.filter(feedback => feedback._id === id));
 		dispatch(getSingleFeedback(id));
-	}, []);
+		setSingleFeedback(feedbacks.filter(feedback => feedback._id === id));
+	}, [dispatch]);
 
 	// console.log(setSingleFeedback);
 
@@ -68,7 +68,7 @@ const Details = () => {
 						<FaChevronLeft /> <span>Go Back</span>
 					</Link>
 				</button>
-				{user._id === singleFeedback[0].user ? (
+				{user && user._id === singleFeedback[0].user ? (
 					<Link to={`/edit/${id}`}>
 						<button className="btn btn-blue edit">Edit Feedback</button>
 					</Link>

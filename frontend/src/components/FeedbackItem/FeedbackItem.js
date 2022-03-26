@@ -1,9 +1,10 @@
-// import { useDispatch } from 'react-redux';
-// import { deleteFeedback } from '../../features/feedbacks/feedbackSlice';
 import { motion } from 'framer-motion';
 import { FaChevronUp, FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { likeComment } from '../../features/feedbacks/feedbackSlice';
+import {
+	getFeedbacks,
+	likeComment,
+} from '../../features/feedbacks/feedbackSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import './FeedbackItem.css';
 import { useEffect, useState } from 'react';
@@ -11,11 +12,18 @@ import { useEffect, useState } from 'react';
 const FeedbackItem = ({ feedback, index }) => {
 	const { user } = useSelector(state => state.auth);
 	// const [likedFeedbackId, setLikedFeedbackId] = useState();
-	// console.log(user);
-	// console.log(feedback._id);
+	const [currLikedFeedback, setCurrLikedFeedback] = useState();
+	const { feedbacks } = useSelector(state => {
+		return state.feedbacks;
+	});
+
 	const dispatch = useDispatch();
 
-	// console.log(likedFeedbackId);
+	// let voteCount = 0;
+	// useEffect(() => {
+	// 	return feedback.likes ? voteCount = feedback.likes.length : null
+	// }, [])
+
 	const framerList = {
 		initial: {
 			opacity: 0,
@@ -35,11 +43,19 @@ const FeedbackItem = ({ feedback, index }) => {
 		likedBy: user,
 	};
 
-	// console.log(upvoteData);
-	// const handleUpvote = () => {
-	// 	console.log('handleUpvote test');
-	// 	return dispatch(feedbackService.likeComment(upvoteData));
-	// };
+	const handleClick = e => {
+		e.preventDefault();
+		dispatch(likeComment(upvoteData));
+		const likedFeedbackFilter = feedbacks.filter(
+			stateFeedback => stateFeedback._id === feedback._id
+		);
+		setCurrLikedFeedback(likedFeedbackFilter);
+		console.log(likedFeedbackFilter);
+
+		setTimeout(() => {
+			dispatch(getFeedbacks());
+		}, 250);
+	};
 
 	return (
 		<motion.div
@@ -48,11 +64,9 @@ const FeedbackItem = ({ feedback, index }) => {
 			transition={framerList.transition}
 			className="FeedbackItem">
 			{/* make this form maybe? */}
-			<div className="FeedbackItem__left">
+			<form className="FeedbackItem__left" onSubmit={handleClick}>
 				<div className="FeedbackItem__left--voteBtn">
-					<button
-						className="votes"
-						onClick={() => dispatch(likeComment(upvoteData))}>
+					<button className="votes" type="submit">
 						<FaChevronUp className="chevronUp" />
 						<span>{feedback.likes.length}</span>
 					</button>
@@ -64,7 +78,7 @@ const FeedbackItem = ({ feedback, index }) => {
 					<p className="text">{feedback.text}</p>
 					<button className="feedbackTypeBtn">{feedback.feedbackType}</button>
 				</div>
-			</div>
+			</form>
 
 			<div className="FeedbackItem__right">
 				<FaComment className="commentIcon" />
