@@ -3,7 +3,7 @@ const Feedback = require('../models/feedbackModel');
 const User = require('../models/userModel');
 
 const getFeedbacks = async (req, res) => {
-	const allFeedbacks = await Feedback.find({}).populate('author', 'username');
+	const allFeedbacks = await Feedback.find({});
 	res.status(200).json(allFeedbacks);
 };
 

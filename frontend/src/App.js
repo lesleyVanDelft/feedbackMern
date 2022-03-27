@@ -1,4 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getFeedbacks } from './reducers/feedbackReducer';
+import { setUser } from './reducers/userReducer';
 import Header from './components/Header/Header';
 import Homepage from './pages/Homepage';
 import Login from './pages/Login';
@@ -9,6 +13,22 @@ import Edit from './pages/Edit/Edit';
 import Test from './pages/Test';
 
 function App() {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const setAllFeedbacks = async () => {
+			try {
+				await dispatch(getFeedbacks());
+			} catch (error) {
+				console.log(error.message);
+			}
+		};
+
+		dispatch(setUser());
+		setAllFeedbacks();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<>
 			<Router>

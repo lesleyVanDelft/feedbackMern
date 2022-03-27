@@ -5,9 +5,11 @@ const {
 	setUserAvatar,
 	removeUserAvatar,
 } = require('../controllers/user');
-
+const { loginUser, registerUser } = require('../controllers/auth');
 const router = express.Router();
 
+router.post('/register', registerUser);
+router.post('/login', loginUser);
 router.get('/:username', getUser);
 router.post('/avatar', auth, setUserAvatar);
 router.delete('/avatar', auth, removeUserAvatar);

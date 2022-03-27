@@ -1,8 +1,8 @@
 import axios from 'axios';
-import backendUrl from '../backendUrl';
+// import backendUrl from '../backendUrl';
 import { token } from './auth';
 
-const baseUrl = `${backendUrl}/api/users`;
+const API_URL = '/api/users';
 
 const setConfig = () => {
 	return {
@@ -12,14 +12,14 @@ const setConfig = () => {
 
 const getUser = async (username, limit, page) => {
 	const response = await axios.get(
-		`${baseUrl}/${username}/?limit=${limit}&page=${page}`
+		`${API_URL}/${username}/?limit=${limit}&page=${page}`
 	);
 	return response.data;
 };
 
 const uploadAvatar = async avatarObj => {
 	const response = await axios.post(
-		`${baseUrl}/avatar`,
+		`${API_URL}/avatar`,
 		avatarObj,
 		setConfig()
 	);
@@ -27,7 +27,7 @@ const uploadAvatar = async avatarObj => {
 };
 
 const removeAvatar = async () => {
-	const response = await axios.delete(`${baseUrl}/avatar`, setConfig());
+	const response = await axios.delete(`${API_URL}/avatar`, setConfig());
 	return response.data;
 };
 

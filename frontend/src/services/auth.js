@@ -13,11 +13,11 @@ const login = async loginData => {
 	return response.data;
 };
 
-const signup = async registerData => {
+const register = async registerData => {
 	const response = await axios.post(API_URL + 'register', registerData);
 	return response.data;
 };
 
-const authService = { setToken, login, signup };
+const authService = { setToken, login, register };
 
 export default authService;

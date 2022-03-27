@@ -38,11 +38,11 @@ import thunk from 'redux-thunk';
 import userReducer from '../reducers/userReducer';
 import feedbackReducer from '../reducers/feedbackReducer';
 // import subReducer from '../reducers/subReducer';
-import CommentsReducer from '../reducers/postCommentsReducer';
-import userPageReducer from '../reducers/userPageReducer';
-import subPageReducer from '../reducers/subPageReducer';
-import searchReducer from '../reducers/searchReducer';
-import themeReducer from '../reducers/themeReducer';
+// import CommentsReducer from '../reducers/postCommentsReducer';
+// import userPageReducer from '../reducers/userPageReducer';
+// import subPageReducer from '../reducers/subPageReducer';
+// import searchReducer from '../reducers/searchReducer';
+// import themeReducer from '../reducers/themeReducer';
 import feedbackCommentsReducer from '../reducers/feedbackCommentsReducer';
 
 const reducer = combineReducers({
@@ -52,6 +52,9 @@ const reducer = combineReducers({
 	feedbackComments: feedbackCommentsReducer,
 });
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+export const store = createStore(
+	reducer,
+	composeWithDevTools(applyMiddleware(thunk))
+);
 
 export default store;

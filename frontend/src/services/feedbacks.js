@@ -10,7 +10,7 @@ const setConfig = () => {
 };
 
 // get user feedbacks
-const getFeedbacks = async token => {
+const getFeedbacks = async () => {
 	const response = await axios.get(API_URL);
 	return response.data;
 };

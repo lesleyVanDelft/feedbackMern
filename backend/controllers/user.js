@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../models/userModel');
 const Feedback = require('../models/feedbackModel');
 // const { cloudinary, UPLOAD_PRESET } = require('../utils/config');
 // const paginateResults = require('../utils/paginateResults');
