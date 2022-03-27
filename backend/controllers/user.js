@@ -4,12 +4,12 @@ const Feedback = require('../models/feedbackModel');
 // const paginateResults = require('../utils/paginateResults');
 
 const getUser = async (req, res) => {
-	const { username } = req.params;
-	const page = Number(req.query.page);
-	const limit = Number(req.query.limit);
+	const { email } = req.params;
+	// const page = Number(req.query.page);
+	// const limit = Number(req.query.limit);
 
 	const user = await User.findOne({
-		username: { $regex: new RegExp('^' + username + '$', 'i') },
+		email: email,
 	});
 
 	if (!user) {
@@ -18,23 +18,23 @@ const getUser = async (req, res) => {
 			.send({ message: `Username '${username}' does not exist on server.` });
 	}
 
-	const postsCount = await Post.find({ author: user.id }).countDocuments();
-	const paginated = paginateResults(page, limit, postsCount);
-	const userPosts = await Post.find({ author: user.id })
-		.sort({ createdAt: -1 })
-		.select('-comments')
-		.limit(limit)
-		.skip(paginated.startIndex)
-		.populate('author', 'username')
-		.populate('subreddit', 'subredditName');
+	// const postsCount = await Post.find({ author: user.id }).countDocuments();
+	// const paginated = paginateResults(page, limit, postsCount);
+	// const userPosts = await Post.find({ author: user.id })
+	// 	.sort({ createdAt: -1 })
+	// 	.select('-comments')
+	// 	.limit(limit)
+	// 	.skip(paginated.startIndex)
+	// 	.populate('author', 'username')
+	// 	.populate('subreddit', 'subredditName');
 
-	const paginatedPosts = {
-		previous: paginated.results.previous,
-		results: userPosts,
-		next: paginated.results.next,
-	};
+	// const paginatedPosts = {
+	// 	previous: paginated.results.previous,
+	// 	results: userPosts,
+	// 	next: paginated.results.next,
+	// };
 
-	res.status(200).json({ userDetails: user, posts: paginatedPosts });
+	res.status(200).json(user);
 };
 
 const setUserAvatar = async (req, res) => {

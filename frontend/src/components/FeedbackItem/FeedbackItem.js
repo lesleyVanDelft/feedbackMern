@@ -24,24 +24,10 @@ import { useEffect, useState } from 'react';
 // 	// 	return feedback.likes ? voteCount = feedback.likes.length : null
 // 	// }, [])
 
-// 	const framerList = {
-// 		initial: {
-// 			opacity: 0,
-// 			translateX: -40,
-// 		},
-// 		animate: {
-// 			opacity: 1,
-// 			translateX: 0,
-// 		},
-// 		transition: {
-// 			duration: 0.3,
-// 			delay: index ? index * 0.1 : 0,
-// 		},
-// 	};
-// 	const upvoteData = {
-// 		_id: feedback._id,
-// 		likedBy: user,
-// 	};
+// const upvoteData = {
+// 	_id: feedback._id,
+// 	likedBy: user,
+// };
 
 // 	const handleClick = e => {
 // 		e.preventDefault();
@@ -98,45 +84,59 @@ import { useEffect, useState } from 'react';
 // };
 
 const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
-	// 	return (
-	// 		<motion.div
-	// 			initial={framerList.initial}
-	// 			animate={framerList.animate}
-	// 			transition={framerList.transition}
-	// 			className="FeedbackItem">
-	// 			{/* make this form maybe? */}
-	// 			<form className="FeedbackItem__left" onSubmit={handleClick}>
-	// 				<div className="FeedbackItem__left--voteBtn">
-	// 					<button className="votes" type="submit">
-	// 						<FaChevronUp className="chevronUp" />
-	// 						<span>{feedback.likes.length}</span>
-	// 					</button>
-	// 				</div>
-	// 				<div className="FeedbackItem__left--content">
-	// 					<Link to={`/details/${feedback._id}`}>
-	// 						<h3 className="title">{feedback.title}</h3>
-	// 					</Link>
-	// 					<p className="text">{feedback.text}</p>
-	// 					<button className="feedbackTypeBtn">{feedback.feedbackType}</button>
-	// 				</div>
-	// 			</form>
+	const framerList = {
+		initial: {
+			opacity: 0,
+			translateX: -40,
+		},
+		animate: {
+			opacity: 1,
+			translateX: 0,
+		},
+		transition: {
+			duration: 0.3,
+			delay: index ? index * 0.1 : 0,
+		},
+	};
 
-	// 			<div className="FeedbackItem__right">
-	// 				<FaComment className="commentIcon" />
-	// 				<span className="commentLength">
-	// 					<Link to={`/details/${feedback._id}`}>
-	// 						{feedback.comments.length > 0 ? feedback.comments.length : 0}
-	// 					</Link>
-	// 				</span>
-	// 			</div>
+	return (
+		<motion.div
+			initial={framerList.initial}
+			animate={framerList.animate}
+			transition={framerList.transition}
+			className="FeedbackItem">
+			{/* make this form maybe? */}
+			<form className="FeedbackItem__left" onSubmit={null}>
+				<div className="FeedbackItem__left--voteBtn">
+					<button className="votes" type="submit">
+						<FaChevronUp className="chevronUp" />
+						<span>{0}</span>
+						{/* <span>{feedback.likes.length}</span> */}
+					</button>
+				</div>
+				<div className="FeedbackItem__left--content">
+					<Link to={`/details/${feedback._id}`}>
+						<h3 className="title">{feedback.title}</h3>
+					</Link>
+					<p className="text">{feedback.text}</p>
+					<button className="feedbackTypeBtn">{feedback.feedbackType}</button>
+				</div>
+			</form>
 
-	// 			{/* <p className="FeedbackItem__text">{feedback.feedbackType}</p> */}
-	// 			{/* <button onClick={() => dispatch(deleteFeedback(feedback._id))}>
-	// 				delete me
-	// 			</button> */}
-	// 		</motion.div>
-	// 	);
-	return <div>{feedback}</div>;
+			<div className="FeedbackItem__right">
+				<FaComment className="commentIcon" />
+				<span className="commentLength">
+					<Link to={`/details/${feedback._id}`}>{feedback.commentCount}</Link>
+				</span>
+			</div>
+
+			{/* <p className="FeedbackItem__text">{feedback.feedbackType}</p> */}
+			{/* <button onClick={() => dispatch(deleteFeedback(feedback._id))}>
+					delete me
+				</button> */}
+		</motion.div>
+	);
+	// return <div>{feedback._id}</div>;
 };
 
 export default FeedbackItem;

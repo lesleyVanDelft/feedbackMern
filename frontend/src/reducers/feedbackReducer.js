@@ -1,5 +1,6 @@
 import feedbackService from '../services/feedbacks';
 // import feedbackPageReducer from "./detailsPageReducer";
+import storageService from '../utils/localStorage';
 
 const feedbackReducer = (state = null, action) => {
 	switch (action.type) {
@@ -21,6 +22,11 @@ const feedbackReducer = (state = null, action) => {
 			return {
 				...state,
 				results: state.results.filter(r => r.id !== action.payload),
+			};
+		case 'LOGOUT_FEEDBACK':
+			return {
+				...state,
+				results: (state = []),
 			};
 		default:
 			return state;

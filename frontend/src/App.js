@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getFeedbacks } from './reducers/feedbackReducer';
 import { setUser } from './reducers/userReducer';
+import { useSelector } from 'react-redux';
 import Header from './components/Header/Header';
 import Homepage from './pages/Homepage';
 import Login from './pages/Login';
@@ -14,20 +15,29 @@ import Test from './pages/Test';
 
 function App() {
 	const dispatch = useDispatch();
+	const user = useSelector(state => state.user);
 
 	useEffect(() => {
-		const setAllFeedbacks = async () => {
-			try {
-				await dispatch(getFeedbacks());
-			} catch (error) {
-				console.log(error.message);
-			}
-		};
+		// const setAllFeedbacks = () => {
+		// 	try {
+		// 		dispatch(getFeedbacks());
+		// 	} catch (error) {
+		// 		console.log(error.message);
+		// 	}
+		// };
+		if (!user) {
+			dispatch(setUser());
+		} else if (user) {
+			dispatch(getFeedbacks());
+		}
 
-		dispatch(setUser());
-		setAllFeedbacks();
+		// dispatch(getFeedbacks());
+		// setAllFeedbacks();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+	// if (!user) {
+	// 	dispatch(setUser());
+	// }
 
 	return (
 		<>
@@ -35,13 +45,13 @@ function App() {
 				<div className="App">
 					<Header />
 					<Routes>
-						<Route exact path="/" element={<Homepage />} />
-						<Route exact path="/login" element={<Login />} />
-						<Route exact path="/register" element={<Register />} />
-						<Route exact path="/details/:id" element={<Details />} />
-						<Route exact path="/edit/:id" element={<Edit />} />
-						<Route exact path="/create" element={<Create />} />
-						<Route exact path="/test" element={<Test />} />
+						<Route path="/" element={<Homepage />} />
+						<Route path="/login" element={<Login />} />
+						<Route path="/register" element={<Register />} />
+						<Route path="/details/:id" element={<Details />} />
+						<Route path="/edit/:id" element={<Edit />} />
+						<Route path="/create" element={<Create />} />
+						<Route path="/test" element={<Test />} />
 					</Routes>
 				</div>
 			</Router>

@@ -11,9 +11,7 @@ const setConfig = () => {
 };
 
 const getUser = async (username, limit, page) => {
-	const response = await axios.get(
-		`${API_URL}/${username}/?limit=${limit}&page=${page}`
-	);
+	const response = await axios.get(`${API_URL}/`);
 	return response.data;
 };
 

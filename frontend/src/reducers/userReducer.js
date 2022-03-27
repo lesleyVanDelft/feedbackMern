@@ -1,8 +1,9 @@
 import authService from '../services/auth';
 import userService from '../services/user';
 import storageService from '../utils/localStorage';
+import feedbackService from '../services/feedbacks';
 
-const userReducer = (state = null, action) => {
+const userReducer = (state = '', action) => {
 	switch (action.type) {
 		case 'LOGIN':
 			return action.payload;
