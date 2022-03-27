@@ -4,6 +4,8 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 const { promisify } = require('util');
 
+// copy user controller from reddish clone
+
 // JWT
 //////////////////////////////////////
 // decode the JWT giving access to

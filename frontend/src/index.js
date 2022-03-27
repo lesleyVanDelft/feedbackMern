@@ -6,10 +6,10 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 // import store from './app/store';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistStore } from 'redux-persist';
+// import { PersistGate } from 'redux-persist/integration/react';
+// import { persistStore } from 'redux-persist';
 
-let persistor = persistStore(store);
+// let persistor = persistStore(store);
 
 ReactDOM.render(
 	<React.StrictMode>
