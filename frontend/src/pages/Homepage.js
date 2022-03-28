@@ -46,12 +46,12 @@ const Homepage = () => {
 	// }, [dispatch, user]);
 
 	useEffect(() => {
-		if (user) {
-			dispatch(getFeedbacks());
+		if (!user) {
+			navigate('/login');
 		}
 		setTimeout(() => {
-			if (!user) {
-				navigate('/login');
+			if (user) {
+				dispatch(getFeedbacks());
 			}
 		}, 200);
 	}, []);
@@ -73,6 +73,10 @@ const Homepage = () => {
 	// 	}
 	// }
 	// const filteredFeedbacks = () => {};
+
+	if (!feedbacks) {
+		return <h1>Loading </h1>;
+	}
 	return (
 		<main className="Homepage">
 			<Dashboard category={getCategoryState} mobileOpen={getMobileState} />

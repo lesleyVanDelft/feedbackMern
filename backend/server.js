@@ -28,9 +28,9 @@ app.use(bodyParser.json());
 // app.use('/api/feedbacks', require('./routes/feedbackRoutes'));
 // app.use('/api/users', require('./routes/userRoutes'));
 
-app.use('/api', authRoutes);
-app.use('/api/feedbacks', feedbackRoutes);
-app.use('/api/users', userRoutes);
+// app.use('/api', authRoutes);
+app.use('/api/feedbacks', authRoutes, feedbackRoutes);
+app.use('/api/users', authRoutes, userRoutes);
 
 app.use(middleware.unknownEndpointHandler);
 app.use(middleware.errorHandler);

@@ -24,7 +24,7 @@ const {
 const router = express.Router();
 
 //CRUD posts routes
-router.get('/', getFeedbacks);
+router.get('/homepage', getFeedbacks);
 // router.get('/search', getSearchedPosts);
 router.get('/details/:id', getFeedbackAndComments);
 // router.get('/subscribed', auth, getSubscribedPosts);

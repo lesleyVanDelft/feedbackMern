@@ -11,7 +11,7 @@ const setConfig = () => {
 
 // get user feedbacks
 const getFeedbacks = async () => {
-	const response = await axios.get(API_URL);
+	const response = await axios.get(API_URL + 'homepage');
 	return response.data;
 };
 
@@ -30,7 +30,7 @@ const editFeedback = async (id, feedbackObj) => {
 };
 
 const getFeedbackComments = async id => {
-	const response = await axios.get(`${API_URL}/${id}/comments`);
+	const response = await axios.get(`${API_URL}/details/${id}`);
 	return response.data;
 };
 

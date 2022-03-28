@@ -18,11 +18,7 @@ const getFeedbackAndComments = async (req, res) => {
 			.send({ message: `Feedback with ID:${id} does not exist` });
 	}
 
-	const populatedFeedback = await feedback
-		.populate('author', 'username')
-		.populate('comments.commentedBy', 'username')
-		.populate('comments.replies', 'username')
-		.execPopulate();
+	const populatedFeedback = await feedback.populate('author', 'username');
 
 	res.status(200).json(populatedFeedback);
 };

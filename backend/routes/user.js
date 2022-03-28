@@ -10,8 +10,8 @@ const router = express.Router();
 
 // router.get('/login');
 // router.get('/register');
-router.post('/register', registerUser);
-router.post('/login', loginUser);
+// router.post('/register', registerUser);
+// router.post('/login', loginUser);
 // router.get('/:username', getUser);
 router.post('/avatar', auth, setUserAvatar);
 router.delete('/avatar', auth, removeUserAvatar);

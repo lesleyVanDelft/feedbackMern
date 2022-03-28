@@ -3,7 +3,12 @@ import userService from '../services/user';
 import storageService from '../utils/localStorage';
 import feedbackService from '../services/feedbacks';
 
-const userReducer = (state = '', action) => {
+// const initialLoadState = {
+// 	user: localStorage.getItem('readifyUserKey') ? localStorage.getItem('readifyUserKey') : null,
+// 	feedbacks: [],
+// };
+
+const userReducer = (state = null, action) => {
 	switch (action.type) {
 		case 'LOGIN':
 			return action.payload;
@@ -13,10 +18,10 @@ const userReducer = (state = '', action) => {
 			return null;
 		case 'SET_USER':
 			return action.payload;
-		case 'SET_AVATAR':
-			return { ...state, ...action.payload };
-		case 'REMOVE_AVATAR':
-			return { ...state, avatar: { exists: false } };
+		// case 'SET_AVATAR':
+		// 	return { ...state, ...action.payload };
+		// case 'REMOVE_AVATAR':
+		// 	return { ...state, avatar: { exists: false } };
 		default:
 			return state;
 	}

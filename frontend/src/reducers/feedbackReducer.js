@@ -24,10 +24,7 @@ const feedbackReducer = (state = null, action) => {
 				results: state.results.filter(r => r.id !== action.payload),
 			};
 		case 'LOGOUT_FEEDBACK':
-			return {
-				...state,
-				results: (state = []),
-			};
+			return null;
 		default:
 			return state;
 	}

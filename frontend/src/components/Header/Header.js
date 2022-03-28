@@ -16,6 +16,10 @@ const Header = () => {
 
 	const onLogout = () => {
 		dispatch(logoutUser());
+
+		setTimeout(() => {
+			navigate('/login');
+		}, 200);
 	};
 
 	const handleClick = e => {
