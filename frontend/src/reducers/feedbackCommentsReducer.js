@@ -1,13 +1,14 @@
 import feedbackService from '../services/feedbacks';
+import { toast } from 'react-toastify';
 
 const feedbackPageReducer = (state = null, action) => {
 	switch (action.type) {
 		case 'FETCH_FEEDBACK_COMMENTS':
 			return action.payload;
-		case 'CREATE_NEW_FEEDBACK':
-			return action.payload;
+		// case 'CREATE_NEW_FEEDBACK':
+		// 	return { ...state.push(...action.payload) };
 		case 'UPDATE_FEEDBACK':
-			return action.payload;
+			return { ...state, ...action.payload };
 		case 'TOGGLE_VOTE':
 			return { ...state, ...action.payload };
 		case 'VOTE_COMMENT':
@@ -125,18 +126,18 @@ export const getFeedbackComments = id => {
 	};
 };
 
-export const createNewFeedback = feedbackObj => {
-	return async dispatch => {
-		const addedFeedback = await feedbackService.addNew(feedbackObj);
+// export const createNewFeedback = feedbackObj => {
+// 	return async dispatch => {
+// 		const addedFeedback = await feedbackService.addNew(feedbackObj);
 
-		dispatch({
-			type: 'CREATE_NEW_FEEDBACK',
-			payload: addedFeedback,
-		});
+// 		dispatch({
+// 			type: 'CREATE_NEW_FEEDBACK',
+// 			payload: addedFeedback,
+// 		});
 
-		return addedFeedback.id;
-	};
-};
+// 		return addedFeedback.id;
+// 	};
+// };
 
 export const updateFeedback = (id, feedbackObj) => {
 	return async dispatch => {
@@ -146,6 +147,7 @@ export const updateFeedback = (id, feedbackObj) => {
 			type: 'UPDATE_FEEDBACK',
 			payload: updatedFeedback,
 		});
+		toast.success('Feedback updated');
 	};
 };
 

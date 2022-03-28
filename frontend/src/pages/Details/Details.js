@@ -12,52 +12,55 @@ import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import './Details.css';
 import CommentSection from '../../components/CommentSection/CommentSection';
 import EditFeedbackForm from '../../components/EditFeedbackForm/EditFeedbackForm';
+import { getFeedbackComments } from '../../reducers/feedbackCommentsReducer';
 
 // import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 // import Dashboard from '../components/Dashboard/Dashboard';
 // import Suggestions from '../components/Suggestions/Suggestions';
 
 const Details = () => {
-	// const [isEditing, setIsEditing] = useState(false);
+	const feedbackComments = useSelector(state => state.feedbackComments);
+	const user = useSelector(state => state.user);
 
+	// console.log(feedbackComments.user);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	let { id } = useParams();
+
+	useEffect(() => {
+		dispatch(getFeedbackComments(id));
+	}, []);
 	// console.log(id);
 
 	// useSelector(state => console.log(state));
 	// get user state from auth redux store
-	const { user } = useSelector(state => state.auth);
-	const { feedbacks, isLoading, isError, message } = useSelector(state => {
-		return state.feedbacks;
-	});
-	const [singleFeedback, setSingleFeedback] = useState(feedbacks);
-
-	// const filteredFeedback = feedbacks.filter(feedback => feedback._id === id);
+	// const { feedbacks, isLoading, isError, message } = useSelector(state => {
+	// 	return state.feedbacks;
+	// });
+	// const [singleFeedback, setSingleFeedback] = useState(feedbacks);
 
 	// useEffect(() => {
-	// if (isError) {
-	// 	console.log(message);
-	// }
-	// if (!user) {
-	// 	navigate('/login');
-	// }
-	// console.log(feedbacks);
-	// return () => {
-	// 	dispatch(reset());
-	// };
-	// }, [user, navigate, isError, message, dispatch, id]);
-
-	useEffect(() => {
-		dispatch(getSingleFeedback(id));
-		setSingleFeedback(feedbacks.filter(feedback => feedback._id === id));
-	}, [dispatch]);
+	// 	dispatch(getSingleFeedback(id));
+	// 	setSingleFeedback(feedbacks.filter(feedback => feedback._id === id));
+	// }, [dispatch]);
 
 	// console.log(setSingleFeedback);
 
-	if (isLoading) {
-		return <Spinner />;
+	// if (!feedback) {
+	// 	return <Spinner />;
+	// }
+
+	// if(!feedback){
+	// 	return <h2>Loading</h2>
+	// }
+
+	// if (!user) {
+	// 	return <h2>Loading USER</h2>;
+	// }
+
+	if (!feedbackComments) {
+		return <h2>Loading</h2>;
 	}
 
 	return (
@@ -68,12 +71,18 @@ const Details = () => {
 						<FaChevronLeft /> <span>Go Back</span>
 					</Link>
 				</button>
-				{user && user._id === singleFeedback[0].user ? (
+				{/* {user && user._id === singleFeedback[0].user ? (
 					<Link to={`/edit/${id}`}>
 						<button className="btn btn-blue edit">Edit Feedback</button>
 					</Link>
-				) : null}
+				) : null} */}
+				{user && user.id === feedbackComments.user && (
+					<Link to={`/edit/${id}`}>
+						<button className="btn btn-blue edit">Edit Feedback</button>
+					</Link>
+				)}
 			</div>
+			<FeedbackItem feedback={feedbackComments} />
 
 			{/* {feedbacks.length > 0
 				? feedbacks.map(feedback => {
@@ -81,10 +90,10 @@ const Details = () => {
 				  })
 				: 'loading'} */}
 
-			{singleFeedback && <FeedbackItem feedback={singleFeedback[0]} />}
+			{/* {singleFeedback && <FeedbackItem feedback={singleFeedback[0]} />} */}
 			{/* {console.log(singleFeedback)} */}
 
-			<CommentSection feedbackData={singleFeedback[0]} />
+			<CommentSection feedbackData={feedbackComments} />
 		</main>
 	);
 };

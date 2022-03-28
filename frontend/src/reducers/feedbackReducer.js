@@ -1,11 +1,14 @@
+import { toast } from 'react-toastify';
 import feedbackService from '../services/feedbacks';
 // import feedbackPageReducer from "./detailsPageReducer";
-import storageService from '../utils/localStorage';
+// import storageService from '../utils/localStorage';
 
 const feedbackReducer = (state = null, action) => {
 	switch (action.type) {
 		case 'SET_FEEDBACKS':
 			return action.payload;
+		case 'CREATE_NEW_FEEDBACK':
+			return { ...state.push(...action.payload) };
 		case 'LOAD_MORE_POSTS':
 			return {
 				...action.payload,
@@ -40,6 +43,21 @@ export const getFeedbacks = sortBy => {
 			type: 'SET_FEEDBACKS',
 			payload: feedbacks,
 		});
+
+		// toast.success('success');
+	};
+};
+
+export const createNewFeedback = feedbackObj => {
+	return async dispatch => {
+		const addedFeedback = await feedbackService.addNew(feedbackObj);
+
+		dispatch({
+			type: 'CREATE_NEW_FEEDBACK',
+			payload: addedFeedback,
+		});
+
+		return addedFeedback.id;
 	};
 };
 
@@ -99,7 +117,17 @@ export const removeFeedback = id => {
 			type: 'DELETE_FEEDBACK',
 			payload: id,
 		});
+		// toast.warn('Feedback Deleted');
 	};
 };
+
+// export const resetFeedbacks = () => {
+// 	return async dispatch => {
+// 		dispatch({
+// 			type: 'LOGOUT_FEEDBACKS',
+// 			payload: null,
+// 		});
+// 	};
+// };
 
 export default feedbackReducer;

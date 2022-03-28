@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createFeedback } from '../../features/feedbacks/feedbackSlice';
+import { createNewFeedback } from '../../reducers/feedbackReducer';
 import CreateImg from '../../assets/shared/icon-new-feedback.svg';
 import './CreateFeedbackForm.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CreateFeedbackForm = () => {
 	const [text, setText] = useState('');
@@ -15,7 +16,7 @@ const CreateFeedbackForm = () => {
 	const onSubmit = e => {
 		e.preventDefault();
 
-		dispatch(createFeedback({ title, text, feedbackType }));
+		dispatch(createNewFeedback({ title, text, feedbackType }));
 		setText('');
 		setTitle('');
 		setFeedbackType('UI');
@@ -72,7 +73,9 @@ const CreateFeedbackForm = () => {
 				</div>
 
 				<div className="Form__group--buttons">
-					<button className="btn btn-darkBlue">Cancel</button>
+					<Link to="/">
+						<button className="btn btn-darkBlue">Cancel</button>
+					</Link>
 					<button className="btn btn-purple" type="submit">
 						Add Feedback
 					</button>

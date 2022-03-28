@@ -7,7 +7,10 @@ import feedbackService from '../services/feedbacks';
 // 	user: localStorage.getItem('readifyUserKey') ? localStorage.getItem('readifyUserKey') : null,
 // 	feedbacks: [],
 // };
-
+const initialLoadState = {
+	user: null,
+	feedbacks: null,
+};
 const userReducer = (state = null, action) => {
 	switch (action.type) {
 		case 'LOGIN':
@@ -60,6 +63,7 @@ export const logoutUser = () => {
 
 		dispatch({
 			type: 'LOGOUT',
+			payload: null,
 		});
 	};
 };

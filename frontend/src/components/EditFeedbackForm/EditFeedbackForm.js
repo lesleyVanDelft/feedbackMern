@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import EditImg from '../../assets/shared/icon-edit-feedback.svg';
-// import Spinner from '../Spinner';
-import {
-	// getSingleFeedback,
-	reset,
-	editFeedback,
-	deleteFeedback,
-	getSingleFeedback,
-} from '../../features/feedbacks/feedbackSlice';
+import { toast } from 'react-toastify';
+// import {
+// 	// getSingleFeedback,
+// 	reset,
+// 	editFeedback,
+// 	deleteFeedback,
+// 	getSingleFeedback,
+// } from '../../features/feedbacks/feedbackSlice';
+import { updateFeedback } from '../../reducers/feedbackCommentsReducer';
+import { removeFeedback } from '../../reducers/feedbackReducer';
 import { useParams } from 'react-router-dom';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './EditFeedbackForm.css';
 
 // 01:25 11-3-2022, needs edit form and functionality. Create button gives errors ._.' nvm fixed it, somehow got removed from app.js routes -.-
@@ -23,10 +25,11 @@ const EditFeedbackForm = ({ feedbackData }) => {
 	const [detailContent, setDetailContent] = useState('');
 
 	// get user state from auth redux store
-	const { user } = useSelector(state => state.auth);
-	const { feedbacks } = useSelector(state => {
-		return state.feedbacks;
-	});
+	const user = useSelector(state => state.user);
+	// const feedback = useSelector(state => state.feedbackComments);
+	// const feedbacks  = useSelector(state => {
+	// 	return state.feedbacks;
+	// });
 	// console.log(feedbacks);
 
 	const navigate = useNavigate();
@@ -35,13 +38,12 @@ const EditFeedbackForm = ({ feedbackData }) => {
 
 	// let data = {};
 	useEffect(() => {
-		setTitleContent(feedbacks[0].title);
-		setCategory(feedbacks[0].feedbackType);
-		setDetailContent(feedbacks[0].text);
+		setTitleContent(feedbackData.title);
+		setCategory(feedbackData.feedbackType);
+		setDetailContent(feedbackData.text);
 	}, []);
 
 	let data = {
-		_id: id,
 		title: titleContent,
 		feedbackType: category,
 		text: detailContent,
@@ -49,25 +51,35 @@ const EditFeedbackForm = ({ feedbackData }) => {
 
 	const onSubmit = e => {
 		e.preventDefault();
-		dispatch(editFeedback(data));
+		dispatch(updateFeedback(id, data));
 	};
 
 	const handleDelete = () => {
 		// e.preventDefault();
-		dispatch(deleteFeedback(id));
+		dispatch(removeFeedback(id));
 		// setTimeout(navigate('/'), 1000);
 		// dispatch(reset());
-		navigate('/');
+		// navigate('/');
 
 		// dispatch(feedbackData)
 		// console.log(feedbackData);
+		toast('Deleted?');
 	};
+	const CloseButton = ({ closeToast }) => (
+		<i className="material-icons" onClick={closeToast}>
+			deleted
+		</i>
+	);
+
+	if (!feedbackData) {
+		return <h2>Loading</h2>;
+	}
 
 	return (
 		<section className="EditFeedbackForm">
 			<img src={EditImg} alt="" className="EditFeedbackForm__image" />
 			<h2 className="EditFeedbackForm__title">
-				Editing '{feedbackData.length > 0 ? feedbackData[0].title : null}'
+				Editing '{feedbackData && feedbackData.title}'
 			</h2>
 			<form className="Form" id="FormEdit" onSubmit={onSubmit}>
 				<div className="Form__group">
@@ -119,21 +131,27 @@ const EditFeedbackForm = ({ feedbackData }) => {
 				</div>
 
 				<div className="Form__group--buttons">
-					<button
-						className="btn btn-red"
-						onClick={() => {
-							handleDelete();
-						}}>
-						Delete
-					</button>
-					<button className="btn btn-darkBlue" onClick={() => navigate('/')}>
-						Cancel
-					</button>
+					<Link to="/">
+						<button
+							className="btn btn-red"
+							type="button"
+							onClick={() => {
+								handleDelete();
+							}}>
+							Delete
+						</button>
+					</Link>
+					<Link to="/">
+						<button className="btn btn-darkBlue" type="button" onClick={null}>
+							Cancel
+						</button>
+					</Link>
 					<button className="btn btn-purple" type="submit">
 						Add Changes
 					</button>
 				</div>
 			</form>
+			<ToastContainer autoClose={2000} />
 		</section>
 	);
 };

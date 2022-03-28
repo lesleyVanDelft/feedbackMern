@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaChevronUp, FaComment } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp, FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import {
 	getFeedbacks,
@@ -99,6 +99,8 @@ const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
 		},
 	};
 
+	/* adding new feedback redux action and toast need work */
+
 	return (
 		<motion.div
 			initial={framerList.initial}
@@ -106,13 +108,17 @@ const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
 			transition={framerList.transition}
 			className="FeedbackItem">
 			{/* make this form maybe? */}
-			<form className="FeedbackItem__left" onSubmit={null}>
+			<div className="FeedbackItem__left">
 				<div className="FeedbackItem__left--voteBtn">
-					<button className="votes" type="submit">
-						<FaChevronUp className="chevronUp" />
+					<div className="votes">
+						<button className="votes__upvote">
+							<FaChevronUp className="chevronUp" />
+						</button>
 						<span>{0}</span>
-						{/* <span>{feedback.likes.length}</span> */}
-					</button>
+						<button className="votes__downvote">
+							<FaChevronDown className="chevronDown" />
+						</button>
+					</div>
 				</div>
 				<div className="FeedbackItem__left--content">
 					<Link to={`/details/${feedback._id}`}>
@@ -121,7 +127,7 @@ const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
 					<p className="text">{feedback.text}</p>
 					<button className="feedbackTypeBtn">{feedback.feedbackType}</button>
 				</div>
-			</form>
+			</div>
 
 			<div className="FeedbackItem__right">
 				<FaComment className="commentIcon" />

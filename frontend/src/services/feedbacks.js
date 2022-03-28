@@ -9,20 +9,24 @@ const setConfig = () => {
 	};
 };
 
+// const config = {
+// 	headers: { Authorization: `Bearer ${token}` },
+// };
+
 // get user feedbacks
 const getFeedbacks = async () => {
-	const response = await axios.get(API_URL + 'homepage');
+	const response = await axios.get(API_URL, setConfig());
 	return response.data;
 };
 
 const addNew = async feedbackObj => {
-	const response = await axios.post(`${API_URL}`, feedbackObj, setConfig());
+	const response = await axios.post(API_URL, feedbackObj);
 	return response.data;
 };
 
 const editFeedback = async (id, feedbackObj) => {
 	const response = await axios.patch(
-		`${API_URL}/${id}`,
+		`${API_URL}${id}`,
 		feedbackObj,
 		setConfig()
 	);
@@ -30,7 +34,7 @@ const editFeedback = async (id, feedbackObj) => {
 };
 
 const getFeedbackComments = async id => {
-	const response = await axios.get(`${API_URL}/details/${id}`);
+	const response = await axios.get(`${API_URL}details/${id}`);
 	return response.data;
 };
 
@@ -53,7 +57,8 @@ const downvoteFeedback = async id => {
 };
 
 const deleteFeedback = async id => {
-	const response = await axios.delete(`${API_URL}/${id}`, setConfig());
+	const response = await axios.delete(`${API_URL}` + id);
+	console.log('delete test');
 	return response.data;
 };
 const postComment = async (feedbackId, commentObj) => {

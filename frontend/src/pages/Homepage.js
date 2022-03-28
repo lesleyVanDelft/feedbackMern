@@ -14,12 +14,14 @@ import Suggestions from '../components/Suggestions/Suggestions';
 import './Pages.css';
 import EmptyFeedback from '../components/EmptyFeedback/EmptyFeedback';
 import FeedbackList from '../components/FeedbackList/FeedbackList';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Homepage = () => {
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
 	const [pageLoading, setPageLoading] = useState(false);
-	const [feedbackData, setFeedbackData] = useState([]);
+	// const [feedbackData, setFeedbackData] = useState([]);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -41,38 +43,16 @@ const Homepage = () => {
 		hidden: { opacity: 0 },
 	};
 
-	// useEffect(() => {
-
-	// }, [dispatch, user]);
-
 	useEffect(() => {
-		if (!user) {
-			navigate('/login');
-		}
 		setTimeout(() => {
 			if (user) {
 				dispatch(getFeedbacks());
 			}
+			if (!user) {
+				navigate('/login');
+			}
 		}, 200);
 	}, []);
-
-	// const filteredFeedbacks = [];
-	// const filteredFeedbacks =
-	// 	feedbacks.length > 0 &&
-	// 	feedbacks.filter(feedback => {
-	// 		return feedback.feedbackType.toLowerCase() === categoryState;
-	// 	});
-	// <Dashboard category={getCategoryState} mobileOpen={getMobileState} />;
-
-	// const feedbackList = feedbacks.map();
-	// const handleCategoryChange = async () => {
-	// 	try {
-
-	// 	} catch (error) {
-
-	// 	}
-	// }
-	// const filteredFeedbacks = () => {};
 
 	if (!feedbacks) {
 		return <h1>Loading </h1>;
@@ -89,54 +69,11 @@ const Homepage = () => {
 					initial="hidden"
 					animate="visible"></motion.div>
 
-				{/* <Suggestions suggestionCount={feedbacks && feedbacks.length} /> */}
-				{/* <Suggestions
-					suggestionCount={
-						categoryState === 'all'
-							? feedbacks.length
-							: filteredFeedbacks.length
-					}
-				/> */}
-
 				{/* <FeedbackList category={categoryState} feedbackData={feedbacks} /> */}
 				<FeedbackList category={categoryState} />
-
-				{/* Check for empty feedback lists and render empty component */}
-				{/* <div className="Homepage__content--feedbacks">
-					{feedbacks.length <= 0 ? <EmptyFeedback /> : null}
-					{categoryState !== 'all' && filteredFeedbacks.length <= 0 ? (
-						<EmptyFeedback />
-					) : null} */}
-
-				{/* Loop over all feedbacks if category state is all, else loop over filtered feedbacks*/}
-				{/* {feedbacks.length > 0 && categoryState === 'all' ? (
-						<motion.div className="feedbacks">
-							{feedbacks.map((feedback, i) => {
-								return (
-									<FeedbackItem
-										feedback={feedback}
-										key={feedback._id}
-										index={i}
-									/>
-								);
-							})}
-						</motion.div>
-					) : (
-						<div className="feedbacks">
-							{filteredFeedbacks.length > 0 &&
-								filteredFeedbacks.map((feedback, i) => {
-									return (
-										<FeedbackItem
-											feedback={feedback}
-											key={feedback._id}
-											index={i}
-										/>
-									);
-								})}
-						</div>
-					)}
-				</div> */}
 			</section>
+
+			<ToastContainer autoClose={2000} />
 		</main>
 	);
 };

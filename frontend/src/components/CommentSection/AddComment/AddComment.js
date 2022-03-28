@@ -13,7 +13,7 @@ const AddComment = ({ feedbackData }) => {
 	const [commentText, setCommentText] = useState('');
 	const [charCount, setCharCount] = useState(250);
 	// console.log(feedbackData);
-	const { user } = useSelector(state => state.auth);
+	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	// console.log(user);

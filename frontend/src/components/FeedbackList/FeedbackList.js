@@ -30,22 +30,19 @@ const FeedbackList = ({ category }) => {
 	// 	}
 	// };
 
-	useEffect(() => {
-		if (feedbacks !== null) {
-			setFeedbackData(feedbacks);
-		}
-	}, [feedbacks]);
-	// console.log(feedbackData);
+	// useEffect(() => {
+	// 	if (feedbacks !== null) {
+	// 		setFeedbackData(feedbacks);
+	// 	}
+	// }, [feedbacks]);
 
-	// const filteredFeedbacks = feedbackData.filter(
-	// 	fb => fb.feedbackType.toLowerCase() === category
-	// );
+	if (!feedbacks) {
+		return <h1>Loading</h1>;
+	}
 
-	const filteredFeedbacks =
-		feedbackData.length > 0 &&
-		feedbackData.filter(feedback => {
-			return feedback.feedbackType.toString().toLowerCase() === category;
-		});
+	const filteredFeedbacks = feedbacks.filter(feedback => {
+		return feedback.feedbackType.toString().toLowerCase() === category;
+	});
 	// console.log(category);
 	// const filteredFeedbacks = [];
 	// console.log(filteredFeedbacks);
@@ -53,7 +50,7 @@ const FeedbackList = ({ category }) => {
 	return (
 		<motion.section className="FeedbackList">
 			<Suggestions suggestionCount={feedbacks && feedbacks.length} />
-			{feedbacks && category === 'all' && !pageLoading ? (
+			{feedbacks && category === 'all' ? (
 				<motion.div className="feedbacks">
 					{feedbacks.map((feedback, i) => (
 						<FeedbackItem
@@ -67,7 +64,7 @@ const FeedbackList = ({ category }) => {
 				</motion.div>
 			) : (
 				<div className="feedbacks">
-					{filteredFeedbacks.length > 0 &&
+					{filteredFeedbacks.length > 0 && category !== 'all' ? (
 						filteredFeedbacks.map((feedback, i) => {
 							return (
 								<FeedbackItem
@@ -78,12 +75,13 @@ const FeedbackList = ({ category }) => {
 									toggleDownvote={toggleDownvote}
 								/>
 							);
-						})}
+						})
+					) : (
+						<EmptyFeedback />
+					)}
 				</div>
 			)}
-			{feedbacks.length <= 0 || filteredFeedbacks.length <= 0 ? (
-				<EmptyFeedback />
-			) : null}
+			{/* {filteredFeedbacks.length <= 0 ? <EmptyFeedback /> : null} */}
 		</motion.section>
 	);
 };
