@@ -34,7 +34,7 @@ const editFeedback = async (id, feedbackObj) => {
 };
 
 const getFeedbackComments = async id => {
-	const response = await axios.get(`${API_URL}details/${id}`);
+	const response = await axios.get(`${API_URL}details/${id}`, setConfig());
 	return response.data;
 };
 

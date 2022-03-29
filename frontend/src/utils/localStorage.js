@@ -1,12 +1,11 @@
 const storageKeyToken = 'readifyUserKey';
 const storageKeyDarkMode = 'readifyDarkMode';
 
-const saveUser = user =>
-	localStorage.setItem(storageKeyToken, JSON.stringify(user));
+const saveUser = user => localStorage.setItem('user', JSON.stringify(user));
 
-const loadUser = () => JSON.parse(localStorage.getItem(storageKeyToken));
+const loadUser = () => localStorage.getItem('user');
 
-const logoutUser = () => localStorage.removeItem(storageKeyToken);
+const logoutUser = () => localStorage.removeItem('user');
 
 const saveDarkMode = boolean =>
 	localStorage.setItem(storageKeyDarkMode, boolean);

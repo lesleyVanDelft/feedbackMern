@@ -3,53 +3,47 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 
 const protect = asyncHandler(async (req, res, next) => {
-	let token;
+	const token = req.cookies.jwt;
 
-	// if (
-	// 	req.headers.authorization &&
-	// 	req.headers.authorization.startsWith('Bearer')
-	// ) {
-	// 	try {
-	// 		// get token from header
-	// 		token = req.headers.authorization.split(' ')[1];
-
-	// 		// verify token
-	// 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
-	// 		// console.log(decoded);
-	// 		// get user from the token
-	// 		req.user = await User.findById(decoded.id).select('-password');
-
-	// 		next();
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 		res.status(401);
-
-	// 		throw new Error('Not authorized bruh, token malformed or smt');
-	// 	}
-	// } else if (!token) {
-	// 	res.status(401);
-	// 	throw new Error('Not authorized, no token / authmiddleware');
-	// }
-	if (req.cookies) token = req.cookies.jwt;
-	if (!token || token === 'expiredtoken') {
-		return res.status(401).json({
-			status: 'unauthorized',
-			message: 'You are not authorized to view this content 1',
+	// check jwt exists and verified
+	if (token) {
+		jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+			if (err) {
+				console.log(err.message);
+				res.redirect('/login');
+			} else {
+				console.log(decodedToken);
+				next();
+			}
 		});
+	} else {
+		res.redirect('/login');
 	}
-	const decoded = jwt.verify(token, process.env.JWT_SECRET);
-	req.user = await User.findById(decoded.id).select('-password');
-	// console.log(decoded);
-	const user = await User.findById(decoded.id);
-	if (!user) {
-		return res.status(401).json({
-			status: 'unauthorized',
-			message: 'You are not authorized to view this content 2',
-		});
-	}
-	next();
 });
 
-const refresh = asyncHandler(async (req, res, next) => {});
+// check user
+const checkUser = (req, res, next) => {
+	const token = req.cookies.token;
 
-module.exports = { protect };
+	if (token) {
+		jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
+			if (err) {
+				console.log(err.message);
+				res.locals.user = null;
+				next();
+			} else {
+				console.log(decodedToken);
+				let user = await User.findById(decodedToken.id);
+				res.locals.user = user;
+				next();
+			}
+		});
+	} else {
+		res.locals.user = null;
+		next();
+	}
+};
+
+// const refresh = asyncHandler(async (req, res, next) => {});
+
+module.exports = { protect, checkUser };

@@ -8,7 +8,7 @@ const feedbackReducer = (state = null, action) => {
 		case 'SET_FEEDBACKS':
 			return action.payload;
 		case 'CREATE_NEW_FEEDBACK':
-			return { ...state.push(...action.payload) };
+			return [...state.push(...action.payload)];
 		case 'LOAD_MORE_POSTS':
 			return {
 				...action.payload,

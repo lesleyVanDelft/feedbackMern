@@ -2,6 +2,8 @@ import authService from '../services/auth';
 import userService from '../services/user';
 import storageService from '../utils/localStorage';
 import feedbackService from '../services/feedbacks';
+import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
 // const initialLoadState = {
 // 	user: localStorage.getItem('readifyUserKey') ? localStorage.getItem('readifyUserKey') : null,
@@ -34,20 +36,24 @@ export const loginUser = credentials => {
 	return async dispatch => {
 		const user = await authService.login(credentials);
 		storageService.saveUser(user);
-		authService.setToken(user.token);
+		// authService.setToken(user.token);
 
 		dispatch({
 			type: 'LOGIN',
 			payload: user,
+		});
+
+		toast.info(`Welcome ${user.username}`, {
+			autoClose: 5000,
 		});
 	};
 };
 
 export const registerUser = credentials => {
 	return async dispatch => {
-		const user = await authService.signup(credentials);
-		storageService.saveUser(user);
-		authService.setToken(user.token);
+		const user = await authService.register(credentials);
+		// storageService.saveUser(user);
+		// authService.setToken(user.token);
 
 		dispatch({
 			type: 'SIGNUP',

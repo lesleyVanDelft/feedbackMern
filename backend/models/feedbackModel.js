@@ -50,6 +50,7 @@ const feedbackModel = new mongoose.Schema(
 		author: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
+			// required: true,
 		},
 		title: {
 			type: String,
@@ -77,7 +78,7 @@ const feedbackModel = new mongoose.Schema(
 		],
 		pointsCoint: {
 			type: Number,
-			default: 1,
+			default: 0,
 		},
 		comments: [commentSchema],
 		commentCount: {

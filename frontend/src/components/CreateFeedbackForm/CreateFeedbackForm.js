@@ -1,25 +1,32 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createFeedback } from '../../features/feedbacks/feedbackSlice';
 import { createNewFeedback } from '../../reducers/feedbackReducer';
 import CreateImg from '../../assets/shared/icon-new-feedback.svg';
 import './CreateFeedbackForm.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateFeedbackForm = () => {
 	const [text, setText] = useState('');
 	const [title, setTitle] = useState('');
 	const [feedbackType, setFeedbackType] = useState('UI');
+	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	const toastNotify = () =>
+		toast.success('Feedback added!', { autoClose: 3000 });
 
 	const onSubmit = e => {
 		e.preventDefault();
 
-		dispatch(createNewFeedback({ title, text, feedbackType }));
+		dispatch(createNewFeedback({ title, text, feedbackType, author: user.id }));
 		setText('');
 		setTitle('');
 		setFeedbackType('UI');
+
 		navigate('/');
 	};
 	return (
@@ -76,7 +83,10 @@ const CreateFeedbackForm = () => {
 					<Link to="/">
 						<button className="btn btn-darkBlue">Cancel</button>
 					</Link>
-					<button className="btn btn-purple" type="submit">
+					<button
+						className="btn btn-purple"
+						type="submit"
+						onClick={() => toastNotify()}>
 						Add Feedback
 					</button>
 				</div>

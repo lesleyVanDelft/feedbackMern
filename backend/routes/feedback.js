@@ -1,5 +1,6 @@
 const express = require('express');
 const { auth } = require('../utils/middleware');
+const { protect, checkUser } = require('../middleware/authMiddleware');
 
 const {
 	getFeedbacks,
@@ -24,13 +25,16 @@ const {
 const router = express.Router();
 
 //CRUD posts routes
-router.get('/homepage', getFeedbacks);
+router.get('*', checkUser);
+router.route('/').get(protect, getFeedbacks);
 // router.get('/search', getSearchedPosts);
 router.get('/details/:id', getFeedbackAndComments);
+// router.route('/details/:id').get(getFeedbackAndComments).delete(deleteComment)
+// router.get('/details/edit/:id', getFeedbackAndComments);
 // router.get('/subscribed', auth, getSubscribedPosts);
-router.post('/create', auth, createNewFeedback);
-router.patch('/:id', auth, updateFeedback);
-router.delete('/:id', auth, deleteFeedback);
+router.post('/', createNewFeedback);
+router.patch('/:id', updateFeedback);
+router.delete('/:id', deleteFeedback);
 
 //posts vote routes
 router.post('/:id/upvote', auth, upvoteFeedback);

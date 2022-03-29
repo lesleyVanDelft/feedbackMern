@@ -33,7 +33,7 @@ app.use('/api/feedbacks', authRoutes, feedbackRoutes);
 app.use('/api/users', authRoutes, userRoutes);
 
 app.use(middleware.unknownEndpointHandler);
-app.use(middleware.errorHandler);
+// app.use(middleware.errorHandler);
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {

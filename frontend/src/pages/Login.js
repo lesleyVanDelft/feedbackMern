@@ -44,19 +44,24 @@ const Login = () => {
 	const onSubmit = e => {
 		e.preventDefault();
 
-		const userData = {
-			email,
-			password,
-		};
+		try {
+			const userData = {
+				email,
+				password,
+			};
 
-		dispatch(loginUser(userData));
+			dispatch(loginUser(userData));
+			navigate('/');
+		} catch (error) {
+			console.log(error.message);
+		}
 	};
 
-	useEffect(() => {
-		if (user) {
-			navigate('/');
-		}
-	});
+	// useEffect(() => {
+	// 	if (user) {
+	// 		navigate('/');
+	// 	}
+	// });
 
 	return (
 		<main className="Login">
