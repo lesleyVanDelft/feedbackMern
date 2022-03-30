@@ -3,7 +3,20 @@ const storageKeyDarkMode = 'readifyDarkMode';
 
 const saveUser = user => localStorage.setItem('user', JSON.stringify(user));
 
-const loadUser = () => localStorage.getItem('user');
+const loadUser = () => {
+	try {
+		const localstate = localStorage.getItem('user');
+
+		if (localstate === null) {
+			return undefined;
+		}
+		return JSON.parse(localstate);
+	} catch (error) {
+		console.log('loadUser');
+		console.log(error);
+		return undefined;
+	}
+};
 
 const logoutUser = () => localStorage.removeItem('user');
 

@@ -26,7 +26,7 @@ const router = express.Router();
 
 //CRUD posts routes
 router.get('*', checkUser);
-router.route('/').get(protect, getFeedbacks);
+router.get('/', getFeedbacks);
 // router.get('/search', getSearchedPosts);
 router.get('/details/:id', getFeedbackAndComments);
 // router.route('/details/:id').get(getFeedbackAndComments).delete(deleteComment)

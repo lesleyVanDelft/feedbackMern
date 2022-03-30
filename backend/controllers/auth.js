@@ -40,9 +40,9 @@ const generateToken = id => {
 };
 
 // register
-const registerUser_get = (req, res) => {
-	res.render('register');
-};
+// const registerUser_get = (req, res) => {
+// 	res.render('register');
+// };
 const registerUser = async (req, res) => {
 	const { name, username, email, password } = req.body;
 	try {
@@ -56,7 +56,7 @@ const registerUser = async (req, res) => {
 		});
 		const token = generateToken(user._id);
 		res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-		res.status(201).json({
+		return res.status(201).json({
 			name: user.name,
 			email: user.email,
 			username: user.username,
@@ -65,21 +65,21 @@ const registerUser = async (req, res) => {
 		});
 	} catch (err) {
 		const errors = handleError(err);
-		res.status(400).json({ errors });
+		return res.status(400).json({ errors });
 	}
 };
 
 // login
-const loginUser_get = (req, res) => {
-	res.render('login');
-};
+// const loginUser_get = (req, res) => {
+// 	res.render('login');
+// };
 const loginUser = async (req, res) => {
 	const { email, password } = req.body;
 	try {
 		const user = await User.login(email, password);
 		const token = generateToken(user._id);
-		res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-		res.status(200).json({
+		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
+		return res.status(200).json({
 			name: user.name,
 			email: user.email,
 			username: user.username,
@@ -88,20 +88,20 @@ const loginUser = async (req, res) => {
 		});
 	} catch (err) {
 		const errors = handleError(err);
-		res.status(400).json({ errors });
+		return res.status(400).json({ errors });
 	}
 };
 
 const logoutUser = async (req, res) => {
-	res.cookie('jwt', '', { maxAge: 1 });
+	return res.cookie('jwt', '', { maxAge: 1 });
 	// res.redirect('/');
 };
 
 module.exports = {
 	loginUser,
-	loginUser_get,
+	// loginUser_get,
 	registerUser,
-	registerUser_get,
+	// registerUser_get,
 	logoutUser,
 };
 

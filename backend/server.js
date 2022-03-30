@@ -5,6 +5,7 @@ const colors = require('colors');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 const port = process.env.PORT || 5000;
 const host = '0.0.0.0';
 const { errorHandler } = require('./middleware/errorMiddleware');
@@ -23,13 +24,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(morgan('tiny'));
 
 // these get used in redux service files
 // app.use('/api/feedbacks', require('./routes/feedbackRoutes'));
 // app.use('/api/users', require('./routes/userRoutes'));
 
 // app.use('/api', authRoutes);
-app.use('/api/feedbacks', authRoutes, feedbackRoutes);
+app.use('/api/feedbacks', feedbackRoutes);
 app.use('/api/users', authRoutes, userRoutes);
 
 app.use(middleware.unknownEndpointHandler);

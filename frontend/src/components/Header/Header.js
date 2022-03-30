@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // import { logout, reset } from '../../features/auth/authSlice';
 import { logoutUser } from '../../reducers/userReducer';
-import { resetFeedbacks } from '../../reducers/feedbackReducer';
+// import { resetFeedbacks } from '../../reducers/feedbackReducer';
 import './Header.css';
 import { useState } from 'react';
 

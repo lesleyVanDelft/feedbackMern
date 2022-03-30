@@ -5,7 +5,7 @@ const User = require('../models/userModel');
 const getFeedbacks = async (req, res) => {
 	const allFeedbacks = await Feedback.find({});
 
-	res.status(200).json(allFeedbacks);
+	return res.status(200).json(allFeedbacks);
 };
 
 const getFeedbackAndComments = async (req, res) => {
@@ -41,7 +41,7 @@ const getFeedbackAndComments = async (req, res) => {
 		},
 	]);
 
-	res.status(200).json(populatedFeedback);
+	return res.status(200).json(populatedFeedback);
 };
 
 const createNewFeedback = async (req, res) => {
@@ -73,12 +73,12 @@ const createNewFeedback = async (req, res) => {
 
 	// const populatedFeedback = await savedFeedback.populate('author', 'username');
 
-	res.status(201).json(newFeedback);
+	return res.status(201).json(newFeedback);
 };
 
 const updateFeedback = async (req, res) => {
 	const { id } = req.params;
-	console.log(req.user);
+	// console.log(req.user);
 	// const { title, feedbackType, text } = req.body;
 
 	// const feedback = await Feedback.findById(id);
@@ -132,7 +132,7 @@ const updateFeedback = async (req, res) => {
 		new: true,
 	});
 
-	res.status(200).json(updatedFeedback);
+	return res.status(200).json(updatedFeedback);
 };
 
 const deleteFeedback = async (req, res) => {
@@ -194,7 +194,7 @@ const deleteFeedback = async (req, res) => {
 
 	await Feedback.findByIdAndRemove(id);
 
-	res.status(202);
+	return res.status(202);
 
 	// res.status(204).end();
 };

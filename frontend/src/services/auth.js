@@ -10,13 +10,17 @@ const setToken = newToken => {
 };
 
 const login = async loginData => {
-	const response = await axios.post(API_URL + 'login', loginData);
-	// 	const response = await axios.post(API_URL + 'login', userData);
+	try {
+		const response = await axios.post(API_URL + 'login', loginData);
+		// 	const response = await axios.post(API_URL + 'login', userData);
 
-	if (response.data) {
-		localStorage.setItem('user', JSON.stringify(response.data.user));
+		// if (response.data) {
+		// 	// localStorage.setItem('user', JSON.stringify(response.data.user));
+		// }
+		return response.data;
+	} catch (error) {
+		console.log(error);
 	}
-	return response.data;
 
 	// 	return response.data;
 };

@@ -10,34 +10,34 @@ const { promisify } = require('util');
 //////////////////////////////////////
 // decode the JWT giving access to
 // user.id, initiation time, and the expiration
-const decryptJwt = async token => {
-	const jwtVerify = promisify(jwt.verify);
-	return await jwtVerify(token, process.env.JWT_SECRET);
-};
+// const decryptJwt = async token => {
+// 	const jwtVerify = promisify(jwt.verify);
+// 	return await jwtVerify(token, process.env.JWT_SECRET);
+// };
 
-// create valid jwt
-const signJwt = id => {
-	return jwt.sign({ id }, process.env.JWT_SECRET, {
-		expiresIn: '30d',
-	});
-};
+// // create valid jwt
+// const signJwt = id => {
+// 	return jwt.sign({ id }, process.env.JWT_SECRET, {
+// 		expiresIn: '30d',
+// 	});
+// };
 
-// set jwt options and send jwt as a cookie
-const sendToken = (user, statusCode, req, res) => {
-	const token = signJwt(user._id);
-	const options = {
-		expires: new Date(Date.now() + 14 * 1000 * 60 * 60 * 24),
-		// secure: NODE_ENV === 'prodution' ? true : false,
-		httpOnly: process.env.NODE_ENV === 'production' ? true : false,
-	};
-	res.cookie('jwt', token, options);
+// // set jwt options and send jwt as a cookie
+// const sendToken = (user, statusCode, req, res) => {
+// 	const token = signJwt(user._id);
+// 	const options = {
+// 		expires: new Date(Date.now() + 14 * 1000 * 60 * 60 * 24),
+// 		// secure: NODE_ENV === 'prodution' ? true : false,
+// 		httpOnly: process.env.NODE_ENV === 'production' ? true : false,
+// 	};
+// 	res.cookie('jwt', token, options);
 
-	user.password = undefined;
+// 	user.password = undefined;
 
-	res.status(statusCode).json({
-		user,
-	});
-};
+// 	res.status(statusCode).json({
+// 		user,
+// 	});
+// };
 // JWT
 
 //@desc  register new user

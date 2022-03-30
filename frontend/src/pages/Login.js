@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 // import { login, reset } from '../features/auth/authSlice';
-import { loginUser } from '../reducers/userReducer';
+import { loginUser, setUser } from '../reducers/userReducer';
+// import {}
 import Spinner from '../components/Spinner';
 
 const Login = () => {
@@ -43,25 +44,28 @@ const Login = () => {
 
 	const onSubmit = e => {
 		e.preventDefault();
-
+		// user && navigate('/');
 		try {
 			const userData = {
 				email,
 				password,
 			};
-
-			dispatch(loginUser(userData));
-			navigate('/');
+			// dispatch(loginUser(userData));
+			// dispatch(setUser());
+			setTimeout(() => {
+				navigate('/');
+			}, 300);
 		} catch (error) {
+			console.log('login page error');
 			console.log(error.message);
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (user) {
-	// 		navigate('/');
-	// 	}
-	// });
+	useEffect(() => {
+		if (user) {
+			navigate('/');
+		}
+	});
 
 	return (
 		<main className="Login">

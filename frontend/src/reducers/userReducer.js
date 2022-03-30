@@ -10,8 +10,8 @@ import { toast } from 'react-toastify';
 // 	feedbacks: [],
 // };
 const initialLoadState = {
-	user: null,
-	feedbacks: null,
+	user: localStorage.getItem('user'),
+	feedbacks: [null],
 };
 const userReducer = (state = null, action) => {
 	switch (action.type) {
@@ -35,11 +35,20 @@ const userReducer = (state = null, action) => {
 export const loginUser = credentials => {
 	return async dispatch => {
 		const user = await authService.login(credentials);
-		storageService.saveUser(user);
+		user && storageService.saveUser(user);
+		// storageService.loadUser();
 		// authService.setToken(user.token);
+		console.log(user);
 
 		dispatch({
 			type: 'LOGIN',
+			payload: user,
+		});
+
+		// const loggedUser = storageService.loadUser();
+		// console.log(loggedUser);
+		dispatch({
+			type: 'SET_USER',
 			payload: user,
 		});
 
@@ -65,7 +74,8 @@ export const registerUser = credentials => {
 export const logoutUser = () => {
 	return dispatch => {
 		storageService.logoutUser();
-		authService.setToken(null);
+		// authService.setToken(null);
+		// Cookies.remove('jwt', {path: '/'})
 
 		dispatch({
 			type: 'LOGOUT',
@@ -74,20 +84,16 @@ export const logoutUser = () => {
 	};
 };
 
-export const setUser = () => {
-	return dispatch => {
-		const loggedUser = storageService.loadUser();
+// export const setUser = () => {
+// 	return dispatch => {
+// 		const loggedUser = storageService.loadUser();
 
-		if (loggedUser) {
-			authService.setToken(loggedUser.token);
-
-			dispatch({
-				type: 'SET_USER',
-				payload: loggedUser,
-			});
-		}
-	};
-};
+// 		dispatch({
+// 			type: 'SET_USER',
+// 			payload: loggedUser,
+// 		});
+// 	};
+// };
 
 export const setAvatar = avatarImage => {
 	return async dispatch => {

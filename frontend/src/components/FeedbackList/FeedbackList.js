@@ -40,9 +40,11 @@ const FeedbackList = ({ category }) => {
 		return <h1>Loading</h1>;
 	}
 
-	const filteredFeedbacks = feedbacks.filter(feedback => {
-		return feedback.feedbackType.toString().toLowerCase() === category;
-	});
+	const filteredFeedbacks =
+		feedbacks.length > 0 &&
+		feedbacks.filter(feedback => {
+			return feedback.feedbackType.toString().toLowerCase() === category;
+		});
 	// console.log(category);
 	// const filteredFeedbacks = [];
 	// console.log(filteredFeedbacks);

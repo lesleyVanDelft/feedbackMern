@@ -76,21 +76,21 @@ userModel.pre('save', async function (next) {
 });
 
 // static method to login user
-userModel.statics.login = async function (email, password) {
-	const user = await this.findOne({ email });
-	if (user) {
-		const auth = await bcryptjs.compare(password, user.password);
-		if (auth) {
-			return user;
-		}
-		throw Error('Incorrect password');
-	}
-	throw Error('Incorrect email');
-};
+// userModel.statics.login = async function (email, password) {
+// 	const user = await this.findOne({ email });
+// 	if (user) {
+// 		const auth = await bcryptjs.compare(password, user.password);
+// 		if (auth) {
+// 			return user;
+// 		}
+// 		throw Error('Incorrect password');
+// 	}
+// 	throw Error('Incorrect email');
+// };
 
 // userModel.plugin(uniqueValidator);
 
 // replaces _id with id, convert id to string from ObjectID and deletes __v
-// schemaCleaner(userModel);
+schemaCleaner(userModel);
 
 module.exports = mongoose.model('User', userModel);

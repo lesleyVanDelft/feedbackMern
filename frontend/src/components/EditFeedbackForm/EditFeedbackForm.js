@@ -65,11 +65,6 @@ const EditFeedbackForm = ({ feedbackData }) => {
 		// console.log(feedbackData);
 		toast('Deleted?');
 	};
-	const CloseButton = ({ closeToast }) => (
-		<i className="material-icons" onClick={closeToast}>
-			deleted
-		</i>
-	);
 
 	if (!feedbackData) {
 		return <h2>Loading</h2>;

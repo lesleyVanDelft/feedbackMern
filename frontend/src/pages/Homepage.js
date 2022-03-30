@@ -16,6 +16,7 @@ import EmptyFeedback from '../components/EmptyFeedback/EmptyFeedback';
 import FeedbackList from '../components/FeedbackList/FeedbackList';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
 
 const Homepage = () => {
 	const feedbacks = useSelector(state => state.feedbacks);
@@ -44,10 +45,17 @@ const Homepage = () => {
 	};
 
 	useEffect(() => {
+		// console.log(Cookies.get('jwt'));
+		if (user) {
+			dispatch(getFeedbacks());
+		}
+		// if (!user) {
+		// 	navigate('/login');
+		// }
 		setTimeout(() => {
-			if (user) {
-				dispatch(getFeedbacks());
-			}
+			// if (user) {
+			// 	dispatch(getFeedbacks());
+			// }
 			if (!user) {
 				navigate('/login');
 			}
