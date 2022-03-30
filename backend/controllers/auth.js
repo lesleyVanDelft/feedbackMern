@@ -75,8 +75,8 @@ const registerUser = async (req, res) => {
 // };
 const loginUser = async (req, res) => {
 	const { email, password } = req.body;
+	const user = await User.findOne({ email });
 	try {
-		const user = await User.login(email, password);
 		const token = generateToken(user._id);
 		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
 		return res.status(200).json({
@@ -85,6 +85,7 @@ const loginUser = async (req, res) => {
 			username: user.username,
 			id: user._id,
 			profileImg: user.profileImg,
+			token,
 		});
 	} catch (err) {
 		const errors = handleError(err);

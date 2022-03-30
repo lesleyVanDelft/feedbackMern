@@ -1,14 +1,14 @@
 import axios from 'axios';
-// import { token } from './auth';
+import { token } from './auth';
 import Cookies from 'js-cookie';
 
 const API_URL = '/api/feedbacks/';
 
 const setConfig = () => {
-	const tokenCookie = Cookies.get('jwt');
-	console.log(tokenCookie);
+	// const tokenCookie = Cookies.get('jwt');
+	// console.log(tokenCookie);
 	return {
-		headers: { Authorization: `Bearer ${tokenCookie}` },
+		headers: { Authorization: `Bearer ${token}` },
 	};
 };
 

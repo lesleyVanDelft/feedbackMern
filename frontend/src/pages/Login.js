@@ -50,7 +50,7 @@ const Login = () => {
 				email,
 				password,
 			};
-			// dispatch(loginUser(userData));
+			dispatch(loginUser(userData));
 			// dispatch(setUser());
 			setTimeout(() => {
 				navigate('/');

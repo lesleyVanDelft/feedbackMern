@@ -5,7 +5,7 @@ const User = require('../models/userModel');
 const getFeedbacks = async (req, res) => {
 	const allFeedbacks = await Feedback.find({});
 
-	return res.status(200).json(allFeedbacks);
+	res.status(200).json(allFeedbacks);
 };
 
 const getFeedbackAndComments = async (req, res) => {
@@ -45,7 +45,7 @@ const getFeedbackAndComments = async (req, res) => {
 };
 
 const createNewFeedback = async (req, res) => {
-	const { title, text, feedbackType } = req.body;
+	const { title, text, feedbackType, author } = req.body;
 
 	// const author = await User.findById(req.user);
 	// console.log(author);
@@ -59,7 +59,7 @@ const createNewFeedback = async (req, res) => {
 		title,
 		text,
 		feedbackType,
-		// author: req.user.id,
+		author,
 		feedbackType: req.body.feedbackType,
 		// upvotedBy: [author._id],
 		pointsCoint: 0,
@@ -67,13 +67,13 @@ const createNewFeedback = async (req, res) => {
 
 	// const savedFeedback = await newFeedback.save();
 
-	// author.feedbacksPosted = author.feedbacksPosted.concat(savedFeedback._id);
-	// author.karmaPoints.postKarma++;
-	// await author.save();
+	// // author.feedbacksPosted = author.feedbacksPosted.concat(savedFeedback._id);
+	// // author.karmaPoints.postKarma++;
+	// // await author.save();
 
 	// const populatedFeedback = await savedFeedback.populate('author', 'username');
 
-	return res.status(201).json(newFeedback);
+	res.status(201).json(newFeedback);
 };
 
 const updateFeedback = async (req, res) => {
