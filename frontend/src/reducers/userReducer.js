@@ -35,10 +35,13 @@ const userReducer = (state = null, action) => {
 export const loginUser = credentials => {
 	return async dispatch => {
 		const user = await authService.login(credentials);
-		user && storageService.saveUser(user);
-		// storageService.loadUser();
+		storageService.saveUser(user);
+		storageService.loadUser();
 		// authService.setToken(user.token);
 		console.log(user);
+		// const user = await authService.login(credentials);
+		// storageService.saveUser(user);
+		// authService.setToken(user.token);
 
 		dispatch({
 			type: 'LOGIN',
@@ -47,10 +50,10 @@ export const loginUser = credentials => {
 
 		// const loggedUser = storageService.loadUser();
 		// console.log(loggedUser);
-		dispatch({
-			type: 'SET_USER',
-			payload: user,
-		});
+		// dispatch({
+		// 	type: 'SET_USER',
+		// 	payload: user,
+		// });
 
 		toast.info(`Welcome ${user.username}`, {
 			autoClose: 5000,
@@ -84,16 +87,19 @@ export const logoutUser = () => {
 	};
 };
 
-// export const setUser = () => {
-// 	return dispatch => {
-// 		const loggedUser = storageService.loadUser();
+export const setUser = () => {
+	return dispatch => {
+		const loggedUser = storageService.loadUser();
 
-// 		dispatch({
-// 			type: 'SET_USER',
-// 			payload: loggedUser,
-// 		});
-// 	};
-// };
+		if (loggedUser) {
+			// authService.setToken(loggedUser.token);
+			dispatch({
+				type: 'SET_USER',
+				payload: loggedUser,
+			});
+		}
+	};
+};
 
 export const setAvatar = avatarImage => {
 	return async dispatch => {

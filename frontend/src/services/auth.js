@@ -11,7 +11,7 @@ const setToken = newToken => {
 
 const login = async loginData => {
 	try {
-		const response = await axios.post(API_URL + 'login', loginData);
+		const response = await axios.post(API_URL + 'login', loginData, token);
 		// 	const response = await axios.post(API_URL + 'login', userData);
 
 		// if (response.data) {
