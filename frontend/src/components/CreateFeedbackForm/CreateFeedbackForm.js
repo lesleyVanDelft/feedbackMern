@@ -13,6 +13,7 @@ const CreateFeedbackForm = () => {
 	const [title, setTitle] = useState('');
 	const [feedbackType, setFeedbackType] = useState('UI');
 	const user = useSelector(state => state.user);
+	const author = user.id;
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ const CreateFeedbackForm = () => {
 	const onSubmit = e => {
 		e.preventDefault();
 
-		dispatch(createNewFeedback({ title, text, feedbackType, author: user.id }));
+		dispatch(createNewFeedback({ title, text, feedbackType, author }));
 		setText('');
 		setTitle('');
 		setFeedbackType('UI');

@@ -265,7 +265,7 @@ export const toggleDownvote = (id, downvotedBy, upvotedBy) => {
 //   };
 // };
 
-export const addComment = (feedbackId, comment) => {
+export const addComments = (feedbackId, comment) => {
 	return async dispatch => {
 		const addedComment = await feedbackService.postComment(feedbackId, {
 			comment,

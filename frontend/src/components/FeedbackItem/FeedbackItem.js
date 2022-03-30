@@ -1,18 +1,47 @@
 import { motion } from 'framer-motion';
 import { FaChevronDown, FaChevronUp, FaComment } from 'react-icons/fa';
+// import { useSelector } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
 	getFeedbacks,
 	likeComment,
 } from '../../features/feedbacks/feedbackSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import './FeedbackItem.css';
+import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { useEffect, useState } from 'react';
-// import { useSelector } from 'react-redux';
+import './FeedbackItem.css';
 
 const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
+	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
+	// console.log(feedback);
 	// console.log(user.id);
+	const isUpvoted = user && feedback.upvotedBy.includes(user.id);
+	const isDownvoted = user && feedback.downvotedBy.includes(user.id);
+
+	const handleUpvoteToggle = async () => {
+		try {
+			if (isUpvoted) {
+				const updatedUpvotedBy = feedback.upvotedBy.filter(u => u !== user.id);
+				dispatch(
+					toggleUpvote(feedback.id, updatedUpvotedBy, feedback.downvotedBy)
+				);
+			} else {
+				const updatedUpvotedBy = [...feedback.upvotedBy, user.id];
+				const updatedDownvotedBy = feedback.downvotedBy.filter(
+					d => d !== user.id
+				);
+				dispatch(
+					toggleUpvote(feedback.id, updatedUpvotedBy, updatedDownvotedBy)
+				);
+			}
+		} catch (err) {
+			// dispatch(notify(getErrorMsg(err), 'error'));
+			console.log(err);
+		}
+	};
+
 	const framerList = {
 		initial: {
 			opacity: 0,
@@ -38,7 +67,9 @@ const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
 			<div className="FeedbackItem__left">
 				<div className="FeedbackItem__left--voteBtn">
 					<div className="votes">
-						<button className="votes__upvote">
+						<button
+							className="votes__upvote"
+							onClick={() => handleUpvoteToggle()}>
 							<FaChevronUp className="chevronUp" />
 						</button>
 						<span>{0}</span>

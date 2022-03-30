@@ -4,11 +4,11 @@ import Cookies from 'js-cookie';
 
 const API_URL = '/api/feedbacks/';
 
+const tokenCookie = Cookies.get('jwt');
+// console.log(tokenCookie);
 const setConfig = () => {
-	// const tokenCookie = Cookies.get('jwt');
-	// console.log(tokenCookie);
 	return {
-		headers: { Authorization: `Bearer ${token}` },
+		headers: { Authorization: `Bearer ${tokenCookie}` },
 	};
 };
 
@@ -24,38 +24,38 @@ const getFeedbacks = async () => {
 };
 
 const addNew = async feedbackObj => {
-	const response = await axios.post(API_URL, feedbackObj);
+	const response = await axios.post(API_URL, feedbackObj, setConfig());
 	return response.data;
 };
 
 const editFeedback = async (id, feedbackObj) => {
 	const response = await axios.patch(
 		`${API_URL}${id}`,
-		feedbackObj
-		// setConfig()
+		feedbackObj,
+		setConfig()
 	);
 	return response.data;
 };
 
 const getFeedbackComments = async id => {
-	const response = await axios.get(`${API_URL}details/${id}`);
+	const response = await axios.get(`${API_URL}details/${id}`, setConfig());
 	return response.data;
 };
 
 const upvoteFeedback = async id => {
 	const response = await axios.post(
-		`${API_URL}/${id}/upvote`,
-		null
-		// setConfig()
+		`${API_URL + id}/upvote`,
+		null,
+		setConfig()
 	);
 	return response.data;
 };
 
 const downvoteFeedback = async id => {
 	const response = await axios.post(
-		`${API_URL}/${id}/downvote`,
-		null
-		// setConfig()
+		`${API_URL + id}/downvote`,
+		null,
+		setConfig()
 	);
 	return response.data;
 };
@@ -65,18 +65,19 @@ const deleteFeedback = async id => {
 	console.log('delete test');
 	return response.data;
 };
+
 const postComment = async (feedbackId, commentObj) => {
 	const response = await axios.post(
-		`${API_URL}/${feedbackId}/comment`,
-		commentObj
-		// setConfig()
+		`${API_URL + 'details/' + feedbackId}`,
+		commentObj,
+		setConfig()
 	);
 	return response.data;
 };
 
 const postReply = async (feedbackId, commentId, replyObj) => {
 	const response = await axios.post(
-		`${API_URL}/${feedbackId}/comment/${commentId}/reply`,
+		`${API_URL + feedbackId}/comment/${commentId}/reply`,
 		replyObj
 		// setConfig()
 	);

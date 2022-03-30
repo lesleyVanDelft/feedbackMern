@@ -95,7 +95,7 @@ export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
 
 export const toggleDownvote = (id, downvotedBy, upvotedBy) => {
 	return async dispatch => {
-		let pointsCount = upvotedBy.length - downvotedBy.length;
+		let pointsCount = downvotedBy.length - upvotedBy.length;
 		if (pointsCount < 0) {
 			pointsCount = 0;
 		}

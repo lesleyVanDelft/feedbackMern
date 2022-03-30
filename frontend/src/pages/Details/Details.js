@@ -13,6 +13,7 @@ import './Details.css';
 import CommentSection from '../../components/CommentSection/CommentSection';
 import EditFeedbackForm from '../../components/EditFeedbackForm/EditFeedbackForm';
 import { getFeedbackComments } from '../../reducers/feedbackCommentsReducer';
+import { setUser } from '../../reducers/userReducer';
 
 // import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 // import Dashboard from '../components/Dashboard/Dashboard';
@@ -29,6 +30,7 @@ const Details = () => {
 	let { id } = useParams();
 
 	useEffect(() => {
+		dispatch(setUser());
 		dispatch(getFeedbackComments(id));
 	}, []);
 	// console.log(id);
@@ -76,11 +78,11 @@ const Details = () => {
 						<button className="btn btn-blue edit">Edit Feedback</button>
 					</Link>
 				) : null} */}
-				{user && user.id === feedbackComments.user && (
-					<Link to={`/edit/${id}`}>
-						<button className="btn btn-blue edit">Edit Feedback</button>
-					</Link>
-				)}
+				{/* {user && user.id === feedbackComments.user && ( */}
+				<Link to={`/edit/${id}`}>
+					<button className="btn btn-blue edit">Edit Feedback</button>
+				</Link>
+				{/* )} */}
 			</div>
 			<FeedbackItem feedback={feedbackComments} />
 

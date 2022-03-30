@@ -6,11 +6,12 @@ import {
 	getSingleFeedback,
 } from '../../../features/feedbacks/feedbackSlice';
 // import { addComment } from '../../../features/feedbacks/commentSlice';
+import { addComments } from '../../../reducers/feedbackCommentsReducer';
 import { useParams } from 'react-router-dom';
 import './AddComment.css';
 
 const AddComment = ({ feedbackData }) => {
-	const [commentText, setCommentText] = useState('');
+	const [comment, setComment] = useState('');
 	const [charCount, setCharCount] = useState(250);
 	// console.log(feedbackData);
 	const user = useSelector(state => state.user);
@@ -21,26 +22,26 @@ const AddComment = ({ feedbackData }) => {
 	const { id } = useParams();
 
 	const handleChange = e => {
-		setCommentText(e.target.value);
+		setComment(e.target.value);
 		setCharCount(250 - e.target.value.length);
 	};
 	// console.log(user);
 	// button -> dispatch(addComment())
 	let data = {
 		_id: id,
-		text: commentText,
+		comment: comment,
 	};
 
 	// token: user.token,
 	const onSubmit = e => {
-		// const finalComment = `${user.name}: ${commentText}`;
+		// const finalComment = `${user.name}: ${comment}`;
 		e.preventDefault();
-		dispatch(addComment(data));
+		dispatch(addComments(user.id, data));
 
 		// setTimeout(() => {
 		// 	navigate(`/details/${id}`);
 		// }, 550);
-		navigate('/');
+		// navigate('/');
 	};
 
 	return (
@@ -48,7 +49,7 @@ const AddComment = ({ feedbackData }) => {
 			<h2 className="AddComment__title">Add Comment</h2>
 			<textarea
 				type="text"
-				value={commentText}
+				value={comment}
 				maxLength={250}
 				form={'AddComment'}
 				onChange={e => handleChange(e)}
