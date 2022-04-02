@@ -9,6 +9,7 @@ import './CommentSection.css';
 
 const CommentSection = ({ feedbackData }) => {
 	const feedbackComments = useSelector(state => state.feedbackComments);
+	const user = useSelector(state => state.user);
 
 	if (!feedbackComments) {
 		return <h2>Loading</h2>;
@@ -19,11 +20,16 @@ const CommentSection = ({ feedbackData }) => {
 				{feedbackComments.comments.length} Comments
 			</h2>
 			<div className="CommentSection__comments">
-				{feedbackComments.comments.map((com, i) => {
-					return <Comment commentData={com} key={i} />;
+				{feedbackComments.comments.map((comment, i) => {
+					return <Comment commentData={comment} key={i} user={user} />;
 				})}
 			</div>
-			<AddComment feedbackComments={feedbackComments} />
+			<AddComment feedbackComments={feedbackComments} user={user} />
+			{/* {console.log(feedbackComments.comments)} */}
+
+			{/* {feedbackComments.comments.map((comment) => {
+
+			})} */}
 		</section>
 	);
 };

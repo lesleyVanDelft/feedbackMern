@@ -10,9 +10,11 @@ const postComment = async (req, res) => {
 		return res.status(400).send({ message: `Comment body can't be empty.` });
 	}
 
-	const feedback = await Feedback.findById(id);
-	const user = await User.findById(req.user);
-
+	// current feedback id comes with comment post object
+	const feedback = await Feedback.findById(comment._id);
+	const user = await User.findById(req.params.id);
+	// console.log(user);
+	// req.user = user comes from auth middleware
 	if (!feedback) {
 		return res.status(404).send({
 			message: `feedback with ID: ${id} does not exist in database.`,
@@ -26,24 +28,30 @@ const postComment = async (req, res) => {
 	}
 
 	feedback.comments = feedback.comments.concat({
-		commentedBy: user._id,
-		commentBody: comment,
-		upvotedBy: [user._id],
+		commentedBy: user,
+		commentBody: comment.comment,
+		// upvotedBy: [user._id],
 		pointsCount: 1,
 	});
 	feedback.commentCount = numOfComments(feedback.comments);
 	const savedFeedback = await feedback.save();
-	const populatedFeedback = await savedFeedback
-		.populate('comments.commentedBy', 'username')
-		.execPopulate();
+	const populatedFeedback = await savedFeedback.populate([
+		{
+			path: 'comments.commentedBy',
+			populate: 'username',
+		},
+	]);
+	// .populate('comments.commentedBy', 'username')
+	// .execPopulate();
 
-	user.karmaPoints.commentKarma++;
-	user.totalComments++;
-	await user.save();
+	// user.karmaPoints.commentKarma++;
+	// user.totalComments++;
+	// await user.save();
 
 	const addedComment =
-		populatedFeedback.comments[savedPost.comments.length - 1];
-	res.status(201).json(addedComment);
+		populatedFeedback.comments[savedFeedback.comments.length - 1];
+	console.log(addedComment);
+	res.status(201).json(addedComment).end();
 };
 
 const deleteComment = async (req, res) => {

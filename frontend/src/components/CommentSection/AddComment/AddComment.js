@@ -37,7 +37,7 @@ const AddComment = ({ feedbackData }) => {
 		// const finalComment = `${user.name}: ${comment}`;
 		e.preventDefault();
 		dispatch(addComments(user.id, data));
-
+		setComment('');
 		// setTimeout(() => {
 		// 	navigate(`/details/${id}`);
 		// }, 550);

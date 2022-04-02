@@ -5,7 +5,7 @@ const User = require('../models/userModel');
 const getFeedbacks = async (req, res) => {
 	const allFeedbacks = await Feedback.find({});
 
-	res.status(200).json(allFeedbacks);
+	return res.status(200).json(allFeedbacks);
 };
 
 const getFeedbackAndComments = async (req, res) => {

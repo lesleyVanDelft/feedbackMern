@@ -72,6 +72,7 @@ const postComment = async (feedbackId, commentObj) => {
 		commentObj,
 		setConfig()
 	);
+	// console.log(response);
 	return response.data;
 };
 

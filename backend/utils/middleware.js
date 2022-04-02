@@ -3,7 +3,7 @@ const User = require('../models/userModel');
 
 const auth = async (req, res, next) => {
 	// try {
-	// 	// // const token = req.header(Authorization);
+	// const token = req.header(Authorization);
 	// 	// const token = req.headers.Authorization.split(' ')[1];
 	// 	// if (!token) {
 	// 	// 	return res.status(401).send({
@@ -21,27 +21,31 @@ const auth = async (req, res, next) => {
 	// } catch (error) {
 	// 	res.status(500).send({ message: error.message });
 	// }
-	// let token;
-	// if (
-	// 	req.headers.Authorization &&
-	// 	req.headers.Authorization.startsWith('Bearer')
-	// ) {
-	// 	try {
-	// 		// get token from header
-	// 		token = req.headers.authorization.split(' ')[1];
-	// 		// verify token
-	// 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
-	// 		// console.log(decoded);
-	// 		// get user from the token
-	// 		req.user = await User.findById(decoded.id).select('-password');
-	// 		console.log(req.user);
-	// 		next();
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 		res.status(401);
-	// 		throw new Error('Not authorized bruh, token malformed or smt');
-	// 	}
-	// } else if (!token) {
+
+	let token;
+	try {
+		if (
+			// req.headers.Authorization &&
+			// req.headers.Authorization.startsWith('Bearer')
+			req.cookies.jwt
+		)
+			// get token from header
+			// token = req.headers.authorization.split(' ')[1];
+			token = req.cookies.jwt;
+		// verify token
+		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+		// console.log(decoded);
+		// get user from the token
+		req.user = await User.findById(decoded.id).select('-password');
+		// console.log(req.user);
+		next();
+	} catch (error) {
+		console.log(error);
+		res.status(401);
+		throw new Error('Not authorized, no token / authmiddleware');
+	}
+
+	// else if (!token) {
 	// 	res.status(401);
 	// 	throw new Error('Not authorized, no token / authmiddleware');
 	// }

@@ -18,6 +18,7 @@ const checkUser = asyncHandler(async (req, res, next) => {
 				console.log(decodedToken);
 				let user = await User.findById(decodedToken.id);
 				// res.locals.user = user;s
+				req.user = user;
 				console.log(user + 'checkUser');
 				// res.redirect('/');
 				next();

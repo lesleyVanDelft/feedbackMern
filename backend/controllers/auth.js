@@ -76,6 +76,8 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
 	const { email, password } = req.body;
 	const user = await User.findOne({ email });
+	req.params.id = user._id;
+	console.log(req.params.id);
 	try {
 		const token = generateToken(user._id);
 		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
