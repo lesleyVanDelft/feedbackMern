@@ -7,20 +7,23 @@ import AddComment from './AddComment/AddComment';
 import Comment from './Comment/Comment';
 import './CommentSection.css';
 
-const CommentSection = ({ feedbackData }) => {
+const CommentSection = ({ comments, feedbackId }) => {
+	// const [commentData, setCommentData] = useState()
 	const feedbackComments = useSelector(state => state.feedbackComments);
 	const user = useSelector(state => state.user);
 
-	if (!feedbackComments) {
+	if (!comments) {
 		return <h2>Loading</h2>;
 	}
+
+	// useEffect(() => {
+	// 	setCommentData()
+	// }, [])
 	return (
 		<section className="CommentSection">
-			<h2 className="CommentSection__count">
-				{feedbackComments.comments.length} Comments
-			</h2>
+			<h2 className="CommentSection__count">{comments.length} Comments</h2>
 			<div className="CommentSection__comments">
-				{feedbackComments.comments.map((comment, i) => {
+				{comments.map((comment, i) => {
 					return <Comment commentData={comment} key={i} user={user} />;
 				})}
 			</div>

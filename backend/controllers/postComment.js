@@ -12,8 +12,9 @@ const postComment = async (req, res) => {
 
 	// current feedback id comes with comment post object
 	const feedback = await Feedback.findById(comment._id);
-	const user = await User.findById(req.params.id);
+	const user = await User.findById(req.user);
 	// console.log(user);
+	// console.log(req.params.id);
 	// req.user = user comes from auth middleware
 	if (!feedback) {
 		return res.status(404).send({
@@ -28,14 +29,17 @@ const postComment = async (req, res) => {
 	}
 
 	feedback.comments = feedback.comments.concat({
+		name: user.name,
+		username: user.username,
 		commentedBy: user,
 		commentBody: comment.comment,
 		// upvotedBy: [user._id],
+		// commentAuthor: user.username,
 		pointsCount: 1,
 	});
 	feedback.commentCount = numOfComments(feedback.comments);
 	const savedFeedback = await feedback.save();
-	const populatedFeedback = await savedFeedback.populate([
+	const populatedFeedback = await Feedback.findById(feedback._id).populate([
 		{
 			path: 'comments.commentedBy',
 			populate: 'username',
@@ -50,7 +54,7 @@ const postComment = async (req, res) => {
 
 	const addedComment =
 		populatedFeedback.comments[savedFeedback.comments.length - 1];
-	console.log(addedComment);
+	// console.log(addedComment);
 	res.status(201).json(addedComment).end();
 };
 

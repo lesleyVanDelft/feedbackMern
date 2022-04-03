@@ -32,6 +32,14 @@ const replySchema = new mongoose.Schema(
 
 const commentSchema = new mongoose.Schema(
 	{
+		name: {
+			type: String,
+			ref: 'User',
+		},
+		username: {
+			type: String,
+			ref: 'User',
+		},
 		commentedBy: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',

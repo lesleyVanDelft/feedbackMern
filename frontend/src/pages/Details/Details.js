@@ -95,7 +95,7 @@ const Details = () => {
 			{/* {singleFeedback && <FeedbackItem feedback={singleFeedback[0]} />} */}
 			{/* {console.log(singleFeedback)} */}
 
-			<CommentSection feedbackData={feedbackComments} />
+			<CommentSection comments={feedbackComments.comments} feedbackId={id} />
 		</main>
 	);
 };

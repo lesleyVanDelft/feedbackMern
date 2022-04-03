@@ -11,8 +11,9 @@ const Comment = ({ commentData, user }) => {
 			<div className="Comment__userBar">
 				<img src={BlankProfilePic} alt="" className="profileImage" />
 				<div className="userNames">
-					<h4 className="name">{user.name}</h4>
-					<span className="username">@{user.username}</span>
+					<h4 className="name">{commentData.name}</h4>
+					<span className="username">@{commentData.username}</span>
+					{/* {console.log(commentData.commentedBy.name)} */}
 				</div>
 				<button className="reply">Reply</button>
 				{commentData.commentBy === user._id && (
