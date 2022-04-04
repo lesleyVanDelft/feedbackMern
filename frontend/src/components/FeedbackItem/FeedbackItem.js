@@ -3,12 +3,14 @@ import { FaChevronDown, FaChevronUp, FaComment } from 'react-icons/fa';
 // import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {
-	getFeedbacks,
-	likeComment,
-} from '../../features/feedbacks/feedbackSlice';
+// import {
+// 	getFeedbacks,
+// 	likeComment,
+// } from '../../features/feedbacks/feedbackSlice';
+import { UpvoteButton } from './VoteButtons/VoteButtons';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
+import { getFeedbacks } from '../../reducers/feedbackReducer';
 import { useEffect, useState } from 'react';
 import './FeedbackItem.css';
 
@@ -20,21 +22,24 @@ const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
 	const isUpvoted = user && feedback.upvotedBy.includes(user.id);
 	const isDownvoted = user && feedback.downvotedBy.includes(user.id);
 
-	const handleUpvoteToggle = async () => {
+	const handleUpvoteToggle = async e => {
+		e.preventDefault();
 		try {
 			if (isUpvoted) {
 				const updatedUpvotedBy = feedback.upvotedBy.filter(u => u !== user.id);
 				dispatch(
-					toggleUpvote(feedback.id, updatedUpvotedBy, feedback.downvotedBy)
+					toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
 				);
+				// dispatch(getFeedbacks());
 			} else {
 				const updatedUpvotedBy = [...feedback.upvotedBy, user.id];
 				const updatedDownvotedBy = feedback.downvotedBy.filter(
 					d => d !== user.id
 				);
 				dispatch(
-					toggleUpvote(feedback.id, updatedUpvotedBy, updatedDownvotedBy)
+					toggleUpvote(feedback._id, updatedUpvotedBy, updatedDownvotedBy)
 				);
+				// dispatch(getFeedbacks());
 			}
 		} catch (err) {
 			// dispatch(notify(getErrorMsg(err), 'error'));
@@ -68,11 +73,13 @@ const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
 				<div className="FeedbackItem__left--voteBtn">
 					<div className="votes">
 						<button
+							user={user}
+							body={feedback}
 							className="votes__upvote"
-							onClick={() => handleUpvoteToggle()}>
+							onClick={e => handleUpvoteToggle(e)}>
 							<FaChevronUp className="chevronUp" />
 						</button>
-						<span>{0}</span>
+						<span>{feedback.upvotedBy.length}</span>
 						<button className="votes__downvote">
 							<FaChevronDown className="chevronDown" />
 						</button>

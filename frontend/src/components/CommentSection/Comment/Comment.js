@@ -3,6 +3,7 @@ import './Comment.css';
 
 const Comment = ({ commentData, user }) => {
 	// console.log(commentData);
+	// console.log(user);
 	if (!commentData) {
 		return <h1>loading</h1>;
 	}
@@ -10,17 +11,19 @@ const Comment = ({ commentData, user }) => {
 		<article className="Comment">
 			<div className="Comment__userBar">
 				<img src={BlankProfilePic} alt="" className="profileImage" />
-				<div className="userNames">
+				<div className="Comment__usernames">
 					<h4 className="name">{commentData.name}</h4>
 					<span className="username">@{commentData.username}</span>
 					{/* {console.log(commentData.commentedBy.name)} */}
 				</div>
-				<button className="reply">Reply</button>
-				{commentData.commentBy === user._id && (
-					<button className="delete">delete</button>
-				)}
+				<div className="Comment__buttons">
+					<button className="reply">Reply</button>
+					{commentData.commentedBy === user.id && (
+						<button className="delete">delete</button>
+					)}
+				</div>
 			</div>
-			<p>{commentData.commentBody}</p>
+			<p className="Comment__text">{commentData.commentBody}</p>
 		</article>
 
 		// commentData.map(comment => {

@@ -141,35 +141,30 @@ const addComment = asyncHandler(async (req, res) => {
 
 // like button
 const likeFeedback = asyncHandler(async (req, res) => {
-	const feedback = await Feedback.findById({ _id: req.params.id });
-
-	if (!feedback) {
-		res.status(400);
-		throw new Error('feedback notfound - likefeedback');
-	}
-
-	if (!req.user) {
-		res.status(400);
-		throw new Error('usernotfound- likefeedback');
-	}
-
-	const checkLikes = await Feedback.find({
-		_id: req.params.id,
-		likes: { $exists: false },
-	});
-	// console.log(checkLikes);
-	// console.log(req.body);
-	// console.log(req.body.params); undefined
-	// console.log(req.user);
-	// console.log(feedback);
-
-	const likedFeedback = await Feedback.findByIdAndUpdate(
-		req.params.id,
-		{ $push: { likes: { likedBy: req.user } } },
-		{ new: true, upsert: true }
-	);
-
-	res.status(201).json(likedFeedback);
+	// const feedback = await Feedback.findById({ _id: req.params.id });
+	// if (!feedback) {
+	// 	res.status(400);
+	// 	throw new Error('feedback notfound - likefeedback');
+	// }
+	// if (!req.user) {
+	// 	res.status(400);
+	// 	throw new Error('usernotfound- likefeedback');
+	// }
+	// const checkLikes = await Feedback.find({
+	// 	_id: req.params.id,
+	// 	likes: { $exists: false },
+	// });
+	// // console.log(checkLikes);
+	// // console.log(req.body);
+	// // console.log(req.body.params); undefined
+	// // console.log(req.user);
+	// // console.log(feedback);
+	// const likedFeedback = await Feedback.findByIdAndUpdate(
+	// 	req.params.id,
+	// 	{ $push: { likes: { likedBy: req.user } } },
+	// 	{ new: true, upsert: true }
+	// );
+	// res.status(201).json(likedFeedback);
 });
 
 module.exports = {

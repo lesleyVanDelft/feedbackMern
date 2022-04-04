@@ -25,6 +25,9 @@ const {
 const router = express.Router();
 
 //CRUD posts routes
+//posts vote routes
+router.post('/upvote/:id', auth, upvoteFeedback);
+router.post('/:id/downvote', downvoteFeedback);
 // router.get('*', checkUser);
 router.get('/', auth, getFeedbacks);
 // router.get('/search', getSearchedPosts);
@@ -33,13 +36,9 @@ router.get('/details/:id', auth, getFeedbackAndComments);
 // router.route('/details/:id').get(getFeedbackAndComments).delete(deleteComment)
 // router.get('/details/edit/:id', getFeedbackAndComments);
 // router.get('/subscribed', auth, getSubscribedPosts);
-router.post('/', createNewFeedback);
+router.post('/', auth, createNewFeedback);
 router.patch('/:id', updateFeedback);
 router.delete('/:id', deleteFeedback);
-
-//posts vote routes
-router.post('/:id/upvote', upvoteFeedback);
-router.post('/:id/downvote', downvoteFeedback);
 
 //post comments routes
 // router.post('/details/:id', auth, postComment);

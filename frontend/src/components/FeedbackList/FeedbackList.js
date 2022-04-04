@@ -36,6 +36,9 @@ const FeedbackList = ({ category }) => {
 	// 	}
 	// }, [feedbacks]);
 
+	useEffect(() => {
+		dispatch(getFeedbacks());
+	}, [dispatch]);
 	if (!feedbacks) {
 		return <h1>Loading</h1>;
 	}

@@ -61,6 +61,9 @@ const Details = () => {
 	// 	return <h2>Loading USER</h2>;
 	// }
 
+	// if (!user) {
+	// 	navigate('/login');
+	// }
 	if (!feedbackComments) {
 		return <h2>Loading</h2>;
 	}

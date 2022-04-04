@@ -70,6 +70,9 @@ const Homepage = () => {
 					navigate('/login');
 				}
 			}, 300);
+			if (!user) {
+				navigate('/login');
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -110,7 +113,7 @@ const Homepage = () => {
 					animate="visible"></motion.div>
 
 				{/* <FeedbackList category={categoryState} feedbackData={feedbacks} /> */}
-				<FeedbackList category={categoryState} />
+				{feedbacks && <FeedbackList category={categoryState} />}
 			</section>
 
 			<ToastContainer autoClose={2000} />

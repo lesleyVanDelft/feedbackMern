@@ -41,6 +41,21 @@ function App() {
 	// 		navigate('/')
 	// 	}
 	// }, [user]);
+	// useEffect(() => {
+	// 	const setPostsAndSubreddits = async () => {
+	// 		try {
+	// 			await dispatch(getFeedbacks());
+	// 		} catch (err) {
+	// 			// dispatch(notify(getErrorMsg(err), 'error'));
+	// 			console.log(err.message);
+	// 		}
+	// 	};
+
+	// 	dispatch(setUser());
+	// 	// dispatch(setDarkMode());
+	// 	// setPostsAndSubreddits();
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, []);
 
 	return (
 		<>

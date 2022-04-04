@@ -15,12 +15,22 @@ const feedbackReducer = (state = null, action) => {
 				results: [...state.results, ...action.payload.results],
 			};
 		case 'TOGGLE_VOTE':
-			return {
-				...state,
-				results: state.results.map(r =>
-					r.id !== action.payload.id ? r : { ...r, ...action.payload.data }
-				),
-			};
+			// return {
+			// 	...state,
+			// 	feedbacks: state.map(
+			// 		r =>
+			// 			r.id !== action.payload.id ? r : { ...r, ...action.payload.data }
+			// 		// r.upvotedBy.push(action.payload)
+			// 	),
+			// };
+			// return { ...state, ...action.payload };
+			return state.map(fb => {
+				return fb._id !== action.payload.id
+					? fb
+					: { ...fb, ...action.payload.data };
+				//   fb.upvotedBy.push(action.payload.data);
+			});
+
 		case 'DELETE_FEEDBACK':
 			return {
 				...state,
@@ -83,7 +93,7 @@ export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
 		if (pointsCount < 0) {
 			pointsCount = 0;
 		}
-
+		console.log(id);
 		dispatch({
 			type: 'TOGGLE_VOTE',
 			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },

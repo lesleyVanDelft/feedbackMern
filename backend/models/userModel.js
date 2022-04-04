@@ -63,10 +63,10 @@ const userModel = mongoose.Schema(
 );
 
 // after creating a user
-userModel.post('save', function (doc, next) {
-	console.log('new user was created', doc);
-	next();
-});
+// userModel.post('save', function (doc, next) {
+// 	console.log('new user was created', doc);
+// 	next();
+// });
 
 // before instance of user
 userModel.pre('save', async function (next) {

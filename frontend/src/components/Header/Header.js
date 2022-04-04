@@ -18,9 +18,7 @@ const Header = () => {
 		dispatch(logoutUser());
 		// dispatch(resetFeedbacks());
 
-		setTimeout(() => {
-			navigate('/login');
-		}, 200);
+		navigate('/login');
 	};
 
 	const handleClick = e => {

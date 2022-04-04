@@ -1,10 +1,15 @@
 @import '../../sass/main.scss';
 
 .CommentSection {
+	background: $white;
+	border-radius: 5px;
+	padding: 1rem 2.125rem;
 	svg {
 		width: 50px;
 	}
 	&__count {
 		color: $darkBlue1;
+		font-size: 1.225rem;
+		padding-bottom: 1.75rem;
 	}
 }
