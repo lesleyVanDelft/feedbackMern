@@ -23,7 +23,7 @@ const Details = () => {
 	const feedbackComments = useSelector(state => state.feedbackComments);
 	const user = useSelector(state => state.user);
 
-	console.log(feedbackComments);
+	// console.log(feedbackComments);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 

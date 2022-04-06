@@ -7,14 +7,29 @@
 
 	&__content {
 		display: flex;
-		padding-top: 3rem;
+		width: 100%;
+		padding-top: 0.5rem;
 		padding-left: 0.3rem;
 		gap: 1rem;
-		.planned,
-		.in-progress,
-		.live {
-			flex: 33%;
 
+		// .list {
+		// 	width: 100%;
+		// }
+
+		.plannedList,
+		.in-progressList,
+		.liveList {
+			flex: 33%;
+		}
+	}
+
+	.headers {
+		display: flex;
+		width: 100%;
+		margin-left: 0.5rem;
+		padding-top: 2rem;
+		&__item {
+			flex: 33%;
 			h4 {
 				color: $darkBlue2;
 				font-size: 1.125rem;
@@ -23,6 +38,90 @@
 			span.description {
 				font-size: 1rem;
 				color: $lightBlueGray;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.RoadmapPage {
+		padding: 0;
+		margin: 0;
+		height: 100%;
+		width: 100%;
+		// overflow-x: hidden;
+		&__content {
+			gap: 0;
+			padding: 0;
+
+			.list {
+				padding: 0 1rem;
+				width: 100%;
+			}
+			.plannedList {
+				display: none;
+				&.active {
+					display: block;
+				}
+			}
+			.in-progressList {
+				display: none;
+
+				&.active {
+					display: block;
+					width: 100%;
+				}
+			}
+			.liveList {
+				display: none;
+				&.active {
+					display: block;
+				}
+			}
+		}
+		.headers {
+			display: flex;
+			width: 100%;
+			justify-content: space-around;
+			align-items: center;
+			padding: 0;
+			margin: 0;
+			// padding: 20px 0;
+
+			&__item {
+				display: grid;
+				place-content: center;
+				// height: 100%;
+				padding: 1rem 0;
+				h4 {
+					color: $lightBlueGray;
+					opacity: 0.5;
+					font-size: 14px;
+				}
+				span.description {
+					display: none;
+				}
+
+				&.orange.active,
+				&.purple.active,
+				&.blue.active {
+					display: grid;
+					h4 {
+						color: $darkBlue2;
+						opacity: 1;
+						padding-top: 4px;
+					}
+				}
+
+				&.orange.active {
+					border-bottom: 4px solid $orange;
+				}
+				&.purple.active {
+					border-bottom: 4px solid $purple;
+				}
+				&.blue.active {
+					border-bottom: 4px solid $skyBlue;
+				}
 			}
 		}
 	}
