@@ -1,28 +1,30 @@
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../reducers/userReducer';
 import { motion, AnimatePresence } from 'framer-motion';
 // import GoalForm from '../components/GoalForm';
 // import FeedbackForm from '../components/FeedbackForm/FeedbackForm';
 import Spinner from '../components/Spinner';
-import { getFeedbacks, reset } from '../features/feedbacks/feedbackSlice';
+// import { getFeedbacks, reset } from '../features/feedbacks/feedbackSlice';
+import { getFeedbacks } from '../reducers/feedbackReducer';
 import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 import Dashboard from '../components/Dashboard/Dashboard';
 import Suggestions from '../components/Suggestions/Suggestions';
 import './Pages.css';
 import EmptyFeedback from '../components/EmptyFeedback/EmptyFeedback';
+import FeedbackList from '../components/FeedbackList/FeedbackList';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
 
 const Homepage = () => {
+	const feedbacks = useSelector(state => state.feedbacks);
+	const user = useSelector(state => state.user);
+	const [pageLoading, setPageLoading] = useState(false);
+	// const [feedbackData, setFeedbackData] = useState([]);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	// const Context = createContext();
-
-	// get user state from auth redux store
-	const { user } = useSelector(state => state.auth);
-	const { feedbacks, isLoading, isError, message } = useSelector(state => {
-		// console.log(state.feedbacks.feedbacks);
-		return state.feedbacks;
-	});
 
 	// category filter button state
 	const [categoryState, setCategoryState] = useState('all');
@@ -35,14 +37,15 @@ const Homepage = () => {
 	const getMobileState = mobile => {
 		setMobileState(!mobile);
 	};
-	// console.log(mobileState);
 
+	// framer motion
 	const menuVisibility = {
 		visible: { opacity: 1 },
 		hidden: { opacity: 0 },
 	};
 
 	useEffect(() => {
+<<<<<<< HEAD
 		dispatch(getFeedbacks(feedbacks));
 		if (isError) {
 			console.log(message);
@@ -61,56 +64,50 @@ const Homepage = () => {
 		// 	dispatch(reset());
 		// };
 	}, [user, navigate, dispatch, isError, message]);
+=======
+		try {
+			if (user) {
+				dispatch(getFeedbacks());
+			}
+			setTimeout(() => {
+				// if (user) {
+				// 	dispatch(getFeedbacks());
+				// }
+				if (!user) {
+					navigate('/login');
+				}
+			}, 300);
+			if (!user) {
+				navigate('/login');
+			}
+		} catch (error) {
+			console.log(error);
+		}
 
-	if (isLoading) {
-		return <Spinner />;
+		dispatch(setUser());
+	}, []);
+>>>>>>> toolkittesting
+
+	if (!feedbacks) {
+		return <h1>Loading </h1>;
 	}
-
-	const filteredFeedbacks = feedbacks.filter(feedback => {
-		return feedback.feedbackType.toLowerCase() === categoryState;
-	});
-	// console.log(categoryState);
-	// <Dashboard category={getCategoryState} mobileOpen={getMobileState} />
 	return (
 		<main className="Homepage">
 			<Dashboard category={getCategoryState} mobileOpen={getMobileState} />
 
 			<section className={`Homepage__content`}>
+				{/* mobile animation overlay */}
 				<motion.div
 					className={`overlay ${mobileState ? 'active' : null}`}
 					variants={menuVisibility}
 					initial="hidden"
 					animate="visible"></motion.div>
-				<Suggestions
-					suggestionCount={
-						categoryState === 'all'
-							? feedbacks.length
-							: filteredFeedbacks.length
-					}
-				/>
 
-				{/* Check for empty feedback lists and render empty component */}
-				{feedbacks.length <= 0 ? <EmptyFeedback /> : null}
-				{categoryState !== 'all' && filteredFeedbacks.length <= 0 ? (
-					<EmptyFeedback />
-				) : null}
-
-				{/* Loop over all feedbacks if category state is all, else loop over filtered feedbacks*/}
-				{feedbacks.length > 0 && categoryState === 'all' ? (
-					<div className="feedbacks">
-						{feedbacks.map(feedback => {
-							return <FeedbackItem feedback={feedback} key={feedback._id} />;
-						})}
-					</div>
-				) : (
-					<div className="feedbacks">
-						{filteredFeedbacks.map(feedback => {
-							return <FeedbackItem feedback={feedback} key={feedback._id} />;
-						})}
-					</div>
-					// <h3>no shit</h3>
-				)}
+				{/* <FeedbackList category={categoryState} feedbackData={feedbacks} /> */}
+				{feedbacks && <FeedbackList category={categoryState} />}
 			</section>
+
+			<ToastContainer autoClose={2000} />
 		</main>
 	);
 };

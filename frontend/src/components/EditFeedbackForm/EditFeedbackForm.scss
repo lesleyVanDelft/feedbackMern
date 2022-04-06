@@ -48,4 +48,35 @@
 	.btn-darkBlue {
 		margin-right: 1rem;
 	}
+
+	textarea {
+		border: none;
+		background: $lightGray;
+		width: 100%;
+		padding: 1rem 2rem;
+		margin-bottom: 1rem;
+		outline: none;
+		border-radius: 10px;
+
+		&::placeholder {
+			opacity: 0.8;
+		}
+
+		&:focus {
+			outline: 1px solid $blue;
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.EditFeedbackForm {
+		margin-top: 55px;
+		.btn {
+			margin: 0;
+
+			&-darkBlue {
+				margin: 1rem 0;
+			}
+		}
+	}
 }

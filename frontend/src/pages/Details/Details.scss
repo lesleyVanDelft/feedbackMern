@@ -34,4 +34,26 @@
 			font-weight: 600;
 		}
 	}
+
+	.postedBy {
+		// margin-bottom: -1.3rem;
+		color: $lightBlueGray;
+		font-size: 14px;
+
+		.username {
+			font-weight: bold;
+			margin-left: 0.4rem;
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.Details {
+		padding: 0 1.5rem;
+		&__buttons {
+			margin: 0;
+			margin-bottom: 1.5rem;
+			padding-top: 1.5rem;
+		}
+	}
 }

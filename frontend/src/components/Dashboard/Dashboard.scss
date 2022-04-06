@@ -41,6 +41,7 @@
 	.Dashboard {
 		width: 100%;
 		display: flex;
+		flex-direction: row;
 		gap: 10px;
 		margin-bottom: 40px;
 		justify-content: space-between;
@@ -50,6 +51,12 @@
 			width: 223px;
 			background-image: url('../../assets/suggestions/tablet/background-header.png');
 			padding: 0 0 1.5rem 1.5rem;
+		}
+
+		&__desktop {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
 		}
 	}
 }

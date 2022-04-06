@@ -2,36 +2,53 @@ const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 
-const protect = asyncHandler(async (req, res, next) => {
-	let token;
+// check user
+const checkUser = asyncHandler(async (req, res, next) => {
+	const token = req.cookies.token;
 
-	if (
-		req.headers.authorization &&
-		req.headers.authorization.startsWith('Bearer')
-	) {
-		try {
-			// get token from header
-			token = req.headers.authorization.split(' ')[1];
-			// console.log(token);
-			// verify token
-			const decoded = jwt.verify(token, process.env.JWT_SECRET);
+	if (token) {
+		jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
+			console.log(decodedToken);
+			if (err) {
+				console.log(err.message + 'checkUser mw');
+				// res.locals.user = null;
 
-			// get user from the token
-			req.user = await User.findById(decoded.id).select('-password');
-
-			next();
-		} catch (error) {
-			console.log(error);
-			res.status(401);
-
-			throw new Error('Not authorized bruh, token malformed or smt');
-		}
+				next();
+			} else {
+				console.log(decodedToken);
+				let user = await User.findById(decodedToken.id);
+				// res.locals.user = user;s
+				req.user = user;
+				console.log(user + 'checkUser');
+				// res.redirect('/');
+				next();
+			}
+		});
+		// res.redirect('/');
 	}
 
-	if (!token) {
-		res.status(401);
-		throw new Error('Not authorized, no token');
-	}
+	next();
 });
 
-module.exports = { protect };
+const protect = asyncHandler(async (req, res, next) => {
+	const token = req.cookies.jwt;
+
+	// check jwt exists and verified
+	if (token) {
+		jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+			if (err) {
+				console.log(err.message);
+				// res.redirect('/login');
+			} else {
+				console.log(decodedToken);
+				res.redirect('/');
+				next();
+			}
+		});
+	} else {
+		// res.redirect('/login');
+	}
+});
+// const refresh = asyncHandler(async (req, res, next) => {});
+
+module.exports = { checkUser, protect };

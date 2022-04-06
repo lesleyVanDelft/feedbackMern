@@ -17,14 +17,14 @@
 		h2 {
 			font-size: 18px;
 			margin-right: 1.5rem;
-			span {
-				margin-right: 0.5rem;
+			span.suggestionCount {
+				padding-right: 0.5rem;
 			}
 		}
 		svg {
 			width: 30px;
 			height: 30px;
-			margin-right: 0.4rem;
+			padding-right: 0.4rem;
 		}
 	}
 
@@ -34,7 +34,7 @@
 		// cursor: pointer;
 
 		span {
-			margin-right: 0.5rem;
+			padding-right: 0.5rem;
 		}
 		button {
 			display: flex;
@@ -53,6 +53,28 @@
 
 	.btnLink {
 		margin-left: auto;
+	}
+
+	// roadmap page
+	.Roadmap__header {
+		.back {
+			border: none;
+			background: none;
+			a {
+				color: $white;
+				display: flex;
+				align-items: center;
+				font-size: 14px;
+				font-weight: bold;
+
+				svg {
+					color: $white;
+					width: 16px;
+					height: 12px;
+					margin-right: 0.3rem;
+				}
+			}
+		}
 	}
 }
 

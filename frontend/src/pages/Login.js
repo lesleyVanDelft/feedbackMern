@@ -3,40 +3,37 @@ import { FaSignInAlt } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { login, reset } from '../features/auth/authSlice';
+// import { login, reset } from '../features/auth/authSlice';
+import { loginUser, setUser } from '../reducers/userReducer';
+// import {}
 import Spinner from '../components/Spinner';
 
 const Login = () => {
+	const user = useSelector(state => state.user);
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
 	});
-
 	// destructure useState
 	const { email, password } = formData;
-
 	// useNavigate
 	const navigate = useNavigate();
-
 	// fire off functions from authSlice
 	const dispatch = useDispatch();
 
 	// get state from redux
-	const { user, isLoading, isError, isSuccess, message } = useSelector(
-		state => state.auth
-	);
-
-	useEffect(() => {
-		if (isError) {
-			toast.error(message);
-		}
-
-		if (isSuccess || user) {
-			navigate('/');
-		}
-
-		dispatch(reset());
-	}, [user, isError, isSuccess, message, navigate, dispatch]);
+	// const { user, isLoading, isError, isSuccess, message } = useSelector(
+	// 	state => state.auth
+	// );
+	// useEffect(() => {
+	// 	if (isError) {
+	// 		toast.error(message);
+	// 	}
+	// 	if (isSuccess || user) {
+	// 		navigate('/');
+	// 	}
+	// 	// dispatch(reset());
+	// }, [user, isError, isSuccess, message, navigate, dispatch]);
 
 	const onChange = e => {
 		setFormData(prevState => ({
@@ -47,29 +44,42 @@ const Login = () => {
 
 	const onSubmit = e => {
 		e.preventDefault();
-
-		const userData = {
-			email,
-			password,
-		};
-
-		dispatch(login(userData));
+		// user && navigate('/');
+		try {
+			const userData = {
+				email,
+				password,
+			};
+			dispatch(loginUser(userData));
+			// dispatch(setUser());
+			setTimeout(() => {
+				navigate('/');
+			}, 300);
+		} catch (error) {
+			console.log('login page error');
+			console.log(error.message);
+		}
 	};
 
-	if (isLoading) {
-		return <Spinner />;
-	}
+	useEffect(() => {
+		if (user) {
+			navigate('/');
+		}
+	});
 
 	return (
-		<>
-			<section className="heading">
-				<h1>
-					<FaSignInAlt /> Login
-				</h1>
-				<p>Login and start setting goals</p>
-			</section>
+		<main className="Login">
+			{/* <section className="heading">
+				
+			</section> */}
 
-			<section className="form">
+			<section className="Login__form form">
+				<div className="heading">
+					<h2>
+						<FaSignInAlt /> Login
+					</h2>
+					<p>Login and share your feedback</p>
+				</div>
 				<form onSubmit={onSubmit}>
 					<div className="form-group">
 						<input
@@ -94,14 +104,12 @@ const Login = () => {
 						/>
 					</div>
 
-					<div className="form-group">
-						<button type="submit" className="btn btn-block">
-							Submit
-						</button>
-					</div>
+					<button type="submit" className="btn btnSubmit">
+						Submit
+					</button>
 				</form>
 			</section>
-		</>
+		</main>
 	);
 };
 

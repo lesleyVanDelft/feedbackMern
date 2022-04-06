@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoMenuSharp } from 'react-icons/io5/index.esm';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, LayoutGroup } from 'framer-motion';
 import MobileDashboard from '../MobileDashboard/MobileDashboard';
 import './Dashboard.css';
 import FilterButtons from './FilterButtons/FilterButtons';
@@ -10,6 +10,13 @@ import Roadmap from './Roadmap/Roadmap';
 const Dashboard = ({ category, mobileOpen }) => {
 	const [categoryState, setCategoryState] = useState('all');
 	const [active, setActive] = useState(false);
+
+	// lock body scrolling when mobile menu is open
+	useEffect(() => {
+		return active
+			? (document.body.style.overflow = 'hidden')
+			: (document.body.style.overflow = 'unset');
+	}, [active]);
 
 	// get state through onclick on category buttons
 	const getCategoryState = catState => {
@@ -27,11 +34,33 @@ const Dashboard = ({ category, mobileOpen }) => {
 		query: '(max-width: 768px)',
 	});
 
+	// framer motion
+	const framerList = {
+		hidden: {
+			opacity: 0,
+		},
+		show: {
+			opacity: 1,
+			transition: {
+				staggerChildren: 0.1,
+			},
+		},
+	};
+	const framerItem = {
+		hidden: { opacity: 0 },
+		show: { opacity: 1 },
+	};
+
 	return (
 		<section className="Dashboard">
+			{/* desktop + tablet dashboard */}
 			{isMobile || (
-				<>
-					<div className="Dashboard__logo">
+				<motion.div
+					variants={framerList}
+					initial="hidden"
+					animate="show"
+					className="Dashboard__desktop">
+					<motion.div variants={framerItem} className="Dashboard__logo">
 						<div className="text">
 							<h2>Frontend Mentor</h2>
 							<p>Feedback Board</p>
@@ -42,14 +71,14 @@ const Dashboard = ({ category, mobileOpen }) => {
 							onClick={() => {
 								setActive(!active);
 							}}></div>
-					</div>
-					<div className="Dashboard__buttons ">
+					</motion.div>
+					<motion.div variants={framerItem} className="Dashboard__buttons ">
 						<FilterButtons category={getCategoryState} />
-					</div>
-					<div className="Dashboard__roadmap ">
+					</motion.div>
+					<motion.div variants={framerItem} className="Dashboard__roadmap ">
 						<Roadmap />
-					</div>
-				</>
+					</motion.div>
+				</motion.div>
 			)}
 
 			{/* Mobile Nav + Dashboard  */}
@@ -69,13 +98,15 @@ const Dashboard = ({ category, mobileOpen }) => {
 						</div>
 					</div>
 
-					{/* <div className="Dashboard__mobile--container"> */}
 					{active ? (
-						<div>
-							<MobileDashboard category={getCategoryState} isVisible={active} />
-						</div>
+						<LayoutGroup>
+							<MobileDashboard
+								category={getCategoryState}
+								isVisible={active}
+								layout
+							/>
+						</LayoutGroup>
 					) : null}
-					{/* </div> */}
 				</div>
 			)}
 		</section>

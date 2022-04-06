@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
-import { register, reset } from '../features/auth/authSlice';
+// import { register, reset } from '../features/auth/authSlice';
+import { registerUser } from '../reducers/userReducer';
+// import {}
 import Spinner from '../components/Spinner';
 
 const Register = () => {
@@ -20,22 +22,6 @@ const Register = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const { user, isLoading, isError, isSuccess, message } = useSelector(
-		state => state.auth
-	);
-
-	useEffect(() => {
-		if (isError) {
-			toast.error(message);
-		}
-
-		if (isSuccess || user) {
-			navigate('/');
-		}
-
-		dispatch(reset());
-	}, [user, isError, isSuccess, message, navigate, dispatch]);
-
 	const onChange = e => {
 		setFormData(prevState => ({
 			...prevState,
@@ -45,10 +31,10 @@ const Register = () => {
 
 	const onSubmit = e => {
 		e.preventDefault();
-
-		if (password !== password2) {
-			toast.error('Passwords do not match');
-		} else {
+		try {
+			// if (!name || !email || !username || !password || !password2) {
+			// 	alert('add all fields');
+			// }
 			const userData = {
 				name,
 				email,
@@ -56,27 +42,37 @@ const Register = () => {
 				password,
 			};
 
-			dispatch(register(userData));
+			dispatch(registerUser(userData));
+
+			navigate('/');
+		} catch (error) {
+			console.log(error.message);
 		}
+
+		// if (password !== password2) {
+		// 	toast.error('Passwords do not match');
+		// } else {
+
+		// }
 	};
 
-	if (isLoading) {
-		return <Spinner />;
-	}
+	// if (isLoading) {
+	// 	return <Spinner />;
+	// }
 
 	return (
-		<>
-			<section className="heading">
-				<h1>
-					<FaUser /> Register
-				</h1>
-				<p>Please create an account</p>
-			</section>
-
-			<section className="form">
+		<main className="Register">
+			<section className="Register__form">
 				<form onSubmit={onSubmit}>
+					<div className="heading">
+						<h2>
+							<FaUser /> Register
+						</h2>
+						<p>Please create an account</p>
+					</div>
 					<div className="form-group">
 						<input
+							required
 							type="text"
 							className="form-control"
 							id="name"
@@ -88,6 +84,7 @@ const Register = () => {
 					</div>
 					<div className="form-group">
 						<input
+							required
 							type="text"
 							className="form-control"
 							id="username"
@@ -99,6 +96,7 @@ const Register = () => {
 					</div>
 					<div className="form-group">
 						<input
+							required
 							type="email"
 							className="form-control"
 							id="email"
@@ -110,6 +108,7 @@ const Register = () => {
 					</div>
 					<div className="form-group">
 						<input
+							required
 							type="password"
 							className="form-control"
 							id="password"
@@ -121,6 +120,7 @@ const Register = () => {
 					</div>
 					<div className="form-group">
 						<input
+							required
 							type="password"
 							className="form-control"
 							id="password2"
@@ -130,14 +130,13 @@ const Register = () => {
 							onChange={onChange}
 						/>
 					</div>
-					<div className="form-group">
-						<button type="submit" className="btn btn-block">
-							Submit
-						</button>
-					</div>
+
+					<button type="submit" className="btn btnSubmit">
+						Submit
+					</button>
 				</form>
 			</section>
-		</>
+		</main>
 	);
 };
 

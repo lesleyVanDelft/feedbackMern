@@ -1,24 +1,33 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createFeedback } from '../../features/feedbacks/feedbackSlice';
+import { createNewFeedback } from '../../reducers/feedbackReducer';
 import CreateImg from '../../assets/shared/icon-new-feedback.svg';
 import './CreateFeedbackForm.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateFeedbackForm = () => {
 	const [text, setText] = useState('');
 	const [title, setTitle] = useState('');
 	const [feedbackType, setFeedbackType] = useState('UI');
+	const user = useSelector(state => state.user);
+	const author = user.id;
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	const toastNotify = () =>
+		toast.success('Feedback added!', { autoClose: 3000 });
 
 	const onSubmit = e => {
 		e.preventDefault();
 
-		dispatch(createFeedback({ title, text, feedbackType }));
+		dispatch(createNewFeedback({ title, text, feedbackType, author }));
 		setText('');
 		setTitle('');
 		setFeedbackType('UI');
+
 		navigate('/');
 	};
 	return (
@@ -61,7 +70,7 @@ const CreateFeedbackForm = () => {
 						Include any specific comments on what should be improved, added,
 						etc.
 					</label>
-					<input
+					<textarea
 						type="text"
 						name="text"
 						id="text"
@@ -72,8 +81,13 @@ const CreateFeedbackForm = () => {
 				</div>
 
 				<div className="Form__group--buttons">
-					<button className="btn btn-darkBlue">Cancel</button>
-					<button className="btn btn-purple" type="submit">
+					<Link to="/">
+						<button className="btn btn-darkBlue">Cancel</button>
+					</Link>
+					<button
+						className="btn btn-purple"
+						type="submit"
+						onClick={() => toastNotify()}>
 						Add Feedback
 					</button>
 				</div>
