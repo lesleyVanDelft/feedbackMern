@@ -13,15 +13,13 @@ const postComment = async (req, res) => {
 	// current feedback id comes with comment post object
 	const feedback = await Feedback.findById(comment._id);
 	const user = await User.findById(req.user);
-	// console.log(user);
-	// console.log(req.params.id);
+
 	// req.user = user comes from auth middleware
 	if (!feedback) {
 		return res.status(404).send({
 			message: `feedback with ID: ${id} does not exist in database.`,
 		});
 	}
-
 	if (!user) {
 		return res
 			.status(404)
@@ -34,7 +32,6 @@ const postComment = async (req, res) => {
 		commentedBy: user,
 		commentBody: comment.comment,
 		// upvotedBy: [user._id],
-		// commentAuthor: user.username,
 		pointsCount: 1,
 	});
 	feedback.commentCount = numOfComments(feedback.comments);
@@ -45,16 +42,10 @@ const postComment = async (req, res) => {
 			populate: 'username',
 		},
 	]);
-	// .populate('comments.commentedBy', 'username')
-	// .execPopulate();
-
-	// user.karmaPoints.commentKarma++;
-	// user.totalComments++;
-	// await user.save();
 
 	const addedComment =
 		populatedFeedback.comments[savedFeedback.comments.length - 1];
-	// console.log(addedComment);
+
 	res.status(201).json(addedComment).end();
 };
 
@@ -147,6 +138,53 @@ const updateComment = async (req, res) => {
 	res.status(202).end();
 };
 
+// const postComment = async (req, res) => {
+// 	const { id } = req.params;
+// 	const { comment } = req.body;
+
+// 	if (!comment) {
+// 		return res.status(400).send({ message: `Comment body can't be empty.` });
+// 	}
+
+// 	// current feedback id comes with comment post object
+// 	const feedback = await Feedback.findById(comment._id);
+// 	const user = await User.findById(req.user);
+
+// 	// req.user = user comes from auth middleware
+// 	if (!feedback) {
+// 		return res.status(404).send({
+// 			message: `feedback with ID: ${id} does not exist in database.`,
+// 		});
+// 	}
+// 	if (!user) {
+// 		return res
+// 			.status(404)
+// 			.send({ message: 'User does not exist in database.' });
+// 	}
+
+// 	feedback.comments = feedback.comments.concat({
+// 		name: user.name,
+// 		username: user.username,
+// 		commentedBy: user,
+// 		commentBody: comment.comment,
+// 		// upvotedBy: [user._id],
+// 		pointsCount: 1,
+// 	});
+// 	feedback.commentCount = numOfComments(feedback.comments);
+// 	const savedFeedback = await feedback.save();
+// 	const populatedFeedback = await Feedback.findById(feedback._id).populate([
+// 		{
+// 			path: 'comments.commentedBy',
+// 			populate: 'username',
+// 		},
+// 	]);
+
+// 	const addedComment =
+// 		populatedFeedback.comments[savedFeedback.comments.length - 1];
+
+// 	res.status(201).json(addedComment).end();
+// };
+
 const postReply = async (req, res) => {
 	const { id, commentId } = req.params;
 	const { reply } = req.body;
@@ -185,20 +223,38 @@ const postReply = async (req, res) => {
 		repliedBy: user._id,
 		upvotedBy: [user._id],
 		pointsCount: 1,
+		name: user.name,
+		username: user.username,
+		commentedBy: user,
 	});
 
 	feedback.comments = feedback.comments.map(c =>
 		c._id.toString() !== commentId ? c : targetComment
 	);
 	feedback.commentCount = numOfComments(feedback.comments);
-	const savedFeedback = await feedback.save();
-	const populatedFeedback = await savedFeedback
-		.populate('comments.replies.repliedBy', 'username')
-		.execPopulate();
+	await feedback.save();
 
-	user.karmaPoints.commentKarma++;
-	user.totalComments++;
-	await user.save();
+	// const populatedFeedback = await savedFeedback
+	// 	.populate('comments.replies.repliedBy', 'username')
+	// 	.execPopulate();
+
+	const populatedFeedback = await Feedback.findById(feedback._id).populate([
+		{
+			path: 'comments.replies.repliedBy',
+			populate: 'username',
+		},
+	]);
+
+	// const populatedFeedback = await Feedback.findById(feedback._id).populate([
+	// 	{
+	// 		path: 'comments.commentedBy',
+	// 		populate: 'username',
+	// 	},
+	// ]);
+
+	// user.karmaPoints.commentKarma++;
+	// user.totalComments++;
+	// await user.save();
 
 	const commentToReply = populatedFeedback.comments.find(
 		c => c._id.toString() === commentId

@@ -11,31 +11,15 @@ import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
 
 import './FeedbackList.css';
 import Suggestions from '../Suggestions/Suggestions';
+import Sorter from '../Sorter/Sorter';
+import SuggestionsHeader from '../Suggestions/SuggestionsHeader/SuggestionsHeader';
 
 const FeedbackList = ({ category }) => {
-	const [pageLoading, setPageLoading] = useState(false);
-	const [feedbackData, setFeedbackData] = useState([]);
+	const [sortBy, setSortBy] = useState('Most Upvotes');
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
-
-	// const handleLoadFeedbacks = async () => {
-	// 	try {
-	// 		setPageLoading(true);
-	// 		await dispatch(getFeedbacks());
-	// 		setPageLoading(false);
-	// 	} catch (error) {
-	// 		setPageLoading(false);
-	// 		console.log(error);
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	if (feedbacks !== null) {
-	// 		setFeedbackData(feedbacks);
-	// 	}
-	// }, [feedbacks]);
-
+	// console.log(sortBy);
 	useEffect(() => {
 		dispatch(getFeedbacks());
 	}, [dispatch]);
@@ -48,42 +32,54 @@ const FeedbackList = ({ category }) => {
 		feedbacks.filter(feedback => {
 			return feedback.feedbackType.toString().toLowerCase() === category;
 		});
-	// console.log(category);
 	// const filteredFeedbacks = [];
-	// console.log(filteredFeedbacks);
+
+	const getSortBy = sortState => {
+		setSortBy(sortState);
+	};
 
 	return (
 		<motion.section className="FeedbackList">
-			<Suggestions suggestionCount={feedbacks && feedbacks.length} />
+			{/* <Suggestions suggestionCount={feedbacks && feedbacks.length} /> */}
+			<SuggestionsHeader
+				suggestionCount={feedbacks && feedbacks.length}
+				sortBy={getSortBy}
+				roadmap={false}
+			/>
+
 			{feedbacks && category === 'all' ? (
 				<motion.div className="feedbacks">
-					{feedbacks.map((feedback, i) => (
-						<FeedbackItem
-							feedback={feedback}
-							key={feedback._id}
-							index={i}
-							toggleUpvote={toggleUpvote}
-							toggleDownvote={toggleDownvote}
-						/>
-					))}
+					<Sorter by={sortBy}>
+						{feedbacks.map((feedback, i) => (
+							<FeedbackItem
+								feedback={feedback}
+								key={feedback._id}
+								index={i}
+								toggleUpvote={toggleUpvote}
+								toggleDownvote={toggleDownvote}
+							/>
+						))}
+					</Sorter>
 				</motion.div>
 			) : (
 				<div className="feedbacks">
-					{filteredFeedbacks.length > 0 && category !== 'all' ? (
-						filteredFeedbacks.map((feedback, i) => {
-							return (
-								<FeedbackItem
-									feedback={feedback}
-									key={feedback._id}
-									index={i}
-									toggleUpvote={toggleUpvote}
-									toggleDownvote={toggleDownvote}
-								/>
-							);
-						})
-					) : (
-						<EmptyFeedback />
-					)}
+					<Sorter by={sortBy}>
+						{filteredFeedbacks.length > 0 && category !== 'all' ? (
+							filteredFeedbacks.map((feedback, i) => {
+								return (
+									<FeedbackItem
+										feedback={feedback}
+										key={feedback._id}
+										index={i}
+										toggleUpvote={toggleUpvote}
+										toggleDownvote={toggleDownvote}
+									/>
+								);
+							})
+						) : (
+							<EmptyFeedback />
+						)}
+					</Sorter>
 				</div>
 			)}
 			{/* {filteredFeedbacks.length <= 0 ? <EmptyFeedback /> : null} */}

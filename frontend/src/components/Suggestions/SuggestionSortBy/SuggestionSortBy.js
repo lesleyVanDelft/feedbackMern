@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi';
 import { FiCheck } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import './SuggestionSortBy.css';
 
-const SuggestionSortBy = () => {
+const SuggestionSortBy = ({ getSortState }) => {
 	const [active, setActive] = useState(false);
 	const [selected, setSelected] = useState('Most Upvotes');
 
+	useEffect(() => {
+		getSortState(selected);
+	}, [getSortState, selected]);
+
 	const handleClick = () => {
 		setActive(!active);
+		// getSuggestionSort(selected);
 	};
 
 	// framer motion

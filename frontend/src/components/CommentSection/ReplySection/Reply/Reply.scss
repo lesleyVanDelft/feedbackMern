@@ -1,9 +1,13 @@
-@import '../../../sass/main.scss';
+@import '../../../../sass/main.scss';
 
-.Comment {
+.Reply {
 	width: 100%;
-	border-bottom: 1px solid rgba(128, 128, 128, 0.301);
-	margin-bottom: 2rem;
+	// border-bottom: 1px solid rgba(128, 128, 128, 0.301);
+	margin-bottom: 0rem;
+	// display: flex;
+	// padding-left: 3.125rem;
+	padding-left: 24px;
+	// border-left: 1px solid rgba(128, 128, 128, 0.301);
 	img {
 		width: 40px;
 		height: 40px;
@@ -71,24 +75,12 @@
 		font-size: 0.9375rem;
 		padding-left: 4.5rem;
 		padding-top: 1.0625rem;
-		padding-bottom: 1.5rem;
-	}
+		padding-bottom: 2rem;
 
-	&__replies {
-		position: relative;
-		margin-left: 1.25rem;
-
-		&::before {
-			content: '';
-			position: absolute;
-			width: 1px;
-			height: 100%;
-			background: $lightBlueGray;
-			opacity: 0.2;
-			left: 0px;
-			// top: 0;
-			// bottom: 90px;
-			bottom: 38%;
+		span.replyingTo {
+			font-weight: bold;
+			color: $purple;
+			margin-right: 0.4rem;
 		}
 	}
 }

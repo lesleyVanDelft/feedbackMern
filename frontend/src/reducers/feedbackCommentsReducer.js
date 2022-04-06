@@ -53,7 +53,7 @@ const feedbackPageReducer = (state = null, action) => {
 		case 'EDIT_COMMENT':
 			return {
 				...state,
-				comments: state.comments.map(c =>
+				...state.feedbackComments.comments.map(c =>
 					c.id !== action.payload.commentId
 						? c
 						: { ...c, ...action.payload.data }

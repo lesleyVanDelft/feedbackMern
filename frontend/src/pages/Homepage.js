@@ -45,19 +45,6 @@ const Homepage = () => {
 	};
 
 	useEffect(() => {
-		// if (user) {
-		// 	dispatch(getFeedbacks());
-		// }
-
-		// setTimeout(() => {
-		// 	// if (user) {
-		// 	// 	dispatch(getFeedbacks());
-		// 	// }
-		// 	if (!user) {
-		// 		navigate('/login');
-		// 	}
-		// }, 200);
-
 		try {
 			if (user) {
 				dispatch(getFeedbacks());
@@ -79,23 +66,6 @@ const Homepage = () => {
 
 		dispatch(setUser());
 	}, []);
-
-	// useEffect(() => {
-	// 	const setPostsAndSubreddits = async () => {
-	// 	  try {
-	// 		await dispatch(fetchPosts('hot'));
-	// 		await dispatch(setSubList());
-	// 		await dispatch(setTopSubsList());
-	// 	  } catch (err) {
-	// 		dispatch(notify(getErrorMsg(err), 'error'));
-	// 	  }
-	// 	};
-
-	// 	dispatch(setUser());
-	// 	dispatch(setDarkMode());
-	// 	setPostsAndSubreddits();
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	//   }, []);
 
 	if (!feedbacks) {
 		return <h1>Loading </h1>;

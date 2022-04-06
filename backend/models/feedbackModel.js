@@ -5,6 +5,14 @@ const schemaCleaner = require('../utils/schemaCleaner');
 
 const replySchema = new mongoose.Schema(
 	{
+		name: {
+			type: String,
+			ref: 'User',
+		},
+		username: {
+			type: String,
+			ref: 'User',
+		},
 		repliedBy: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',

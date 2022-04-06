@@ -78,9 +78,9 @@ const postComment = async (feedbackId, commentObj) => {
 
 const postReply = async (feedbackId, commentId, replyObj) => {
 	const response = await axios.post(
-		`${API_URL + feedbackId}/comment/${commentId}/reply`,
-		replyObj
-		// setConfig()
+		`${API_URL + 'details/' + feedbackId}/comment/${commentId}/reply`,
+		replyObj,
+		setConfig()
 	);
 	return response.data;
 };

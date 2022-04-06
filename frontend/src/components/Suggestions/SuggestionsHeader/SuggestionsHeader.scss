@@ -54,6 +54,28 @@
 	.btnLink {
 		margin-left: auto;
 	}
+
+	// roadmap page
+	.Roadmap__header {
+		.back {
+			border: none;
+			background: none;
+			a {
+				color: $white;
+				display: flex;
+				align-items: center;
+				font-size: 14px;
+				font-weight: bold;
+
+				svg {
+					color: $white;
+					width: 16px;
+					height: 12px;
+					margin-right: 0.3rem;
+				}
+			}
+		}
+	}
 }
 
 @media screen and (max-width: 768px) {

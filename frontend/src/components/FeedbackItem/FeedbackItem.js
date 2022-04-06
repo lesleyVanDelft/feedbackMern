@@ -12,15 +12,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { getFeedbacks } from '../../reducers/feedbackReducer';
 import { useEffect, useState } from 'react';
+// import { UpvoteButton } from './VoteButtons/VoteButtons';
 import './FeedbackItem.css';
 
-const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
+const FeedbackItem = ({
+	feedback,
+	index,
+	toggleUpvote,
+	toggleDownvote,
+	roadmap,
+	status,
+}) => {
+	const [upvoted, setUpvoted] = useState(false);
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
-	// console.log(feedback);
-	// console.log(user.id);
 	const isUpvoted = user && feedback.upvotedBy.includes(user.id);
 	const isDownvoted = user && feedback.downvotedBy.includes(user.id);
+
+	useEffect(() => {
+		if (feedback.upvotedBy.includes(user.id)) {
+			setUpvoted(true);
+		} else {
+			setUpvoted(false);
+		}
+	}, [user, feedback.upvotedBy]);
 
 	const handleUpvoteToggle = async e => {
 		e.preventDefault();
@@ -30,6 +45,7 @@ const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
 				dispatch(
 					toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
 				);
+				setUpvoted(true);
 				// dispatch(getFeedbacks());
 			} else {
 				const updatedUpvotedBy = [...feedback.upvotedBy, user.id];
@@ -39,6 +55,7 @@ const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
 				dispatch(
 					toggleUpvote(feedback._id, updatedUpvotedBy, updatedDownvotedBy)
 				);
+				setUpvoted(false);
 				// dispatch(getFeedbacks());
 			}
 		} catch (err) {
@@ -63,49 +80,56 @@ const FeedbackItem = ({ feedback, index, toggleUpvote, toggleDownvote }) => {
 	};
 
 	return (
-		<motion.div
-			initial={framerList.initial}
-			animate={framerList.animate}
-			transition={framerList.transition}
-			className="FeedbackItem">
-			{/* make this form maybe? */}
-			<div className="FeedbackItem__left">
-				<div className="FeedbackItem__left--voteBtn">
-					<div className="votes">
-						<button
+		<>
+			<motion.div
+				initial={framerList.initial}
+				animate={framerList.animate}
+				transition={framerList.transition}
+				className={`FeedbackItem ${roadmap && 'roadmap'} ${roadmap && status}`}>
+				<div className="FeedbackItem__left">
+					<div className="FeedbackItem__left--voteBtn">
+						<div className="votes">
+							{/* <button
 							user={user}
 							body={feedback}
-							className="votes__upvote"
+							className={`votes__upvote ${upvoted ? 'active' : ''}`}
 							onClick={e => handleUpvoteToggle(e)}>
 							<FaChevronUp className="chevronUp" />
-						</button>
-						<span>{feedback.upvotedBy.length}</span>
-						<button className="votes__downvote">
-							<FaChevronDown className="chevronDown" />
-						</button>
+						</button> */}
+							<UpvoteButton
+								user={user}
+								body={feedback}
+								active={upvoted}
+								handleUpvote={handleUpvoteToggle}
+							/>
+							<span className="votes__count">{feedback.upvotedBy.length}</span>
+							<button className="votes__downvote">
+								<FaChevronDown className="chevronDown" />
+							</button>
+						</div>
+					</div>
+					<div className="FeedbackItem__left--content">
+						{roadmap && (
+							<ul className="status">
+								<li>{status}</li>
+							</ul>
+						)}
+						<Link to={`/details/${feedback._id}`}>
+							<h3 className="title">{feedback.title}</h3>
+						</Link>
+						<p className="text">{feedback.text}</p>
+						<button className="feedbackTypeBtn">{feedback.feedbackType}</button>
 					</div>
 				</div>
-				<div className="FeedbackItem__left--content">
-					<Link to={`/details/${feedback._id}`}>
-						<h3 className="title">{feedback.title}</h3>
-					</Link>
-					<p className="text">{feedback.text}</p>
-					<button className="feedbackTypeBtn">{feedback.feedbackType}</button>
+
+				<div className="FeedbackItem__right">
+					<FaComment className="commentIcon" />
+					<span className="commentLength">
+						<Link to={`/details/${feedback._id}`}>{feedback.commentCount}</Link>
+					</span>
 				</div>
-			</div>
-
-			<div className="FeedbackItem__right">
-				<FaComment className="commentIcon" />
-				<span className="commentLength">
-					<Link to={`/details/${feedback._id}`}>{feedback.commentCount}</Link>
-				</span>
-			</div>
-
-			{/* <p className="FeedbackItem__text">{feedback.feedbackType}</p> */}
-			{/* <button onClick={() => dispatch(deleteFeedback(feedback._id))}>
-					delete me
-				</button> */}
-		</motion.div>
+			</motion.div>
+		</>
 	);
 	// return <div>{feedback._id}</div>;
 };

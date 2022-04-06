@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Roadmap.css';
 
 const Roadmap = () => {
@@ -5,7 +6,7 @@ const Roadmap = () => {
 		<div className="Roadmap">
 			<div className="Roadmap__title">
 				<h2>Roadmap</h2>
-				<a href="/">View</a>
+				<Link to="/roadmap">View</Link>
 			</div>
 			<ul className="Roadmap__list">
 				<li>

@@ -23,7 +23,7 @@ const Details = () => {
 	const feedbackComments = useSelector(state => state.feedbackComments);
 	const user = useSelector(state => state.user);
 
-	// console.log(feedbackComments.user);
+	console.log(feedbackComments);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -61,45 +61,60 @@ const Details = () => {
 	// 	return <h2>Loading USER</h2>;
 	// }
 
-	// if (!user) {
-	// 	navigate('/login');
-	// }
+	// useEffect(() => {
+	// 	if (!user) {
+	// 		navigate('/login');
+	// 	}
+	// }, []);
 	if (!feedbackComments) {
 		return <h2>Loading</h2>;
 	}
 
 	return (
-		<main className="Details">
-			<div className="Details__buttons">
-				<button className="back">
-					<Link to="/">
-						<FaChevronLeft /> <span>Go Back</span>
-					</Link>
-				</button>
-				{/* {user && user._id === singleFeedback[0].user ? (
+		<>
+			<main className="Details">
+				<div className="Details__buttons">
+					<button className="back">
+						<Link to="/">
+							<FaChevronLeft /> <span>Go Back</span>
+						</Link>
+					</button>
+					{/* {user && user._id === singleFeedback[0].user ? (
 					<Link to={`/edit/${id}`}>
 						<button className="btn btn-blue edit">Edit Feedback</button>
 					</Link>
 				) : null} */}
-				{/* {user && user.id === feedbackComments.user && ( */}
-				<Link to={`/edit/${id}`}>
-					<button className="btn btn-blue edit">Edit Feedback</button>
-				</Link>
-				{/* )} */}
-			</div>
-			<FeedbackItem feedback={feedbackComments} />
+					{/* {user && user.id === feedbackComments.user && ( */}
 
-			{/* {feedbacks.length > 0
+					{feedbackComments.author.id === user.id && (
+						<Link to={`/edit/${id}`}>
+							<button className="btn btn-blue edit">Edit Feedback</button>
+						</Link>
+					)}
+					{/* )} */}
+				</div>
+				<span className="postedBy">
+					Posted by:
+					{feedbackComments.author.username && (
+						<span className="username">
+							@{feedbackComments.author.username}
+						</span>
+					)}
+				</span>
+				<FeedbackItem feedback={feedbackComments} />
+
+				{/* {feedbacks.length > 0
 				? feedbacks.map(feedback => {
 						return <FeedbackItem feedback={feedback} key={feedback._id} />;
 				  })
 				: 'loading'} */}
 
-			{/* {singleFeedback && <FeedbackItem feedback={singleFeedback[0]} />} */}
-			{/* {console.log(singleFeedback)} */}
+				{/* {singleFeedback && <FeedbackItem feedback={singleFeedback[0]} />} */}
+				{/* {console.log(singleFeedback)} */}
 
-			<CommentSection comments={feedbackComments.comments} feedbackId={id} />
-		</main>
+				<CommentSection comments={feedbackComments.comments} feedbackId={id} />
+			</main>
+		</>
 	);
 };
 

@@ -57,6 +57,7 @@ export const loginUser = credentials => {
 
 		toast.info(`Welcome ${user.username}`, {
 			autoClose: 5000,
+			icon: '👋',
 		});
 	};
 };

@@ -42,12 +42,20 @@
 					display: grid;
 					place-items: center;
 				}
+
 				&__upvote {
 					border-radius: 10px 10px 0px 0px;
 					&:hover {
 						background-color: $green;
 						opacity: 0.5;
 
+						svg {
+							color: $white;
+						}
+					}
+
+					&.active {
+						background-color: $green;
 						svg {
 							color: $white;
 						}
@@ -113,6 +121,108 @@
 			font-weight: bold;
 		}
 	}
+
+	// roadmap cards
+	&.roadmap {
+		align-items: flex-end;
+		// background: rgb(201, 201, 201);
+		border-top: 6px solid $orange;
+		padding-top: 1rem;
+
+		.status {
+			color: $lightBlueGray;
+			padding-left: 1rem;
+			padding-bottom: 0.5rem;
+			li {
+				&::marker {
+					color: $orange;
+				}
+				text-transform: capitalize;
+			}
+		}
+		.FeedbackItem__left {
+			flex-direction: column-reverse;
+			&--voteBtn {
+				margin-top: 1rem;
+				// padding: 0;
+
+				.votes {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					// padding: 0.28rem 0.8125rem;
+					// padding: 0.2rem 0rem;
+					margin: 0;
+
+					svg {
+						margin-right: 0rem;
+					}
+					span {
+						margin: 0;
+					}
+
+					&__upvote {
+						border-radius: 10px 0px 0px 10px;
+						padding: 0.5rem 0.8rem;
+					}
+					&__downvote {
+						border-radius: 0px 10px 10px 0px;
+						padding: 0.5rem 0.8rem;
+					}
+
+					&__count {
+						padding: 0 0.7rem;
+					}
+				}
+			}
+		}
+		.FeedbackItem__right {
+			display: flex;
+			align-items: center;
+			height: 100%;
+			// background-color: orange;
+			// justify-content: flex-end;
+			padding-bottom: 0.3rem;
+			.commentIcon {
+				color: $darkGray;
+				margin-right: 8px;
+			}
+			.commentLength {
+				font-size: 1rem;
+				font-weight: bold;
+			}
+		}
+	}
+	&.roadmap.planned {
+		border-top: 6px solid $orange;
+		.status {
+			li {
+				&::marker {
+					color: $orange;
+				}
+			}
+		}
+	}
+	&.roadmap.in-progress {
+		border-top: 6px solid $purple;
+		.status {
+			li {
+				&::marker {
+					color: $purple;
+				}
+			}
+		}
+	}
+	&.roadmap.live {
+		border-top: 6px solid $skyBlue;
+		.status {
+			li {
+				&::marker {
+					color: $skyBlue;
+				}
+			}
+		}
+	}
 }
 
 @media screen and (max-width: 768px) {
@@ -126,19 +236,34 @@
 
 			&--voteBtn {
 				margin-top: 1rem;
+				// padding: 0;
 
-				button.votes {
+				.votes {
 					display: flex;
 					flex-direction: row;
 					align-items: center;
-					padding: 0.28rem 0.8125rem;
+					// padding: 0.28rem 0.8125rem;
+					// padding: 0.2rem 0rem;
 					margin: 0;
 
 					svg {
-						margin-right: 0.4rem;
+						margin-right: 0rem;
 					}
 					span {
 						margin: 0;
+					}
+
+					&__upvote {
+						border-radius: 10px 0px 0px 10px;
+						padding: 0.5rem 0.8rem;
+					}
+					&__downvote {
+						border-radius: 0px 10px 10px 0px;
+						padding: 0.5rem 0.8rem;
+					}
+
+					&__count {
+						padding: 0 0.7rem;
 					}
 				}
 			}

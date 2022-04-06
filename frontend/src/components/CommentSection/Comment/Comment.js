@@ -1,9 +1,15 @@
+import { useState } from 'react';
+import ReplySection from '../ReplyForm/ReplyForm';
+import Reply from '../ReplySection/Reply/Reply';
 import BlankProfilePic from '../../../assets/blank-profile-picture.png';
+import ReplyForm from '../ReplyForm/ReplyForm';
 import './Comment.css';
 
-const Comment = ({ commentData, user }) => {
-	// console.log(commentData);
+const Comment = ({ commentData, currentFeedback, user }) => {
+	const [replyActive, setReplyActive] = useState(false);
+	// console.log(currentFeedback);
 	// console.log(user);
+
 	if (!commentData) {
 		return <h1>loading</h1>;
 	}
@@ -17,13 +23,60 @@ const Comment = ({ commentData, user }) => {
 					{/* {console.log(commentData.commentedBy.name)} */}
 				</div>
 				<div className="Comment__buttons">
-					<button className="reply">Reply</button>
+					<button
+						className="reply"
+						onClick={() => setReplyActive(!replyActive)}>
+						Reply
+					</button>
 					{commentData.commentedBy === user.id && (
 						<button className="delete">delete</button>
 					)}
 				</div>
 			</div>
 			<p className="Comment__text">{commentData.commentBody}</p>
+
+			{replyActive && (
+				<ReplyForm
+					active={replyActive}
+					comment={commentData}
+					currentFeedback={currentFeedback}
+				/>
+			)}
+
+			{/* <section className="Comment__replies">
+				{commentData.replies.length > 0 &&
+					commentData.replies.map((reply, i) => {
+						return (
+							<Reply
+								replyData={reply}
+								replyingTo={commentData.username}
+								currentFeedback={currentFeedback}
+								key={i}
+							/>
+						);
+					})}
+			</section> */}
+
+			{commentData.replies.length > 0 && (
+				<section className="Comment__replies">
+					{commentData.replies.length > 0 &&
+						commentData.replies.map((reply, i) => {
+							return (
+								<Reply
+									replyData={reply}
+									replyingTo={commentData.username}
+									currentFeedback={currentFeedback}
+									key={i}
+								/>
+							);
+						})}
+				</section>
+			)}
+			{/* <ReplySection
+				replies={commentData.replies}
+				replyingTo={commentData.username}
+				currentFeedback={currentFeedback}
+			/> */}
 		</article>
 
 		// commentData.map(comment => {

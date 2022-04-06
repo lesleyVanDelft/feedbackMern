@@ -1,0 +1,29 @@
+@import '../../sass/main.scss';
+.RoadmapPage {
+	width: 100%;
+	padding: 2rem 100px;
+	// background-color: $white;
+	border-radius: 10px;
+
+	&__content {
+		display: flex;
+		padding-top: 3rem;
+		padding-left: 0.3rem;
+		gap: 1rem;
+		.planned,
+		.in-progress,
+		.live {
+			flex: 33%;
+
+			h4 {
+				color: $darkBlue2;
+				font-size: 1.125rem;
+				padding-bottom: 0.1rem;
+			}
+			span.description {
+				font-size: 1rem;
+				color: $lightBlueGray;
+			}
+		}
+	}
+}
