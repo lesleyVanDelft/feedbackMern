@@ -12,10 +12,6 @@
 		padding-left: 0.3rem;
 		gap: 1rem;
 
-		// .list {
-		// 	width: 100%;
-		// }
-
 		.plannedList,
 		.in-progressList,
 		.liveList {
@@ -49,35 +45,44 @@
 		margin: 0;
 		height: 100%;
 		width: 100%;
-		// overflow-x: hidden;
 		&__content {
 			gap: 0;
 			padding: 0;
-
 			.list {
 				padding: 0 1rem;
 				width: 100%;
 			}
-			.plannedList {
-				display: none;
-				&.active {
-					display: block;
-				}
-			}
-			.in-progressList {
+
+			.plannedList,
+			.in-progressList,
+			.liveList {
 				display: none;
 
 				&.active {
 					display: block;
-					width: 100%;
 				}
 			}
-			.liveList {
-				display: none;
-				&.active {
-					display: block;
-				}
-			}
+
+			// .plannedList {
+			// 	display: none;
+			// 	&.active {
+			// 		display: block;
+			// 	}
+			// }
+			// .in-progressList {
+			// 	display: none;
+
+			// 	&.active {
+			// 		display: block;
+			// 		width: 100%;
+			// 	}
+			// }
+			// .liveList {
+			// 	display: none;
+			// 	&.active {
+			// 		display: block;
+			// 	}
+			// }
 		}
 		.headers {
 			display: flex;

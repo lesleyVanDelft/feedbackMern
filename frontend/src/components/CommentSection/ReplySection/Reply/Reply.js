@@ -23,7 +23,7 @@ const Reply = ({ replyData, currentFeedback, replyingTo }) => {
 						onClick={() => setReplyActive(!replyActive)}>
 						Reply
 					</button>
-					{replyData.commentedBy === user.id && (
+					{replyData.repliedBy === user.id && (
 						<button className="delete">delete</button>
 					)}
 				</div>
