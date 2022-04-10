@@ -71,6 +71,18 @@ const RoadmapPage = () => {
 				</div>
 			</div>
 
+			<div className="mobileHeaders">
+				<h2>
+					{active} ({active === 'planned' && plannedFeedbacks.length}
+					{active === 'in-progress' && inProgressFeedbacks.length}
+					{active === 'live' && liveFeedbacks.length})
+				</h2>
+				<span className="description">
+					{active === 'planned' && 'Ideas prioritized for research'}
+					{active === 'in-progress' && 'Currently being developed'}
+					{active === 'live' && 'Released features'}
+				</span>
+			</div>
 			<div className="RoadmapPage__content">
 				<div
 					className={`plannedList ${active === 'planned' ? 'active' : null}`}>

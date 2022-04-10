@@ -82,8 +82,19 @@
 	.SuggestionsHeader {
 		border-radius: 0;
 		padding-left: 1rem;
+		justify-content: space-between;
 		&__total {
 			display: none;
+		}
+
+		.btnLink {
+			margin: 0;
+			padding: 0;
+			.btn {
+				padding: 0.7rem 1rem;
+				margin: 0;
+				// justify-self: flex-end;
+			}
 		}
 	}
 }

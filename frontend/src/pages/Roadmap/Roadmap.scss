@@ -131,3 +131,29 @@
 		}
 	}
 }
+
+@media screen and (max-width: 768px) {
+	.RoadmapPage {
+		// padding: 0;
+		&__content {
+			.plannedList {
+				padding-top: 0rem;
+			}
+		}
+
+		.mobileHeaders {
+			padding-left: 1.375rem;
+			padding-top: 1.3rem;
+			padding-bottom: 0.5rem;
+			h2 {
+				text-transform: capitalize;
+				color: $darkBlue2;
+				font-size: 1.125rem;
+			}
+			.description {
+				color: $lightBlueGray;
+				font-size: 0.8525rem;
+			}
+		}
+	}
+}
