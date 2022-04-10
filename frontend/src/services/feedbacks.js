@@ -85,6 +85,10 @@ const postReply = async (feedbackId, commentId, replyObj) => {
 	return response.data;
 };
 
+// REPLY TO REPLY
+// Request URL: http://localhost:3000/api/feedbacks/details/624a051e144bddae062b586a/comment/624a0b343fbc960f6cf35406/reply
+// NORMAL REPLY
+// Request URL: http://localhost:3000/api/feedbacks/details/624a051e144bddae062b586a/comment/624c545eb999d68c5469514e/reply
 const updateComment = async (feedbackId, commentId, commentObj) => {
 	const response = await axios.patch(
 		`${API_URL}/${feedbackId}/comment/${commentId}`,

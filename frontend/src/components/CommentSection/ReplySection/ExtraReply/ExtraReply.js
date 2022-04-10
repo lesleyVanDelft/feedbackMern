@@ -1,54 +1,42 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import ReplyForm from '../../ReplyForm/ReplyForm';
+import { useDispatch } from 'react-redux';
 import BlankProfilePic from '../../../../assets/blank-profile-picture.png';
-import './Reply.css';
 import { deleteReply } from '../../../../reducers/feedbackCommentsReducer';
+import ReplyForm from '../../ReplyForm/ReplyForm';
+import './ExtraReply.css';
 
-const Reply = ({
+const ExtraReply = ({
 	replyData,
 	currentFeedback,
-	replyingTo,
-	// replyActive,
-	// replyToReply,
-	setActive,
+	user,
+	replyToReply,
 	comment,
-	index,
-	// repliedBy,
 }) => {
 	const [replyActive, setReplyActive] = useState(false);
-	const [repliedBy, setRepliedBy] = useState('');
-	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
-	// const currFb = useSelector(state => state.feedbackComments);
-	// console.log(repliedBy);
-	// console.log(comment.replies[0]);
-	// console.log(comment);
-	const handleDelete = () => {
-		dispatch(deleteReply(currentFeedback._id, comment._id, replyData._id));
-	};
-
-	const getReplyName = name => {
-		setRepliedBy(name);
-	};
 	const getReplyActive = act => {
 		setReplyActive(act);
 	};
 
+	const handleDelete = () => {
+		dispatch(deleteReply(currentFeedback._id, comment._id, replyData._id));
+	};
+
+	const repliedTo = () => {};
 	return (
-		<article className="Reply">
-			<div className="Reply__userBar">
+		<article className="ExtraReply">
+			<div className="ExtraReply__userBar">
 				<img src={BlankProfilePic} alt="" className="profileImage" />
-				<div className="Reply__usernames">
+				<div className="ExtraReply__usernames">
 					<h4 className="name">{replyData.name}</h4>
 					<span className="username">@{replyData.username}</span>
 					{/* {console.log(replyData.commentedBy.name)} */}
 				</div>
-				<div className="Reply__buttons">
+				<div className="ExtraReply__buttons">
 					<button
 						className="reply"
 						onClick={() => setReplyActive(!replyActive)}>
-						Reply
+						ExtraReply
 					</button>
 					{replyData.repliedBy === user.id && (
 						<button className="delete" onClick={handleDelete}>
@@ -57,11 +45,23 @@ const Reply = ({
 					)}
 				</div>
 			</div>
-			<p className="Reply__text">
+			<p className="ExtraReply__text">
 				{/* <span className="replyingTo">{`@${comment.username}`}</span> */}
-				<span className="replyingTo">{`@${comment.username}`}</span>
+				{/* <span className="replyingTo">{`@${replyData.username}`}</span> */}
 				{/* {console.log(repliedBy)} */}
+				{replyData.replyBody.split(' ')[0].includes('@') ? (
+					<>
+						{/* <span className="replyingTo">@{replyData.username}</span> */}
+
+						<span className="replyingTo">
+							{replyData.replyBody.split(' ')[0]}
+						</span>
+
+						{replyData.replyBody.split(' ').slice(1)}
+					</>
+				) : null}
 				{replyData.replyBody}
+				{/* {console.log(replyData.replyBody.split(' ')[0].includes('@'))} */}
 			</p>
 
 			{replyActive && (
@@ -69,15 +69,15 @@ const Reply = ({
 					active={replyActive}
 					replyData={replyData}
 					currentFeedback={currentFeedback}
-					setActive={setActive}
-					comment={comment}
-					getReplyName={getReplyName}
 					getReplyActive={getReplyActive}
-					replyToReply={true}
+					// setExtraReplyStateActive={setExtraReplyStateActive}
+					comment={replyData}
+					// getExtraReplyName={getExtraReplyName}
+					replyToReply={replyToReply}
 				/>
 			)}
 		</article>
 	);
 };
 
-export default Reply;
+export default ExtraReply;

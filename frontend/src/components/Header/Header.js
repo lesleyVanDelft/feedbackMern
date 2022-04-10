@@ -7,7 +7,7 @@ import { logoutUser } from '../../reducers/userReducer';
 import './Header.css';
 import { useState } from 'react';
 
-const Header = () => {
+const Header = ({ login }) => {
 	const [location, setLocation] = useState('login');
 
 	const navigate = useNavigate();
@@ -27,10 +27,16 @@ const Header = () => {
 	};
 
 	return (
-		<header className="Header">
+		<header className={`Header ${login && 'mobile'}`}>
 			{user && (
 				<div className="Header__logo">
-					<Link to="/">{user ? `Welcome, ${user.username}` : null}</Link>
+					<Link to="/">
+						{user ? (
+							<span className="welcome">
+								Welcome, <span className="welcome__user">@{user.username}</span>
+							</span>
+						) : null}
+					</Link>
 				</div>
 			)}
 			{/* <ul className='Header__content'>

@@ -38,7 +38,7 @@ export const loginUser = credentials => {
 		storageService.saveUser(user);
 		storageService.loadUser();
 		// authService.setToken(user.token);
-		console.log(user);
+		// console.log(user);
 		// const user = await authService.login(credentials);
 		// storageService.saveUser(user);
 		// authService.setToken(user.token);
@@ -71,6 +71,11 @@ export const registerUser = credentials => {
 		dispatch({
 			type: 'SIGNUP',
 			payload: user,
+		});
+
+		toast.info(`Welcome, ${user.username}`, {
+			autoClose: 3000,
+			icon: '🎉',
 		});
 	};
 };

@@ -46,6 +46,9 @@ const Homepage = () => {
 
 	useEffect(() => {
 		try {
+			if (!user) {
+				dispatch(setUser());
+			}
 			if (user) {
 				dispatch(getFeedbacks());
 			}

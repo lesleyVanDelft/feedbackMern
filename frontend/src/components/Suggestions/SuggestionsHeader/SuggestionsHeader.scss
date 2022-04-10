@@ -80,13 +80,16 @@
 
 @media screen and (max-width: 768px) {
 	.SuggestionsHeader {
-		border-radius: 0px;
-	}
-}
-@media screen and (max-width: 550px) {
-	.SuggestionsHeader {
+		border-radius: 0;
 		&__total {
 			display: none;
 		}
 	}
 }
+// @media screen and (max-width: 550px) {
+// 	.SuggestionsHeader {
+// 		&__total {
+// 			display: none;
+// 		}
+// 	}
+// }

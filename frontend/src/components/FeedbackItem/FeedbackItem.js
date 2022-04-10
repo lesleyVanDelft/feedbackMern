@@ -30,6 +30,9 @@ const FeedbackItem = ({
 	const isDownvoted = user && feedback.downvotedBy.includes(user.id);
 
 	useEffect(() => {
+		if (!user) {
+			return <h1>loading</h1>;
+		}
 		if (feedback.upvotedBy.includes(user.id)) {
 			setUpvoted(true);
 		} else {

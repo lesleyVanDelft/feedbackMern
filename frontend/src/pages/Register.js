@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
 // import { register, reset } from '../features/auth/authSlice';
 import { registerUser } from '../reducers/userReducer';
 // import {}
 import Spinner from '../components/Spinner';
+import Header from '../components/Header/Header';
 
 const Register = () => {
 	const [formData, setFormData] = useState({
@@ -62,6 +63,7 @@ const Register = () => {
 
 	return (
 		<main className="Register">
+			<Header login={true} />
 			<section className="Register__form">
 				<form onSubmit={onSubmit}>
 					<div className="heading">
@@ -136,6 +138,7 @@ const Register = () => {
 					</button>
 				</form>
 			</section>
+			<ToastContainer autoClose={3500} />
 		</main>
 	);
 };

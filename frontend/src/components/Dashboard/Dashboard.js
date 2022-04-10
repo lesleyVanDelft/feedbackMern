@@ -7,6 +7,7 @@ import MobileDashboard from '../MobileDashboard/MobileDashboard';
 import './Dashboard.css';
 import FilterButtons from './FilterButtons/FilterButtons';
 import Roadmap from './Roadmap/Roadmap';
+import { Link } from 'react-router-dom';
 const Dashboard = ({ category, mobileOpen }) => {
 	const [categoryState, setCategoryState] = useState('all');
 	const [active, setActive] = useState(false);
@@ -61,10 +62,12 @@ const Dashboard = ({ category, mobileOpen }) => {
 					animate="show"
 					className="Dashboard__desktop">
 					<motion.div variants={framerItem} className="Dashboard__logo">
-						<div className="text">
-							<h2>Frontend Mentor</h2>
-							<p>Feedback Board</p>
-						</div>
+						<Link to="/">
+							<div className="text">
+								<h2>Frontend Mentor</h2>
+								<p>Feedback Board</p>
+							</div>
+						</Link>
 
 						<div
 							className="hamburger"
@@ -85,10 +88,12 @@ const Dashboard = ({ category, mobileOpen }) => {
 			{isMobile && (
 				<div className={`Dashboard__mobile ${active ? 'active' : null}`}>
 					<div className="Dashboard__mobile--logo">
-						<div className="text">
-							<h2>Frontend Mentor</h2>
-							<p>Feedback Board</p>
-						</div>
+						<Link to="/">
+							<div className="text">
+								<h2>Frontend Mentor</h2>
+								<p>Feedback Board</p>
+							</div>
+						</Link>
 						<div
 							className="hamburger"
 							onClick={() => {

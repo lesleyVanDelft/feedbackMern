@@ -17,9 +17,6 @@ const CommentSection = ({ comments, feedbackId }) => {
 		return <h2>Loading</h2>;
 	}
 
-	// useEffect(() => {
-	// 	setCommentData()
-	// }, [])
 	return (
 		<section className="CommentSection">
 			<h2 className="CommentSection__count">
@@ -33,17 +30,12 @@ const CommentSection = ({ comments, feedbackId }) => {
 							currentFeedback={feedbackComments}
 							key={i}
 							user={user}
+							username={comment.username}
 						/>
 					);
-					// return comment.replies.length > 0 ? '' : null
 				})}
 			</div>
 			<AddComment feedbackComments={feedbackComments} user={user} />
-			{/* {console.log(feedbackComments.comments)} */}
-
-			{/* {feedbackComments.comments.map((comment) => {
-
-			})} */}
 		</section>
 	);
 };

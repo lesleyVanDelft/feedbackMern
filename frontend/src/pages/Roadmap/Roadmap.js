@@ -12,6 +12,7 @@ const RoadmapPage = () => {
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		dispatch(setUser());
 		dispatch(getFeedbacks());

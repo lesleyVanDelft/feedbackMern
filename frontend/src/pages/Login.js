@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { loginUser, setUser } from '../reducers/userReducer';
 // import {}
 import Spinner from '../components/Spinner';
+import Header from '../components/Header/Header';
 
 const Login = () => {
 	const user = useSelector(state => state.user);
@@ -72,7 +73,7 @@ const Login = () => {
 			{/* <section className="heading">
 				
 			</section> */}
-
+			<Header login={true} />
 			<section className="Login__form form">
 				<div className="heading">
 					<h2>

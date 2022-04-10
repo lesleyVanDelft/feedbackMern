@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 const storageKeyToken = 'readifyUserKey';
 const storageKeyDarkMode = 'readifyDarkMode';
 
@@ -18,7 +19,14 @@ const loadUser = () => {
 	}
 };
 
-const logoutUser = () => localStorage.removeItem('user');
+const logoutUser = () => {
+	try {
+		localStorage.removeItem('user');
+		Cookies.remove('jwt');
+	} catch (error) {
+		console.log(error + 'logout user');
+	}
+};
 
 const saveDarkMode = boolean =>
 	localStorage.setItem(storageKeyDarkMode, boolean);
