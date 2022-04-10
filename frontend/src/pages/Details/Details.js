@@ -42,7 +42,6 @@ const Details = () => {
 	// });
 	// const [singleFeedback, setSingleFeedback] = useState(feedbacks);
 
-<<<<<<< HEAD
 	useEffect(() => {
 		dispatch(getSingleFeedback(id));
 
@@ -53,16 +52,14 @@ const Details = () => {
 		if (isError) {
 			console.log(message);
 		}
-=======
-	// useEffect(() => {
-	// 	dispatch(getSingleFeedback(id));
-	// 	setSingleFeedback(feedbacks.filter(feedback => feedback._id === id));
-	// }, [dispatch]);
->>>>>>> toolkittesting
 
-	// console.log(setSingleFeedback);
+		// useEffect(() => {
+		// 	dispatch(getSingleFeedback(id));
+		// 	setSingleFeedback(feedbacks.filter(feedback => feedback._id === id));
+		// }, [dispatch]);
 
-<<<<<<< HEAD
+		// console.log(setSingleFeedback);
+
 		// console.log(feedbacks);
 
 		// return () => {
@@ -70,7 +67,6 @@ const Details = () => {
 		// };
 	}, [user, navigate, isError, message, dispatch, id]);
 
-=======
 	// if (!feedback) {
 	// 	return <Spinner />;
 	// }
@@ -92,7 +88,6 @@ const Details = () => {
 		return <h2>Loading</h2>;
 	}
 
->>>>>>> toolkittesting
 	return (
 		<>
 			<main className="Details">
