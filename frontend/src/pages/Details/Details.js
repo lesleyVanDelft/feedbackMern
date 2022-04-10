@@ -13,6 +13,7 @@ import './Details.css';
 import CommentSection from '../../components/CommentSection/CommentSection';
 import EditFeedbackForm from '../../components/EditFeedbackForm/EditFeedbackForm';
 import { getFeedbackComments } from '../../reducers/feedbackCommentsReducer';
+import { toggleUpvote } from '../../reducers/feedbackReducer';
 import { setUser } from '../../reducers/userReducer';
 
 // import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
@@ -59,7 +60,11 @@ const Details = () => {
 						</span>
 					)}
 				</span>
-				<FeedbackItem feedback={feedbackComments} />
+				<FeedbackItem
+					feedback={feedbackComments}
+					origin={'details'}
+					toggleUpvote={toggleUpvote}
+				/>
 				<CommentSection comments={feedbackComments.comments} feedbackId={id} />
 			</main>
 		</>

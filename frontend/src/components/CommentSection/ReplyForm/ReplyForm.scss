@@ -24,7 +24,25 @@
 	}
 
 	button {
-		align-self: flex-start;
+		// align-self: flex-start;
+		// flex-wrap: nowrap;
+	}
+	&__buttons {
+		// background-color: orange;
+		display: flex;
+		flex-direction: column;
+		width: 35%;
+		justify-content: flex-end;
+
+		.btn {
+			padding: 0.6rem 0rem;
+		}
+		.btn-purple {
+			margin-bottom: 0.2rem;
+		}
+		// padding-left: 20rem;
+		// margin-left: 5rem;
+		// width: fit-content;
 	}
 
 	.targetedUser {
