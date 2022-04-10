@@ -1,0 +1,26 @@
+@import '../../sass/main.scss';
+.LogoBar {
+	height: 4.5rem;
+	width: 100%;
+	background: url('../../assets/suggestions/mobile/background-header.png')
+		no-repeat center center / cover;
+	color: $white;
+	padding: 0rem 1.5rem;
+	display: none;
+
+	h2 {
+		font-size: 1.25rem;
+		letter-spacing: -0.25px;
+	}
+
+	p {
+		opacity: 0.8;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.LogoBar {
+		display: flex;
+		align-items: center;
+	}
+}

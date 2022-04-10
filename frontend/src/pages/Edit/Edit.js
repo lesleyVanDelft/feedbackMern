@@ -13,6 +13,7 @@ import './Edit.css';
 import CommentSection from '../../components/CommentSection/CommentSection';
 import EditFeedbackForm from '../../components/EditFeedbackForm/EditFeedbackForm';
 import { getFeedbackComments } from '../../reducers/feedbackCommentsReducer';
+import LogoBar from '../../components/LogoBar/LogoBar';
 
 const Edit = () => {
 	// get user state from auth redux store
@@ -59,16 +60,19 @@ const Edit = () => {
 	}
 
 	return (
-		<section className="Edit">
-			<div className="Edit__backButton">
-				<button className="back">
-					<Link to="/">
-						<FaChevronLeft /> <span>Go Back</span>
-					</Link>
-				</button>
-			</div>
-			<EditFeedbackForm feedbackData={feedback} />
-		</section>
+		<>
+			<LogoBar />
+			<section className="Edit">
+				<div className="Edit__backButton">
+					<button className="back">
+						<Link to="/">
+							<FaChevronLeft /> <span>Go Back</span>
+						</Link>
+					</button>
+				</div>
+				<EditFeedbackForm feedbackData={feedback} />
+			</section>
+		</>
 	);
 };
 

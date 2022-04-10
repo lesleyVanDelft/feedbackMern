@@ -54,16 +54,27 @@
 	.ReplyForm {
 		// padding: 0;
 		padding-left: 0;
+		display: flex;
+		flex-direction: column;
 		&__textarea {
 		}
 
 		&__buttons {
 			// align-items: center;
-			justify-content: center;
+			width: 100%;
+			flex-direction: row;
+			// justify-content: flex-start;
+			padding-top: 1rem;
+
 			.btn {
 				padding: 0;
 				padding: 0.5rem 0.8rem;
 				font-size: 13px;
+				margin: 0;
+
+				&-purple {
+					margin-right: 0.3rem;
+				}
 			}
 		}
 	}

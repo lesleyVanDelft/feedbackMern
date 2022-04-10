@@ -15,7 +15,7 @@ import EditFeedbackForm from '../../components/EditFeedbackForm/EditFeedbackForm
 import { getFeedbackComments } from '../../reducers/feedbackCommentsReducer';
 import { toggleUpvote } from '../../reducers/feedbackReducer';
 import { setUser } from '../../reducers/userReducer';
-
+import LogoBar from '../../components/LogoBar/LogoBar';
 // import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 // import Dashboard from '../components/Dashboard/Dashboard';
 // import Suggestions from '../components/Suggestions/Suggestions';
@@ -39,6 +39,7 @@ const Details = () => {
 
 	return (
 		<>
+			<LogoBar />
 			<main className="Details">
 				<div className="Details__buttons">
 					<button className="back">
