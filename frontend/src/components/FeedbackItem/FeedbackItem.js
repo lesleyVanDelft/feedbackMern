@@ -121,22 +121,6 @@ const FeedbackItem = ({
 						<button className="feedbackTypeBtn">{feedback.feedbackType}</button>
 					</div>
 				</div>
-<<<<<<< HEAD
-				<div className="FeedbackItem__left--content">
-					<Link to={`/${feedback._id}`}>
-						<h3 className="title">{feedback.title}</h3>
-					</Link>
-					<p className="text">{feedback.text}</p>
-					<button className="feedbackTypeBtn">{feedback.feedbackType}</button>
-				</div>
-			</div>
-
-			<div className="FeedbackItem__right">
-				<FaComment className="commentIcon" />
-				{/* <span className="commentLength">{feedback.comments.length}</span> */}
-			</div>
-=======
->>>>>>> toolkittesting
 
 				<div className="FeedbackItem__right">
 					<FaComment className="commentIcon" />
