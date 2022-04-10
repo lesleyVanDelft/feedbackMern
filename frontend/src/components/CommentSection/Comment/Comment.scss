@@ -95,3 +95,28 @@
 		}
 	}
 }
+
+@media screen and (max-width: 768px) {
+	.Comment {
+		padding: 0;
+		&__userBar {
+			img {
+				margin-right: 0.9rem;
+			}
+		}
+		&__text {
+			padding-left: 0rem;
+			// padding: 0;
+		}
+
+		&__replies {
+			margin: 0;
+
+			&::before {
+				height: 75%;
+				bottom: 25%;
+				// top: 50%;
+			}
+		}
+	}
+}

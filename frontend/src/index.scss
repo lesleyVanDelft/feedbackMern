@@ -130,6 +130,11 @@ a {
 @media screen and (max-width: 768px) {
 	.App {
 		padding: 0;
+		padding-bottom: 2rem;
+	}
+
+	.btn {
+		width: 100%;
 	}
 
 	.Form__group {

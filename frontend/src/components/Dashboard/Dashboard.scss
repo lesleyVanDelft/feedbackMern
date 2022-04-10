@@ -81,6 +81,12 @@
 		&__mobile {
 			width: 100%;
 			// position: relative;
+			.btn {
+				width: fit-content;
+				align-self: flex-start;
+				margin-top: 1.5rem;
+				margin-left: 2.2rem;
+			}
 			&.active {
 				// right: 0%;
 			}

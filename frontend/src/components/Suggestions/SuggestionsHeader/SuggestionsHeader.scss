@@ -81,6 +81,7 @@
 @media screen and (max-width: 768px) {
 	.SuggestionsHeader {
 		border-radius: 0;
+		padding-left: 1rem;
 		&__total {
 			display: none;
 		}

@@ -84,3 +84,19 @@
 		}
 	}
 }
+
+@media screen and (max-width: 768px) {
+	.Reply {
+		padding-left: 1rem;
+
+		&__userBar {
+			img.replyImg {
+				margin-right: 0.8rem;
+			}
+		}
+		&__text {
+			padding-left: 0rem;
+			// padding: 0;
+		}
+	}
+}

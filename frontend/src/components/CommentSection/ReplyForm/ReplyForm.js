@@ -67,7 +67,7 @@ const ReplyForm = ({
 			/>
 			<div className="ReplyForm__buttons">
 				<button className="btn btn-purple" type="submit">
-					Post Reply
+					Reply
 				</button>
 				<button
 					className="btn btn-darkBlue"

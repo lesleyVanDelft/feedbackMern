@@ -49,3 +49,22 @@
 		color: $purple;
 	}
 }
+
+@media screen and (max-width: 768px) {
+	.ReplyForm {
+		// padding: 0;
+		padding-left: 0;
+		&__textarea {
+		}
+
+		&__buttons {
+			// align-items: center;
+			justify-content: center;
+			.btn {
+				padding: 0;
+				padding: 0.5rem 0.8rem;
+				font-size: 13px;
+			}
+		}
+	}
+}

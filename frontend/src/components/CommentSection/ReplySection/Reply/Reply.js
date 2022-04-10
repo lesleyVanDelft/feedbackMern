@@ -41,7 +41,12 @@ const Reply = ({
 	return (
 		<article className="Reply">
 			<div className="Reply__userBar">
-				<img src={BlankProfilePic} alt="" className="profileImage" />
+				<img
+					src={BlankProfilePic}
+					alt=""
+					// className="profileImage"
+					className="replyImg"
+				/>
 				<div className="Reply__usernames">
 					<h4 className="name">{replyData.name}</h4>
 					<span className="username">@{replyData.username}</span>

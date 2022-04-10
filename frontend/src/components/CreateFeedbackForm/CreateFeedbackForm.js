@@ -23,7 +23,15 @@ const CreateFeedbackForm = () => {
 	const onSubmit = e => {
 		e.preventDefault();
 
-		dispatch(createNewFeedback({ title, text, feedbackType, author }));
+		dispatch(
+			createNewFeedback({
+				title,
+				text,
+				feedbackType,
+				author,
+				status: 'planned',
+			})
+		);
 		setText('');
 		setTitle('');
 		setFeedbackType('UI');
