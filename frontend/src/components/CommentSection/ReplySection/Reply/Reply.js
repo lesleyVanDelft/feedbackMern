@@ -8,9 +8,9 @@ import { deleteReply } from '../../../../reducers/feedbackCommentsReducer';
 const Reply = ({
 	replyData,
 	currentFeedback,
-	replyingTo,
+	// replyingTo,
 	// replyActive,
-	// replyToReply,
+	replyToReply,
 	setActive,
 	comment,
 	index,
@@ -35,6 +35,9 @@ const Reply = ({
 		setReplyActive(act);
 	};
 
+	const replyingTo = replyData.replyBody.split(' ')[0];
+	const trimmedText = replyData.replyBody.split(' ').slice(1).join(' ');
+
 	return (
 		<article className="Reply">
 			<div className="Reply__userBar">
@@ -58,10 +61,20 @@ const Reply = ({
 				</div>
 			</div>
 			<p className="Reply__text">
+				{/* {console.log(replyData.replyBody.split(' ')[0].includes('@'))} */}
 				{/* <span className="replyingTo">{`@${comment.username}`}</span> */}
-				<span className="replyingTo">{`@${comment.username}`}</span>
+				{/* <span className="replyingTo">{`@${
+					replyToReply ? replyData.username : comment.username
+				}`}</span> */}
 				{/* {console.log(repliedBy)} */}
-				{replyData.replyBody}
+				{/* {replyData.replyBody} */}
+				{replyData.replyBody.split(' ')[0].includes('@') ? (
+					<span className="replyingTo">{replyingTo}</span>
+				) : (
+					replyData.replyBody.split(' ')[0]
+				)}
+
+				{trimmedText}
 			</p>
 
 			{replyActive && (

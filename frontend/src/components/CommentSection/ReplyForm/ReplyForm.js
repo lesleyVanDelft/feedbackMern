@@ -17,19 +17,22 @@ const ReplyForm = ({
 	const [replyBody, setReplyBody] = useState('');
 	const [replyName, setReplyName] = useState('');
 	const dispatch = useDispatch();
+	// console.log(replyData);
+	// console.log(comment);
 	// console.log(replyToReply);
 
-	// const formik = useFormik({
-	// 	initialValues: {
-	// 		replyBody: `@${comment.username}`,
-	// 	},
-	// 	onSubmit: values => {
-	// 		// e.preventDefault();
-	// 		console.log(values.replyBody);
-	// 		replyToReply ? getReplyActive(false) : setActive(false);
-	// 		dispatch(addReply(currentFeedback._id, comment._id, values.replyBody));
-	// 	},
-	// });
+	const formik = useFormik({
+		initialValues: {
+			// replyBody: `@${comment.username }`,
+			replyBody: `@${replyToReply ? replyData.username : comment.username} `,
+		},
+		onSubmit: values => {
+			// e.preventDefault();
+			// console.log(values.replyBody);
+			replyToReply ? getReplyActive(false) : setActive(false);
+			dispatch(addReply(currentFeedback._id, comment._id, values.replyBody));
+		},
+	});
 	const handleClick = e => {
 		// setReplyName(replyData.username);
 		// getReplyName(replyName);
@@ -50,7 +53,7 @@ const ReplyForm = ({
 	};
 
 	return (
-		<form className="ReplyForm" onSubmit={handleSubmit}>
+		<form className="ReplyForm" onSubmit={formik.handleSubmit}>
 			<textarea
 				name="replyBody"
 				id="replyBody"
@@ -58,8 +61,9 @@ const ReplyForm = ({
 				// cols="55"
 				maxLength={250}
 				className="ReplyForm__textarea"
-				// value={`@${replyData.username} ${replyBody}`}
-				onChange={handleChange}
+				// value={`@${replyData.username ? replyData.username : comment.username}`}
+				value={formik.values.replyBody}
+				onChange={formik.handleChange}
 			/>
 			<div className="ReplyForm__buttons">
 				<button className="btn btn-purple" type="submit">
