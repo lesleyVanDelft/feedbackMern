@@ -17,9 +17,6 @@ const ReplyForm = ({
 	const [replyBody, setReplyBody] = useState('');
 	const [replyName, setReplyName] = useState('');
 	const dispatch = useDispatch();
-	// console.log(replyData);
-	// console.log(comment);
-	// console.log(replyToReply);
 
 	const formik = useFormik({
 		initialValues: {
@@ -33,24 +30,24 @@ const ReplyForm = ({
 			dispatch(addReply(currentFeedback._id, comment._id, values.replyBody));
 		},
 	});
-	const handleClick = e => {
-		// setReplyName(replyData.username);
-		// getReplyName(replyName);
-		// console.log(replyName);
+	// const handleClick = e => {
+	// 	// setReplyName(replyData.username);
+	// 	// getReplyName(replyName);
+	// 	// console.log(replyName);
 
-		console.log(e.target);
-	};
+	// 	console.log(e.target);
+	// };
 
 	// console.log(replyToReply);
-	const handleSubmit = e => {
-		e.preventDefault();
-		replyToReply ? getReplyActive(false) : setActive(false);
-		dispatch(addReply(currentFeedback._id, comment._id, replyBody));
-	};
+	// const handleSubmit = e => {
+	// 	e.preventDefault();
+	// 	replyToReply ? getReplyActive(false) : setActive(false);
+	// 	dispatch(addReply(currentFeedback._id, comment._id, replyBody));
+	// };
 
-	const handleChange = e => {
-		setReplyBody(e.target.value);
-	};
+	// const handleChange = e => {
+	// 	setReplyBody(e.target.value);
+	// };
 
 	return (
 		<form className="ReplyForm" onSubmit={formik.handleSubmit}>

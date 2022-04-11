@@ -101,6 +101,10 @@
 	.Reply {
 		padding-left: 1rem;
 
+		&::before {
+			height: 75%;
+		}
+
 		&__userBar {
 			img.replyImg {
 				margin-right: 0.8rem;
@@ -108,7 +112,6 @@
 		}
 		&__text {
 			padding-left: 0rem;
-			// padding: 0;
 		}
 	}
 }
