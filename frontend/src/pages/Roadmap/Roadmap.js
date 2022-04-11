@@ -7,6 +7,7 @@ import SuggestionsHeader from '../../components/Suggestions/SuggestionsHeader/Su
 import './Roadmap.css';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import { useNavigate } from 'react-router-dom';
+import { toggleUpvote } from '../../reducers/feedbackReducer';
 
 const RoadmapPage = () => {
 	const [active, setActive] = useState('in-progress');
@@ -114,6 +115,7 @@ const RoadmapPage = () => {
 										key={i}
 										roadmap={true}
 										status={'planned'}
+										toggleUpvote={toggleUpvote}
 									/>
 								);
 							})}
@@ -134,6 +136,7 @@ const RoadmapPage = () => {
 										key={i}
 										roadmap={true}
 										status={'in-progress'}
+										toggleUpvote={toggleUpvote}
 									/>
 								);
 							})}
@@ -151,6 +154,7 @@ const RoadmapPage = () => {
 										key={i}
 										roadmap={true}
 										status={'live'}
+										toggleUpvote={toggleUpvote}
 									/>
 								);
 							})}

@@ -42,13 +42,23 @@ const feedbackPageReducer = (state = null, action) => {
 				comments: [...state.comments, action.payload],
 			};
 		case 'ADD_REPLY':
+			// return {
+			// 	...state,
+			// 	comments: state.comments.map(c =>
+			// 		c.id !== action.payload.commentId
+			// 			? c
+			// 			: { ...c, replies: [...c.replies, action.payload.addedReply] }
+			// 	),
+			// };
 			return {
 				...state,
-				comments: state.comments.map(c =>
-					c.id !== action.payload.commentId
-						? c
-						: { ...c, replies: [...c.replies, action.payload.addedReply] }
-				),
+				// comments: [...state.comments.replies, action.payload.addedReply],
+				comments: state.comments.map(comment => {
+					return {
+						...comment,
+						replies: [...comment.replies, action.payload.addedReply],
+					};
+				}),
 			};
 		case 'EDIT_COMMENT':
 			return {
