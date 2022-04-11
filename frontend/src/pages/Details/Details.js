@@ -17,6 +17,7 @@ import { getFeedbackComments } from '../../reducers/feedbackCommentsReducer';
 import { toggleUpvote } from '../../reducers/feedbackCommentsReducer';
 import { setUser } from '../../reducers/userReducer';
 import LogoBar from '../../components/LogoBar/LogoBar';
+import { getFeedbacks } from '../../reducers/feedbackReducer';
 // import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 // import Dashboard from '../components/Dashboard/Dashboard';
 // import Suggestions from '../components/Suggestions/Suggestions';
@@ -33,6 +34,7 @@ const Details = () => {
 	// const currentFeedback = feedbacks.filter(fb => fb._id === id);
 	useEffect(() => {
 		dispatch(setUser());
+		dispatch(getFeedbacks());
 		dispatch(getFeedbackComments(id));
 	}, []);
 

@@ -93,14 +93,14 @@ const feedbackPageReducer = (state = null, action) => {
 		case 'DELETE_REPLY':
 			return {
 				...state,
-				comments: state.comments.map(c =>
-					c.id !== action.payload.commentId
-						? c
-						: {
-								...c,
-								replies: c.replies.filter(r => r.id !== action.payload.replyId),
-						  }
-				),
+				comments: state.comments.map(comment => {
+					return {
+						...comment,
+						replies: comment.replies.filter(
+							reply => reply.id !== action.payload.replyId
+						),
+					};
+				}),
 			};
 		case 'SORT_COMMENTS':
 			return {
