@@ -13,7 +13,8 @@ import './Details.css';
 import CommentSection from '../../components/CommentSection/CommentSection';
 import EditFeedbackForm from '../../components/EditFeedbackForm/EditFeedbackForm';
 import { getFeedbackComments } from '../../reducers/feedbackCommentsReducer';
-import { toggleUpvote } from '../../reducers/feedbackReducer';
+// import { toggleUpvote } from '../../reducers/feedbackReducer';
+import { toggleUpvote } from '../../reducers/feedbackCommentsReducer';
 import { setUser } from '../../reducers/userReducer';
 import LogoBar from '../../components/LogoBar/LogoBar';
 // import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
@@ -22,12 +23,14 @@ import LogoBar from '../../components/LogoBar/LogoBar';
 
 const Details = () => {
 	const feedbackComments = useSelector(state => state.feedbackComments);
+	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	let { id } = useParams();
-
+	// console.log(feedbacks.filter(fb => fb._id === id));
+	// const currentFeedback = feedbacks.filter(fb => fb._id === id);
 	useEffect(() => {
 		dispatch(setUser());
 		dispatch(getFeedbackComments(id));

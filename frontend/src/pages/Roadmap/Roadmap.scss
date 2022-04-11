@@ -52,7 +52,6 @@
 				padding: 0 1rem;
 				width: 100%;
 			}
-
 			.plannedList,
 			.in-progressList,
 			.liveList {
@@ -62,27 +61,6 @@
 					display: block;
 				}
 			}
-
-			// .plannedList {
-			// 	display: none;
-			// 	&.active {
-			// 		display: block;
-			// 	}
-			// }
-			// .in-progressList {
-			// 	display: none;
-
-			// 	&.active {
-			// 		display: block;
-			// 		width: 100%;
-			// 	}
-			// }
-			// .liveList {
-			// 	display: none;
-			// 	&.active {
-			// 		display: block;
-			// 	}
-			// }
 		}
 		.headers {
 			display: flex;
@@ -91,12 +69,10 @@
 			align-items: center;
 			padding: 0;
 			margin: 0;
-			// padding: 20px 0;
 
 			&__item {
 				display: grid;
 				place-content: center;
-				// height: 100%;
 				padding: 1rem 0;
 				h4 {
 					color: $lightBlueGray;

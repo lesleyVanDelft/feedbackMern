@@ -27,7 +27,9 @@ const router = express.Router();
 //CRUD posts routes
 //posts vote routes
 // router.get('*', checkUser);
+// router.post('/upvote/:id', auth, upvoteFeedback);
 router.post('/upvote/:id', auth, upvoteFeedback);
+router.post('/details/upvote/:id', auth, upvoteFeedback);
 router.post('/:id/downvote', downvoteFeedback);
 router.get('/', auth, getFeedbacks);
 

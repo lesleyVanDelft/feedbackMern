@@ -21,13 +21,19 @@ const Header = ({ login }) => {
 		navigate('/login');
 	};
 
-	const handleClick = e => {
+	const handleClick = () => {
+		if (location === 'login') {
+			setLocation('login');
+		} else {
+			setLocation('register');
+		}
+
 		// setLocation(e.target.value)
-		console.log(e.target.value);
+		// console.log(e.target.value);/
 	};
 
 	return (
-		<header className={`Header ${login && 'mobile'}`}>
+		<header className={`Header ${login ? 'mobile' : 'desktop'}`}>
 			{user && (
 				<div className="Header__logo">
 					<Link to="/">
@@ -39,28 +45,6 @@ const Header = ({ login }) => {
 					</Link>
 				</div>
 			)}
-			{/* <ul className='Header__content'>
-				{user ? (
-					<li>
-						<button className="btn" onClick={onLogout}>
-							<FaSignOutAlt /> Logout
-						</button>
-					</li>
-				) : (
-					<>
-						<li>
-							<Link to="/login">
-								<FaSignInAlt /> Login
-							</Link>
-						</li>
-						<li>
-							<Link to="/register">
-								<FaUser /> Register
-							</Link>
-						</li>
-					</>
-				)}
-			</ul> */}
 
 			{user ? (
 				<div className="Header__content">
@@ -72,22 +56,30 @@ const Header = ({ login }) => {
 				<div className="Header__content login">
 					<Link
 						to="/login"
+						className={`loginBtn ${location === 'login' && 'active'}`}
 						onClick={() => {
 							setLocation('login');
 						}}>
-						<button className={`btn ${location === 'login' ? 'active' : null}`}>
-							<FaSignInAlt /> <span>Login</span>
-						</button>
+						{/* <button
+							onClick={handleClick}
+							className={`btn ${location === 'login' ? 'active' : null}`}>
+							
+						</button> */}
+						<FaSignInAlt /> <span>Login</span>
 					</Link>
 
-					<Link to="/register">
-						<button
-							className={`btn ${location === 'register' ? 'active' : null}`}
-							onClick={() => {
-								setLocation('register');
-							}}>
-							<FaUser /> <span>Register</span>
-						</button>
+					<Link
+						to="/register"
+						className={`registerBtn ${location === 'register' && 'active'}`}
+						onClick={() => {
+							setLocation('register');
+						}}>
+						{/* <button
+							onClick={handleClick}
+							className={`btn ${location === 'register' ? 'active' : null}`}>
+							
+						</button> */}
+						<FaUser /> <span>Register</span>
 					</Link>
 				</div>
 			)}

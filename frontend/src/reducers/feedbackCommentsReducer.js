@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 const feedbackPageReducer = (state = null, action) => {
 	switch (action.type) {
 		case 'FETCH_FEEDBACK_COMMENTS':
-			return action.payload;
+			return { ...state, ...action.payload };
 		// case 'CREATE_NEW_FEEDBACK':
 		// 	return { ...state.push(...action.payload) };
 		case 'UPDATE_FEEDBACK':

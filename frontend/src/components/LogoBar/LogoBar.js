@@ -1,10 +1,15 @@
+import { Link } from 'react-router-dom';
 import './LogoBar.css';
 const LogoBar = () => {
 	return (
 		<header className="LogoBar">
 			<div className="LogoBar__content">
-				<h2>Frontend Mentor</h2>
-				<p>Feedback Board</p>
+				<Link to="/">
+					<h2>Frontend Mentor</h2>
+				</Link>
+				<Link to="/">
+					<p>Feedback Board</p>
+				</Link>
 			</div>
 		</header>
 	);

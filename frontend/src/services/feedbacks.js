@@ -44,7 +44,8 @@ const getFeedbackComments = async id => {
 
 const upvoteFeedback = async id => {
 	const response = await axios.post(
-		`${API_URL + '/upvote/' + id}`,
+		`${API_URL + 'upvote/' + id}`,
+		// `${API_URL + id + '/upvote'}`,
 		null,
 		setConfig()
 	);

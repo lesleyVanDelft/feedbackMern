@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../reducers/userReducer';
-// import setFeed
+import { motion } from 'framer-motion';
 import { getFeedbacks } from '../../reducers/feedbackReducer';
 import SuggestionsHeader from '../../components/Suggestions/SuggestionsHeader/SuggestionsHeader';
 import './Roadmap.css';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
+import { useNavigate } from 'react-router-dom';
 
 const RoadmapPage = () => {
 	const [active, setActive] = useState('in-progress');
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
-
+	const navigate = useNavigate();
 	useEffect(() => {
 		dispatch(setUser());
 		dispatch(getFeedbacks());
@@ -21,24 +22,39 @@ const RoadmapPage = () => {
 	if (!feedbacks) {
 		return <h1>Loading</h1>;
 	}
+	if (!user) {
+		navigate('/login');
+	}
 
-	const plannedFeedbacks =
-		feedbacks &&
-		feedbacks.filter(fb => {
-			return fb.status.toString() === 'planned';
-		});
+	const plannedFeedbacks = feedbacks
+		? feedbacks.filter(fb => {
+				return fb.status.toString() === 'planned';
+		  })
+		: [];
 
-	const inProgressFeedbacks =
-		feedbacks &&
-		feedbacks.filter(fb => {
-			return fb.status.toString() === 'in-progress';
-		});
+	const inProgressFeedbacks = feedbacks
+		? feedbacks.filter(fb => {
+				return fb.status.toString() === 'in-progress';
+		  })
+		: [];
 
-	const liveFeedbacks =
-		feedbacks &&
-		feedbacks.filter(fb => {
-			return fb.status.toString() === 'live';
-		});
+	const liveFeedbacks = feedbacks
+		? feedbacks.filter(fb => {
+				return fb.status.toString() === 'live';
+		  })
+		: [];
+
+	// const borderVariant = {
+	// 	hidden: {
+	// 		opacity: 0,
+	// 	},
+	// 	show: {
+	// 		opacity:1,
+	// 		transition:{
+	// 			delay: 0.5
+	// 		}
+	// 	}
+	// }
 
 	return (
 		<main className="RoadmapPage">
@@ -53,6 +69,7 @@ const RoadmapPage = () => {
 					<h4>{`Planned (${plannedFeedbacks.length})`}</h4>
 					<span className="description">Ideas prioritized for research</span>
 				</div>
+
 				<div
 					className={`headers__item ${
 						active === 'in-progress' ? 'purple active' : null
@@ -61,6 +78,7 @@ const RoadmapPage = () => {
 					<h4>{`In-Progress (${inProgressFeedbacks.length})`}</h4>
 					<span className="description">Currently being developed</span>
 				</div>
+
 				<div
 					className={`headers__item ${
 						active === 'live' ? 'blue active' : null

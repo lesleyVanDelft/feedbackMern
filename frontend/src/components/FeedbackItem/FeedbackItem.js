@@ -26,6 +26,7 @@ const FeedbackItem = ({
 	const [upvoted, setUpvoted] = useState(false);
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
+	const currentFeedback = useSelector(state => state.feedbackComments);
 	const isUpvoted = user && feedback.upvotedBy.includes(user.id);
 	const isDownvoted = user && feedback.downvotedBy.includes(user.id);
 
@@ -106,6 +107,7 @@ const FeedbackItem = ({
 								handleUpvote={handleUpvoteToggle}
 							/>
 							<span className="votes__count">{feedback.upvotedBy.length}</span>
+
 							<button className="votes__downvote">
 								<FaChevronDown className="chevronDown" />
 							</button>

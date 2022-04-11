@@ -22,7 +22,7 @@ const FeedbackList = ({ category }) => {
 	// console.log(sortBy);
 	useEffect(() => {
 		dispatch(getFeedbacks());
-	}, [dispatch]);
+	}, []);
 	if (!feedbacks) {
 		return <h1>Loading</h1>;
 	}
