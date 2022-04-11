@@ -22,7 +22,7 @@ const loadUser = () => {
 const logoutUser = () => {
 	try {
 		localStorage.removeItem('user');
-		Cookies.remove('jwt');
+		Cookies.remove('jwt', { path: '/' });
 	} catch (error) {
 		console.log(error + 'logout user');
 	}

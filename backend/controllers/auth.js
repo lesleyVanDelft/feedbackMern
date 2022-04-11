@@ -58,18 +58,25 @@ const registerUser = async (req, res) => {
 			username,
 			password,
 		});
-		const token = generateToken({
-			id: user._id,
-			username: user.username,
-			name: user.name,
-		});
-		res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+		// const token = generateToken({
+		// 	id: user._id,
+		// 	username: user.username,
+		// 	name: user.name,
+		// });
+		// const token = generateToken({
+		// 	id: user._id,
+		// 	username: user.username,
+		// 	name: user.name,
+		// });
+		const token = generateToken(user);
+		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
 		return res.status(201).json({
 			name: user.name,
 			email: user.email,
 			username: user.username,
 			id: user._id,
 			profileImg: user.profileImg,
+			token,
 		});
 	} catch (err) {
 		const errors = handleError(err);

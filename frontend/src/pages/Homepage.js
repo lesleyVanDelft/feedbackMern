@@ -67,7 +67,7 @@ const Homepage = () => {
 			console.log(error);
 		}
 
-		dispatch(setUser());
+		// dispatch(setUser());
 	}, []);
 
 	if (!feedbacks) {
@@ -95,3 +95,11 @@ const Homepage = () => {
 };
 
 export default Homepage;
+
+// {name: "tester", email: "test@test.nl", username: "tester1", id: "62239c97eb2f4493437026f7",…}
+// email: "test@test.nl"
+// id: "62239c97eb2f4493437026f7"
+// name: "tester"
+// profileImg: {exists: false, imageId: "null", imageLink: "null"}
+// token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjM5Yzk3ZWIyZjQ0OTM0MzcwMjZmNyIsInVzZXJuYW1lIjoidGVzdGVyMSIsIm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2NDk2OTYzMDQsImV4cCI6MTY1MjI4ODMwNH0.Z-q4Hu2a94Kh7tMs31lJnYlifLy6A942nDPpA6NkVvM"
+// username: "tester1"

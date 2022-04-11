@@ -27,7 +27,11 @@ const login = async loginData => {
 
 const register = async registerData => {
 	try {
-		const response = await axios.post(API_URL + 'register', registerData);
+		const response = await axios.post(
+			API_URL + 'register',
+			registerData,
+			token
+		);
 		return response.data;
 	} catch (error) {
 		console.log(error);

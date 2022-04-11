@@ -64,12 +64,18 @@ export const loginUser = credentials => {
 
 export const registerUser = credentials => {
 	return async dispatch => {
+		// const token = Cookies.get('jwt');
 		const user = await authService.register(credentials);
-		// storageService.saveUser(user);
-		// authService.setToken(user.token);
+		storageService.saveUser(user);
+		// storageService.loadUser();
 
 		dispatch({
 			type: 'SIGNUP',
+			payload: user,
+		});
+
+		dispatch({
+			type: 'LOGIN',
 			payload: user,
 		});
 
@@ -84,7 +90,7 @@ export const logoutUser = () => {
 	return dispatch => {
 		storageService.logoutUser();
 		// authService.setToken(null);
-		// Cookies.remove('jwt', {path: '/'})
+		Cookies.remove('jwt', { path: '/' });
 
 		dispatch({
 			type: 'LOGOUT',
