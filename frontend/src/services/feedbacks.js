@@ -101,7 +101,7 @@ const updateComment = async (feedbackId, commentId, commentObj) => {
 
 const removeComment = async (feedbackId, commentId) => {
 	const response = await axios.delete(
-		`${API_URL}/${feedbackId}/comment/${commentId}`
+		`${API_URL}${feedbackId}/comment/${commentId}`
 		// setConfig()
 	);
 	return response.data;

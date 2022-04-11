@@ -72,7 +72,10 @@ const feedbackPageReducer = (state = null, action) => {
 		case 'DELETE_COMMENT':
 			return {
 				...state,
-				comments: state.comments.filter(c => c.id !== action.payload),
+				// comments: state.comments.filter(c => c.id !== action.payload),
+				comments: state.comments.filter(
+					comment => comment._id !== action.payload
+				),
 			};
 		case 'EDIT_REPLY':
 			return {
@@ -97,7 +100,7 @@ const feedbackPageReducer = (state = null, action) => {
 					return {
 						...comment,
 						replies: comment.replies.filter(
-							reply => reply.id !== action.payload.replyId
+							reply => reply._id !== action.payload.replyId
 						),
 					};
 				}),

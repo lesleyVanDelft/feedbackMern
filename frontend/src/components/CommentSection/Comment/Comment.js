@@ -4,14 +4,20 @@ import Reply from '../ReplySection/Reply/Reply';
 import BlankProfilePic from '../../../assets/blank-profile-picture.png';
 import ReplyForm from '../ReplyForm/ReplyForm';
 import './Comment.css';
+import { useDispatch } from 'react-redux';
+import { deleteComment } from '../../../reducers/feedbackCommentsReducer';
 
 const Comment = ({ commentData, currentFeedback, user, username }) => {
 	const [replyActive, setReplyActive] = useState(false);
+	const dispatch = useDispatch();
 	// console.log(currentFeedback);
 	// console.log(user);
 	// console.log(commentData);
 	const setActive = actv => {
 		setReplyActive(actv);
+	};
+	const handleDelete = () => {
+		dispatch(deleteComment(currentFeedback._id, commentData._id));
 	};
 
 	if (!commentData) {
@@ -33,7 +39,9 @@ const Comment = ({ commentData, currentFeedback, user, username }) => {
 						Reply
 					</button>
 					{commentData.commentedBy === user.id && (
-						<button className="delete">delete</button>
+						<button className="delete" onClick={handleDelete}>
+							delete
+						</button>
 					)}
 				</div>
 			</div>

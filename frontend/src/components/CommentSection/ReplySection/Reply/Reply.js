@@ -21,9 +21,9 @@ const Reply = ({
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 	// const currFb = useSelector(state => state.feedbackComments);
-	// console.log(repliedBy);
-	// console.log(comment.replies[0]);
+	// console.log(currentFeedback);
 	// console.log(comment);
+	// console.log(replyData);
 	const handleDelete = () => {
 		dispatch(deleteReply(currentFeedback._id, comment._id, replyData._id));
 	};
