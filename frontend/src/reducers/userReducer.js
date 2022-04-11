@@ -75,7 +75,7 @@ export const registerUser = credentials => {
 		});
 
 		dispatch({
-			type: 'LOGIN',
+			type: 'SET_USER',
 			payload: user,
 		});
 
