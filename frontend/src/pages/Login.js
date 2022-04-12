@@ -24,7 +24,8 @@ const Login = () => {
 			password: Yup.string().required('Password required'),
 		}),
 		onSubmit: values => {
-			return dispatch(loginUser(values));
+			dispatch(loginUser(values));
+			console.log(values);
 		},
 	});
 	// destructure useState

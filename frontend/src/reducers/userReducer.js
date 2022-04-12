@@ -9,10 +9,10 @@ import { toast } from 'react-toastify';
 // 	user: localStorage.getItem('readifyUserKey') ? localStorage.getItem('readifyUserKey') : null,
 // 	feedbacks: [],
 // };
-const initialLoadState = {
-	user: localStorage.getItem('user'),
-	feedbacks: [null],
-};
+// const initialLoadState = {
+// 	user: localStorage.getItem('user'),
+// 	feedbacks: [null],
+// };
 const userReducer = (state = null, action) => {
 	switch (action.type) {
 		case 'LOGIN':
