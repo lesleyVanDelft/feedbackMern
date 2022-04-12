@@ -28,6 +28,19 @@
 		border-radius: 5px;
 		width: 450px;
 
+		.form-group {
+			position: relative;
+			.formikErrorMessage {
+				position: absolute;
+				color: red;
+				bottom: 0.7rem;
+				left: 5px;
+				font-size: 13px;
+				font-weight: 500;
+				letter-spacing: 0.5px;
+				opacity: 0.8;
+			}
+		}
 		.heading {
 			padding-bottom: 1.5rem;
 
@@ -52,7 +65,7 @@
 			border-radius: 5px;
 			font-size: 1rem;
 			padding: 0.5rem 1rem;
-			margin-bottom: 1rem;
+			margin-bottom: 2rem;
 			background: $inputGray2;
 			width: 100%;
 
