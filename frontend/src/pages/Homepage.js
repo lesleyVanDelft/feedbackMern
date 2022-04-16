@@ -25,12 +25,9 @@ const Homepage = () => {
 	// const [feedbackData, setFeedbackData] = useState([]);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-<<<<<<< HEAD
-=======
 	// useEffect(() => {
 	// 	dispatch(getFeedbacks());
 	// }, []);
->>>>>>> toolkittesting
 
 	// category filter button state
 	const [categoryState, setCategoryState] = useState('all');
@@ -51,51 +48,6 @@ const Homepage = () => {
 	};
 
 	useEffect(() => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-		dispatch(getFeedbacks(feedbacks));
-		if (isError) {
-			console.log(message);
-		}
-
-		if (!user) {
-			navigate('/login');
-		}
-
-		setTimeout(() => {
-			dispatch(getFeedbacks(feedbacks));
-			// console.log('homepage log');
-		}, 100);
-
-		// return () => {
-		// 	dispatch(reset());
-		// };
-	}, [user, navigate, dispatch, isError, message]);
-=======
-		try {
-			if (user) {
-				dispatch(getFeedbacks());
-			}
-			setTimeout(() => {
-				// if (user) {
-				// 	dispatch(getFeedbacks());
-				// }
-				if (!user) {
-					navigate('/login');
-				}
-			}, 300);
-			if (!user) {
-				navigate('/login');
-			}
-		} catch (error) {
-			console.log(error);
-		}
-
-		dispatch(setUser());
-	}, []);
->>>>>>> toolkittesting
-
-=======
 		try {
 			if (!user) {
 				dispatch(setUser());
@@ -117,11 +69,9 @@ const Homepage = () => {
 		} catch (error) {
 			console.log(error);
 		}
-
-		// dispatch(setUser());
+		dispatch(setUser());
 	}, []);
 
->>>>>>> toolkittesting
 	if (!feedbacks) {
 		return <h1>Loading </h1>;
 	}
