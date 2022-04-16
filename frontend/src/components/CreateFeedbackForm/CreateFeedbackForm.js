@@ -43,7 +43,7 @@ const CreateFeedbackForm = () => {
 				text,
 				feedbackType,
 				author,
-				details,
+				// details,
 				status: 'planned',
 			})
 		);
@@ -54,7 +54,7 @@ const CreateFeedbackForm = () => {
 		navigate('/');
 	};
 	return (
-		<section className="CreateFeedbackForm">
+		<section className="CreateFeedbackForm ">
 			<img src={CreateImg} className="CreateFeedbackForm__image" alt="" />
 			<h2 className="CreateFeedbackForm__title">Create New Feedback</h2>
 			<form onSubmit={onSubmit} className="Form">

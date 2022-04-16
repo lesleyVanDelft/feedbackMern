@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -9,13 +9,21 @@ import './CommentSection.css';
 
 const CommentSection = ({ comments, feedbackId }) => {
 	// const [commentData, setCommentData] = useState()
+	const [commentCount, setCommentCount] = useState(0);
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const user = useSelector(state => state.user);
-	// console.log(singleFeedback);
+	// console.log(comments);
+
+	// const count = useRef(singleFeedback.commentCount);
+	// useEffect(() => {
+	// 	setCommentCount();
+	// }, []);
 
 	if (!comments) {
 		return <h2>Loading comments..</h2>;
 	}
+
+	let count = 0;
 
 	return (
 		<section className="CommentSection">

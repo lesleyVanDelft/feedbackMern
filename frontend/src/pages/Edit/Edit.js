@@ -16,46 +16,13 @@ import { getFeedbackComments } from '../../reducers/feedbackCommentsReducer';
 import LogoBar from '../../components/LogoBar/LogoBar';
 
 const Edit = () => {
-	// get user state from auth redux store
-	// const { user } = useSelector(state => state.auth);
-	// const { feedbacks, isLoading, isError, message } = useSelector(state => {
-	// 	return state.feedbacks;
-	// });
-	// const [currentTitle, setCurrentTitle] = useState(feedbacks[0].title);
-	// const [currentFeedbackType, setCurrentFeedbackType] = useState(
-	// 	feedbacks[0].feedbackType
-	// );
-	// const [currentText, setCurrentText] = useState(feedbacks[0].text);
 	const user = useSelector(state => state.user);
-	const feedback = useSelector(state => state.feedbackComments);
+	const singleFeedback = useSelector(state => state.singleFeedback);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	let { id } = useParams();
 
-	// useEffect(() => {
-	// 	dispatch(getFeedbackComments(id));
-	// }, []);
-
-	// useEffect(() => {
-	// 	if (isError) {
-	// 		console.log(message);
-	// 	}
-
-	// 	if (!user) {
-	// 		navigate('/login');
-	// 	}
-	// 	if (isLoading) {
-	// 		return <Spinner />;
-	// 	}
-
-	// 	// dispatch(getSingleFeedback(id));
-
-	// 	// return () => {
-	// 	// 	dispatch(reset());
-	// 	// };
-	// }, [id]);
-
-	if (!feedback) {
+	if (!singleFeedback) {
 		return <h2>Loading</h2>;
 	}
 
@@ -70,7 +37,7 @@ const Edit = () => {
 						</Link>
 					</button>
 				</div>
-				<EditFeedbackForm feedbackData={feedback} />
+				<EditFeedbackForm feedbackData={singleFeedback} />
 			</section>
 		</>
 	);

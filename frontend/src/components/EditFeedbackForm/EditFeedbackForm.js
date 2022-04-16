@@ -23,7 +23,7 @@ const EditFeedbackForm = ({ feedbackData }) => {
 	const [titleContent, setTitleContent] = useState('');
 	const [category, setCategory] = useState('');
 	const [detailContent, setDetailContent] = useState('');
-
+	const singleFeedback = useSelector(state => state.singleFeedback);
 	// get user state from auth redux store
 	const user = useSelector(state => state.user);
 	// const feedback = useSelector(state => state.feedbackComments);
@@ -38,9 +38,9 @@ const EditFeedbackForm = ({ feedbackData }) => {
 
 	// let data = {};
 	useEffect(() => {
-		setTitleContent(feedbackData.title);
-		setCategory(feedbackData.feedbackType);
-		setDetailContent(feedbackData.text);
+		setTitleContent(singleFeedback.title);
+		setCategory(singleFeedback.feedbackType);
+		setDetailContent(singleFeedback.text);
 	}, []);
 
 	let data = {
@@ -66,15 +66,18 @@ const EditFeedbackForm = ({ feedbackData }) => {
 		toast('Deleted?');
 	};
 
-	if (!feedbackData) {
+	if (!singleFeedback) {
 		return <h2>Loading</h2>;
 	}
+	// if (!feedbackData) {
+	// 	return <h2>Loading</h2>;
+	// }
 
 	return (
 		<section className="EditFeedbackForm">
 			<img src={EditImg} alt="" className="EditFeedbackForm__image" />
 			<h2 className="EditFeedbackForm__title">
-				Editing '{feedbackData && feedbackData.title}'
+				Editing '{singleFeedback && singleFeedback.title}'
 			</h2>
 			<form className="Form" id="FormEdit" onSubmit={onSubmit}>
 				<div className="Form__group">

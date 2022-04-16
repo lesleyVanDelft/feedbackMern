@@ -51,40 +51,54 @@ const Details = () => {
 
 	useEffect(() => {
 		dispatch(getSingleFeedback(id));
-	}, []);
+		dispatch(setUser());
+	}, [dispatch, id]);
 
 	if (!singleFeedback) {
-		console.log('details');
+		// console.log('details');
 		return <h1>Loading...</h1>;
 	}
 
 	// console.log(singleFeedback);
 	return (
 		<>
-			{/* <p>{singleFeedback.status}</p> */}
-			<LogoBar />
-			<main className="Details">
-				<div className="Details__buttons">
-					<button className="back">
-						<Link to="/">
-							<FaChevronLeft /> <span>Go Back</span>
-						</Link>
-					</button>
-					{singleFeedback.length > 0 && singleFeedback.author === user.id && (
-						<Link to={`/edit/${id}`}>
-							<button className="btn btn-blue edit">Edit Feedback</button>
-						</Link>
-					)}
-				</div>
-				<span className="postedBy">
-					Posted by:
-					{singleFeedback.length > 0 && singleFeedback.details.username && (
+			{singleFeedback ? (
+				<>
+					{/* <p>{singleFeedback.status}</p> */}
+					<LogoBar />
+					<main className="Details">
+						<div className="Details__buttons">
+							<button className="back">
+								<Link to="/">
+									<FaChevronLeft /> <span>Go Back</span>
+								</Link>
+							</button>
+							{singleFeedback.author._id === user.id && (
+								<Link to={`/edit/${id}`}>
+									<button className="btn btn-blue edit">Edit Feedback</button>
+								</Link>
+							)}
+						</div>
+						<span className="postedBy">
+							Posted by:
+							{/* {singleFeedback.length > 0 && singleFeedback.details.username && (
 						<span className="username">@{singleFeedback.details.username}</span>
-					)}
-				</span>
-				<FeedbackItem feedback={singleFeedback} toggleUpvote={toggleUpvote} />
-				<CommentSection comments={singleFeedback.comments} feedbackId={id} />
-			</main>
+					)} */}
+							<span className="username">{singleFeedback.author.username}</span>
+						</span>
+						<FeedbackItem
+							feedback={singleFeedback}
+							toggleUpvote={toggleUpvote}
+						/>
+						<CommentSection
+							comments={singleFeedback.comments}
+							feedbackId={id}
+						/>
+					</main>
+				</>
+			) : (
+				<h1>Loading</h1>
+			)}
 		</>
 	);
 };
