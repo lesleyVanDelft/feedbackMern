@@ -68,6 +68,20 @@ const feedbackModel = new mongoose.Schema(
 			ref: 'User',
 			required: true,
 		},
+		details: {
+			name: {
+				type: String,
+				// required: true,
+			},
+			username: {
+				type: String,
+				// required: true,
+			},
+			email: {
+				type: String,
+				// required: true,
+			},
+		},
 		title: {
 			type: String,
 			required: [true, 'Please add a title'],

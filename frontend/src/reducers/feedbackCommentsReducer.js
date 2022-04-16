@@ -3,8 +3,18 @@ import { toast } from 'react-toastify';
 
 const feedbackPageReducer = (state = null, action) => {
 	switch (action.type) {
-		case 'FETCH_FEEDBACK_COMMENTS':
+		// case 'FETCH_FEEDBACK_COMMENTS':
+		// 	return { ...state, ...action.payload };
+		// case 'GET_SINGLE_FEEDBACK':
+		// 	return {
+		// 		...state,
+		// 		singleFeedback: [...state, ...action.payload]
+		// 	}
+		//
+		//
+		case 'GET_SINGLE_FEEDBACK':
 			return { ...state, ...action.payload };
+
 		// case 'CREATE_NEW_FEEDBACK':
 		// 	return { ...state.push(...action.payload) };
 		case 'UPDATE_FEEDBACK':
@@ -128,12 +138,12 @@ const feedbackPageReducer = (state = null, action) => {
 	}
 };
 
-export const getFeedbackComments = id => {
+export const getSingleFeedback = id => {
 	return async dispatch => {
-		const fetchedFeedback = await feedbackService.getFeedbackComments(id);
+		const fetchedFeedback = await feedbackService.getSingleFeedback(id);
 
 		dispatch({
-			type: 'FETCH_FEEDBACK_COMMENTS',
+			type: 'GET_SINGLE_FEEDBACK',
 			payload: fetchedFeedback,
 		});
 	};
@@ -195,88 +205,6 @@ export const toggleDownvote = (id, downvotedBy, upvotedBy) => {
 		await feedbackService.downvoteFeedback(id);
 	};
 };
-
-// export const toggleCommentUpvote = (
-//   feedbackId,
-//   commentId,
-//   upvotedBy,
-//   downvotedBy
-// ) => {
-//   return async (dispatch) => {
-//     const pointsCount = upvotedBy.length - downvotedBy.length;
-
-//     dispatch({
-//       type: 'VOTE_COMMENT',
-//       payload: { commentId, data: { upvotedBy, pointsCount, downvotedBy } },
-//     });
-
-//     await feedbackService.upvoteComment(feedbackId, commentId);
-//   };
-// };
-
-// export const toggleCommentDownvote = (
-//   feedbackId,
-//   commentId,
-//   downvotedBy,
-//   upvotedBy
-// ) => {
-//   return async (dispatch) => {
-//     const pointsCount = upvotedBy.length - downvotedBy.length;
-
-//     dispatch({
-//       type: 'VOTE_COMMENT',
-//       payload: { commentId, data: { upvotedBy, pointsCount, downvotedBy } },
-//     });
-
-//     await feedbackService.downvoteComment(feedbackId, commentId);
-//   };
-// };
-
-// export const toggleReplyUpvote = (
-//   feedbackId,
-//   commentId,
-//   replyId,
-//   upvotedBy,
-//   downvotedBy
-// ) => {
-//   return async (dispatch) => {
-//     const pointsCount = upvotedBy.length - downvotedBy.length;
-
-//     dispatch({
-//       type: 'VOTE_REPLY',
-//       payload: {
-//         commentId,
-//         replyId,
-//         data: { upvotedBy, pointsCount, downvotedBy },
-//       },
-//     });
-
-//     await feedbackService.upvoteReply(feedbackId, commentId, replyId);
-//   };
-// };
-
-// export const toggleReplyDownvote = (
-//   feedbackId,
-//   commentId,
-//   replyId,
-//   downvotedBy,
-//   upvotedBy
-// ) => {
-//   return async (dispatch) => {
-//     const pointsCount = upvotedBy.length - downvotedBy.length;
-
-//     dispatch({
-//       type: 'VOTE_REPLY',
-//       payload: {
-//         commentId,
-//         replyId,
-//         data: { upvotedBy, pointsCount, downvotedBy },
-//       },
-//     });
-
-//     await feedbackService.downvoteReply(feedbackId, commentId, replyId);
-//   };
-// };
 
 export const addComments = (feedbackId, comment) => {
 	return async dispatch => {

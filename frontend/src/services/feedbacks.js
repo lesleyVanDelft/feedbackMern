@@ -23,6 +23,12 @@ const getFeedbacks = async () => {
 	return response.data;
 };
 
+// get single feedback
+const getSingleFeedback = async id => {
+	const response = await axios.get(`${API_URL}details/${id}`, setConfig());
+	return response.data;
+};
+
 const addNew = async feedbackObj => {
 	const response = await axios.post(API_URL, feedbackObj, setConfig());
 	return response.data;
@@ -126,6 +132,7 @@ const removeReply = async (feedbackId, commentId, replyId) => {
 
 const feedbackService = {
 	getFeedbacks,
+	getSingleFeedback,
 	addNew,
 	editFeedback,
 	getFeedbackComments,

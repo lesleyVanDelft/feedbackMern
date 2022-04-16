@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaChevronLeft } from 'react-icons/fa';
 import Spinner from '../../components/Spinner';
-import {
-	getSingleFeedback,
-	reset,
-} from '../../features/feedbacks/feedbackSlice';
+// import {
+// 	getSingleFeedback,
+// 	reset,
+// } from '../../features/feedbacks/feedbackSlice';
+import { getSingleFeedback } from '../../reducers/feedbackCommentsReducer';
 import { useParams } from 'react-router-dom';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import './Details.css';
@@ -23,27 +24,44 @@ import { getFeedbacks } from '../../reducers/feedbackReducer';
 // import Suggestions from '../components/Suggestions/Suggestions';
 
 const Details = () => {
-	const feedbackComments = useSelector(state => state.feedbackComments);
+	const singleFeedback = useSelector(state => state.singleFeedback);
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
+
+	// hooks
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	let { id } = useParams();
 	// console.log(feedbacks.filter(fb => fb._id === id));
 	// const currentFeedback = feedbacks.filter(fb => fb._id === id);
+	// useEffect(() => {
+	// 	// if (!singleFeedback) {
+	// 	// 	return <h2>Loading</h2>;
+	// 	// }
+	// 	try {
+	// 		dispatch(setUser());
+	// 		// dispatch(getFeedbacks());
+	// 		dispatch()
+	// 		// dispatch(getFeedbackComments(id));
+	// 	} catch (error) {
+	// 		console.log(error + 'details useEffect');
+	// 	}
+	// }, []);
+
 	useEffect(() => {
-		dispatch(setUser());
-		dispatch(getFeedbacks());
-		dispatch(getFeedbackComments(id));
+		dispatch(getSingleFeedback(id));
 	}, []);
 
-	if (!feedbackComments) {
-		return <h2>Loading</h2>;
+	if (!singleFeedback) {
+		console.log('details');
+		return <h1>Loading...</h1>;
 	}
 
+	// console.log(singleFeedback);
 	return (
 		<>
+			{/* <p>{singleFeedback.status}</p> */}
 			<LogoBar />
 			<main className="Details">
 				<div className="Details__buttons">
@@ -52,7 +70,7 @@ const Details = () => {
 							<FaChevronLeft /> <span>Go Back</span>
 						</Link>
 					</button>
-					{feedbackComments.author.id === user.id && (
+					{singleFeedback.length > 0 && singleFeedback.author === user.id && (
 						<Link to={`/edit/${id}`}>
 							<button className="btn btn-blue edit">Edit Feedback</button>
 						</Link>
@@ -60,18 +78,12 @@ const Details = () => {
 				</div>
 				<span className="postedBy">
 					Posted by:
-					{feedbackComments.author.username && (
-						<span className="username">
-							@{feedbackComments.author.username}
-						</span>
+					{singleFeedback.length > 0 && singleFeedback.details.username && (
+						<span className="username">@{singleFeedback.details.username}</span>
 					)}
 				</span>
-				<FeedbackItem
-					feedback={feedbackComments}
-					origin={'details'}
-					toggleUpvote={toggleUpvote}
-				/>
-				<CommentSection comments={feedbackComments.comments} feedbackId={id} />
+				<FeedbackItem feedback={singleFeedback} toggleUpvote={toggleUpvote} />
+				<CommentSection comments={singleFeedback.comments} feedbackId={id} />
 			</main>
 		</>
 	);

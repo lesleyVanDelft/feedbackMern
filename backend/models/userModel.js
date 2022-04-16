@@ -69,25 +69,25 @@ const userModel = mongoose.Schema(
 // });
 
 // before instance of user
-userModel.pre('save', async function (next) {
-	const salt = await bcryptjs.genSalt();
-	this.password = await bcryptjs.hash(this.password, salt);
-	next();
-});
+// userModel.pre('save', async function (next) {
+// 	const salt = await bcryptjs.genSalt();
+// 	this.password = await bcryptjs.hash(this.password, salt);
+// 	next();
+// });
 
 // static method to login user
-userModel.statics.login = async function (email, password) {
-	const user = await this.findOne({ email });
-	if (user) {
-		const auth = await bcryptjs.compare(password, user.password);
-		if (auth) {
-			return user;
-		} else {
-			throw Error('Incorrect password');
-		}
-	}
-	throw Error('Incorrect email');
-};
+// userModel.statics.login = async function (email, password) {
+// 	const user = await this.findOne({ email });
+// 	if (user) {
+// 		const auth = await bcryptjs.compare(password, user.password);
+// 		if (auth) {
+// 			return user;
+// 		} else {
+// 			throw Error('Incorrect password');
+// 		}
+// 	}
+// 	throw Error('Incorrect email');
+// };
 
 // userModel.plugin(uniqueValidator);
 

@@ -4,6 +4,7 @@ const { protect, checkUser } = require('../middleware/authMiddleware');
 
 const {
 	getFeedbacks,
+	getSingleFeedback,
 	getFeedbackAndComments,
 	createNewFeedback,
 	updateFeedback,
@@ -27,18 +28,28 @@ const router = express.Router();
 //CRUD posts routes
 //posts vote routes
 // router.get('*', checkUser);
-// router.post('/upvote/:id', auth, upvoteFeedback);
+
+// UPVOTE id post link
 router.post('/upvote/:id', auth, upvoteFeedback);
 router.post('/details/upvote/:id', auth, upvoteFeedback);
+// DOWNVOTE id post link
 router.post('/:id/downvote', downvoteFeedback);
+
+// get ALL feedbacks
 router.get('/', auth, getFeedbacks);
 
+// get SINGLE feedback
+router.get('/details/:id', getSingleFeedback);
 // post comment
 router.post('/details/:id', auth, postComment);
 // reply to comment
 router.post('/details/:id/comment/:commentId/reply', auth, postReply);
-// get details page - current feedback and comments related to feedback
-router.get('/details/:id', auth, getFeedbackAndComments);
+
+// // // // // // // // // // // // // // // // // // // // // // // // // //
+// get details page - current feedback and comments related to feedback   //
+// router.get('/details/:id', auth, getFeedbackAndComments);			 //
+// router.get('/details/:id', auth, getFeedbacks);
+// // // // // // // // // // // // // // // // // // // // // // // // //
 
 router.post('/', auth, createNewFeedback);
 router.patch('/:id', updateFeedback);

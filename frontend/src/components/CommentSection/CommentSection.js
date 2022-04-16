@@ -9,25 +9,25 @@ import './CommentSection.css';
 
 const CommentSection = ({ comments, feedbackId }) => {
 	// const [commentData, setCommentData] = useState()
-	const feedbackComments = useSelector(state => state.feedbackComments);
+	const singleFeedback = useSelector(state => state.singleFeedback);
 	const user = useSelector(state => state.user);
-	// console.log(feedbackComments);
+	// console.log(singleFeedback);
 
 	if (!comments) {
-		return <h2>Loading</h2>;
+		return <h2>Loading comments..</h2>;
 	}
 
 	return (
 		<section className="CommentSection">
 			<h2 className="CommentSection__count">
-				{feedbackComments.commentCount} Comments
+				{singleFeedback.commentCount} Comments
 			</h2>
 			<div className="CommentSection__comments">
 				{comments.map((comment, i) => {
 					return (
 						<Comment
 							commentData={comment}
-							currentFeedback={feedbackComments}
+							currentFeedback={singleFeedback}
 							key={i}
 							user={user}
 							username={comment.username}
@@ -35,7 +35,7 @@ const CommentSection = ({ comments, feedbackId }) => {
 					);
 				})}
 			</div>
-			<AddComment feedbackComments={feedbackComments} user={user} />
+			<AddComment singleFeedback={singleFeedback} user={user} />
 		</section>
 	);
 };

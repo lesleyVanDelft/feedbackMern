@@ -3,16 +3,21 @@ import feedbackService from '../services/feedbacks';
 // import feedbackPageReducer from "./detailsPageReducer";
 // import storageService from '../utils/localStorage';
 
-const feedbackReducer = (state = null, action) => {
+const feedbackReducer = (state = [], action) => {
 	switch (action.type) {
-		case 'SET_FEEDBACKS':
+		case 'GET_ALL_FEEDBACKS':
 			return action.payload;
+		// case 'CREATE_NEW_FEEDBACK':
+		// 	return state.push(...action.payload);
+		// case 'GET_SINGLE_FEEDBACK':
+		// 	return { ...state, ...action.payload };
 		case 'CREATE_NEW_FEEDBACK':
-			return state.push(...action.payload);
-		case 'LOAD_MORE_POSTS':
 			return {
-				...action.payload,
-				results: [...state.results, ...action.payload.results],
+				...state,
+				feedbacks: [
+					...state.feedbacks,
+					state.feedbacks.push(...action.payload),
+				],
 			};
 		case 'TOGGLE_VOTE':
 			// return {
@@ -48,9 +53,10 @@ export const getFeedbacks = sortBy => {
 		let feedbacks;
 
 		feedbacks = await feedbackService.getFeedbacks();
+		// console.log(feedbacks);
 
 		dispatch({
-			type: 'SET_FEEDBACKS',
+			type: 'GET_ALL_FEEDBACKS',
 			payload: feedbacks,
 		});
 
@@ -68,22 +74,6 @@ export const createNewFeedback = feedbackObj => {
 		});
 
 		return addedFeedback.id;
-	};
-};
-
-export const loadMorePosts = (sortBy, page) => {
-	return async dispatch => {
-		let posts;
-		if (sortBy !== 'subscribed') {
-			posts = await feedbackService.getPosts(sortBy, 10, page);
-		} else {
-			posts = await feedbackService.getSubPosts(10, page);
-		}
-
-		dispatch({
-			type: 'LOAD_MORE_POSTS',
-			payload: posts,
-		});
 	};
 };
 

@@ -26,20 +26,25 @@ const FeedbackItem = ({
 	const [upvoted, setUpvoted] = useState(false);
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
-	const currentFeedback = useSelector(state => state.feedbackComments);
+	const singleFeedback = useSelector(state => state.singleFeedback);
 	const isUpvoted = user && feedback.upvotedBy.includes(user.id);
 	const isDownvoted = user && feedback.downvotedBy.includes(user.id);
+	// const currentFeedback = useSelector(state => state.feedbackComments);
 
 	useEffect(() => {
 		if (!user) {
-			return <h1>loading</h1>;
+			return <h1>loading...</h1>;
+		}
+
+		if (!feedback) {
+			return <h1>Loading feedback</h1>;
 		}
 		if (feedback.upvotedBy.includes(user.id)) {
 			setUpvoted(true);
 		} else {
 			setUpvoted(false);
 		}
-	}, [user, feedback.upvotedBy]);
+	}, [user, feedback.upvotedBy, feedback]);
 
 	const handleUpvoteToggle = async e => {
 		e.preventDefault();
@@ -85,55 +90,58 @@ const FeedbackItem = ({
 
 	return (
 		<>
-			<motion.div
-				initial={framerList.initial}
-				animate={framerList.animate}
-				transition={framerList.transition}
-				className={`FeedbackItem ${roadmap && 'roadmap'} ${roadmap && status}`}>
-				<div className="FeedbackItem__left">
-					<div className="FeedbackItem__left--voteBtn">
-						<div className="votes">
-							{/* <button
-							user={user}
-							body={feedback}
-							className={`votes__upvote ${upvoted ? 'active' : ''}`}
-							onClick={e => handleUpvoteToggle(e)}>
-							<FaChevronUp className="chevronUp" />
-						</button> */}
-							<UpvoteButton
-								user={user}
-								body={feedback}
-								active={upvoted}
-								handleUpvote={handleUpvoteToggle}
-							/>
-							<span className="votes__count">{feedback.upvotedBy.length}</span>
+			{(feedback || singleFeedback) && (
+				<motion.div
+					initial={framerList.initial}
+					animate={framerList.animate}
+					transition={framerList.transition}
+					className={`FeedbackItem ${roadmap && 'roadmap'} ${
+						roadmap && status
+					}`}>
+					<div className="FeedbackItem__left">
+						<div className="FeedbackItem__left--voteBtn">
+							<div className="votes">
+								<UpvoteButton
+									user={user}
+									body={feedback}
+									active={upvoted}
+									handleUpvote={handleUpvoteToggle}
+								/>
+								<span className="votes__count">
+									{feedback.upvotedBy.length}
+								</span>
 
-							<button className="votes__downvote">
-								<FaChevronDown className="chevronDown" />
+								<button className="votes__downvote">
+									<FaChevronDown className="chevronDown" />
+								</button>
+							</div>
+						</div>
+						<div className="FeedbackItem__left--content">
+							{roadmap && (
+								<ul className="status">
+									<li>{status}</li>
+								</ul>
+							)}
+							<Link to={`/details/${feedback._id}`}>
+								<h3 className="title">{feedback.title}</h3>
+							</Link>
+							<p className="text">{feedback.text}</p>
+							<button className="feedbackTypeBtn">
+								{feedback.feedbackType}
 							</button>
 						</div>
 					</div>
-					<div className="FeedbackItem__left--content">
-						{roadmap && (
-							<ul className="status">
-								<li>{status}</li>
-							</ul>
-						)}
-						<Link to={`/details/${feedback._id}`}>
-							<h3 className="title">{feedback.title}</h3>
-						</Link>
-						<p className="text">{feedback.text}</p>
-						<button className="feedbackTypeBtn">{feedback.feedbackType}</button>
-					</div>
-				</div>
 
-				<div className="FeedbackItem__right">
-					<FaComment className="commentIcon" />
-					<span className="commentLength">
-						<Link to={`/details/${feedback._id}`}>{feedback.commentCount}</Link>
-					</span>
-				</div>
-			</motion.div>
+					<div className="FeedbackItem__right">
+						<FaComment className="commentIcon" />
+						<span className="commentLength">
+							<Link to={`/details/${feedback._id}`}>
+								{feedback.commentCount}
+							</Link>
+						</span>
+					</div>
+				</motion.div>
+			)}
 		</>
 	);
 	// return <div>{feedback._id}</div>;

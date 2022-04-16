@@ -25,6 +25,9 @@ const Homepage = () => {
 	// const [feedbackData, setFeedbackData] = useState([]);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	// useEffect(() => {
+	// 	dispatch(getFeedbacks());
+	// }, []);
 
 	// category filter button state
 	const [categoryState, setCategoryState] = useState('all');

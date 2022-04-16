@@ -18,6 +18,19 @@ const CreateFeedbackForm = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	// const {author
+	// 	details
+	// 	name
+	// 	username
+	// 	email} = user;
+	// const { id, name, username, email } = user;
+	const details = {
+		// author: user.id,
+		name: user.name,
+		username: user.username,
+		email: user.email,
+	};
+
 	const toastNotify = () =>
 		toast.success('Feedback added!', { autoClose: 3000 });
 
@@ -30,6 +43,7 @@ const CreateFeedbackForm = () => {
 				text,
 				feedbackType,
 				author,
+				details,
 				status: 'planned',
 			})
 		);

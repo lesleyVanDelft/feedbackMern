@@ -114,7 +114,7 @@ const loginUser = async (req, res) => {
 	try {
 		const token = generateToken(user);
 		// console.log(user);
-		await User.login(email, password);
+		// await User.login(email, password);
 		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
 		return res.status(200).json({
 			name: user.name,

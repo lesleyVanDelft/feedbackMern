@@ -10,10 +10,10 @@ import Header from '../components/Header/Header';
 
 const Login = () => {
 	const user = useSelector(state => state.user);
-	const [formData, setFormData] = useState({
-		email: '',
-		password: '',
-	});
+	// const [formData, setFormData] = useState({
+	// 	email: '',
+	// 	password: '',
+	// });
 	const formik = useFormik({
 		initialValues: {
 			email: '',
@@ -25,11 +25,11 @@ const Login = () => {
 		}),
 		onSubmit: values => {
 			dispatch(loginUser(values));
-			console.log(values);
+			// console.log(values);
 		},
 	});
 	// destructure useState
-	const { email, password } = formData;
+	// const { email, password } = formData;
 	// useNavigate
 	const navigate = useNavigate();
 	// fire off functions from authSlice

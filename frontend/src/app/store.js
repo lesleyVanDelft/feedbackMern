@@ -31,19 +31,22 @@
 // });
 
 // export default store;
+
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 // import notificationReducer from './reducers/notificationReducer';
 import userReducer from '../reducers/userReducer';
 import feedbackReducer from '../reducers/feedbackReducer';
-import feedbackCommentsReducer from '../reducers/feedbackCommentsReducer';
+// import feedbackCommentsReducer from '../reducers/feedbackCommentsReducer';
+import feedbackPageReducer from '../reducers/feedbackCommentsReducer';
 
 const reducer = combineReducers({
 	user: userReducer,
 	//   notification: notificationReducer,
 	feedbacks: feedbackReducer,
-	feedbackComments: feedbackCommentsReducer,
+	// singleFeedback: feedbackCommentsReducer,
+	singleFeedback: feedbackPageReducer,
 });
 
 export const store = createStore(
