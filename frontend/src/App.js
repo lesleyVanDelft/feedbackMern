@@ -22,62 +22,51 @@ import RoadmapPage from './pages/Roadmap/Roadmap';
 // import RoadmapPage from './components/Dashboard/Roadmap/Roadmap';
 function App() {
 	const dispatch = useDispatch();
-	const user = useSelector(state => state.user);
 	// const navigate = useNavigate();
+	const user = useSelector(state => state.user);
+	const feedbacks = useSelector(state => state.feedbacks);
+	const singleFeedback = useSelector(state => state.singleFeedback);
 
 	// useEffect(() => {
-	// 	if (user) {
-	// 		console.log(user);
-	// 	} else {
-	// 		console.log('fuck you');
-	// 	}
-
-	// 	// dispatch(getFeedbacks());
-	// 	// setAllFeedbacks();
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, []);
-	// if (!user) {
-	// 	dispatch(setUser());
-	// }
-	// useEffect(() => {
-	// 	if (user) {
-	// 		navigate('/')
-	// 	}
-	// }, [user]);
-	// useEffect(() => {
-	// 	const setPostsAndSubreddits = async () => {
-	// 		try {
-	// 			await dispatch(getFeedbacks());
-	// 		} catch (err) {
-	// 			// dispatch(notify(getErrorMsg(err), 'error'));
-	// 			console.log(err.message);
+	// 	try {
+	// 		if (!user) {
+	// 			return null;
+	// 		} else {
+	// 			dispatch(setUser());
+	// 			dispatch(getFeedbacks());
+	// 			console.log('app.js effect');
 	// 		}
-	// 	};
-
-	// 	dispatch(setUser());
-	// 	// dispatch(setDarkMode());
-	// 	// setPostsAndSubreddits();
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// 	} catch (error) {
+	// 		return console.log(error + 'effect App.js');
+	// 	}
 	// }, []);
+
+	// if (!user) {
+	// 	return <h1>Loading.</h1>;
+	// }
+	// if (!feedbacks) {
+	// 	return <h1>Loading.</h1>;
+	// }
 
 	return (
-		<>
-			<Router>
-				<div className="App">
-					<Header />
-					<Routes>
-						<Route exact path="/" element={<Homepage />} />
-						<Route path="/login" element={<Login />} />
-						<Route path="/register" element={<Register />} />
-						<Route path="/details/:id" element={<Details />} />
-						<Route path="/edit/:id" element={<Edit />} />
-						<Route path="/create" element={<Create />} />
-						<Route path="/roadmap" element={<RoadmapPage />} />
-						<Route path="/test" element={<Test />} />
-					</Routes>
-				</div>
-			</Router>
-		</>
+		<Router>
+			<div className="App">
+				<Header />
+				<Routes>
+					<Route exact path="/" element={<Homepage />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
+					<Route
+						path="/details/:id"
+						element={<Details singleFeedback={singleFeedback} />}
+					/>
+					<Route path="/edit/:id" element={<Edit />} />
+					<Route path="/create" element={<Create />} />
+					<Route path="/roadmap" element={<RoadmapPage />} />
+					<Route path="/test" element={<Test />} />
+				</Routes>
+			</div>
+		</Router>
 	);
 }
 

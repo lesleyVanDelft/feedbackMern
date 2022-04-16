@@ -17,13 +17,35 @@ const CreateFeedbackForm = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	// const {author
+	// 	details
+	// 	name
+	// 	username
+	// 	email} = user;
+	// const { id, name, username, email } = user;
+	const details = {
+		// author: user.id,
+		name: user.name,
+		username: user.username,
+		email: user.email,
+	};
+
 	const toastNotify = () =>
 		toast.success('Feedback added!', { autoClose: 3000 });
 
 	const onSubmit = e => {
 		e.preventDefault();
 
-		dispatch(createNewFeedback({ title, text, feedbackType, author }));
+		dispatch(
+			createNewFeedback({
+				title,
+				text,
+				feedbackType,
+				author,
+				// details,
+				status: 'planned',
+			})
+		);
 		setText('');
 		setTitle('');
 		setFeedbackType('UI');
@@ -31,7 +53,7 @@ const CreateFeedbackForm = () => {
 		navigate('/');
 	};
 	return (
-		<section className="CreateFeedbackForm">
+		<section className="CreateFeedbackForm ">
 			<img src={CreateImg} className="CreateFeedbackForm__image" alt="" />
 			<h2 className="CreateFeedbackForm__title">Create New Feedback</h2>
 			<form onSubmit={onSubmit} className="Form">

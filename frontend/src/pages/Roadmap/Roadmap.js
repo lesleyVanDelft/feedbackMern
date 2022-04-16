@@ -1,17 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../reducers/userReducer';
+<<<<<<< HEAD
 // import setFeed
+=======
+import { motion } from 'framer-motion';
+>>>>>>> toolkittesting
 import { getFeedbacks } from '../../reducers/feedbackReducer';
 import SuggestionsHeader from '../../components/Suggestions/SuggestionsHeader/SuggestionsHeader';
 import './Roadmap.css';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
+<<<<<<< HEAD
+=======
+import { useNavigate } from 'react-router-dom';
+import { toggleUpvote } from '../../reducers/feedbackReducer';
+>>>>>>> toolkittesting
 
 const RoadmapPage = () => {
 	const [active, setActive] = useState('in-progress');
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
+<<<<<<< HEAD
+=======
+	const navigate = useNavigate();
+>>>>>>> toolkittesting
 	useEffect(() => {
 		dispatch(setUser());
 		dispatch(getFeedbacks());
@@ -20,6 +33,7 @@ const RoadmapPage = () => {
 	if (!feedbacks) {
 		return <h1>Loading</h1>;
 	}
+<<<<<<< HEAD
 
 	const plannedFeedbacks =
 		feedbacks &&
@@ -38,6 +52,41 @@ const RoadmapPage = () => {
 		feedbacks.filter(fb => {
 			return fb.status.toString() === 'live';
 		});
+=======
+	if (!user) {
+		navigate('/login');
+	}
+
+	const plannedFeedbacks = feedbacks
+		? feedbacks.filter(fb => {
+				return fb.status.toString() === 'planned';
+		  })
+		: [];
+
+	const inProgressFeedbacks = feedbacks
+		? feedbacks.filter(fb => {
+				return fb.status.toString() === 'in-progress';
+		  })
+		: [];
+
+	const liveFeedbacks = feedbacks
+		? feedbacks.filter(fb => {
+				return fb.status.toString() === 'live';
+		  })
+		: [];
+
+	// const borderVariant = {
+	// 	hidden: {
+	// 		opacity: 0,
+	// 	},
+	// 	show: {
+	// 		opacity:1,
+	// 		transition:{
+	// 			delay: 0.5
+	// 		}
+	// 	}
+	// }
+>>>>>>> toolkittesting
 
 	return (
 		<main className="RoadmapPage">
@@ -52,6 +101,10 @@ const RoadmapPage = () => {
 					<h4>{`Planned (${plannedFeedbacks.length})`}</h4>
 					<span className="description">Ideas prioritized for research</span>
 				</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> toolkittesting
 				<div
 					className={`headers__item ${
 						active === 'in-progress' ? 'purple active' : null
@@ -60,6 +113,10 @@ const RoadmapPage = () => {
 					<h4>{`In-Progress (${inProgressFeedbacks.length})`}</h4>
 					<span className="description">Currently being developed</span>
 				</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> toolkittesting
 				<div
 					className={`headers__item ${
 						active === 'live' ? 'blue active' : null
@@ -70,6 +127,21 @@ const RoadmapPage = () => {
 				</div>
 			</div>
 
+<<<<<<< HEAD
+=======
+			<div className="mobileHeaders">
+				<h2>
+					{active} ({active === 'planned' && plannedFeedbacks.length}
+					{active === 'in-progress' && inProgressFeedbacks.length}
+					{active === 'live' && liveFeedbacks.length})
+				</h2>
+				<span className="description">
+					{active === 'planned' && 'Ideas prioritized for research'}
+					{active === 'in-progress' && 'Currently being developed'}
+					{active === 'live' && 'Released features'}
+				</span>
+			</div>
+>>>>>>> toolkittesting
 			<div className="RoadmapPage__content">
 				<div
 					className={`plannedList ${active === 'planned' ? 'active' : null}`}>
@@ -83,6 +155,10 @@ const RoadmapPage = () => {
 										key={i}
 										roadmap={true}
 										status={'planned'}
+<<<<<<< HEAD
+=======
+										toggleUpvote={toggleUpvote}
+>>>>>>> toolkittesting
 									/>
 								);
 							})}
@@ -103,6 +179,10 @@ const RoadmapPage = () => {
 										key={i}
 										roadmap={true}
 										status={'in-progress'}
+<<<<<<< HEAD
+=======
+										toggleUpvote={toggleUpvote}
+>>>>>>> toolkittesting
 									/>
 								);
 							})}
@@ -120,6 +200,10 @@ const RoadmapPage = () => {
 										key={i}
 										roadmap={true}
 										status={'live'}
+<<<<<<< HEAD
+=======
+										toggleUpvote={toggleUpvote}
+>>>>>>> toolkittesting
 									/>
 								);
 							})}

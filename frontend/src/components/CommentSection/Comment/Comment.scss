@@ -74,21 +74,49 @@
 		padding-bottom: 1.5rem;
 	}
 
+	// replies section inside comment component
+
 	&__replies {
 		position: relative;
 		margin-left: 1.25rem;
 
-		&::before {
-			content: '';
-			position: absolute;
-			width: 1px;
-			height: 100%;
-			background: $lightBlueGray;
-			opacity: 0.2;
-			left: 0px;
-			// top: 0;
-			// bottom: 90px;
-			bottom: 38%;
+		// &::before {
+		// 	content: '';
+		// 	position: absolute;
+		// 	width: 1px;
+		// 	height: 100%;
+		// 	background: $lightBlueGray;
+		// 	opacity: 0.2;
+		// 	left: 0px;
+		// 	// top: 0;
+		// 	// bottom: 90px;
+		// 	// bottom: 38%;
+		// 	bottom: 10%;
+		// }
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.Comment {
+		padding: 0;
+		&__userBar {
+			img {
+				margin-right: 0.9rem;
+			}
+		}
+		&__text {
+			padding-left: 0rem;
+			// padding: 0;
+		}
+
+		&__replies {
+			margin: 0;
+
+			// &::before {
+			// 	height: 75%;
+			// 	bottom: 25%;
+			// 	// top: 50%;
+			// }
 		}
 	}
 }

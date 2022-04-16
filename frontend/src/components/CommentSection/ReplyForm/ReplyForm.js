@@ -1,38 +1,80 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 // import { ReplyContext } from '../Comment/Comment';
+import { useFormik } from 'formik';
 import { addReply } from '../../../reducers/feedbackCommentsReducer';
 import './ReplyForm.css';
 
-const ReplyForm = ({ currentFeedback, comment }) => {
+const ReplyForm = ({
+	currentFeedback,
+	comment,
+	setActive,
+	getReplyActive,
+	replyData,
+	replyToReply,
+	getReplyName,
+}) => {
 	const [replyBody, setReplyBody] = useState('');
+	const [replyName, setReplyName] = useState('');
 	const dispatch = useDispatch();
-	// console.log(replyBody);
 
-	const handleSubmit = e => {
-		e.preventDefault();
-		// console.log('HELLOOOOOO 🤭');
-		dispatch(addReply(currentFeedback._id, comment._id, replyBody));
-	};
+	const formik = useFormik({
+		initialValues: {
+			// replyBody: `@${comment.username }`,
+			replyBody: `@${replyToReply ? replyData.username : comment.username} `,
+		},
+		onSubmit: values => {
+			// e.preventDefault();
+			// console.log(values.replyBody);
+			replyToReply ? getReplyActive(false) : setActive(false);
+			dispatch(addReply(currentFeedback._id, comment._id, values.replyBody));
+		},
+	});
+	// const handleClick = e => {
+	// 	// setReplyName(replyData.username);
+	// 	// getReplyName(replyName);
+	// 	// console.log(replyName);
 
-	const handleChange = e => {
-		setReplyBody(e.target.value);
-	};
+	// 	console.log(e.target);
+	// };
+
+	// console.log(replyToReply);
+	// const handleSubmit = e => {
+	// 	e.preventDefault();
+	// 	replyToReply ? getReplyActive(false) : setActive(false);
+	// 	dispatch(addReply(currentFeedback._id, comment._id, replyBody));
+	// };
+
+	// const handleChange = e => {
+	// 	setReplyBody(e.target.value);
+	// };
 
 	return (
-		<form className="ReplyForm" onSubmit={handleSubmit}>
+		<form className="ReplyForm" onSubmit={formik.handleSubmit}>
 			<textarea
-				name="reply"
-				id="reply"
+				name="replyBody"
+				id="replyBody"
 				rows="5"
 				// cols="55"
 				maxLength={250}
 				className="ReplyForm__textarea"
-				onChange={e => handleChange(e)}
+				// value={`@${replyData.username ? replyData.username : comment.username}`}
+				value={formik.values.replyBody}
+				onChange={formik.handleChange}
 			/>
-			<button className="btn btn-purple" type="submit">
-				Post Reply
-			</button>
+			<div className="ReplyForm__buttons">
+				<button className="btn btn-purple" type="submit">
+					Reply
+				</button>
+				<button
+					className="btn btn-darkBlue"
+					type="button"
+					onClick={() =>
+						replyToReply ? getReplyActive(false) : setActive(false)
+					}>
+					Cancel
+				</button>
+			</div>
 		</form>
 	);
 };

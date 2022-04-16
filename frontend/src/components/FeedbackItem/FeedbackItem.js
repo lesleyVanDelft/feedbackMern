@@ -26,16 +26,36 @@ const FeedbackItem = ({
 	const [upvoted, setUpvoted] = useState(false);
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
+<<<<<<< HEAD
 	const isUpvoted = user && feedback.upvotedBy.includes(user.id);
 	const isDownvoted = user && feedback.downvotedBy.includes(user.id);
 
 	useEffect(() => {
+=======
+	const singleFeedback = useSelector(state => state.singleFeedback);
+	const isUpvoted = user && feedback.upvotedBy.includes(user.id);
+	const isDownvoted = user && feedback.downvotedBy.includes(user.id);
+	// const currentFeedback = useSelector(state => state.feedbackComments);
+
+	useEffect(() => {
+		if (!user) {
+			return <h1>loading...</h1>;
+		}
+
+		if (!feedback) {
+			return <h1>Loading feedback</h1>;
+		}
+>>>>>>> toolkittesting
 		if (feedback.upvotedBy.includes(user.id)) {
 			setUpvoted(true);
 		} else {
 			setUpvoted(false);
 		}
+<<<<<<< HEAD
 	}, [user, feedback.upvotedBy]);
+=======
+	}, [user, feedback.upvotedBy, feedback]);
+>>>>>>> toolkittesting
 
 	const handleUpvoteToggle = async e => {
 		e.preventDefault();
@@ -81,6 +101,7 @@ const FeedbackItem = ({
 
 	return (
 		<>
+<<<<<<< HEAD
 			<motion.div
 				initial={framerList.initial}
 				animate={framerList.animate}
@@ -129,6 +150,60 @@ const FeedbackItem = ({
 					</span>
 				</div>
 			</motion.div>
+=======
+			{(feedback || singleFeedback) && (
+				<motion.div
+					initial={framerList.initial}
+					animate={framerList.animate}
+					transition={framerList.transition}
+					className={`FeedbackItem ${roadmap && 'roadmap'} ${
+						roadmap && status
+					}`}>
+					<div className="FeedbackItem__left">
+						<div className="FeedbackItem__left--voteBtn">
+							<div className="votes">
+								<UpvoteButton
+									user={user}
+									body={feedback}
+									active={upvoted}
+									handleUpvote={handleUpvoteToggle}
+								/>
+								<span className="votes__count">
+									{feedback.upvotedBy.length}
+								</span>
+
+								<button className="votes__downvote">
+									<FaChevronDown className="chevronDown" />
+								</button>
+							</div>
+						</div>
+						<div className="FeedbackItem__left--content">
+							{roadmap && (
+								<ul className="status">
+									<li>{status}</li>
+								</ul>
+							)}
+							<Link to={`/details/${feedback._id}`}>
+								<h3 className="title">{feedback.title}</h3>
+							</Link>
+							<p className="text">{feedback.text}</p>
+							<button className="feedbackTypeBtn">
+								{feedback.feedbackType}
+							</button>
+						</div>
+					</div>
+
+					<div className="FeedbackItem__right">
+						<FaComment className="commentIcon" />
+						<span className="commentLength">
+							<Link to={`/details/${feedback._id}`}>
+								{feedback.commentCount}
+							</Link>
+						</span>
+					</div>
+				</motion.div>
+			)}
+>>>>>>> toolkittesting
 		</>
 	);
 	// return <div>{feedback._id}</div>;

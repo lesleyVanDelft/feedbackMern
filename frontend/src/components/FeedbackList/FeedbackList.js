@@ -19,10 +19,12 @@ const FeedbackList = ({ category }) => {
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
-	// console.log(sortBy);
-	useEffect(() => {
-		dispatch(getFeedbacks());
-	}, [dispatch]);
+
+	// console.log(feedbacks);
+	// useEffect(() => {
+	// 	dispatch(getFeedbacks());
+	// }, []);
+
 	if (!feedbacks) {
 		return <h1>Loading</h1>;
 	}
@@ -47,6 +49,14 @@ const FeedbackList = ({ category }) => {
 				roadmap={false}
 			/>
 
+			{/* if everything is empty */}
+			{feedbacks.length <= 0 && category === 'all' ? (
+				<div className="feedbacks">
+					<EmptyFeedback />
+				</div>
+			) : null}
+
+			{/* Loop if feedbacks is true and category */}
 			{feedbacks && category === 'all' ? (
 				<motion.div className="feedbacks">
 					<Sorter by={sortBy}>

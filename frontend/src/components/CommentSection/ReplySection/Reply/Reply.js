@@ -1,17 +1,52 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReplyForm from '../../ReplyForm/ReplyForm';
 import BlankProfilePic from '../../../../assets/blank-profile-picture.png';
 import './Reply.css';
+import { deleteReply } from '../../../../reducers/feedbackCommentsReducer';
 
-const Reply = ({ replyData, currentFeedback, replyingTo }) => {
+const Reply = ({
+	replyData,
+	currentFeedback,
+	// replyingTo,
+	// replyActive,
+	replyToReply,
+	setActive,
+	comment,
+	index,
+	// repliedBy,
+}) => {
 	const [replyActive, setReplyActive] = useState(false);
+	const [repliedBy, setRepliedBy] = useState('');
 	const user = useSelector(state => state.user);
+	const dispatch = useDispatch();
+	// const currFb = useSelector(state => state.feedbackComments);
+	// console.log(currentFeedback);
+	// console.log(comment);
+	// console.log(replyData);
+	const handleDelete = () => {
+		dispatch(deleteReply(currentFeedback._id, comment._id, replyData._id));
+	};
+
+	const getReplyName = name => {
+		setRepliedBy(name);
+	};
+	const getReplyActive = act => {
+		setReplyActive(act);
+	};
+
+	const replyingTo = replyData.replyBody.split(' ')[0];
+	const trimmedText = replyData.replyBody.split(' ').slice(1).join(' ');
 
 	return (
 		<article className="Reply">
 			<div className="Reply__userBar">
-				<img src={BlankProfilePic} alt="" className="profileImage" />
+				<img
+					src={BlankProfilePic}
+					alt=""
+					// className="profileImage"
+					className="replyImg"
+				/>
 				<div className="Reply__usernames">
 					<h4 className="name">{replyData.name}</h4>
 					<span className="username">@{replyData.username}</span>
@@ -24,20 +59,39 @@ const Reply = ({ replyData, currentFeedback, replyingTo }) => {
 						Reply
 					</button>
 					{replyData.repliedBy === user.id && (
-						<button className="delete">delete</button>
+						<button className="delete" onClick={handleDelete}>
+							delete
+						</button>
 					)}
 				</div>
 			</div>
 			<p className="Reply__text">
-				<span className="replyingTo">{`@${replyingTo}`}</span>
-				{replyData.replyBody}
+				{/* {console.log(replyData.replyBody.split(' ')[0].includes('@'))} */}
+				{/* <span className="replyingTo">{`@${comment.username}`}</span> */}
+				{/* <span className="replyingTo">{`@${
+					replyToReply ? replyData.username : comment.username
+				}`}</span> */}
+				{/* {console.log(repliedBy)} */}
+				{/* {replyData.replyBody} */}
+				{replyData.replyBody.split(' ')[0].includes('@') ? (
+					<span className="replyingTo">{replyingTo}</span>
+				) : (
+					replyData.replyBody.split(' ')[0]
+				)}
+
+				{trimmedText}
 			</p>
 
 			{replyActive && (
 				<ReplyForm
 					active={replyActive}
-					comment={replyData}
+					replyData={replyData}
 					currentFeedback={currentFeedback}
+					setActive={setActive}
+					comment={comment}
+					getReplyName={getReplyName}
+					getReplyActive={getReplyActive}
+					replyToReply={true}
 				/>
 			)}
 		</article>

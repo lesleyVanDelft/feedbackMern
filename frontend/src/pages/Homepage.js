@@ -25,6 +25,12 @@ const Homepage = () => {
 	// const [feedbackData, setFeedbackData] = useState([]);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+<<<<<<< HEAD
+=======
+	// useEffect(() => {
+	// 	dispatch(getFeedbacks());
+	// }, []);
+>>>>>>> toolkittesting
 
 	// category filter button state
 	const [categoryState, setCategoryState] = useState('all');
@@ -45,6 +51,7 @@ const Homepage = () => {
 	};
 
 	useEffect(() => {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		dispatch(getFeedbacks(feedbacks));
 		if (isError) {
@@ -88,6 +95,33 @@ const Homepage = () => {
 	}, []);
 >>>>>>> toolkittesting
 
+=======
+		try {
+			if (!user) {
+				dispatch(setUser());
+			}
+			if (user) {
+				dispatch(getFeedbacks());
+			}
+			setTimeout(() => {
+				// if (user) {
+				// 	dispatch(getFeedbacks());
+				// }
+				if (!user) {
+					navigate('/login');
+				}
+			}, 300);
+			if (!user) {
+				navigate('/login');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+
+		// dispatch(setUser());
+	}, []);
+
+>>>>>>> toolkittesting
 	if (!feedbacks) {
 		return <h1>Loading </h1>;
 	}
@@ -113,3 +147,11 @@ const Homepage = () => {
 };
 
 export default Homepage;
+
+// {name: "tester", email: "test@test.nl", username: "tester1", id: "62239c97eb2f4493437026f7",…}
+// email: "test@test.nl"
+// id: "62239c97eb2f4493437026f7"
+// name: "tester"
+// profileImg: {exists: false, imageId: "null", imageLink: "null"}
+// token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjM5Yzk3ZWIyZjQ0OTM0MzcwMjZmNyIsInVzZXJuYW1lIjoidGVzdGVyMSIsIm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2NDk2OTYzMDQsImV4cCI6MTY1MjI4ODMwNH0.Z-q4Hu2a94Kh7tMs31lJnYlifLy6A942nDPpA6NkVvM"
+// username: "tester1"

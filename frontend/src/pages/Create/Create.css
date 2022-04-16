@@ -1,1 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;700&family=Jost:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;600;800&display=swap");.Create{max-width:33.75rem;margin:0 auto}.Create__backButton{margin-bottom:55px;padding-top:34px}.Create__backButton .back{border:none;background:none}.Create__backButton .back a{color:#647196;display:flex;align-items:center;font-size:14px;font-weight:bold}.Create__backButton .back a svg{color:#4761e6;width:1rem;height:0.75rem;margin-right:0.3rem}@media screen and (max-width: 768px){.Create{padding:0 1.5rem}.Create__backButton{padding-top:20px}}
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;700&family=Jost:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;600;800&display=swap');
+.Create {
+	max-width: 33.75rem;
+	margin: 0 auto;
+}
+.Create__backButton {
+	margin-bottom: 55px;
+	padding-top: 34px;
+}
+.Create__backButton .back {
+	border: none;
+	background: none;
+}
+.Create__backButton .back a {
+	color: #647196;
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	font-weight: bold;
+}
+.Create__backButton .back a svg {
+	color: #4761e6;
+	width: 1rem;
+	height: 0.75rem;
+	margin-right: 0.3rem;
+}
+@media screen and (max-width: 768px) {
+	.Create {
+		padding: 0 1.5rem;
+	}
+	.Create__backButton {
+		padding-top: 25px;
+		margin-bottom: 2.5rem;
+	}
+}

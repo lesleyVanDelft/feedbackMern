@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 const User = require('../models/userModel');
 
 // Error handler
@@ -48,7 +48,21 @@ const generateToken = user => {
 // 	res.render('register');
 // };
 const registerUser = async (req, res) => {
-	const { name, username, email, password } = req.body;
+	// const { name, username, email, password } = req.body;
+	const { name, username, email } = req.body;
+
+	const existingUser = await User.findOne({
+		email,
+	});
+
+	if (existingUser) {
+		return res
+			.status(400)
+			.send({ message: `Email: ${email} is already registered` });
+	}
+
+	const salt = await bcryptjs.genSalt();
+	const password = await bcryptjs.hash(req.body.password, salt);
 	try {
 		// Create user
 		const user = await User.create({
@@ -58,18 +72,16 @@ const registerUser = async (req, res) => {
 			username,
 			password,
 		});
-		const token = generateToken({
-			id: user._id,
-			username: user.username,
-			name: user.name,
-		});
-		res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+
+		const token = generateToken(user);
+		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
 		return res.status(201).json({
 			name: user.name,
 			email: user.email,
 			username: user.username,
 			id: user._id,
 			profileImg: user.profileImg,
+			token,
 		});
 	} catch (err) {
 		const errors = handleError(err);
@@ -84,10 +96,25 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
 	const { email, password } = req.body;
 	const user = await User.findOne({ email });
+
+	// console.log(password);
 	// req.params.id = user._id;
 	// console.log(req.params.id);
+	if (!user) {
+		return res
+			.status(400)
+			.send({ message: 'No account with this username has been registered' });
+	}
+	// const credentialsValid = await bcryptjs.compare(password, user.password);
+	// console.log(credentialsValid);
+
+	// if (!credentialsValid) {
+	// 	return res.status(400).send({ message: 'invalid username or password' });
+	// }
 	try {
 		const token = generateToken(user);
+		// console.log(user);
+		// await User.login(email, password);
 		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
 		return res.status(200).json({
 			name: user.name,

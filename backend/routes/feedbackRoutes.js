@@ -1,33 +1,3 @@
-<<<<<<< HEAD
-const express = require('express');
-const router = express.Router();
-const {
-	getFeedbacks,
-	setFeedback,
-	editFeedback,
-	deleteFeedback,
-	getSingleFeedback,
-} = require('../controllers/feedbackController');
-const { protect } = require('../middleware/authMiddleware');
-// const Feedback = require('../models/feedbackModel');
-
-router
-	.route('/')
-	.get(protect, getFeedbacks)
-	.post(protect, setFeedback)
-	.delete(protect, deleteFeedback);
-// router
-// 	.route('/edit/:id')
-// 	.get(protect, getSingleFeedback)
-// 	.put(protect, editFeedback)
-// 	.delete(protect, deleteFeedback);
-router
-	.route('/:id')
-	.get(protect, getSingleFeedback)
-	.delete(protect, deleteFeedback)
-	.put(protect, editFeedback);
-
-=======
 // const express = require('express');
 // // const { addComment } = require('../controllers/commentController');
 // const router = express.Router();
@@ -44,7 +14,7 @@ router
 // const { protect } = require('../middleware/authMiddleware.js');
 // // const Feedback = require('../models/feedbackModel');
 // // router.get('/currentUser', protect, getCurrentUser);/
->>>>>>> toolkittesting
+
 // router
 // 	.route('/')
 // 	.get(protect, getFeedbacks)

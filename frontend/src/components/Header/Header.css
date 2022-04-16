@@ -1,1 +1,102 @@
-@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;700&family=Jost:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;600;800&display=swap");.Header{display:flex;justify-content:space-between;align-items:center;width:50%;margin:0 auto;padding:0.5rem 0}.Header button.btnLogout{background:#3a4373;display:flex;align-items:center}.Header button.btnLogout svg{margin-right:0.3rem}.Header__content{list-style:none}.Header__content.login{display:flex;justify-content:flex-end;width:100%;padding-top:2rem}.Header__content.login button.btn{border:none;background:#3a4373;margin-right:1rem}.Header__content.login button.btn.active{background:#4761e6}@media screen and (max-width: 768px){.Header{display:none}}
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;700&family=Jost:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;600;800&display=swap');
+.Header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 730px;
+	margin: 0 auto;
+	padding: 0.5rem 0;
+	padding-top: 1rem;
+}
+.Header__logo .welcome {
+	color: #647196;
+	font-weight: 500;
+}
+.Header__logo .welcome__user {
+	font-weight: bold;
+}
+.Header button.btnLogout {
+	background: #3a4373;
+	display: flex;
+	align-items: center;
+	padding: 0.3rem 1rem;
+	font-size: 13px;
+}
+.Header button.btnLogout svg {
+	margin-right: 0.3rem;
+}
+.Header__content {
+	list-style: none;
+}
+.Header__content.login {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding-top: 2rem;
+}
+.Header__content.login .registerBtn,
+.Header__content.login .loginBtn {
+	border: none;
+	display: flex;
+	align-items: center;
+	background: #3a4373;
+	margin-right: 1rem;
+	padding: 0.7rem 1.2rem;
+	color: #fff;
+	border-radius: 10px;
+	font-size: 1rem;
+}
+.Header__content.login .registerBtn svg,
+.Header__content.login .loginBtn svg {
+	margin-right: 0.4rem;
+}
+.Header__content.login .registerBtn.active,
+.Header__content.login .loginBtn.active {
+	background: #4761e6;
+}
+.Header.mobile {
+	display: none;
+}
+@media screen and (max-width: 768px) {
+	.Header {
+		display: none;
+		margin: 0;
+		width: 28.125rem;
+	}
+	.Header__content {
+		padding: 0;
+	}
+	.Header.mobile {
+		display: flex;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		justify-content: flex-start;
+		padding-bottom: 3rem;
+	}
+	.Header.mobile button.btn {
+		margin: 0;
+		margin-left: 0rem;
+	}
+	.Header.mobile .Header__content.login a {
+		background: #3a4373;
+		padding: 0.5rem 1rem;
+		border-radius: 10px;
+		color: #fff;
+		text-transform: capitalize;
+		display: flex;
+		align-items: center;
+		font-size: 0.9rem;
+		font-weight: 400;
+		letter-spacing: 0.25px;
+	}
+	.Header.mobile .Header__content.login a:nth-child(1) {
+		margin-right: 1rem;
+	}
+	.Header.mobile .Header__content.login a.active {
+		background-color: #4761e6;
+	}
+	.Header.mobile .Header__content.login a svg {
+		margin-right: 0.4rem;
+	}
+}

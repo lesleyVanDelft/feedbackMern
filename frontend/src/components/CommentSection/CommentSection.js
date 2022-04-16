@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -7,57 +7,46 @@ import AddComment from './AddComment/AddComment';
 import Comment from './Comment/Comment';
 import './CommentSection.css';
 
-<<<<<<< HEAD
-const CommentSection = ({ feedbackData }) => {
-	// const [comments, setComments] = useState([]);
-	const [feedback, setFeedback] = useState([]);
-	// const { comments } = feedbackData.comments;
-	// console.log(comments);
-	// const dispatch = useDispatch();
-	useEffect(() => {
-		// dispatch(getSingleFeedback(feedbackData));
-		setFeedback(feedbackData[0]);
-	}, []);
-	console.log(feedback);
-=======
 const CommentSection = ({ comments, feedbackId }) => {
 	// const [commentData, setCommentData] = useState()
-	const feedbackComments = useSelector(state => state.feedbackComments);
+	const [commentCount, setCommentCount] = useState(0);
+	const singleFeedback = useSelector(state => state.singleFeedback);
 	const user = useSelector(state => state.user);
-	// console.log(feedbackComments);
+	// console.log(comments);
+
+	// const count = useRef(singleFeedback.commentCount);
+	// useEffect(() => {
+	// 	setCommentCount();
+	// }, []);
 
 	if (!comments) {
-		return <h2>Loading</h2>;
+		return <h2>Loading comments..</h2>;
 	}
 
-	// useEffect(() => {
-	// 	setCommentData()
-	// }, [])
->>>>>>> toolkittesting
+	let count = 0;
+
 	return (
+		// <section className="CommentSection">
+		// 	<h2 className="CommentSection__count">
+		// 		{feedbackComments.commentCount} Comments</h2>
 		<section className="CommentSection">
 			<h2 className="CommentSection__count">
-				{feedbackComments.commentCount} Comments
+				{singleFeedback.commentCount} Comments
 			</h2>
 			<div className="CommentSection__comments">
 				{comments.map((comment, i) => {
 					return (
 						<Comment
 							commentData={comment}
-							currentFeedback={feedbackComments}
+							currentFeedback={singleFeedback}
 							key={i}
 							user={user}
+							username={comment.username}
 						/>
 					);
-					// return comment.replies.length > 0 ? '' : null
 				})}
 			</div>
-			<AddComment feedbackComments={feedbackComments} user={user} />
-			{/* {console.log(feedbackComments.comments)} */}
-
-			{/* {feedbackComments.comments.map((comment) => {
-
-			})} */}
+			<AddComment singleFeedback={singleFeedback} user={user} />
 		</section>
 	);
 };

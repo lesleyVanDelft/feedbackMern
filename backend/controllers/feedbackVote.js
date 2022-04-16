@@ -30,14 +30,14 @@ const upvoteFeedback = async (req, res) => {
 		feedback.upvotedBy = feedback.upvotedBy.filter(
 			u => u.toString() !== user._id.toString()
 		);
-
+		// feedback.pointsCount++;
 		author.karmaPoints.feedbackKarma--;
 	} else {
 		feedback.upvotedBy = feedback.upvotedBy.concat(user._id);
 		feedback.downvotedBy = feedback.downvotedBy.filter(
 			d => d.toString() !== user._id.toString()
 		);
-
+		// feedback.pointsCount--;
 		author.karmaPoints.postKarma++;
 	}
 
@@ -53,6 +53,7 @@ const upvoteFeedback = async (req, res) => {
 	const calculatedData = pointsCalculator(
 		feedback.upvotedBy.length,
 		feedback.downvotedBy.length,
+		feedback.pointsCount,
 		feedback.createdAt
 	);
 

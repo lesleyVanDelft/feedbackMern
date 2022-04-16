@@ -37,6 +37,10 @@
 			}
 		}
 	}
+
+	.mobileHeaders {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 768px) {
@@ -52,7 +56,6 @@
 				padding: 0 1rem;
 				width: 100%;
 			}
-
 			.plannedList,
 			.in-progressList,
 			.liveList {
@@ -62,27 +65,6 @@
 					display: block;
 				}
 			}
-
-			// .plannedList {
-			// 	display: none;
-			// 	&.active {
-			// 		display: block;
-			// 	}
-			// }
-			// .in-progressList {
-			// 	display: none;
-
-			// 	&.active {
-			// 		display: block;
-			// 		width: 100%;
-			// 	}
-			// }
-			// .liveList {
-			// 	display: none;
-			// 	&.active {
-			// 		display: block;
-			// 	}
-			// }
 		}
 		.headers {
 			display: flex;
@@ -91,12 +73,10 @@
 			align-items: center;
 			padding: 0;
 			margin: 0;
-			// padding: 20px 0;
 
 			&__item {
 				display: grid;
 				place-content: center;
-				// height: 100%;
 				padding: 1rem 0;
 				h4 {
 					color: $lightBlueGray;
@@ -127,6 +107,32 @@
 				&.blue.active {
 					border-bottom: 4px solid $skyBlue;
 				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.RoadmapPage {
+		// padding: 0;
+		&__content {
+			.plannedList {
+				padding-top: 0rem;
+			}
+		}
+
+		.mobileHeaders {
+			padding-left: 1.375rem;
+			padding-top: 1.3rem;
+			padding-bottom: 0.5rem;
+			h2 {
+				text-transform: capitalize;
+				color: $darkBlue2;
+				font-size: 1.125rem;
+			}
+			.description {
+				color: $lightBlueGray;
+				font-size: 0.8525rem;
 			}
 		}
 	}

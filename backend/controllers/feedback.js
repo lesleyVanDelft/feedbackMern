@@ -8,9 +8,11 @@ const getFeedbacks = async (req, res) => {
 	return res.status(200).json(allFeedbacks);
 };
 
-const getFeedbackAndComments = async (req, res) => {
-	const { id } = req.params;
+const getSingleFeedback = async (req, res) => {
+	// const singleFeedback = await Feedback.findById(req.params.id);
+	// return res.status(200).json(singleFeedback);
 
+	const { id } = req.params;
 	const feedback = await Feedback.findById(id);
 
 	if (!feedback) {
@@ -44,8 +46,40 @@ const getFeedbackAndComments = async (req, res) => {
 	return res.status(200).json(populatedFeedback);
 };
 
+const getFeedbackAndComments = async (req, res) => {
+	// const { id } = req.params;
+	// const feedback = await Feedback.findById(id);
+	// if (!feedback) {
+	// 	return res
+	// 		.status(404)
+	// 		.send({ message: `Feedback with ID:${id} does not exist` });
+	// }
+	// // const populatedFeedback = await feedback.populate('author', 'username');
+	// const populatedFeedback = await feedback.populate([
+	// 	{
+	// 		path: 'author',
+	// 		populate: 'username',
+	// 	},
+	// 	{
+	// 		path: 'comments',
+	// 		populate: [
+	// 			{
+	// 				path: 'comments.commentedBy',
+	// 				select: ['username'],
+	// 				// ,'commentBody'
+	// 			},
+	// 			{
+	// 				path: 'comments.replies',
+	// 				select: ['username'],
+	// 			},
+	// 		],
+	// 	},
+	// ]);
+	// return res.status(200).json(populatedFeedback);
+};
+
 const createNewFeedback = async (req, res) => {
-	const { title, text, feedbackType, author } = req.body;
+	const { title, text, feedbackType, author, details } = req.body;
 
 	// const author = await User.findById(req.user);
 	// console.log(author);
@@ -60,6 +94,7 @@ const createNewFeedback = async (req, res) => {
 		text,
 		feedbackType,
 		author,
+		details,
 		feedbackType: req.body.feedbackType,
 		// upvotedBy: [author._id],
 		pointsCoint: 0,
@@ -201,6 +236,7 @@ const deleteFeedback = async (req, res) => {
 
 module.exports = {
 	getFeedbacks,
+	getSingleFeedback,
 	getFeedbackAndComments,
 	createNewFeedback,
 	updateFeedback,

@@ -39,6 +39,7 @@ const setFeedback = asyncHandler(async (req, res) => {
 		text: req.body.text,
 		user: req.user.id,
 		feedbackType: req.body.feedbackType,
+		status: req.body.status,
 	});
 
 	res.status(201).json(newFeedback);

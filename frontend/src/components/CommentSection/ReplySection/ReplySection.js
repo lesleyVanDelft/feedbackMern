@@ -1,21 +1,25 @@
+import ExtraReply from './ExtraReply/ExtraReply';
 import Reply from './Reply/Reply';
 import './ReplySection.css';
 
-const ReplySection = ({ replies, replyingTo, currentFeedback }) => {
+const ReplySection = ({ replies, currentFeedback, user, comment }) => {
 	return (
-		<>
+		<section className="ReplySection">
 			{replies.length > 0 &&
 				replies.map((reply, i) => {
 					return (
-						<Reply
+						<ExtraReply
 							replyData={reply}
-							replyingTo={replyingTo}
+							// replyingTo={reply.username}
 							currentFeedback={currentFeedback}
 							key={i}
+							user={user}
+							replyToReply={true}
+							comment={comment}
 						/>
 					);
 				})}
-		</>
+		</section>
 	);
 };
 

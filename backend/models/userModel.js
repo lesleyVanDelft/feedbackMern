@@ -69,11 +69,11 @@ const userModel = mongoose.Schema(
 // });
 
 // before instance of user
-userModel.pre('save', async function (next) {
-	const salt = await bcryptjs.genSalt();
-	this.password = await bcryptjs.hash(this.password, salt);
-	next();
-});
+// userModel.pre('save', async function (next) {
+// 	const salt = await bcryptjs.genSalt();
+// 	this.password = await bcryptjs.hash(this.password, salt);
+// 	next();
+// });
 
 // static method to login user
 // userModel.statics.login = async function (email, password) {
@@ -82,8 +82,9 @@ userModel.pre('save', async function (next) {
 // 		const auth = await bcryptjs.compare(password, user.password);
 // 		if (auth) {
 // 			return user;
+// 		} else {
+// 			throw Error('Incorrect password');
 // 		}
-// 		throw Error('Incorrect password');
 // 	}
 // 	throw Error('Incorrect email');
 // };
@@ -91,6 +92,6 @@ userModel.pre('save', async function (next) {
 // userModel.plugin(uniqueValidator);
 
 // replaces _id with id, convert id to string from ObjectID and deletes __v
-schemaCleaner(userModel);
+// schemaCleaner(userModel);
 
 module.exports = mongoose.model('User', userModel);

@@ -9,10 +9,10 @@ import { toast } from 'react-toastify';
 // 	user: localStorage.getItem('readifyUserKey') ? localStorage.getItem('readifyUserKey') : null,
 // 	feedbacks: [],
 // };
-const initialLoadState = {
-	user: localStorage.getItem('user'),
-	feedbacks: [null],
-};
+// const initialLoadState = {
+// 	user: localStorage.getItem('user'),
+// 	feedbacks: [null],
+// };
 const userReducer = (state = null, action) => {
 	switch (action.type) {
 		case 'LOGIN':
@@ -38,7 +38,7 @@ export const loginUser = credentials => {
 		storageService.saveUser(user);
 		storageService.loadUser();
 		// authService.setToken(user.token);
-		console.log(user);
+		// console.log(user);
 		// const user = await authService.login(credentials);
 		// storageService.saveUser(user);
 		// authService.setToken(user.token);
@@ -64,13 +64,24 @@ export const loginUser = credentials => {
 
 export const registerUser = credentials => {
 	return async dispatch => {
+		// const token = Cookies.get('jwt');
 		const user = await authService.register(credentials);
-		// storageService.saveUser(user);
-		// authService.setToken(user.token);
+		storageService.saveUser(user);
+		// storageService.loadUser();
 
 		dispatch({
 			type: 'SIGNUP',
 			payload: user,
+		});
+
+		dispatch({
+			type: 'SET_USER',
+			payload: user,
+		});
+
+		toast.info(`Welcome, ${user.username}`, {
+			autoClose: 3000,
+			icon: '🎉',
 		});
 	};
 };
@@ -79,7 +90,7 @@ export const logoutUser = () => {
 	return dispatch => {
 		storageService.logoutUser();
 		// authService.setToken(null);
-		// Cookies.remove('jwt', {path: '/'})
+		Cookies.remove('jwt', { path: '/' });
 
 		dispatch({
 			type: 'LOGOUT',

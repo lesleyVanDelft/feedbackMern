@@ -1,6 +1,6 @@
 @import '../../../../sass/main.scss';
 
-.Reply {
+.ExtraReply {
 	width: 100%;
 	// border-bottom: 1px solid rgba(128, 128, 128, 0.301);
 	margin-bottom: 0rem;
@@ -8,18 +8,6 @@
 	// padding-left: 3.125rem;
 	padding-left: 24px;
 	// border-left: 1px solid rgba(128, 128, 128, 0.301);
-	// background-color: orange;
-	position: relative;
-	&::before {
-		content: '';
-		position: absolute;
-		width: 1px;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.1);
-		left: 0;
-		bottom: 25%;
-	}
-
 	img {
 		width: 40px;
 		height: 40px;
@@ -93,25 +81,6 @@
 			font-weight: bold;
 			color: $purple;
 			margin-right: 0.4rem;
-		}
-	}
-}
-
-@media screen and (max-width: 768px) {
-	.Reply {
-		padding-left: 1rem;
-
-		&::before {
-			height: 75%;
-		}
-
-		&__userBar {
-			img.replyImg {
-				margin-right: 0.8rem;
-			}
-		}
-		&__text {
-			padding-left: 0rem;
 		}
 	}
 }

@@ -46,3 +46,34 @@
 		}
 	}
 }
+
+@media screen and (max-width: 768px) {
+	.AddComment {
+		padding: 0;
+
+		&__title {
+			padding-top: 0;
+		}
+
+		textarea {
+			height: 80px;
+			padding: 0;
+			padding-left: 0.7rem;
+			padding-top: 0.5rem;
+		}
+		&__bottom {
+			.letterCount {
+				flex: 100%;
+				margin-right: 5rem;
+			}
+
+			.btn-purple {
+				// align-self: flex-end;
+				// width: fit-content;
+				margin-left: 0rem;
+				padding: 0;
+				padding: 0.7rem 0.9rem;
+			}
+		}
+	}
+}

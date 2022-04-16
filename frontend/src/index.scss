@@ -1,4 +1,3 @@
-@import '../node_modules/bootstrap/dist/css/bootstrap-grid.css';
 @import './sass/main.scss';
 
 *,
@@ -101,6 +100,11 @@ a {
 			padding: 0;
 			padding-left: 1rem;
 			border-radius: 10px;
+			outline: none;
+
+			&:focus {
+				outline: 1px solid $blue;
+			}
 		}
 
 		&.text {
@@ -130,6 +134,18 @@ a {
 @media screen and (max-width: 768px) {
 	.App {
 		padding: 0;
+		padding-bottom: 2rem;
+	}
+
+	.btn {
+		width: 100%;
+	}
+
+	.Form__group {
+		&--buttons {
+			display: flex;
+			flex-direction: column-reverse;
+		}
 	}
 
 	.Form__group {

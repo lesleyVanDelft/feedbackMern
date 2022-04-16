@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import FilterButtons from '../Dashboard/FilterButtons/FilterButtons';
 import Roadmap from '../Dashboard/Roadmap/Roadmap';
 import { motion, AnimatePresence } from 'framer-motion';
-import { logout, reset } from '../../features/auth/authSlice';
+// import { logout, reset } from '../../features/auth/authSlice';
+import { logoutUser } from '../../reducers/userReducer';
 
 const menuVisibility = {
 	hidden: { opacity: 0, right: -150 },
@@ -16,9 +17,9 @@ const MobileDashboard = ({ category, isVisible }) => {
 	const navigate = useNavigate();
 
 	const onLogout = () => {
-		dispatch(logout());
-		dispatch(reset());
-		navigate('/');
+		dispatch(logoutUser());
+		// dispatch(reset());
+		navigate('/login');
 	};
 	return (
 		<AnimatePresence>
