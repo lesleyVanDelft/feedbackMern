@@ -42,7 +42,7 @@ const Register = () => {
 		onSubmit: values => {
 			dispatch(registerUser(values));
 			navigate('/');
-			console.log('submit test register');
+			// console.log('submit test register');
 		},
 	});
 
