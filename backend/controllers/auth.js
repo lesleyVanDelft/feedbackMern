@@ -105,25 +105,26 @@ const loginUser = async (req, res) => {
 			.status(400)
 			.send({ message: 'No account with this username has been registered' });
 	}
-	// const credentialsValid = await bcryptjs.compare(password, user.password);
 	// console.log(credentialsValid);
 
 	// if (!credentialsValid) {
 	// 	return res.status(400).send({ message: 'invalid username or password' });
 	// }
 	try {
-		const token = generateToken(user);
-		// console.log(user);
-		// await User.login(email, password);
-		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
-		return res.status(200).json({
-			name: user.name,
-			email: user.email,
-			username: user.username,
-			id: user._id,
-			profileImg: user.profileImg,
-			token,
-		});
+		const credentialsValid = await bcryptjs.compare(user.password, password);
+
+		if (credentialsValid) {
+			const token = generateToken(user);
+			res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
+			return res.status(200).json({
+				name: user.name,
+				email: user.email,
+				username: user.username,
+				id: user._id,
+				profileImg: user.profileImg,
+				token,
+			});
+		}
 	} catch (err) {
 		const errors = handleError(err);
 		return res.status(400).json({ errors });
