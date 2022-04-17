@@ -32,33 +32,24 @@ const userReducer = (state = null, action) => {
 	}
 };
 
-export const loginUser = credentials => {
+export const loginUser = (credentials, errorHandler) => {
 	return async dispatch => {
 		const user = await authService.login(credentials);
-		storageService.saveUser(user);
-		storageService.loadUser();
-		// authService.setToken(user.token);
-		// console.log(user);
-		// const user = await authService.login(credentials);
-		// storageService.saveUser(user);
-		// authService.setToken(user.token);
 
-		dispatch({
-			type: 'LOGIN',
-			payload: user,
-		});
+		if (user) {
+			storageService.saveUser(user);
+			storageService.loadUser();
 
-		// const loggedUser = storageService.loadUser();
-		// console.log(loggedUser);
-		// dispatch({
-		// 	type: 'SET_USER',
-		// 	payload: user,
-		// });
+			dispatch({
+				type: 'LOGIN',
+				payload: user,
+			});
 
-		toast.info(`Welcome ${user.username}`, {
-			autoClose: 5000,
-			icon: '👋',
-		});
+			toast.info(`Welcome ${user.username}`, {
+				autoClose: 5000,
+				icon: '👋',
+			});
+		}
 	};
 };
 

@@ -93,23 +93,25 @@ const registerUser = async (req, res) => {
 // const loginUser_get = (req, res) => {
 // 	res.render('login');
 // };
-const loginUser = async (req, res) => {
+const loginUser = async (req, res, next) => {
+	const { email, password } = req.body;
+	const user = await User.findOne({ email });
 	try {
-		const { email, password } = req.body;
-		const user = await User.findOne({ email });
-
 		if (!user) {
 			return res
-				.status(400)
-				.send({ message: 'No account with this email has been registered' });
+				.status(401)
+				.send({
+					errors: [
+						{
+							errorMessage: 'no user found with email auth controller',
+							type: 'email',
+						},
+					],
+				});
 		}
 
 		if (user) {
 			const comparedPassword = await bcryptjs.compare(password, user.password);
-			// console.log(comparedPassword);
-			// console.log(password);
-			// console.log(user.password);
-
 			if (comparedPassword) {
 				const token = generateToken(user);
 				res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
@@ -123,14 +125,21 @@ const loginUser = async (req, res) => {
 					token,
 				});
 			} else {
-				res.redirect(401, '/login');
+				res
+					.status(401)
+					.send({
+						errors: [
+							{
+								errorMessage: 'wrong password auth controller',
+								type: 'password',
+							},
+						],
+					});
 			}
-		} else {
-			res.redirect('/login');
 		}
+		next();
 	} catch (err) {
-		const errors = handleError(err);
-		return res.status(500).json({ errors });
+		res.status(402).send(err);
 	}
 };
 

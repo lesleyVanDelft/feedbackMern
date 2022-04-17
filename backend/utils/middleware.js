@@ -55,20 +55,21 @@ const unknownEndpointHandler = (_req, res) => {
 	res.status(404).send({ message: 'Unknown endpoint' });
 };
 
-// const errorHandler = (error, _req, res, next) => {
-// 	console.log(error.message + 'utils/middleware.js');
+const errorHandler = (error, _req, res, next) => {
+	// console.log(error.message + 'utils/middleware.js');
+	// if (error.name === 'CastError' && error.kind === 'ObjectId') {
+	// 	return res.status(400).send({ message: 'Malformatted ID.' });
+	// } else if (error.name === 'ValidationError') {
+	// 	return res.status(400).send({ message: error.message });
+	// } else if (error.name === 'JsonWebTokenError') {
+	// 	return res.status(401).send({ message: 'Invalid token.' });
+	// } else {
+	// 	res.status(400).send({ message: error.message });
+	// }
+	// if (error.response === 401) {
+	// 	return res.status(401).send({ loginError: error.response });
+	// }
+	// next(error);
+};
 
-// 	if (error.name === 'CastError' && error.kind === 'ObjectId') {
-// 		return res.status(400).send({ message: 'Malformatted ID.' });
-// 	} else if (error.name === 'ValidationError') {
-// 		return res.status(400).send({ message: error.message });
-// 	} else if (error.name === 'JsonWebTokenError') {
-// 		return res.status(401).send({ message: 'Invalid token.' });
-// 	} else {
-// 		res.status(400).send({ message: error.message });
-// 	}
-
-// 	next(error);
-// };
-
-module.exports = { auth, unknownEndpointHandler };
+module.exports = { auth, unknownEndpointHandler, errorHandler };

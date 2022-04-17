@@ -7,9 +7,12 @@ import * as Yup from 'yup';
 import { loginUser } from '../reducers/userReducer';
 import Spinner from '../components/Spinner';
 import Header from '../components/Header/Header';
+import { errorHandler } from '../utils/errorHandler';
+import axios from 'axios';
 
 const Login = () => {
 	const user = useSelector(state => state.user);
+	const [error, setError] = useState(null);
 	// const [formData, setFormData] = useState({
 	// 	email: '',
 	// 	password: '',
@@ -24,9 +27,33 @@ const Login = () => {
 			password: Yup.string().required('Password required'),
 		}),
 		onSubmit: values => {
-			dispatch(loginUser(values));
-			// console.log(values);
+			try {
+				dispatch(loginUser(values));
+			} catch (err) {
+				// console.log(`${err} loginpage`);
+				setError(err);
+
+				console.log(error);
+
+				// errorHandler(err);
+				// console.log(err);
+			}
 		},
+		// onSubmit: async values => {
+		// 	try {
+		// 		await axios({
+		// 			method: 'POST',
+		// 			url: `/api/users/login`,
+		// 			data: {
+		// 				email: values.email,
+		// 				password: values.password,
+		// 			},
+		// 		}).then(res => res.json());
+		// 	} catch (err) {
+		// 		setError(err);
+		// 		console.log(err);
+		// 	}
+		// },
 	});
 	// destructure useState
 	// const { email, password } = formData;
@@ -65,7 +92,9 @@ const Login = () => {
 		if (user) {
 			navigate('/');
 		}
+		// console.log(errorHandler());
 	}, [user, navigate]);
+	console.log();
 
 	return (
 		<main className="Login">
@@ -80,8 +109,9 @@ const Login = () => {
 					</h2>
 					<p>Login and share your feedback</p>
 				</div>
-				<form action={'/login'} onSubmit={formik.handleSubmit}>
+				<form onSubmit={formik.handleSubmit}>
 					<div className="form-group">
+						{error && <span className="error">{error.message}</span>}
 						<input
 							type="email"
 							className="form-control"
@@ -97,6 +127,9 @@ const Login = () => {
 						) : null}
 					</div>
 					<div className="form-group">
+						{error && (
+							<span className="error">{error.response.data.message}</span>
+						)}
 						<input
 							type="password"
 							className="form-control"

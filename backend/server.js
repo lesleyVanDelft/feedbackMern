@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const port = process.env.PORT || 5000;
 const host = '0.0.0.0';
-const { errorHandler } = require('./middleware/errorMiddleware');
+// const { errorHandler } = require('./utils/middleware');
 const connectDB = require('./config/db');
 const middleware = require('./utils/middleware');
 const authRoutes = require('./routes/auth');
@@ -35,7 +35,7 @@ app.use('/api/feedbacks/', feedbackRoutes);
 app.use('/api/users/', authRoutes);
 
 app.use(middleware.unknownEndpointHandler);
-// app.use(middleware.errorHandler);
+app.use(middleware.errorHandler);
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {

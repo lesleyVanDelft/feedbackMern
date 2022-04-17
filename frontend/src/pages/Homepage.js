@@ -50,22 +50,23 @@ const Homepage = () => {
 	useEffect(() => {
 		try {
 			if (!user) {
-				dispatch(setUser());
+				// dispatch(setUser());
+				navigate('/login');
 			}
 			if (user) {
 				dispatch(getFeedbacks());
 			}
-			setTimeout(() => {
-				// if (user) {
-				// 	dispatch(getFeedbacks());
-				// }
-				if (!user) {
-					navigate('/login');
-				}
-			}, 300);
-			if (!user) {
-				navigate('/login');
-			}
+			// setTimeout(() => {
+			// 	// if (user) {
+			// 	// 	dispatch(getFeedbacks());
+			// 	// }
+			// 	if (!user) {
+			// 		navigate('/login');
+			// 	}
+			// }, 300);
+			// if (!user) {
+			// 	navigate('/login');
+			// }
 		} catch (error) {
 			console.log(error);
 		}
