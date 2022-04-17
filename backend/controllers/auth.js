@@ -69,7 +69,7 @@ const registerUser = async (req, res) => {
 			name,
 			username,
 			email,
-			username,
+			// username,
 			password,
 		});
 

@@ -65,7 +65,7 @@ const Login = () => {
 		if (user) {
 			navigate('/');
 		}
-	});
+	}, [user, navigate]);
 
 	return (
 		<main className="Login">
@@ -80,7 +80,7 @@ const Login = () => {
 					</h2>
 					<p>Login and share your feedback</p>
 				</div>
-				<form onSubmit={formik.handleSubmit}>
+				<form action={'/login'} onSubmit={formik.handleSubmit}>
 					<div className="form-group">
 						<input
 							type="email"
