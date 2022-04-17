@@ -12,7 +12,7 @@ const Comment = ({ commentData, currentFeedback, user, username }) => {
 	const dispatch = useDispatch();
 	// console.log(currentFeedback);
 	// console.log(user);
-	console.log(commentData);
+	// console.log(commentData);
 	const setActive = actv => {
 		setReplyActive(actv);
 	};

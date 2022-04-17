@@ -61,16 +61,16 @@ const registerUser = async (req, res) => {
 			.send({ message: `Email: ${email} is already registered` });
 	}
 
-	const salt = await bcryptjs.genSalt();
-	const password = await bcryptjs.hash(req.body.password, salt);
 	try {
+		// const salt = await bcryptjs.genSalt();
+		const hashedPassword = await bcryptjs.hash(req.body.password, 10);
 		// Create user
 		const user = await User.create({
 			name,
 			username,
 			email,
 			// username,
-			password,
+			password: hashedPassword,
 		});
 
 		const token = generateToken(user);
@@ -85,7 +85,7 @@ const registerUser = async (req, res) => {
 		});
 	} catch (err) {
 		const errors = handleError(err);
-		return res.status(400).json({ errors });
+		return res.status(500).json({ errors });
 	}
 };
 
@@ -94,40 +94,43 @@ const registerUser = async (req, res) => {
 // 	res.render('login');
 // };
 const loginUser = async (req, res) => {
-	const { email, password } = req.body;
-	const user = await User.findOne({ email });
-
-	// console.log(password);
-	// req.params.id = user._id;
-	// console.log(req.params.id);
-	if (!user) {
-		return res
-			.status(400)
-			.send({ message: 'No account with this username has been registered' });
-	}
-	// console.log(credentialsValid);
-
-	// if (!credentialsValid) {
-	// 	return res.status(400).send({ message: 'invalid username or password' });
-	// }
 	try {
-		const credentialsValid = await bcryptjs.compare(user.password, password);
+		const { email, password } = req.body;
+		const user = await User.findOne({ email });
 
-		if (credentialsValid) {
-			const token = generateToken(user);
-			res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
-			return res.status(200).json({
-				name: user.name,
-				email: user.email,
-				username: user.username,
-				id: user._id,
-				profileImg: user.profileImg,
-				token,
-			});
+		if (!user) {
+			return res
+				.status(400)
+				.send({ message: 'No account with this email has been registered' });
+		}
+
+		if (user) {
+			const comparedPassword = await bcryptjs.compare(password, user.password);
+			// console.log(comparedPassword);
+			// console.log(password);
+			// console.log(user.password);
+
+			if (comparedPassword) {
+				const token = generateToken(user);
+				res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
+
+				return res.status(200).json({
+					name: user.name,
+					email: user.email,
+					username: user.username,
+					id: user._id,
+					profileImg: user.profileImg,
+					token,
+				});
+			} else {
+				res.redirect(401, '/login');
+			}
+		} else {
+			res.redirect('/login');
 		}
 	} catch (err) {
 		const errors = handleError(err);
-		return res.status(400).json({ errors });
+		return res.status(500).json({ errors });
 	}
 };
 
