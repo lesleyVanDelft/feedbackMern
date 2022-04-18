@@ -36,7 +36,7 @@ router.post('/details/upvote/:id', auth, upvoteFeedback);
 router.post('/:id/downvote', downvoteFeedback);
 
 // get ALL feedbacks
-router.get('/', auth, getFeedbacks);
+router.get('/homepage', auth, getFeedbacks);
 
 // get SINGLE feedback
 router.get('/details/:id', getSingleFeedback);

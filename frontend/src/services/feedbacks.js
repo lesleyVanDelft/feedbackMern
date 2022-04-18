@@ -2,7 +2,7 @@ import axios from 'axios';
 import { token } from './auth';
 import Cookies from 'js-cookie';
 
-const API_URL = '/api/feedbacks/';
+const API_URL = '/api/feedbacks';
 
 const tokenCookie = Cookies.get('jwt');
 // console.log(tokenCookie);
@@ -18,14 +18,14 @@ const setConfig = () => {
 
 // get user feedbacks
 const getFeedbacks = async () => {
-	const response = await axios.get(API_URL, setConfig());
+	const response = await axios.get(API_URL + '/homepage', setConfig());
 	// console.log();
 	return response.data;
 };
 
 // get single feedback
 const getSingleFeedback = async id => {
-	const response = await axios.get(`${API_URL}details/${id}`, setConfig());
+	const response = await axios.get(`${API_URL}/details/${id}`, setConfig());
 	return response.data;
 };
 
@@ -36,7 +36,7 @@ const addNew = async feedbackObj => {
 
 const editFeedback = async (id, feedbackObj) => {
 	const response = await axios.patch(
-		`${API_URL}${id}`,
+		`${API_URL}/${id}`,
 		feedbackObj,
 		setConfig()
 	);
@@ -44,13 +44,13 @@ const editFeedback = async (id, feedbackObj) => {
 };
 
 const getFeedbackComments = async id => {
-	const response = await axios.get(`${API_URL}details/${id}`, setConfig());
+	const response = await axios.get(`${API_URL}/details/${id}`, setConfig());
 	return response.data;
 };
 
 const upvoteFeedback = async id => {
 	const response = await axios.post(
-		`${API_URL + 'upvote/' + id}`,
+		`${API_URL + '/upvote/' + id}`,
 		// `${API_URL + id + '/upvote'}`,
 		null,
 		setConfig()
@@ -60,7 +60,7 @@ const upvoteFeedback = async id => {
 
 const downvoteFeedback = async id => {
 	const response = await axios.post(
-		`${API_URL + id}/downvote`,
+		`${API_URL + '/downvote/' + id}`,
 		null,
 		setConfig()
 	);
@@ -68,14 +68,14 @@ const downvoteFeedback = async id => {
 };
 
 const deleteFeedback = async id => {
-	const response = await axios.delete(`${API_URL}` + id);
+	const response = await axios.delete(`${API_URL}/` + id);
 	console.log('delete test');
 	return response.data;
 };
 
 const postComment = async (feedbackId, commentObj) => {
 	const response = await axios.post(
-		`${API_URL + 'details/' + feedbackId}`,
+		`${API_URL + '/details/' + feedbackId}`,
 		commentObj,
 		setConfig()
 	);
@@ -85,7 +85,7 @@ const postComment = async (feedbackId, commentObj) => {
 
 const postReply = async (feedbackId, commentId, replyObj) => {
 	const response = await axios.post(
-		`${API_URL + 'details/' + feedbackId}/comment/${commentId}/reply`,
+		`${API_URL + '/details/' + feedbackId}/comment/${commentId}/reply`,
 		replyObj,
 		setConfig()
 	);
