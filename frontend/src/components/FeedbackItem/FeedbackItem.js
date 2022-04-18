@@ -25,6 +25,7 @@ const FeedbackItem = ({
 }) => {
 	const [upvoted, setUpvoted] = useState(false);
 	const [downvoted, setDownvoted] = useState(false);
+	const [voteCount, setVoteCount] = useState(0);
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
 	const singleFeedback = useSelector(state => state.singleFeedback);
@@ -48,7 +49,9 @@ const FeedbackItem = ({
 			setDownvoted(true);
 			setUpvoted(false);
 		}
-	}, [user, feedback.upvotedBy, feedback]);
+
+		console.log(feedback.pointsCount);
+	}, [user, feedback.upvotedBy, feedback.downvotedBy, feedback]);
 
 	const handleUpvoteToggle = async e => {
 		e.preventDefault();
@@ -86,8 +89,9 @@ const FeedbackItem = ({
 					downvote => downvote !== user.id
 				);
 				dispatch(
-					toggleDownvote(feedback._id, updatedDownvotedBy, feedback.downvotedBy)
+					toggleDownvote(feedback._id, updatedDownvotedBy, feedback.upvotedBy)
 				);
+				// setVoteCount(prevState => prevState + 1);
 				setDownvoted(false);
 				// setUpvoted(false);
 			} else {
@@ -98,6 +102,7 @@ const FeedbackItem = ({
 				dispatch(
 					toggleDownvote(feedback._id, updatedDownvotedBy, updatedUpvotedBy)
 				);
+				// setVoteCount(prevState => prevState - 1);
 				setDownvoted(true);
 				setUpvoted(false);
 			}
@@ -142,7 +147,10 @@ const FeedbackItem = ({
 									handleUpvote={handleUpvoteToggle}
 								/>
 								<span className="votes__count">
-									{feedback.upvotedBy.length}
+									{/* {feedback.upvotedBy.length} */}
+									{feedback.pointsCount === undefined
+										? feedback.upvotedBy.length
+										: feedback.pointsCount}
 								</span>
 
 								{/* <button className="votes__downvote">

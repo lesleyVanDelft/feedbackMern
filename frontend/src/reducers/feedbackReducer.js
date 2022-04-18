@@ -33,7 +33,6 @@ const feedbackReducer = (state = [], action) => {
 				return fb._id !== action.payload.id
 					? fb
 					: { ...fb, ...action.payload.data };
-				//   fb.upvotedBy.push(action.payload.data);
 			});
 		case 'TOGGLE_DOWNVOTE':
 			return state.map(fb => {
@@ -101,10 +100,10 @@ export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
 
 export const toggleDownvote = (id, downvotedBy, upvotedBy) => {
 	return async dispatch => {
-		let pointsCount = downvotedBy.length - upvotedBy.length;
-		if (pointsCount < 0) {
-			pointsCount = 0;
-		}
+		let pointsCount = upvotedBy.length - downvotedBy.length;
+		// if (pointsCount < 0) {
+		// 	pointsCount = 0;
+		// }
 
 		dispatch({
 			type: 'TOGGLE_DOWNVOTE',

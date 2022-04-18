@@ -1,6 +1,7 @@
 const Feedback = require('../models/feedbackModel');
 const User = require('../models/userModel');
 const pointsCalculator = require('../utils/pointsCalculator');
+// const ptscalc = require('../utils/pointsCalculator');
 
 const upvoteFeedback = async (req, res) => {
 	const { id } = req.params;
@@ -30,15 +31,15 @@ const upvoteFeedback = async (req, res) => {
 		feedback.upvotedBy = feedback.upvotedBy.filter(
 			u => u.toString() !== user._id.toString()
 		);
-		// feedback.pointsCount++;
-		author.karmaPoints.feedbackKarma--;
+		// feedback.pointsCount--;
+		// author.karmaPoints.feedbackKarma--;
 	} else {
 		feedback.upvotedBy = feedback.upvotedBy.concat(user._id);
 		feedback.downvotedBy = feedback.downvotedBy.filter(
 			d => d.toString() !== user._id.toString()
 		);
-		// feedback.pointsCount--;
-		author.karmaPoints.postKarma++;
+		// feedback.pointsCount++;
+		// author.karmaPoints.postKarma++;
 	}
 
 	// if (feedback.upvotedBy.includes(user._id.toString())) {
@@ -53,11 +54,13 @@ const upvoteFeedback = async (req, res) => {
 	const calculatedData = pointsCalculator(
 		feedback.upvotedBy.length,
 		feedback.downvotedBy.length,
-		feedback.pointsCount,
+		// feedback.pointsCount,
 		feedback.createdAt
 	);
 
 	feedback.pointsCount = calculatedData.pointsCount;
+	// console.log(feedback.pointsCount);
+	// feedback.pointsCount = calculatedData.pointsCount;
 
 	await feedback.save();
 	await author.save();
@@ -91,17 +94,18 @@ const downvoteFeedback = async (req, res) => {
 
 	if (feedback.downvotedBy.includes(user._id.toString())) {
 		feedback.downvotedBy = feedback.downvotedBy.filter(
-			d => d.toString() !== user._id.toString()
+			downvote => downvote.toString() !== user._id.toString()
 		);
-
-		author.karmaPoints.feedbackKarma++;
+		// feedback.pointsCount++;
+		// author.karmaPoints.feedbackKarma++;
 	} else {
 		feedback.downvotedBy = feedback.downvotedBy.concat(user._id);
 		feedback.upvotedBy = feedback.upvotedBy.filter(
-			u => u.toString() !== user._id.toString()
+			upvote => upvote.toString() !== user._id.toString()
 		);
 
-		author.karmaPoints.postKarma--;
+		// feedback.pointsCount--;
+		// author.karmaPoints.postKarma--;
 	}
 
 	// add to pointscount model

@@ -109,6 +109,7 @@ const feedbackModel = new mongoose.Schema(
 		pointsCoint: {
 			type: Number,
 			default: 0,
+			required: true,
 		},
 		comments: [commentSchema],
 		commentCount: {
