@@ -33,7 +33,7 @@ const router = express.Router();
 router.post('/upvote/:id', auth, upvoteFeedback);
 router.post('/details/upvote/:id', auth, upvoteFeedback);
 // DOWNVOTE id post link
-router.post('/:id/downvote', downvoteFeedback);
+router.post('/downvote/:id', downvoteFeedback);
 
 // get ALL feedbacks
 router.get('/homepage', auth, getFeedbacks);
