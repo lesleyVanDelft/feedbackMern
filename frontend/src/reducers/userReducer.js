@@ -32,9 +32,9 @@ const userReducer = (state = null, action) => {
 	}
 };
 
-export const loginUser = (credentials, errorHandler) => {
+export const loginUser = (credentials, getError) => {
 	return async dispatch => {
-		const user = await authService.login(credentials);
+		const user = await authService.login(credentials, getError);
 
 		if (user) {
 			storageService.saveUser(user);

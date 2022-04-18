@@ -13,6 +13,10 @@ import axios from 'axios';
 const Login = () => {
 	const user = useSelector(state => state.user);
 	const [error, setError] = useState(null);
+	const getError = e => {
+		// console.log(e);
+		setError(e);
+	};
 	// const [formData, setFormData] = useState({
 	// 	email: '',
 	// 	password: '',
@@ -28,7 +32,7 @@ const Login = () => {
 		}),
 		onSubmit: values => {
 			try {
-				dispatch(loginUser(values));
+				dispatch(loginUser(values, getError));
 			} catch (err) {
 				// console.log(`${err} loginpage`);
 				setError(err);

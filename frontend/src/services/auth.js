@@ -10,12 +10,15 @@ const setToken = newToken => {
 	token = newToken;
 };
 
-const login = async loginData => {
+const login = async (loginData, getError) => {
 	try {
 		const response = await axios.post(API_URL + 'login', loginData, token);
 		return response.data;
 	} catch (error) {
-		console.log(error.response.data);
+		console.log(error);
+		// if (error) {
+		// 	getError(error);
+		// }
 		// return error.response.data;
 		// if (error.response.status === 401) {
 		// 	errorHandler(error.response.data);

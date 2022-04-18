@@ -35,7 +35,7 @@ app.use('/api/feedbacks/', feedbackRoutes);
 app.use('/api/users/', authRoutes);
 
 app.use(middleware.unknownEndpointHandler);
-app.use(middleware.errorHandler);
+// app.use(middleware.errorHandler);
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {
@@ -52,6 +52,6 @@ if (process.env.NODE_ENV === 'production') {
 
 // app.use(errorHandler);
 
-app.listen(port, host, () =>
+app.listen(port, () =>
 	console.log(`Feedbackmern backend is running on port ${port}`)
 );

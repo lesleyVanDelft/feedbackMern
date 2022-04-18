@@ -96,18 +96,24 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res, next) => {
 	const { email, password } = req.body;
 	const user = await User.findOne({ email });
+	// if (err) {
+	// 	console.log('-------------------------');
+	// 	console.log(err);
+	// 	console.log('-------------------------');
+	// 	res.status(401).send({
+	// 		errMsg: err,
+	// 	});
+	// }
 	try {
 		if (!user) {
-			return res
-				.status(401)
-				.send({
-					errors: [
-						{
-							errorMessage: 'no user found with email auth controller',
-							type: 'email',
-						},
-					],
-				});
+			return res.status(401).send({
+				errors: [
+					{
+						errorMessage: 'no user found with email auth controller',
+						type: 'email',
+					},
+				],
+			});
 		}
 
 		if (user) {
@@ -125,19 +131,16 @@ const loginUser = async (req, res, next) => {
 					token,
 				});
 			} else {
-				res
-					.status(401)
-					.send({
-						errors: [
-							{
-								errorMessage: 'wrong password auth controller',
-								type: 'password',
-							},
-						],
-					});
+				res.status(401).send({
+					errors: [
+						{
+							errorMessage: 'wrong password auth controller',
+							type: 'password',
+						},
+					],
+				});
 			}
 		}
-		next();
 	} catch (err) {
 		res.status(402).send(err);
 	}
