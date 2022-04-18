@@ -1,18 +1,10 @@
 import { motion } from 'framer-motion';
 import { FaChevronDown, FaChevronUp, FaComment } from 'react-icons/fa';
-// import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import {
-// 	getFeedbacks,
-// 	likeComment,
-// } from '../../features/feedbacks/feedbackSlice';
 import { DownvoteButton, UpvoteButton } from './VoteButtons/VoteButtons';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { getFeedbacks } from '../../reducers/feedbackReducer';
 import { useEffect, useState } from 'react';
-// import { UpvoteButton } from './VoteButtons/VoteButtons';
 import './FeedbackItem.css';
 
 const FeedbackItem = ({
@@ -25,13 +17,11 @@ const FeedbackItem = ({
 }) => {
 	const [upvoted, setUpvoted] = useState(false);
 	const [downvoted, setDownvoted] = useState(false);
-	const [voteCount, setVoteCount] = useState(0);
-	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const isUpvoted = user && feedback.upvotedBy.includes(user.id);
 	const isDownvoted = user && feedback.downvotedBy.includes(user.id);
-	// const currentFeedback = useSelector(state => state.feedbackComments);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (!user) {
@@ -50,7 +40,7 @@ const FeedbackItem = ({
 			setUpvoted(false);
 		}
 
-		console.log(feedback.pointsCount);
+		// console.log(feedback.pointsCount);
 	}, [user, feedback.upvotedBy, feedback.downvotedBy, feedback]);
 
 	const handleUpvoteToggle = async e => {
