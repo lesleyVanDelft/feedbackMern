@@ -17,6 +17,7 @@ const FeedbackItem = ({
 }) => {
 	const [upvoted, setUpvoted] = useState(false);
 	const [downvoted, setDownvoted] = useState(false);
+	const [count, setCount] = useState(0);
 	const user = useSelector(state => state.user);
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const isUpvoted = user && feedback.upvotedBy.includes(user.id);
@@ -38,6 +39,11 @@ const FeedbackItem = ({
 		if (feedback.downvotedBy.includes(user.id)) {
 			setDownvoted(true);
 			setUpvoted(false);
+		}
+		if (feedback.pointsCount === undefined) {
+			setCount(feedback.upvotedBy.length - feedback.downvotedBy.length);
+		} else {
+			setCount(feedback.pointsCount);
 		}
 
 		// console.log(feedback.pointsCount);
@@ -138,9 +144,10 @@ const FeedbackItem = ({
 								/>
 								<span className="votes__count">
 									{/* {feedback.upvotedBy.length} */}
-									{feedback.pointsCount === undefined
+									{/* {feedback.pointsCount === undefined
 										? feedback.upvotedBy.length
-										: feedback.pointsCount}
+										: feedback.pointsCount} */}
+									{count}
 								</span>
 
 								{/* <button className="votes__downvote">

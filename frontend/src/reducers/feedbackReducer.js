@@ -85,9 +85,9 @@ export const createNewFeedback = feedbackObj => {
 export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
 	return async dispatch => {
 		let pointsCount = upvotedBy.length - downvotedBy.length;
-		if (pointsCount < 0) {
-			pointsCount = 0;
-		}
+		// if (pointsCount < 0) {
+		// 	pointsCount = 0;
+		// }
 		// console.log(id);
 		dispatch({
 			type: 'TOGGLE_UPVOTE',
