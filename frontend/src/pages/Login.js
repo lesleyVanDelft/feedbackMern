@@ -32,12 +32,15 @@ const Login = () => {
 		}),
 		onSubmit: values => {
 			try {
-				dispatch(loginUser(values, getError));
+				if (!error) {
+					dispatch(loginUser(values, getError));
+				} else {
+					console.log(error);
+					console.log('hi');
+				}
 			} catch (err) {
 				// console.log(`${err} loginpage`);
 				setError(err);
-
-				console.log(error);
 
 				// errorHandler(err);
 				// console.log(err);
@@ -45,14 +48,18 @@ const Login = () => {
 		},
 		// onSubmit: async values => {
 		// 	try {
-		// 		await axios({
-		// 			method: 'POST',
-		// 			url: `/api/users/login`,
-		// 			data: {
-		// 				email: values.email,
-		// 				password: values.password,
-		// 			},
-		// 		}).then(res => res.json());
+		// 		// const response = await axios({
+		// 		// 	method: 'POST',
+		// 		// 	url: `/api/users/login`,
+		// 		// 	data: {
+		// 		// 		email: values.email,
+		// 		// 		password: values.password,
+		// 		// 	},
+		// 		// });
+		// 		// return response.data;
+
+		// 			dispatch(loginUser(values))
+
 		// 	} catch (err) {
 		// 		setError(err);
 		// 		console.log(err);

@@ -106,7 +106,8 @@ const loginUser = async (req, res, next) => {
 	// }
 	try {
 		if (!user) {
-			return res.status(401).send({
+			console.error('wrong email - auth controller');
+			res.status(401).send({
 				errors: [
 					{
 						errorMessage: 'no user found with email auth controller',
@@ -131,6 +132,7 @@ const loginUser = async (req, res, next) => {
 					token,
 				});
 			} else {
+				console.error('wrong password - auth controller');
 				res.status(401).send({
 					errors: [
 						{

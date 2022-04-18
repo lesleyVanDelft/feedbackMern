@@ -19,7 +19,7 @@ const feedbackReducer = (state = [], action) => {
 					state.feedbacks.push(...action.payload),
 				],
 			};
-		case 'TOGGLE_VOTE':
+		case 'TOGGLE_UPVOTE':
 			// return {
 			// 	...state,
 			// 	feedbacks: state.map(
@@ -35,11 +35,17 @@ const feedbackReducer = (state = [], action) => {
 					: { ...fb, ...action.payload.data };
 				//   fb.upvotedBy.push(action.payload.data);
 			});
+		case 'TOGGLE_DOWNVOTE':
+			return state.map(fb => {
+				return fb._id !== action.payload.id
+					? fb
+					: { ...fb, ...action.payload.data };
+			});
 
 		case 'DELETE_FEEDBACK':
 			return {
 				...state,
-				results: state.results.filter(r => r.id !== action.payload),
+				results: state.results.filter(fb => fb.id !== action.payload),
 			};
 		case 'LOGOUT_FEEDBACK':
 			return null;
@@ -83,9 +89,9 @@ export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
 		if (pointsCount < 0) {
 			pointsCount = 0;
 		}
-		console.log(id);
+		// console.log(id);
 		dispatch({
-			type: 'TOGGLE_VOTE',
+			type: 'TOGGLE_UPVOTE',
 			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
 		});
 
@@ -101,7 +107,7 @@ export const toggleDownvote = (id, downvotedBy, upvotedBy) => {
 		}
 
 		dispatch({
-			type: 'TOGGLE_VOTE',
+			type: 'TOGGLE_DOWNVOTE',
 			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
 		});
 

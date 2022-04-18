@@ -60,7 +60,7 @@ const upvoteFeedback = async id => {
 
 const downvoteFeedback = async id => {
 	const response = await axios.post(
-		`${API_URL + id}/downvote`,
+		`${API_URL + 'downvote/' + id}`,
 		null,
 		setConfig()
 	);

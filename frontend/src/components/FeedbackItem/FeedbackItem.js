@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 // 	getFeedbacks,
 // 	likeComment,
 // } from '../../features/feedbacks/feedbackSlice';
-import { UpvoteButton } from './VoteButtons/VoteButtons';
+import { DownvoteButton, UpvoteButton } from './VoteButtons/VoteButtons';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { getFeedbacks } from '../../reducers/feedbackReducer';
@@ -24,6 +24,7 @@ const FeedbackItem = ({
 	status,
 }) => {
 	const [upvoted, setUpvoted] = useState(false);
+	const [downvoted, setDownvoted] = useState(false);
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
 	const singleFeedback = useSelector(state => state.singleFeedback);
@@ -41,7 +42,10 @@ const FeedbackItem = ({
 		}
 		if (feedback.upvotedBy.includes(user.id)) {
 			setUpvoted(true);
-		} else {
+			setDownvoted(false);
+		}
+		if (feedback.downvotedBy.includes(user.id)) {
+			setDownvoted(true);
 			setUpvoted(false);
 		}
 	}, [user, feedback.upvotedBy, feedback]);
@@ -50,22 +54,52 @@ const FeedbackItem = ({
 		e.preventDefault();
 		try {
 			if (isUpvoted) {
-				const updatedUpvotedBy = feedback.upvotedBy.filter(u => u !== user.id);
+				const updatedUpvotedBy = feedback.upvotedBy.filter(
+					upvote => upvote !== user.id
+				);
 				dispatch(
 					toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
 				);
-				setUpvoted(true);
-				// dispatch(getFeedbacks());
+				setUpvoted(false);
+				// setDownvoted(false);
 			} else {
 				const updatedUpvotedBy = [...feedback.upvotedBy, user.id];
 				const updatedDownvotedBy = feedback.downvotedBy.filter(
-					d => d !== user.id
+					downvote => downvote !== user.id
 				);
 				dispatch(
 					toggleUpvote(feedback._id, updatedUpvotedBy, updatedDownvotedBy)
 				);
 				setUpvoted(false);
-				// dispatch(getFeedbacks());
+				// setDownvoted(false);
+			}
+		} catch (err) {
+			// dispatch(notify(getErrorMsg(err), 'error'));
+			console.log(err);
+		}
+	};
+	const handleDownvoteToggle = async e => {
+		e.preventDefault();
+		try {
+			if (isDownvoted) {
+				const updatedDownvotedBy = feedback.downvotedBy.filter(
+					downvote => downvote !== user.id
+				);
+				dispatch(
+					toggleDownvote(feedback._id, updatedDownvotedBy, feedback.downvotedBy)
+				);
+				setDownvoted(false);
+				// setUpvoted(false);
+			} else {
+				const updatedDownvotedBy = [...feedback.downvotedBy, user.id];
+				const updatedUpvotedBy = feedback.upvotedBy.filter(
+					upvote => upvote !== user.id
+				);
+				dispatch(
+					toggleDownvote(feedback._id, updatedDownvotedBy, updatedUpvotedBy)
+				);
+				setDownvoted(true);
+				setUpvoted(false);
 			}
 		} catch (err) {
 			// dispatch(notify(getErrorMsg(err), 'error'));
@@ -111,9 +145,15 @@ const FeedbackItem = ({
 									{feedback.upvotedBy.length}
 								</span>
 
-								<button className="votes__downvote">
+								{/* <button className="votes__downvote">
 									<FaChevronDown className="chevronDown" />
-								</button>
+								</button> */}
+								<DownvoteButton
+									user={user}
+									body={feedback}
+									active={downvoted}
+									handleDownvote={handleDownvoteToggle}
+								/>
 							</div>
 						</div>
 						<div className="FeedbackItem__left--content">

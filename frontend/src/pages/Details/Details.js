@@ -15,10 +15,14 @@ import CommentSection from '../../components/CommentSection/CommentSection';
 import EditFeedbackForm from '../../components/EditFeedbackForm/EditFeedbackForm';
 import { getFeedbackComments } from '../../reducers/feedbackCommentsReducer';
 // import { toggleUpvote } from '../../reducers/feedbackReducer';
-import { toggleUpvote } from '../../reducers/feedbackCommentsReducer';
+// import { toggleUpvote } from '../../reducers/feedbackCommentsReducer';
 import { setUser } from '../../reducers/userReducer';
 import LogoBar from '../../components/LogoBar/LogoBar';
-import { getFeedbacks } from '../../reducers/feedbackReducer';
+import {
+	getFeedbacks,
+	toggleUpvote,
+	toggleDownvote,
+} from '../../reducers/feedbackReducer';
 // import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 // import Dashboard from '../components/Dashboard/Dashboard';
 // import Suggestions from '../components/Suggestions/Suggestions';
@@ -49,9 +53,13 @@ const Details = () => {
 	// 	}
 	// }, []);
 
+	// const reqUrl = feedbacks.filter(fb => fb._id === id.toString());
+
 	useEffect(() => {
 		dispatch(getSingleFeedback(id));
 		dispatch(setUser());
+
+		// console.log(reqUrl);
 	}, [dispatch, id]);
 
 	if (!singleFeedback) {
@@ -89,6 +97,7 @@ const Details = () => {
 						<FeedbackItem
 							feedback={singleFeedback}
 							toggleUpvote={toggleUpvote}
+							toggleDownvote={toggleDownvote}
 						/>
 						<CommentSection
 							comments={singleFeedback.comments}
