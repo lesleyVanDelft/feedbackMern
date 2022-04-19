@@ -107,8 +107,8 @@ const loginUser = async (req, res, next) => {
 
 	if (!user) {
 		console.error('wrong email - auth controller');
-		res.status(401);
-		res.send('wrong email - auth controller');
+		res.status(400);
+		res.send('Email is not registered');
 	}
 
 	if (user) {
@@ -128,7 +128,7 @@ const loginUser = async (req, res, next) => {
 		} else {
 			console.error('wrong password - auth controller');
 			res.status(401);
-			res.send('wrong password - auth controller');
+			res.send('Wrong password');
 		}
 	}
 };

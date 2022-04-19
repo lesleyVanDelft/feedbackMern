@@ -14,10 +14,10 @@ const Login = () => {
 	const user = useSelector(state => state.user);
 	const [error, setError] = useState(null);
 	const errorMessage = useSelector(state => state.errorMessage);
-	// const [formData, setFormData] = useState({
-	// 	email: '',
-	// 	password: '',
-	// });
+	const [formData, setFormData] = useState({
+		email: '',
+		password: '',
+	});
 	const formik = useFormik({
 		initialValues: {
 			email: '',
@@ -57,12 +57,13 @@ const Login = () => {
 	// fire off functions from authSlice
 	const dispatch = useDispatch();
 
-	// const onChange = e => {
-	// 	setFormData(prevState => ({
-	// 		...prevState,
-	// 		[e.target.name]: e.target.value,
-	// 	}));
-	// };
+	const onChange = e => {
+		setError(null);
+		setFormData(prevState => ({
+			...prevState,
+			[e.target.name]: e.target.value,
+		}));
+	};
 
 	// const onSubmit = e => {
 	// 	e.preventDefault();
@@ -82,6 +83,10 @@ const Login = () => {
 	// 		console.log(error.message);
 	// 	}
 	// };
+	const onSubmit = e => {
+		e.preventDefault();
+		dispatch(loginUser(formData));
+	};
 
 	useEffect(() => {
 		if (user) {
@@ -95,10 +100,6 @@ const Login = () => {
 
 	return (
 		<main className="Login">
-			{errorMessage && <span>{errorMessage}</span>}
-			{/* <section className="heading">
-				
-			</section> */}
 			<Header login={true} />
 			<section className="Login__form form">
 				<div className="heading">
@@ -107,19 +108,23 @@ const Login = () => {
 					</h2>
 					<p>Login and share your feedback</p>
 				</div>
-				<form onSubmit={formik.handleSubmit}>
+				<form onSubmit={onSubmit}>
 					<div className="form-group">
-						{/* {error && <span className="error">{error.message}</span>} */}
+						{error && error.status === 400 && (
+							<span className="errorMsg">{error.data}</span>
+						)}
 						<label htmlFor="email">Email:</label>
 						<input
 							type="email"
 							className="form-control"
 							id="email"
 							name="email"
-							value={formik.values.email}
+							// value={formik.values.email}
+							value={formData.email}
 							placeholder="Enter your email"
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
+							// onChange={formik.handleChange}
+							onChange={onChange}
+							// onBlur={formik.handleBlur}
 						/>
 						{formik.touched.email && formik.errors.email ? (
 							<p className="formikErrorMessage">{formik.errors.email}</p>
@@ -129,16 +134,21 @@ const Login = () => {
 						{/* {error && (
 							<span className="error">{error.response.data.message}</span>
 						)} */}
+						{error && error.status === 401 && (
+							<span className="errorMsg">{error.data}</span>
+						)}
 						<label htmlFor="password">Password:</label>
 						<input
 							type="password"
 							className="form-control"
 							id="password"
 							name="password"
-							value={formik.values.password}
+							// value={formik.values.password}
+							value={formData.password}
 							placeholder="Enter your password"
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
+							// onChange={formik.handleChange}
+							onChange={onChange}
+							// onBlur={formik.handleBlur}
 						/>
 						{formik.touched.password && formik.errors.password ? (
 							<p className="formikErrorMessage">{formik.errors.password}</p>
