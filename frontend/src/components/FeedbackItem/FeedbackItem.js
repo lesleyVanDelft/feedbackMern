@@ -18,6 +18,7 @@ const FeedbackItem = ({
 	toggleDownvote,
 	roadmap,
 	detailsPage,
+	detailsCount,
 	isUpvotedDetails,
 	isDownvotedDetails,
 	status,
@@ -104,9 +105,7 @@ const FeedbackItem = ({
 				dispatch(
 					toggleDownvote(feedback._id, updatedDownvotedBy, feedback.upvotedBy)
 				);
-				// setVoteCount(prevState => prevState + 1);
 				setDownvoted(!downvoted);
-				// setUpvoted(false);
 				console.log('isDownvoted is now false');
 			} else {
 				const updatedDownvotedBy = [...feedback.downvotedBy, user.id];
@@ -168,10 +167,7 @@ const FeedbackItem = ({
 										? feedback.upvotedBy.length
 										: feedback.pointsCount} */}
 									{/* {feedback.upvotedBy.length - feedback.downvotedBy.length} */}
-									{detailsPage
-										? singleFeedback.upvotedBy.length -
-										  singleFeedback.downvotedBy.length
-										: count}
+									{detailsPage ? detailsCount : count}
 								</span>
 
 								{/* <button className="votes__downvote">

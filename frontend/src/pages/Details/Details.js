@@ -36,19 +36,29 @@ const Details = () => {
 	let { id } = useParams();
 
 	useEffect(() => {
-		dispatch(getSingleFeedback(id));
+		// dispatch(getSingleFeedback(id));
+		dispatch(getFeedbacks());
 		dispatch(setUser());
 	}, [dispatch, id]);
+	useEffect(() => {}, []);
 
 	if (!singleFeedback) {
 		return <h1>Loading...</h1>;
 	}
 
+	const filteredFeedbacks = feedbacks.filter(fb => fb._id === id);
+	const filteredFeedback = filteredFeedbacks[0];
+	// console.log(filteredFeedback);
+
+	//////////////////////
+	// filtering all feedbacks ?
+	//////////////////
+
 	return (
 		<>
-			{singleFeedback ? (
+			{filteredFeedback ? (
 				<>
-					{/* <p>{singleFeedback.status}</p> */}
+					{/* <p>{filteredFeedback.status}</p> */}
 					<LogoBar />
 					<main className="Details">
 						<div className="Details__buttons">
@@ -57,7 +67,7 @@ const Details = () => {
 									<FaChevronLeft /> <span>Go Back</span>
 								</Link>
 							</button>
-							{singleFeedback.author._id === user.id && (
+							{filteredFeedback.author === user.id && (
 								<Link to={`/edit/${id}`}>
 									<button className="btn btn-blue edit">Edit Feedback</button>
 								</Link>
@@ -65,24 +75,28 @@ const Details = () => {
 						</div>
 						<span className="postedBy">
 							Posted by:
-							{/* {singleFeedback.length > 0 && singleFeedback.details.username && (
-						<span className="username">@{singleFeedback.details.username}</span>
+							{/* {filteredFeedback.length > 0 && filteredFeedback.details.username && (
+						<span className="username">@{filteredFeedback.details.username}</span>
 					)} */}
 							<span className="username">
-								@{singleFeedback.author.username}
+								@{filteredFeedback.details.username}
 							</span>
 						</span>
 						<FeedbackItem
-							feedback={singleFeedback}
+							feedback={filteredFeedback}
 							toggleUpvote={toggleUpvote}
 							toggleDownvote={toggleDownvote}
 							detailsPage={true}
+							detailsCount={
+								filteredFeedback.upvotedBy.length -
+								filteredFeedback.downvotedBy.length
+							}
 							// isUpvotedDetails={isUpvotedDetails}
 							// isDownvotedDetails={isDownvotedDetails}
 							// downvoteActive={getDownvote}
 						/>
 						<CommentSection
-							comments={singleFeedback.comments}
+							comments={filteredFeedback.comments}
 							feedbackId={id}
 						/>
 					</main>
