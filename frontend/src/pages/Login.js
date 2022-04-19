@@ -13,10 +13,7 @@ import axios from 'axios';
 const Login = () => {
 	const user = useSelector(state => state.user);
 	const [error, setError] = useState(null);
-	const getError = e => {
-		// console.log(e);
-		setError(e);
-	};
+	const errorMessage = useSelector(state => state.errorMessage);
 	// const [formData, setFormData] = useState({
 	// 	email: '',
 	// 	password: '',
@@ -31,11 +28,7 @@ const Login = () => {
 			password: Yup.string().required('Password required'),
 		}),
 		onSubmit: values => {
-			try {
-				dispatch(loginUser(values));
-			} catch (err) {
-				setError(errorHandler(err));
-			}
+			dispatch(loginUser(values));
 		},
 		// onSubmit: async values => {
 		// 	try {
@@ -94,12 +87,15 @@ const Login = () => {
 		if (user) {
 			navigate('/');
 		}
-		// console.log(errorHandler());
 	}, [user, navigate]);
-	console.log();
+
+	useEffect(() => {
+		return errorMessage ? setError(errorMessage) : null;
+	}, [errorMessage]);
 
 	return (
 		<main className="Login">
+			{errorMessage && <span>{errorMessage}</span>}
 			{/* <section className="heading">
 				
 			</section> */}
@@ -113,7 +109,8 @@ const Login = () => {
 				</div>
 				<form onSubmit={formik.handleSubmit}>
 					<div className="form-group">
-						{error && <span className="error">{error.message}</span>}
+						{/* {error && <span className="error">{error.message}</span>} */}
+						<label htmlFor="email">Email:</label>
 						<input
 							type="email"
 							className="form-control"
@@ -129,9 +126,10 @@ const Login = () => {
 						) : null}
 					</div>
 					<div className="form-group">
-						{error && (
+						{/* {error && (
 							<span className="error">{error.response.data.message}</span>
-						)}
+						)} */}
+						<label htmlFor="password">Password:</label>
 						<input
 							type="password"
 							className="form-control"

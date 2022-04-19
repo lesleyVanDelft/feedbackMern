@@ -12,21 +12,8 @@ const setToken = newToken => {
 };
 
 const login = async (loginData, getError) => {
-	try {
-		const response = await axios.post(API_URL + 'login', loginData, token);
-		return response.data;
-	} catch (error) {
-		console.log(error, 'auth service');
-		// if (error) {
-		// 	getError(error);
-		// }
-		// return error.response.data;
-		// if (error.response.status === 401) {
-		// 	errorHandler(error.response.data);
-		// 	// return error.response.data;
-		// }
-		// return errorHandler(error.response);
-	}
+	const response = await axios.post(API_URL + 'login', loginData, token);
+	return response.data;
 };
 
 const register = async registerData => {

@@ -23,10 +23,10 @@ const Details = () => {
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
-	const isUpvotedDetails =
-		user && singleFeedback && singleFeedback.upvotedBy.includes(user.id);
-	const isDownvotedDetails =
-		user && singleFeedback && singleFeedback.downvotedBy.includes(user.id);
+	// const isUpvotedDetails =
+	// 	user && singleFeedback && singleFeedback.upvotedBy.includes(user.id);
+	// const isDownvotedDetails =
+	// 	user && singleFeedback && singleFeedback.downvotedBy.includes(user.id);
 
 	// hooks
 	const navigate = useNavigate();
@@ -56,7 +56,7 @@ const Details = () => {
 									<FaChevronLeft /> <span>Go Back</span>
 								</Link>
 							</button>
-							{singleFeedback.author._id === user.id && (
+							{singleFeedback.author === user.id && (
 								<Link to={`/edit/${id}`}>
 									<button className="btn btn-blue edit">Edit Feedback</button>
 								</Link>
@@ -67,15 +67,17 @@ const Details = () => {
 							{/* {singleFeedback.length > 0 && singleFeedback.details.username && (
 						<span className="username">@{singleFeedback.details.username}</span>
 					)} */}
-							<span className="username">{singleFeedback.author.username}</span>
+							<span className="username">
+								@{singleFeedback.author.username}
+							</span>
 						</span>
 						<FeedbackItem
 							feedback={singleFeedback}
 							toggleUpvote={toggleUpvote}
 							toggleDownvote={toggleDownvote}
 							detailsPage={true}
-							isUpvotedDetails={isUpvotedDetails}
-							isDownvotedDetails={isDownvotedDetails}
+							// isUpvotedDetails={isUpvotedDetails}
+							// isDownvotedDetails={isDownvotedDetails}
 							// downvoteActive={getDownvote}
 						/>
 						<CommentSection

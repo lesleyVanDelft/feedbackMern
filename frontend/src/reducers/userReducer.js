@@ -4,6 +4,8 @@ import storageService from '../utils/localStorage';
 import feedbackService from '../services/feedbacks';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
+import { errorHandler } from '../utils/errorHandler';
+import { setError } from './errorReducer';
 
 // const initialLoadState = {
 // 	user: localStorage.getItem('readifyUserKey') ? localStorage.getItem('readifyUserKey') : null,
@@ -13,8 +15,14 @@ import { toast } from 'react-toastify';
 // 	user: localStorage.getItem('user'),
 // 	feedbacks: [null],
 // };
-const userReducer = (state = null, action) => {
+
+const userReducer = (state = '', action) => {
 	switch (action.type) {
+		// case 'SET_LOGIN_ERROR':
+		// 	return {
+		// 		...state,
+		// 		errorMessage: action.payload.data,
+		// 	};
 		case 'LOGIN':
 			return action.payload;
 		case 'SIGNUP':
@@ -32,23 +40,35 @@ const userReducer = (state = null, action) => {
 	}
 };
 
-export const loginUser = (credentials, getError) => {
+export const loginUser = credentials => {
 	return async dispatch => {
-		const user = await authService.login(credentials, getError);
+		try {
+			const user = await authService.login(credentials);
 
-		if (user) {
-			storageService.saveUser(user);
-			storageService.loadUser();
+			if (user) {
+				storageService.saveUser(user);
+				storageService.loadUser();
 
+				dispatch({
+					type: 'LOGIN',
+					payload: user,
+				});
+
+				toast.info(`Welcome ${user.username}`, {
+					autoClose: 5000,
+					icon: '👋',
+				});
+			}
+		} catch (err) {
 			dispatch({
-				type: 'LOGIN',
-				payload: user,
+				type: 'SET_LOGIN_ERROR',
+				payload: err.response,
 			});
+			// dispatch(setError(err));
+			// errorHandler(err);
 
-			toast.info(`Welcome ${user.username}`, {
-				autoClose: 5000,
-				icon: '👋',
-			});
+			console.log(err.response);
+			// console.log('fuck u');
 		}
 	};
 };

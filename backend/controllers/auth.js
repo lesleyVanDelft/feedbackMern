@@ -104,47 +104,32 @@ const loginUser = async (req, res, next) => {
 	// 		errMsg: err,
 	// 	});
 	// }
-	try {
-		if (!user) {
-			console.error('wrong email - auth controller');
-			res.status(401).send({
-				errors: [
-					{
-						errorMessage: 'no user found with email auth controller',
-						type: 'email',
-					},
-				],
+
+	if (!user) {
+		console.error('wrong email - auth controller');
+		res.status(401);
+		res.send('wrong email - auth controller');
+	}
+
+	if (user) {
+		const comparedPassword = await bcryptjs.compare(password, user.password);
+		if (comparedPassword) {
+			const token = generateToken(user);
+			res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
+
+			return res.status(200).json({
+				name: user.name,
+				email: user.email,
+				username: user.username,
+				id: user._id,
+				profileImg: user.profileImg,
+				token,
 			});
+		} else {
+			console.error('wrong password - auth controller');
+			res.status(401);
+			res.send('wrong password - auth controller');
 		}
-
-		if (user) {
-			const comparedPassword = await bcryptjs.compare(password, user.password);
-			if (comparedPassword) {
-				const token = generateToken(user);
-				res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
-
-				return res.status(200).json({
-					name: user.name,
-					email: user.email,
-					username: user.username,
-					id: user._id,
-					profileImg: user.profileImg,
-					token,
-				});
-			} else {
-				console.error('wrong password - auth controller');
-				res.status(401).send({
-					errors: [
-						{
-							errorMessage: 'wrong password auth controller',
-							type: 'password',
-						},
-					],
-				});
-			}
-		}
-	} catch (err) {
-		res.status(402).send(err);
 	}
 };
 

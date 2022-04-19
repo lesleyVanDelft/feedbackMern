@@ -39,6 +39,7 @@ import userReducer from '../reducers/userReducer';
 import feedbackReducer from '../reducers/feedbackReducer';
 // import feedbackCommentsReducer from '../reducers/feedbackCommentsReducer';
 import feedbackPageReducer from '../reducers/feedbackCommentsReducer';
+import errorReducer from '../reducers/errorReducer';
 
 const reducer = combineReducers({
 	user: userReducer,
@@ -46,6 +47,7 @@ const reducer = combineReducers({
 	feedbacks: feedbackReducer,
 	// singleFeedback: feedbackCommentsReducer,
 	singleFeedback: feedbackPageReducer,
+	errorMessage: errorReducer,
 });
 
 export const store = createStore(
