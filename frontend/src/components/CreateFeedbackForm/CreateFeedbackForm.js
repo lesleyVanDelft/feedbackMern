@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createFeedback } from '../../features/feedbacks/feedbackSlice';
 import { createNewFeedback } from '../../reducers/feedbackReducer';
 import CreateImg from '../../assets/shared/icon-new-feedback.svg';
 import './CreateFeedbackForm.css';

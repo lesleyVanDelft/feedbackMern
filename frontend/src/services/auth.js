@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+// import { errorHandler } from '../utils/getErrorMsg';
 import { errorHandler } from '../utils/errorHandler';
 
 const API_URL = '/api/users/';
@@ -15,7 +16,7 @@ const login = async (loginData, getError) => {
 		const response = await axios.post(API_URL + 'login', loginData, token);
 		return response.data;
 	} catch (error) {
-		console.log(error);
+		console.log(error, 'auth service');
 		// if (error) {
 		// 	getError(error);
 		// }

@@ -3,24 +3,25 @@ import { toast } from 'react-toastify';
 
 const feedbackPageReducer = (state = null, action) => {
 	switch (action.type) {
-		// case 'FETCH_FEEDBACK_COMMENTS':
-		// 	return { ...state, ...action.payload };
-		// case 'GET_SINGLE_FEEDBACK':
-		// 	return {
-		// 		...state,
-		// 		singleFeedback: [...state, ...action.payload]
-		// 	}
-		//
-		//
 		case 'GET_SINGLE_FEEDBACK':
 			return { ...state, ...action.payload };
-
-		// case 'CREATE_NEW_FEEDBACK':
-		// 	return { ...state.push(...action.payload) };
 		case 'UPDATE_FEEDBACK':
 			return { ...state, ...action.payload };
-		case 'TOGGLE_VOTE':
-			return { ...state, ...action.payload };
+		// case 'TOGGLE_UPVOTE':
+		// 	return state.map(fb => {
+		// 		return fb._id !== action.payload.id
+		// 			? fb
+		// 			: { ...fb, ...action.payload.data };
+		// 	});
+		// case 'TOGGLE_DOWNVOTE':
+		// 	return state.map(fb => {
+		// 		return fb._id !== action.payload.id
+		// 			? fb
+		// 			: { ...fb, ...action.payload.data };
+		// 	});
+		case 'TOGGLE_UPVOTE_DETAILS':
+			return { state: state, ...action.payload };
+
 		case 'VOTE_COMMENT':
 			return {
 				...state,
@@ -28,22 +29,6 @@ const feedbackPageReducer = (state = null, action) => {
 					c.id !== action.payload.commentId
 						? c
 						: { ...c, ...action.payload.data }
-				),
-			};
-		case 'VOTE_REPLY':
-			return {
-				...state,
-				comments: state.comments.map(c =>
-					c.id !== action.payload.commentId
-						? c
-						: {
-								...c,
-								replies: c.replies.map(r =>
-									r.id !== action.payload.replyId
-										? r
-										: { ...r, ...action.payload.data }
-								),
-						  }
 				),
 			};
 		case 'ADD_COMMENT':
@@ -149,18 +134,37 @@ export const getSingleFeedback = id => {
 	};
 };
 
-// export const createNewFeedback = feedbackObj => {
-// 	return async dispatch => {
-// 		const addedFeedback = await feedbackService.addNew(feedbackObj);
+export const toggleUpvoteDetails = (id, upvotedBy, downvotedBy) => {
+	return async dispatch => {
+		let pointsCount = upvotedBy.length - downvotedBy.length;
+		// if (pointsCount < 0) {
+		// 	pointsCount = 0;
+		// }
+		// console.log(id);
+		dispatch({
+			type: 'TOGGLE_UPVOTE_DETAILS',
+			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
+		});
 
-// 		dispatch({
-// 			type: 'CREATE_NEW_FEEDBACK',
-// 			payload: addedFeedback,
-// 		});
+		await feedbackService.upvoteFeedback(id);
+	};
+};
 
-// 		return addedFeedback.id;
-// 	};
-// };
+export const toggleDownvoteDetails = (id, downvotedBy, upvotedBy) => {
+	return async dispatch => {
+		let pointsCount = upvotedBy.length - downvotedBy.length;
+		// if (pointsCount < 0) {
+		// 	pointsCount = 0;
+		// }
+
+		dispatch({
+			type: 'TOGGLE_DOWNVOTE_DETAILS',
+			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
+		});
+
+		await feedbackService.downvoteFeedback(id);
+	};
+};
 
 export const updateFeedback = (id, feedbackObj) => {
 	return async dispatch => {
@@ -174,37 +178,37 @@ export const updateFeedback = (id, feedbackObj) => {
 	};
 };
 
-export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
-	return async dispatch => {
-		let pointsCount = upvotedBy.length - downvotedBy.length;
-		if (pointsCount < 0) {
-			pointsCount = 0;
-		}
+// export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
+// 	return async dispatch => {
+// 		let pointsCount = upvotedBy.length - downvotedBy.length;
+// 		if (pointsCount < 0) {
+// 			pointsCount = 0;
+// 		}
 
-		dispatch({
-			type: 'TOGGLE_VOTE',
-			payload: { upvotedBy, pointsCount, downvotedBy },
-		});
+// 		dispatch({
+// 			type: 'TOGGLE_VOTE',
+// 			payload: { upvotedBy, pointsCount, downvotedBy },
+// 		});
 
-		await feedbackService.upvoteFeedback(id);
-	};
-};
+// 		await feedbackService.upvoteFeedback(id);
+// 	};
+// };
 
-export const toggleDownvote = (id, downvotedBy, upvotedBy) => {
-	return async dispatch => {
-		let pointsCount = upvotedBy.length - downvotedBy.length;
-		if (pointsCount < 0) {
-			pointsCount = 0;
-		}
+// export const toggleDownvote = (id, downvotedBy, upvotedBy) => {
+// 	return async dispatch => {
+// 		let pointsCount = upvotedBy.length - downvotedBy.length;
+// 		if (pointsCount < 0) {
+// 			pointsCount = 0;
+// 		}
 
-		dispatch({
-			type: 'TOGGLE_VOTE',
-			payload: { upvotedBy, pointsCount, downvotedBy },
-		});
+// 		dispatch({
+// 			type: 'TOGGLE_VOTE',
+// 			payload: { upvotedBy, pointsCount, downvotedBy },
+// 		});
 
-		await feedbackService.downvoteFeedback(id);
-	};
-};
+// 		await feedbackService.downvoteFeedback(id);
+// 	};
+// };
 
 export const addComments = (feedbackId, comment) => {
 	return async dispatch => {

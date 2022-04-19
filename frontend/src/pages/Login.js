@@ -32,18 +32,9 @@ const Login = () => {
 		}),
 		onSubmit: values => {
 			try {
-				if (!error) {
-					dispatch(loginUser(values, getError));
-				} else {
-					console.log(error);
-					console.log('hi');
-				}
+				dispatch(loginUser(values));
 			} catch (err) {
-				// console.log(`${err} loginpage`);
-				setError(err);
-
-				// errorHandler(err);
-				// console.log(err);
+				setError(errorHandler(err));
 			}
 		},
 		// onSubmit: async values => {

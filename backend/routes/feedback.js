@@ -34,7 +34,7 @@ router.post('/upvote/:id', auth, upvoteFeedback);
 router.post('/details/upvote/:id', auth, upvoteFeedback);
 // DOWNVOTE id post link
 router.post('/downvote/:id', auth, downvoteFeedback);
-router.post('/details/downvote/:id', auth, upvoteFeedback);
+// router.post('/details/downvote/:id', auth, downvoteFeedback);
 // get ALL feedbacks
 router.get('/homepage', auth, getFeedbacks);
 

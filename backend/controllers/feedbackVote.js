@@ -31,13 +31,14 @@ const upvoteFeedback = async (req, res) => {
 		feedback.upvotedBy = feedback.upvotedBy.filter(
 			u => u.toString() !== user._id.toString()
 		);
-		// feedback.pointsCount--;
+		feedback.updateOne({ _id: id }, { $inc: { pointsCount: -1 } });
 		// author.karmaPoints.feedbackKarma--;
 	} else {
 		feedback.upvotedBy = feedback.upvotedBy.concat(user._id);
 		feedback.downvotedBy = feedback.downvotedBy.filter(
 			d => d.toString() !== user._id.toString()
 		);
+		feedback.updateOne({ _id: id }, { $inc: { pointsCount: 1 } });
 		// feedback.pointsCount++;
 		// author.karmaPoints.postKarma++;
 	}
@@ -96,6 +97,7 @@ const downvoteFeedback = async (req, res) => {
 		feedback.downvotedBy = feedback.downvotedBy.filter(
 			downvote => downvote.toString() !== user._id.toString()
 		);
+		feedback.updateOne({ _id: id }, { $inc: { pointsCount: 1 } });
 		// feedback.pointsCount++;
 		// author.karmaPoints.feedbackKarma++;
 	} else {
@@ -103,6 +105,7 @@ const downvoteFeedback = async (req, res) => {
 		feedback.upvotedBy = feedback.upvotedBy.filter(
 			upvote => upvote.toString() !== user._id.toString()
 		);
+		feedback.updateOne({ _id: id }, { $inc: { pointsCount: -1 } });
 
 		// feedback.pointsCount--;
 		// author.karmaPoints.postKarma--;

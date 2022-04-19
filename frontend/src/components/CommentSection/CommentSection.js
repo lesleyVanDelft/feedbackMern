@@ -1,8 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getSingleFeedback } from '../../features/feedbacks/feedbackSlice';
 import AddComment from './AddComment/AddComment';
 import Comment from './Comment/Comment';
 import './CommentSection.css';

@@ -7,10 +7,6 @@ const feedbackReducer = (state = [], action) => {
 	switch (action.type) {
 		case 'GET_ALL_FEEDBACKS':
 			return action.payload;
-		// case 'CREATE_NEW_FEEDBACK':
-		// 	return state.push(...action.payload);
-		// case 'GET_SINGLE_FEEDBACK':
-		// 	return { ...state, ...action.payload };
 		case 'CREATE_NEW_FEEDBACK':
 			return {
 				...state,
@@ -20,15 +16,6 @@ const feedbackReducer = (state = [], action) => {
 				],
 			};
 		case 'TOGGLE_UPVOTE':
-			// return {
-			// 	...state,
-			// 	feedbacks: state.map(
-			// 		r =>
-			// 			r.id !== action.payload.id ? r : { ...r, ...action.payload.data }
-			// 		// r.upvotedBy.push(action.payload)
-			// 	),
-			// };
-			// return { ...state, ...action.payload };
 			return state.map(fb => {
 				return fb._id !== action.payload.id
 					? fb
@@ -40,6 +27,13 @@ const feedbackReducer = (state = [], action) => {
 					? fb
 					: { ...fb, ...action.payload.data };
 			});
+		// case 'TOGGLE_DOWNVOTE_DETAILS':
+		// 	return {...state,
+		// 		singleFeedbak: state.singleFeedbak.map(fb => {
+		// 		return fb._id !== action.payload.id
+		// 			? fb
+		// 			: { ...fb, ...action.payload.data };
+		// 	})}
 
 		case 'DELETE_FEEDBACK':
 			return {
@@ -68,6 +62,17 @@ export const getFeedbacks = sortBy => {
 		// toast.success('success');
 	};
 };
+
+// export const getSingleFeedback = id => {
+// 	return async dispatch => {
+// 		const fetchedFeedback = await feedbackService.getSingleFeedback(id);
+
+// 		dispatch({
+// 			type: 'GET_SINGLE_FEEDBACK',
+// 			payload: fetchedFeedback,
+// 		});
+// 	};
+// };
 
 export const createNewFeedback = feedbackObj => {
 	return async dispatch => {

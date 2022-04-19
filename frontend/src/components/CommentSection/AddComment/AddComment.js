@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-	addComment,
-	getSingleFeedback,
-} from '../../../features/feedbacks/feedbackSlice';
 // import { addComment } from '../../../features/feedbacks/commentSlice';
 import { addComments } from '../../../reducers/feedbackCommentsReducer';
 import { useParams } from 'react-router-dom';
