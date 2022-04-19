@@ -57,8 +57,25 @@ const upvoteFeedback = async id => {
 	);
 	return response.data;
 };
+const upvoteFeedbackDetails = async id => {
+	const response = await axios.post(
+		`${API_URL + 'upvote/' + id}`,
+		// `${API_URL + id + '/upvote'}`,
+		null,
+		setConfig()
+	);
+	return response.data;
+};
 
 const downvoteFeedback = async id => {
+	const response = await axios.post(
+		`${API_URL + 'downvote/' + id}`,
+		null,
+		setConfig()
+	);
+	return response.data;
+};
+const downvoteFeedbackDetails = async id => {
 	const response = await axios.post(
 		`${API_URL + 'downvote/' + id}`,
 		null,
@@ -145,6 +162,8 @@ const feedbackService = {
 	postReply,
 	updateReply,
 	removeReply,
+	upvoteFeedbackDetails,
+	downvoteFeedbackDetails,
 };
 
 export default feedbackService;

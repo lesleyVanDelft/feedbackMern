@@ -23,10 +23,11 @@ const Details = () => {
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
-	// const isUpvotedDetails =
-	// 	user && singleFeedback && singleFeedback.upvotedBy.includes(user.id);
+	// const isUpvotedDetails = user && singleFeedback.upvotedBy.includes(user.id);
 	// const isDownvotedDetails =
-	// 	user && singleFeedback && singleFeedback.downvotedBy.includes(user.id);
+	// 	user && singleFeedback.downvotedBy.includes(user.id);
+	// console.log(isUpvotedDetails, 'upvote');
+	// console.log(isDownvotedDetails, 'downvote');
 
 	// hooks
 	const navigate = useNavigate();
@@ -56,7 +57,7 @@ const Details = () => {
 									<FaChevronLeft /> <span>Go Back</span>
 								</Link>
 							</button>
-							{singleFeedback.author === user.id && (
+							{singleFeedback.author._id === user.id && (
 								<Link to={`/edit/${id}`}>
 									<button className="btn btn-blue edit">Edit Feedback</button>
 								</Link>

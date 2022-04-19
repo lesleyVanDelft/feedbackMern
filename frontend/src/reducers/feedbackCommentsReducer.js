@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 const feedbackPageReducer = (state = null, action) => {
 	switch (action.type) {
 		case 'GET_SINGLE_FEEDBACK':
-			return { ...state, ...action.payload };
+			return { ...action.payload };
 		case 'UPDATE_FEEDBACK':
 			return { ...state, ...action.payload };
 		// case 'TOGGLE_UPVOTE':
@@ -146,7 +146,7 @@ export const toggleUpvoteDetails = (id, upvotedBy, downvotedBy) => {
 			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
 		});
 
-		await feedbackService.upvoteFeedback(id);
+		await feedbackService.upvoteFeedbackDetails(id);
 	};
 };
 
@@ -162,7 +162,7 @@ export const toggleDownvoteDetails = (id, downvotedBy, upvotedBy) => {
 			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
 		});
 
-		await feedbackService.downvoteFeedback(id);
+		await feedbackService.downvoteFeedbackDetails(id);
 	};
 };
 

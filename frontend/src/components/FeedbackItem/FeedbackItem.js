@@ -73,9 +73,9 @@ const FeedbackItem = ({
 					: dispatch(
 							toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
 					  );
-				setUpvoted(false);
+				setUpvoted(!upvoted);
 				// console.log(object);
-				console.log(upvoted, 'isUpvoted is now false');
+				console.log('isUpvoted is now false');
 				// setDownvoted(false);
 			} else {
 				const updatedUpvotedBy = [...feedback.upvotedBy, user.id];
@@ -85,8 +85,8 @@ const FeedbackItem = ({
 				dispatch(
 					toggleUpvote(feedback._id, updatedUpvotedBy, updatedDownvotedBy)
 				);
-				setUpvoted(false);
-				console.log(downvoted, 'isUpvoted is now true');
+				setUpvoted(!upvoted);
+				console.log('isUpvoted is now true');
 				// setDownvoted(false);
 			}
 		} catch (err) {
@@ -105,9 +105,9 @@ const FeedbackItem = ({
 					toggleDownvote(feedback._id, updatedDownvotedBy, feedback.upvotedBy)
 				);
 				// setVoteCount(prevState => prevState + 1);
-				setDownvoted(false);
+				setDownvoted(!downvoted);
 				// setUpvoted(false);
-				console.log(downvoted, 'isDownvoted is now false');
+				console.log('isDownvoted is now false');
 			} else {
 				const updatedDownvotedBy = [...feedback.downvotedBy, user.id];
 				const updatedUpvotedBy = feedback.upvotedBy.filter(
@@ -117,9 +117,9 @@ const FeedbackItem = ({
 					toggleDownvote(feedback._id, updatedDownvotedBy, updatedUpvotedBy)
 				);
 				// setVoteCount(prevState => prevState - 1);
-				setDownvoted(true);
+				setDownvoted(!downvoted);
 				// setUpvoted(false);
-				console.log(downvoted, 'isDownvoted is now true');
+				console.log('isDownvoted is now true');
 			}
 		} catch (err) {
 			// dispatch(notify(getErrorMsg(err), 'error'));
@@ -167,7 +167,11 @@ const FeedbackItem = ({
 									{/* {feedback.pointsCount === undefined
 										? feedback.upvotedBy.length
 										: feedback.pointsCount} */}
-									{count}
+									{/* {feedback.upvotedBy.length - feedback.downvotedBy.length} */}
+									{detailsPage
+										? singleFeedback.upvotedBy.length -
+										  singleFeedback.downvotedBy.length
+										: count}
 								</span>
 
 								{/* <button className="votes__downvote">

@@ -15,7 +15,7 @@ export const UpvoteButton = ({
 		<button
 			user={user}
 			// body={body}
-			className={`votes__upvote ${active ? 'upvoteActive' : ''}`}
+			className={`votes__upvote ${active && !notActive ? 'upvoteActive' : ''}`}
 			onClick={e => {
 				handleUpvote(e);
 			}}>
@@ -23,28 +23,34 @@ export const UpvoteButton = ({
 		</button>
 	);
 };
-export const DownvoteButton = ({ body, user, handleDownvote, active }) => {
+export const DownvoteButton = ({
+	body,
+	user,
+	handleDownvote,
+	active,
+	notActive,
+}) => {
 	return (
 		<button
 			user={user}
 			// body={body}
-			className={`votes__downvote ${active ? 'downvoteActive' : ''}`}
+			className={`votes__downvote ${
+				active && !notActive ? 'downvoteActive' : ''
+			}`}
 			onClick={e => handleDownvote(e)}>
 			<FaChevronDown className="chevronUp" />
 		</button>
 	);
 };
 
-// export const CompleteButton = () => {
-
-// }
-
 // const CompleteButton = (user, handleDownvote, active, count) => {
-// 	return <>
-// 		<button className={`votes__downvote`}>
-// 			<FaChevronUp className='chevronUp'/>
-// 		</button>
-// 	</>;
+// 	return (
+// 		<>
+// 			<button className={`votes__downvote`}>
+// 				<FaChevronUp className="chevronUp" />
+// 			</button>
+// 		</>
+// 	);
 // };
 
 // export default CompleteButton;
