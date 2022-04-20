@@ -35,6 +35,7 @@ a {
 	background: $lightGray;
 	height: 100%;
 	padding: 0 8rem;
+	padding-top: 1.5rem;
 
 	.btn {
 		border: none;
@@ -126,6 +127,7 @@ a {
 @media screen and(max-width: 1024px) {
 	.App {
 		padding: 0 1.5rem;
+		padding-top: 2rem;
 	}
 }
 

@@ -71,8 +71,10 @@ const Comment = ({ commentData, currentFeedback, user, username }) => {
 					{commentData.replies.map((reply, i) => {
 						return (
 							<Reply
+								comment={commentData}
 								replyData={reply}
 								replyingTo={commentData.username}
+								user={user}
 								// repliedBy={reply._id}
 								currentFeedback={currentFeedback}
 								key={i}

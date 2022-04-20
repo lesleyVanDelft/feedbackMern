@@ -49,9 +49,8 @@ const feedbackPageReducer = (state = null, action) => {
 			// let comments = state.comments;
 			return {
 				...state,
-				// comments: [...state.comments.replies, action.payload.addedReply],
 				comments: state.comments.map(comment => {
-					return comment.id !== action.payload.commentId
+					return comment._id !== action.payload.commentId
 						? comment
 						: {
 								...comment,
@@ -70,12 +69,11 @@ const feedbackPageReducer = (state = null, action) => {
 				),
 			};
 		case 'DELETE_COMMENT':
-			let newComments = state.comments.filter(
-				comment => comment.id !== action.payload
-			);
 			return {
 				...state,
-				comments: [...state.comments, newComments],
+				comments: state.comments.filter(
+					comment => comment._id !== action.payload
+				),
 				// ...state.comments.filter(comment => comment._id !== action.payload),
 			};
 		case 'EDIT_REPLY':
@@ -143,10 +141,7 @@ export const getSingleFeedback = id => {
 export const toggleUpvoteDetails = (id, upvotedBy, downvotedBy) => {
 	return async dispatch => {
 		let pointsCount = upvotedBy.length - downvotedBy.length;
-		// if (pointsCount < 0) {
-		// 	pointsCount = 0;
-		// }
-		// console.log(id);
+
 		dispatch({
 			type: 'TOGGLE_UPVOTE_DETAILS',
 			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
@@ -159,9 +154,6 @@ export const toggleUpvoteDetails = (id, upvotedBy, downvotedBy) => {
 export const toggleDownvoteDetails = (id, downvotedBy, upvotedBy) => {
 	return async dispatch => {
 		let pointsCount = upvotedBy.length - downvotedBy.length;
-		// if (pointsCount < 0) {
-		// 	pointsCount = 0;
-		// }
 
 		dispatch({
 			type: 'TOGGLE_DOWNVOTE_DETAILS',

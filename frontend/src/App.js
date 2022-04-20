@@ -61,7 +61,6 @@ function App() {
 	return (
 		<Router>
 			<div className="App">
-				<Header />
 				<Routes>
 					<Route exact path="/" element={<Homepage />} />
 					<Route path="/login" element={<Login />} />

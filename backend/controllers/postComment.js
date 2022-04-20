@@ -36,15 +36,14 @@ const postComment = async (req, res) => {
 	});
 	feedback.commentCount = numOfComments(feedback.comments);
 	const savedFeedback = await feedback.save();
-	const populatedFeedback = await Feedback.findById(feedback._id).populate([
-		{
-			path: 'comments.commentedBy',
-			populate: 'username',
-		},
-	]);
+	// const populatedFeedback = await Feedback.findById(feedback._id).populate([
+	// 	{
+	// 		path: 'comments.commentedBy',
+	// 		populate: 'username',
+	// 	},
+	// ]);
 
-	const addedComment =
-		populatedFeedback.comments[savedFeedback.comments.length - 1];
+	const addedComment = feedback.comments[savedFeedback.comments.length - 1];
 
 	res.status(201).json(addedComment).end();
 };
@@ -238,12 +237,12 @@ const postReply = async (req, res) => {
 	// 	.populate('comments.replies.repliedBy', 'username')
 	// 	.execPopulate();
 
-	const populatedFeedback = await Feedback.findById(feedback._id).populate([
-		{
-			path: 'comments.replies.repliedBy',
-			populate: 'username',
-		},
-	]);
+	// const populatedFeedback = await Feedback.findById(feedback._id).populate([
+	// 	{
+	// 		path: 'comments.replies.repliedBy',
+	// 		populate: 'username',
+	// 	},
+	// ]);
 
 	// const populatedFeedback = await Feedback.findById(feedback._id).populate([
 	// 	{
@@ -256,7 +255,7 @@ const postReply = async (req, res) => {
 	// user.totalComments++;
 	// await user.save();
 
-	const commentToReply = populatedFeedback.comments.find(
+	const commentToReply = feedback.comments.find(
 		c => c._id.toString() === commentId
 	);
 

@@ -23,7 +23,7 @@ const Reply = ({
 	// const currFb = useSelector(state => state.feedbackComments);
 	// console.log(currentFeedback);
 	// console.log(comment);
-	// console.log(replyData);
+	console.log(replyData);
 	const handleDelete = () => {
 		dispatch(deleteReply(currentFeedback._id, comment._id, replyData._id));
 	};
@@ -66,13 +66,6 @@ const Reply = ({
 				</div>
 			</div>
 			<p className="Reply__text">
-				{/* {console.log(replyData.replyBody.split(' ')[0].includes('@'))} */}
-				{/* <span className="replyingTo">{`@${comment.username}`}</span> */}
-				{/* <span className="replyingTo">{`@${
-					replyToReply ? replyData.username : comment.username
-				}`}</span> */}
-				{/* {console.log(repliedBy)} */}
-				{/* {replyData.replyBody} */}
 				{replyData.replyBody.split(' ')[0].includes('@') ? (
 					<span className="replyingTo">{replyingTo}</span>
 				) : (

@@ -16,7 +16,7 @@ import { setError } from './errorReducer';
 // 	feedbacks: [null],
 // };
 
-const userReducer = (state = '', action) => {
+const userReducer = (state = null, action) => {
 	switch (action.type) {
 		// case 'SET_LOGIN_ERROR':
 		// 	return {
@@ -85,10 +85,10 @@ export const registerUser = credentials => {
 			payload: user,
 		});
 
-		dispatch({
-			type: 'SET_USER',
-			payload: user,
-		});
+		// dispatch({
+		// 	type: 'SET_USER',
+		// 	payload: user,
+		// });
 
 		toast.info(`Welcome, ${user.username}`, {
 			autoClose: 3000,

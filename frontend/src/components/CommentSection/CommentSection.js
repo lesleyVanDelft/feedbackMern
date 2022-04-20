@@ -10,7 +10,11 @@ const CommentSection = ({ comments, feedbackId, currentFeedback }) => {
 	const [commentCount, setCommentCount] = useState(0);
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const user = useSelector(state => state.user);
-	console.log(comments);
+	// console.log(comments);
+
+	useEffect(() => {
+		setCommentCount(singleFeedback.commentCount);
+	}, [singleFeedback.commentCount]);
 
 	if (!singleFeedback) {
 		return <h1>Loading</h1>;

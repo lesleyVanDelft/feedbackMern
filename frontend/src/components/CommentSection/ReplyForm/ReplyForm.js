@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { ReplyContext } from '../Comment/Comment';
 import { useFormik } from 'formik';
 import { addReply } from '../../../reducers/feedbackCommentsReducer';
@@ -16,7 +16,9 @@ const ReplyForm = ({
 }) => {
 	const [replyBody, setReplyBody] = useState('');
 	const [replyName, setReplyName] = useState('');
+	const singleFeedback = useSelector(state => state.singleFeedback);
 	const dispatch = useDispatch();
+	// console.log(comment);
 
 	const formik = useFormik({
 		initialValues: {
@@ -25,7 +27,7 @@ const ReplyForm = ({
 		},
 		onSubmit: values => {
 			// e.preventDefault();
-			// console.log(values.replyBody);
+			// console.log(comment._id);
 			replyToReply ? getReplyActive(false) : setActive(false);
 			dispatch(addReply(currentFeedback._id, comment._id, values.replyBody));
 		},

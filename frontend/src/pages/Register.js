@@ -91,7 +91,7 @@ const Register = () => {
 
 	return (
 		<main className="Register">
-			<Header login={true} />
+			<Header login={false} />
 			<section className="Register__form">
 				<form onSubmit={formik.handleSubmit}>
 					<div className="heading">
