@@ -29,18 +29,20 @@ const FeedbackItem = ({
 	const user = useSelector(state => state.user);
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const feedbacks = useSelector(state => state.feedbacks);
-	const isUpvoted = user && feedback.upvotedBy.includes(user.id);
-	const isDownvoted = user && feedback.downvotedBy.includes(user.id);
+	const isUpvoted = user && feedback && feedback.upvotedBy.includes(user.id);
+	const isDownvoted =
+		user && feedback && feedback.downvotedBy.includes(user.id);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (!user) {
-			return <h1>loading...</h1>;
-		}
 		if (!feedback) {
 			return <h1>Loading feedback</h1>;
 		}
+		if (!user) {
+			return <h1>loading...</h1>;
+		}
+
 		if (feedback.upvotedBy.includes(user.id)) {
 			setUpvoted(true);
 			setDownvoted(false);

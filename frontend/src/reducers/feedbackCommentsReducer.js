@@ -4,23 +4,21 @@ import { toast } from 'react-toastify';
 const feedbackPageReducer = (state = null, action) => {
 	switch (action.type) {
 		case 'GET_SINGLE_FEEDBACK':
-			return { ...action.payload };
+			return { ...state, ...action.payload };
 		case 'UPDATE_FEEDBACK':
 			return { ...state, ...action.payload };
-		// case 'TOGGLE_UPVOTE':
-		// 	return state.map(fb => {
-		// 		return fb._id !== action.payload.id
-		// 			? fb
-		// 			: { ...fb, ...action.payload.data };
-		// 	});
-		// case 'TOGGLE_DOWNVOTE':
-		// 	return state.map(fb => {
-		// 		return fb._id !== action.payload.id
-		// 			? fb
-		// 			: { ...fb, ...action.payload.data };
-		// 	});
 		case 'TOGGLE_UPVOTE_DETAILS':
-			return { state: state, ...action.payload };
+			return {
+				...(state._id !== action.payload.id
+					? state
+					: { ...state, ...action.payload.data }),
+			};
+		case 'TOGGLE_DOWNVOTE_DETAILS':
+			return {
+				...(state._id !== action.payload.id
+					? state
+					: { ...state, ...action.payload.data }),
+			};
 
 		case 'VOTE_COMMENT':
 			return {
@@ -53,16 +51,15 @@ const feedbackPageReducer = (state = null, action) => {
 				...state,
 				// comments: [...state.comments.replies, action.payload.addedReply],
 				comments: state.comments.map(comment => {
-					return {
-						...comment,
-						replies: [...comment.replies, action.payload.addedReply],
-					};
+					return comment.id !== action.payload.commentId
+						? comment
+						: {
+								...comment,
+								replies: [...comment.replies, action.payload.addedReply],
+						  };
 				}),
 			};
-		// return {
-		// 	...state,
-		// 	comments: state.comments.replies.push(action.payload.addedReply),
-		// };
+
 		case 'EDIT_COMMENT':
 			return {
 				...state,
@@ -73,9 +70,12 @@ const feedbackPageReducer = (state = null, action) => {
 				),
 			};
 		case 'DELETE_COMMENT':
+			let newComments = state.comments.filter(
+				comment => comment.id !== action.payload
+			);
 			return {
 				...state,
-				comments: [state.comments.filter(c => c.id !== action.payload)],
+				comments: [...state.comments, newComments],
 				// ...state.comments.filter(comment => comment._id !== action.payload),
 			};
 		case 'EDIT_REPLY':

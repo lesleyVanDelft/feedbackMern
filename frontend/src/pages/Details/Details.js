@@ -15,6 +15,10 @@ import {
 	toggleDownvote,
 	getFeedbacks,
 } from '../../reducers/feedbackReducer';
+import {
+	toggleUpvoteDetails,
+	toggleDownvoteDetails,
+} from '../../reducers/feedbackCommentsReducer';
 import './Details.css';
 
 const Details = () => {
@@ -39,32 +43,25 @@ const Details = () => {
 
 	useEffect(() => {
 		dispatch(getSingleFeedback(id));
-		dispatch(getFeedbacks());
 		dispatch(setUser());
+
+		// setTimeout(() => {
+		// 	dispatch(getFeedbacks());
+		// }, 500);
 	}, [dispatch, id]);
 
-	useEffect(() => {
-		if (!feedbacks) {
-			return <h1>Loading</h1>;
-		}
-		setFeedbackComments(
-			feedbacks.filter(fb => fb._id === id).map(fb => fb.comments)
-		);
-	}, [feedbacks, id]);
+	// if (!feedbacks) {
+	// 	return <h1>Loading feedbacks</h1>;
+	// }
 
-	// useEffect(() => {
-	// 	setReplies()
-	// }, []);
-
-	if (!feedbacks) {
-		return <h1>Loading feedbacks</h1>;
-	}
-
-	const filteredFeedbacks = feedbacks.filter(fb => fb._id === id);
-	const filteredFeedback = filteredFeedbacks[0];
+	// const filteredFeedbacks = feedbacks.filter(fb => fb._id === id);
+	// const filteredFeedback = filteredFeedbacks[0];
 	// if (!filteredFeedback) {
 	// 	return <h1>Loading filtered feedback...</h1>;
 	// }
+	if (!singleFeedback) {
+		return <h1>loading</h1>;
+	}
 	// console.log(filteredFeedback);
 
 	//////////////////////
@@ -73,7 +70,7 @@ const Details = () => {
 
 	return (
 		<>
-			{singleFeedback || filteredFeedback ? (
+			{singleFeedback ? (
 				<>
 					{/* <p>{filteredFeedback.status}</p> */}
 					<LogoBar />
@@ -84,7 +81,7 @@ const Details = () => {
 									<FaChevronLeft /> <span>Go Back</span>
 								</Link>
 							</button>
-							{filteredFeedback.author === user.id && (
+							{singleFeedback.author === user.id && (
 								<Link to={`/edit/${id}`}>
 									<button className="btn btn-blue edit">Edit Feedback</button>
 								</Link>
@@ -96,31 +93,31 @@ const Details = () => {
 						<span className="username">@{filteredFeedback.details.username}</span>
 					)} */}
 							<span className="username">
-								@{filteredFeedback.details.username}
+								@{singleFeedback.details.username}
 							</span>
 						</span>
 						<FeedbackItem
-							feedback={singleFeedback ? singleFeedback : filteredFeedback}
-							toggleUpvote={toggleUpvote}
-							toggleDownvote={toggleDownvote}
+							feedback={singleFeedback}
+							toggleUpvote={toggleUpvoteDetails}
+							toggleDownvote={toggleDownvoteDetails}
 							detailsPage={true}
 							detailsCount={
-								filteredFeedback.upvotedBy.length -
-								filteredFeedback.downvotedBy.length
+								singleFeedback.upvotedBy.length -
+								singleFeedback.downvotedBy.length
 							}
 							// isUpvotedDetails={isUpvotedDetails}
 							// isDownvotedDetails={isDownvotedDetails}
 							// downvoteActive={getDownvote}
 						/>
 						<CommentSection
-							comments={filteredFeedback.comments}
+							comments={singleFeedback.comments}
 							feedbackId={id}
-							currentFeedback={filteredFeedback}
+							currentFeedback={singleFeedback}
 						/>
 					</main>
 				</>
 			) : (
-				<h1>Loading</h1>
+				<h1>Loading ,,,</h1>
 			)}
 		</>
 	);
