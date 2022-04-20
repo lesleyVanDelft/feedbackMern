@@ -36,6 +36,9 @@ const feedbackPageReducer = (state = null, action) => {
 				...state,
 				comments: [...state.comments, action.payload],
 			};
+		// case 'ADD_COMMENT':
+		// 	return action.payload;
+
 		case 'ADD_REPLY':
 			// return {
 			// 	...state,
@@ -45,6 +48,7 @@ const feedbackPageReducer = (state = null, action) => {
 			// 			: { ...c, replies: [...c.replies, action.payload.addedReply] }
 			// 	),
 			// };
+			// let comments = state.comments;
 			return {
 				...state,
 				// comments: [...state.comments.replies, action.payload.addedReply],
@@ -55,6 +59,10 @@ const feedbackPageReducer = (state = null, action) => {
 					};
 				}),
 			};
+		// return {
+		// 	...state,
+		// 	comments: state.comments.replies.push(action.payload.addedReply),
+		// };
 		case 'EDIT_COMMENT':
 			return {
 				...state,
@@ -67,10 +75,8 @@ const feedbackPageReducer = (state = null, action) => {
 		case 'DELETE_COMMENT':
 			return {
 				...state,
-				// comments: state.comments.filter(c => c.id !== action.payload),
-				comments: state.comments.filter(
-					comment => comment._id !== action.payload
-				),
+				comments: [state.comments.filter(c => c.id !== action.payload)],
+				// ...state.comments.filter(comment => comment._id !== action.payload),
 			};
 		case 'EDIT_REPLY':
 			return {
@@ -210,7 +216,7 @@ export const updateFeedback = (id, feedbackObj) => {
 // 	};
 // };
 
-export const addComments = (feedbackId, comment) => {
+export const addComment = (feedbackId, comment) => {
 	return async dispatch => {
 		const addedComment = await feedbackService.postComment(feedbackId, {
 			comment,

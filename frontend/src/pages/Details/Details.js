@@ -18,8 +18,10 @@ import {
 import './Details.css';
 
 const Details = () => {
-	const [upvoteActive, setUpvoteActive] = useState(false);
-	const [downvoteActive, setDownvoteActive] = useState(false);
+	// const [upvoteActive, setUpvoteActive] = useState(false);
+	// const [downvoteActive, setDownvoteActive] = useState(false);
+	const [feedbackComments, setFeedbackComments] = useState([]);
+	const [replies, setReplies] = useState([]);
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
@@ -36,18 +38,33 @@ const Details = () => {
 	let { id } = useParams();
 
 	useEffect(() => {
-		// dispatch(getSingleFeedback(id));
+		dispatch(getSingleFeedback(id));
 		dispatch(getFeedbacks());
 		dispatch(setUser());
 	}, [dispatch, id]);
-	useEffect(() => {}, []);
 
-	if (!singleFeedback) {
-		return <h1>Loading...</h1>;
+	useEffect(() => {
+		if (!feedbacks) {
+			return <h1>Loading</h1>;
+		}
+		setFeedbackComments(
+			feedbacks.filter(fb => fb._id === id).map(fb => fb.comments)
+		);
+	}, [feedbacks, id]);
+
+	// useEffect(() => {
+	// 	setReplies()
+	// }, []);
+
+	if (!feedbacks) {
+		return <h1>Loading feedbacks</h1>;
 	}
 
 	const filteredFeedbacks = feedbacks.filter(fb => fb._id === id);
 	const filteredFeedback = filteredFeedbacks[0];
+	// if (!filteredFeedback) {
+	// 	return <h1>Loading filtered feedback...</h1>;
+	// }
 	// console.log(filteredFeedback);
 
 	//////////////////////
@@ -56,7 +73,7 @@ const Details = () => {
 
 	return (
 		<>
-			{filteredFeedback ? (
+			{singleFeedback || filteredFeedback ? (
 				<>
 					{/* <p>{filteredFeedback.status}</p> */}
 					<LogoBar />
@@ -83,7 +100,7 @@ const Details = () => {
 							</span>
 						</span>
 						<FeedbackItem
-							feedback={filteredFeedback}
+							feedback={singleFeedback ? singleFeedback : filteredFeedback}
 							toggleUpvote={toggleUpvote}
 							toggleDownvote={toggleDownvote}
 							detailsPage={true}
@@ -98,6 +115,7 @@ const Details = () => {
 						<CommentSection
 							comments={filteredFeedback.comments}
 							feedbackId={id}
+							currentFeedback={filteredFeedback}
 						/>
 					</main>
 				</>

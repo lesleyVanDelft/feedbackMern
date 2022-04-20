@@ -1,18 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReplySection from '../ReplySection/ReplySection';
 import Reply from '../ReplySection/Reply/Reply';
 import BlankProfilePic from '../../../assets/blank-profile-picture.png';
 import ReplyForm from '../ReplyForm/ReplyForm';
 import './Comment.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../../reducers/feedbackCommentsReducer';
 
 const Comment = ({ commentData, currentFeedback, user, username }) => {
 	const [replyActive, setReplyActive] = useState(false);
+	const [replies, setReplies] = useState([]);
+	const singleFeedback = useSelector(state => state.singleFeedback);
 	const dispatch = useDispatch();
 	// console.log(currentFeedback);
 	// console.log(user);
 	// console.log(commentData);
+
+	// useEffect(() => {
+	// 	setReplies(commentData.replies.length > 0 ? commentData.replies : []);
+	// }, [commentData.replies]);
+	// useEffect(() => {
+	// 	setReplies(singleFeedback)
+	// },[])
 	const setActive = actv => {
 		setReplyActive(actv);
 	};
@@ -57,6 +66,26 @@ const Comment = ({ commentData, currentFeedback, user, username }) => {
 				/>
 			)}
 
+			{commentData.replies && (
+				<section className="Comment__replies">
+					{commentData.replies.map((reply, i) => {
+						return (
+							<Reply
+								replyData={reply}
+								replyingTo={commentData.username}
+								// repliedBy={reply._id}
+								currentFeedback={currentFeedback}
+								key={i}
+								index={i}
+								setActive={setActive}
+								replyToReply={true}
+								// active={replyActive}
+							/>
+						);
+					})}
+				</section>
+			)}
+
 			{/* <section className="Comment__replies">
 				{commentData.replies.length > 0 &&
 					commentData.replies.map((reply, i) => {
@@ -78,7 +107,7 @@ const Comment = ({ commentData, currentFeedback, user, username }) => {
 				comment={commentData}
 			/> */}
 
-			{commentData.replies.length > 0 && (
+			{/* {commentData.replies.length > 0 && (
 				<section className="Comment__replies">
 					{commentData.replies.length > 0 &&
 						commentData.replies.map((reply, i) => {
@@ -98,7 +127,7 @@ const Comment = ({ commentData, currentFeedback, user, username }) => {
 							);
 						})}
 				</section>
-			)}
+			)} */}
 		</article>
 
 		// commentData.map(comment => {

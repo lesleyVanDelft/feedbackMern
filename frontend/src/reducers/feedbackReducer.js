@@ -27,14 +27,6 @@ const feedbackReducer = (state = [], action) => {
 					? fb
 					: { ...fb, ...action.payload.data };
 			});
-		// case 'TOGGLE_DOWNVOTE_DETAILS':
-		// 	return {...state,
-		// 		singleFeedbak: state.singleFeedbak.map(fb => {
-		// 		return fb._id !== action.payload.id
-		// 			? fb
-		// 			: { ...fb, ...action.payload.data };
-		// 	})}
-
 		case 'DELETE_FEEDBACK':
 			return {
 				...state,
@@ -42,6 +34,21 @@ const feedbackReducer = (state = [], action) => {
 			};
 		case 'LOGOUT_FEEDBACK':
 			return null;
+		// comments //
+		// // // // //
+		// case 'ADD_COMMENT':
+		// 	// return [...state, action.payload];
+		// 	let comments = state.comments;
+		// 	comments.push(action.payload);
+		// 	return {
+		// 		...state,
+		// 		comments,
+		// 	};
+		// case 'DELETE_COMMENT':
+		// 	return state.filter(comment => comment._id !== action.payload);
+		// // ...state,
+		// // comments: state.comments.filter(c => c.id !== action.payload),
+
 		default:
 			return state;
 	}
@@ -86,6 +93,30 @@ export const createNewFeedback = feedbackObj => {
 		return addedFeedback.id;
 	};
 };
+
+// export const addComment = (feedbackId, comment) => {
+// 	return async dispatch => {
+// 		const addedComment = await feedbackService.postComment(feedbackId, {
+// 			comment,
+// 		});
+
+// 		dispatch({
+// 			type: 'ADD_COMMENT',
+// 			payload: addedComment,
+// 		});
+// 	};
+// };
+
+// export const deleteComment = (feedbackId, commentId) => {
+// 	return async dispatch => {
+// 		await feedbackService.removeComment(feedbackId, commentId);
+
+// 		dispatch({
+// 			type: 'DELETE_COMMENT',
+// 			payload: commentId,
+// 		});
+// 	};
+// };
 
 export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
 	return async dispatch => {
