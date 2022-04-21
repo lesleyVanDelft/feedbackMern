@@ -31,6 +31,7 @@ const Login = () => {
 		}),
 		onSubmit: values => {
 			dispatch(loginUser(values));
+			// handleSubmit(values);
 		},
 		// onSubmit: async values => {
 		// 	try {
@@ -86,7 +87,7 @@ const Login = () => {
 	// 		console.log(error.message);
 	// 	}
 	// };
-	const onSubmit = e => {
+	const handleSubmit = e => {
 		e.preventDefault();
 		dispatch(loginUser(formData));
 	};
@@ -101,10 +102,14 @@ const Login = () => {
 		return errorMessage ? setError(errorMessage) : null;
 	}, [errorMessage]);
 
-	const handleBlur = e => {
-		setBlurMessage(e.target.value);
-	};
-	console.log(blurMessage);
+	// useEffect(() => {
+	// 	setBlurMessage(formData.email);
+	// }, [formData.email]);
+
+	// const handleBlur = e => {
+	// 	return blurMessage !== '' ? e.target.value : '';
+	// };
+	// console.log(blurMessage);
 
 	return (
 		<main className="Login">
@@ -116,7 +121,7 @@ const Login = () => {
 					</h2>
 					<p>Login and share your feedback</p>
 				</div>
-				<form onSubmit={onSubmit}>
+				<form onSubmit={formik.handleSubmit}>
 					<div className="form-group">
 						{error && error.status === 400 && (
 							<span className="errorMsg">{error.data}</span>
@@ -127,20 +132,20 @@ const Login = () => {
 							className="form-control"
 							id="email"
 							name="email"
-							// value={formik.values.email}
-							value={formData.email}
+							value={formik.values.email}
+							// value={formData.email}
 							placeholder="Enter your email"
-							// onChange={formik.handleChange}
-							onChange={onChange}
-							// onBlur={formik.handleBlur}
-							onBlur={handleBlur}
+							onChange={formik.handleChange}
+							// onChange={onChange}
+							onBlur={formik.handleBlur}
+							// onBlur={handleBlur}
 						/>
-						{/* {formik.touched.email && formik.errors.email ? (
+						{formik.touched.email && formik.errors.email ? (
 							<p className="formikErrorMessage">{formik.errors.email}</p>
-						) : null} */}
-						{blurMessage !== '' ? (
-							<p className="formikErrorMessage">Please enter your email</p>
 						) : null}
+						{/* {blurMessage !== '' ? (
+							<p className="formikErrorMessage">Please enter your email</p>
+						) : null} */}
 					</div>
 					<div className="form-group">
 						{/* {error && (
@@ -155,12 +160,12 @@ const Login = () => {
 							className="form-control"
 							id="password"
 							name="password"
-							// value={formik.values.password}
-							value={formData.password}
+							value={formik.values.password}
+							// value={formData.password}
 							placeholder="Enter your password"
-							// onChange={formik.handleChange}
-							onChange={onChange}
-							// onBlur={formik.handleBlur}
+							onChange={formik.handleChange}
+							// onChange={onChange}
+							onBlur={formik.handleBlur}
 						/>
 						{formik.touched.password && formik.errors.password ? (
 							<p className="formikErrorMessage">{formik.errors.password}</p>

@@ -8,23 +8,56 @@ import './Roadmap.css';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import { useNavigate } from 'react-router-dom';
 import { toggleUpvote } from '../../reducers/feedbackReducer';
+import { useSwipeable } from 'react-swipeable';
 
 const RoadmapPage = () => {
 	const [active, setActive] = useState('in-progress');
+	const [mobileSwipe, setMobileSwipe] = useState(0);
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
+
 	const navigate = useNavigate();
+	const handlers = useSwipeable({
+		// onSwipedLeft: () => {
+		// 	return mobileSwipe < 2
+		// 		? setMobileSwipe(mobileSwipe + 1)
+		// 		: setMobileSwipe(0);
+		// },
+		// onSwipedRight: () => {
+		// 	return mobileSwipe === 0
+		// 		? setMobileSwipe(2)
+		// 		: setMobileSwipe(mobileSwipe - 1);
+		// },
+		onSwipedLeft: () => {
+			if (active === 'in-progress') {
+				setActive('live');
+			} else if (active === 'planned') {
+				setActive('in-progress');
+			}
+			// return active === 'in-progress' ? setActive('live') : null;
+		},
+		onSwipedRight: () => {
+			if (active === 'in-progress') {
+				setActive('planned');
+			} else if (active === 'live') {
+				setActive('in-progress');
+			}
+		},
+		delta: 10,
+		preventDefaultTouchmoveEvent: true,
+	});
+
 	useEffect(() => {
 		dispatch(setUser());
 		dispatch(getFeedbacks());
 	}, []);
+	// if (!user) {
+	// 	navigate('/login');
+	// }
 
 	if (!feedbacks) {
 		return <h1>Loading</h1>;
-	}
-	if (!user) {
-		navigate('/login');
 	}
 
 	const plannedFeedbacks = feedbacks
@@ -58,7 +91,7 @@ const RoadmapPage = () => {
 	// }
 
 	return (
-		<main className="RoadmapPage">
+		<main className="RoadmapPage" {...handlers}>
 			<SuggestionsHeader roadmap={true} />
 
 			<div className="headers">

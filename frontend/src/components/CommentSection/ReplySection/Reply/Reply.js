@@ -23,7 +23,7 @@ const Reply = ({
 	// const currFb = useSelector(state => state.feedbackComments);
 	// console.log(currentFeedback);
 	// console.log(comment);
-	console.log(replyData);
+	// console.log(replyData);
 	const handleDelete = () => {
 		dispatch(deleteReply(currentFeedback._id, comment._id, replyData._id));
 	};
