@@ -7,7 +7,7 @@ import SuggestionsHeader from '../../components/Suggestions/SuggestionsHeader/Su
 import './Roadmap.css';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import { useNavigate } from 'react-router-dom';
-import { toggleUpvote } from '../../reducers/feedbackReducer';
+import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { useSwipeable } from 'react-swipeable';
 
 const RoadmapPage = () => {
@@ -89,9 +89,26 @@ const RoadmapPage = () => {
 	// 		}
 	// 	}
 	// }
+	const initialMotion = {
+		initial: {
+			opacity: 0,
+		},
+		animate: {
+			opacity: 1,
+			transition: {
+				duration: 0.5,
+				// ease: [0.87, 0, 0.13, 1],
+			},
+		},
+	};
 
 	return (
-		<main className="RoadmapPage" {...handlers}>
+		<motion.main
+			className="RoadmapPage"
+			{...handlers}
+			variants={initialMotion}
+			initial="initial"
+			animate="animate">
 			<SuggestionsHeader roadmap={true} />
 
 			<div className="headers">
@@ -147,6 +164,7 @@ const RoadmapPage = () => {
 										roadmap={true}
 										status={'planned'}
 										toggleUpvote={toggleUpvote}
+										toggleDownvote={toggleDownvote}
 									/>
 								);
 							})}
@@ -168,6 +186,7 @@ const RoadmapPage = () => {
 										roadmap={true}
 										status={'in-progress'}
 										toggleUpvote={toggleUpvote}
+										toggleDownvote={toggleDownvote}
 									/>
 								);
 							})}
@@ -192,7 +211,7 @@ const RoadmapPage = () => {
 					</div>
 				</div>
 			</div>
-		</main>
+		</motion.main>
 	);
 };
 

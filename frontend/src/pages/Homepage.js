@@ -76,8 +76,24 @@ const Homepage = () => {
 	if (!feedbacks) {
 		return <h1>Loading </h1>;
 	}
+	const initialMotion = {
+		initial: {
+			opacity: 0,
+		},
+		animate: {
+			opacity: 1,
+			transition: {
+				duration: 0.5,
+				// ease: [0.87, 0, 0.13, 1],
+			},
+		},
+	};
 	return (
-		<main className="Homepage">
+		<motion.main
+			className="Homepage"
+			variants={initialMotion}
+			initial="initial"
+			animate="animate">
 			<Dashboard category={getCategoryState} mobileOpen={getMobileState} />
 
 			<section className={`Homepage__content`}>
@@ -93,7 +109,7 @@ const Homepage = () => {
 			</section>
 
 			<ToastContainer autoClose={2000} />
-		</main>
+		</motion.main>
 	);
 };
 

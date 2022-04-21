@@ -9,20 +9,23 @@ import Edit from '../pages/Edit/Edit';
 import Test from '../pages/Test';
 import Cookies from 'js-cookie';
 import RoadmapPage from '../pages/Roadmap/Roadmap';
+import { AnimatePresence } from 'framer-motion';
 
 const AppRoutes = () => {
 	const location = useLocation();
 	return (
-		<Routes location={location} key={location.pathname}>
-			<Route exact path="/" element={<Homepage />} />
-			<Route path="/login" element={<Login />} />
-			<Route path="/register" element={<Register />} />
-			<Route path="/details/:id" element={<Details />} />
-			<Route path="/edit/:id" element={<Edit />} />
-			<Route path="/create" element={<Create />} />
-			<Route path="/roadmap" element={<RoadmapPage />} />
-			<Route path="/test" element={<Test />} />
-		</Routes>
+		<AnimatePresence exitBeforeEnter>
+			<Routes location={location} key={location.pathname}>
+				<Route exact path="/" element={<Homepage />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/register" element={<Register />} />
+				<Route path="/details/:id" element={<Details />} />
+				<Route path="/edit/:id" element={<Edit />} />
+				<Route path="/create" element={<Create />} />
+				<Route path="/roadmap" element={<RoadmapPage />} />
+				<Route path="/test" element={<Test />} />
+			</Routes>
+		</AnimatePresence>
 	);
 };
 

@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { loginUser } from '../reducers/userReducer';
 import Spinner from '../components/Spinner';
 import Header from '../components/Header/Header';
+import { motion } from 'framer-motion';
 import { errorHandler } from '../utils/errorHandler';
 import axios from 'axios';
 
@@ -110,9 +111,25 @@ const Login = () => {
 	// 	return blurMessage !== '' ? e.target.value : '';
 	// };
 	// console.log(blurMessage);
+	const initialMotion = {
+		initial: {
+			opacity: 0,
+		},
+		animate: {
+			opacity: 1,
+			transition: {
+				duration: 0.3,
+				// ease: [0.87, 0, 0.13, 1],
+			},
+		},
+	};
 
 	return (
-		<main className="Login">
+		<motion.main
+			className="Login"
+			variants={initialMotion}
+			initial="initial"
+			animate="animate">
 			<Header login={true} />
 			<section className="Login__form form">
 				<div className="heading">
@@ -177,7 +194,7 @@ const Login = () => {
 					</button>
 				</form>
 			</section>
-		</main>
+		</motion.main>
 	);
 };
 

@@ -30,8 +30,13 @@
 
 @media screen and (max-width: 768px) {
 	.Edit {
-		padding: 0 1.5rem;
-		padding-bottom: 1.5rem;
+		// padding: 0 1.5rem;
+		// padding-bottom: 1.5rem;
+
+		&__content {
+			padding: 0 1.5rem;
+			padding-bottom: 1rem;
+		}
 		&__backButton {
 			padding-top: 25px;
 			margin-bottom: 2.5rem;

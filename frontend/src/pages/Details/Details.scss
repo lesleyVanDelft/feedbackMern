@@ -5,55 +5,87 @@
 	// display: flex;
 	max-width: 730px;
 	margin: 0 auto;
+	&__content {
+		&--buttons {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 1rem;
+			margin-bottom: 1.3rem;
+			.back {
+				border: none;
+				background: none;
+				a {
+					color: $lightBlueGray;
+					display: flex;
+					align-items: center;
+					font-size: 14px;
+					font-weight: bold;
 
-	&__buttons {
-		display: flex;
-		justify-content: space-between;
-		margin-top: 1rem;
-		margin-bottom: 1.3rem;
-		.back {
-			border: none;
-			background: none;
-			a {
-				color: $lightBlueGray;
-				display: flex;
-				align-items: center;
-				font-size: 14px;
-				font-weight: bold;
-
-				svg {
-					color: $blue;
-					width: 16px;
-					height: 12px;
-					margin-right: 0.3rem;
+					svg {
+						color: $blue;
+						width: 16px;
+						height: 12px;
+						margin-right: 0.3rem;
+					}
 				}
+			}
+
+			.edit {
+				font-weight: 600;
 			}
 		}
 
-		.edit {
-			font-weight: 600;
+		.postedBy {
+			// margin-bottom: -1.3rem;
+			color: $lightBlueGray;
+			font-size: 14px;
+
+			.username {
+				font-weight: bold;
+				margin-left: 0.4rem;
+			}
 		}
 	}
 
-	.postedBy {
-		// margin-bottom: -1.3rem;
-		color: $lightBlueGray;
-		font-size: 14px;
+	// &__buttons {
+	// 	display: flex;
+	// 	justify-content: space-between;
+	// 	margin-top: 1rem;
+	// 	margin-bottom: 1.3rem;
+	// 	.back {
+	// 		border: none;
+	// 		background: none;
+	// 		a {
+	// 			color: $lightBlueGray;
+	// 			display: flex;
+	// 			align-items: center;
+	// 			font-size: 14px;
+	// 			font-weight: bold;
 
-		.username {
-			font-weight: bold;
-			margin-left: 0.4rem;
-		}
-	}
+	// 			svg {
+	// 				color: $blue;
+	// 				width: 16px;
+	// 				height: 12px;
+	// 				margin-right: 0.3rem;
+	// 			}
+	// 		}
+	// 	}
+
+	// 	.edit {
+	// 		font-weight: 600;
+	// 	}
+	// }
 }
 
 @media screen and (max-width: 768px) {
 	.Details {
-		padding: 0 1.5rem;
 		&__buttons {
 			margin: 0;
 			margin-bottom: 1.5rem;
 			padding-top: 1.5rem;
+		}
+		&__content {
+			padding: 0 1.5rem;
 		}
 	}
 }

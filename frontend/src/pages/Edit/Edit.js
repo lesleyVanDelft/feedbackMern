@@ -4,6 +4,7 @@ import { FaChevronLeft } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import EditFeedbackForm from '../../components/EditFeedbackForm/EditFeedbackForm';
 import LogoBar from '../../components/LogoBar/LogoBar';
+import { motion } from 'framer-motion';
 import './Edit.css';
 
 const Edit = () => {
@@ -16,11 +17,27 @@ const Edit = () => {
 	if (!singleFeedback) {
 		return <h2>Loading</h2>;
 	}
+	const initialMotion = {
+		initial: {
+			opacity: 0,
+		},
+		animate: {
+			opacity: 1,
+			transition: {
+				duration: 0.3,
+				// ease: [0.87, 0, 0.13, 1],
+			},
+		},
+	};
 
 	return (
-		<>
+		<motion.section
+			className="Edit"
+			variants={initialMotion}
+			initial="initial"
+			animate="animate">
 			<LogoBar />
-			<section className="Edit">
+			<div className="Edit__content">
 				<div className="Edit__backButton">
 					<button className="back">
 						<Link to="/">
@@ -29,8 +46,8 @@ const Edit = () => {
 					</button>
 				</div>
 				<EditFeedbackForm feedbackData={singleFeedback} />
-			</section>
-		</>
+			</div>
+		</motion.section>
 	);
 };
 

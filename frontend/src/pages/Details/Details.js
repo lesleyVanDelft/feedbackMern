@@ -19,6 +19,7 @@ import {
 	toggleUpvoteDetails,
 	toggleDownvoteDetails,
 } from '../../reducers/feedbackCommentsReducer';
+import { motion } from 'framer-motion';
 import './Details.css';
 
 const Details = () => {
@@ -44,77 +45,75 @@ const Details = () => {
 	useEffect(() => {
 		dispatch(getSingleFeedback(id));
 		dispatch(setUser());
-
-		// setTimeout(() => {
-		// 	dispatch(getFeedbacks());
-		// }, 500);
 	}, [dispatch, id]);
 
-	// if (!feedbacks) {
-	// 	return <h1>Loading feedbacks</h1>;
-	// }
-
-	// const filteredFeedbacks = feedbacks.filter(fb => fb._id === id);
-	// const filteredFeedback = filteredFeedbacks[0];
-	// if (!filteredFeedback) {
-	// 	return <h1>Loading filtered feedback...</h1>;
-	// }
 	if (!singleFeedback) {
 		return <h1>loading</h1>;
 	}
-	// console.log(filteredFeedback);
 
-	//////////////////////
-	// filtering all feedbacks ?
-	//////////////////
+	const initialMotion = {
+		initial: {
+			opacity: 0,
+		},
+		animate: {
+			opacity: 1,
+			transition: {
+				duration: 0.5,
+				// ease: [0.87, 0, 0.13, 1],
+			},
+		},
+	};
 
 	return (
 		<>
 			{singleFeedback ? (
 				<>
-					{/* <p>{filteredFeedback.status}</p> */}
-					<LogoBar />
-					<main className="Details">
-						<div className="Details__buttons">
-							<button className="back">
-								<Link to="/">
-									<FaChevronLeft /> <span>Go Back</span>
-								</Link>
-							</button>
-							{singleFeedback.author === user.id && (
-								<Link to={`/edit/${id}`}>
-									<button className="btn btn-blue edit">Edit Feedback</button>
-								</Link>
-							)}
-						</div>
-						<span className="postedBy">
-							Posted by:
-							{/* {filteredFeedback.length > 0 && filteredFeedback.details.username && (
-						<span className="username">@{filteredFeedback.details.username}</span>
-					)} */}
-							<span className="username">
-								@{singleFeedback.details.username}
+					<motion.main
+						className="Details"
+						variants={initialMotion}
+						initial="initial"
+						animate="animate">
+						<LogoBar />
+
+						<div className="Details__content">
+							<div className="Details__content--buttons">
+								<button className="back">
+									<Link to="/">
+										<FaChevronLeft /> <span>Go Back</span>
+									</Link>
+								</button>
+								{singleFeedback.author === user.id && (
+									<Link to={`/edit/${id}`}>
+										<button className="btn btn-blue edit">Edit Feedback</button>
+									</Link>
+								)}
+							</div>
+							<span className="postedBy">
+								Posted by:
+								<span className="username">
+									@{singleFeedback.details.username}
+								</span>
 							</span>
-						</span>
-						<FeedbackItem
-							feedback={singleFeedback}
-							toggleUpvote={toggleUpvoteDetails}
-							toggleDownvote={toggleDownvoteDetails}
-							detailsPage={true}
-							detailsCount={
-								singleFeedback.upvotedBy.length -
-								singleFeedback.downvotedBy.length
-							}
-							// isUpvotedDetails={isUpvotedDetails}
-							// isDownvotedDetails={isDownvotedDetails}
-							// downvoteActive={getDownvote}
-						/>
-						<CommentSection
-							comments={singleFeedback.comments}
-							feedbackId={id}
-							currentFeedback={singleFeedback}
-						/>
-					</main>
+							<FeedbackItem
+								feedback={singleFeedback}
+								toggleUpvote={toggleUpvoteDetails}
+								toggleDownvote={toggleDownvoteDetails}
+								detailsPage={true}
+								detailsCount={
+									singleFeedback.upvotedBy.length -
+									singleFeedback.downvotedBy.length
+								}
+								// isUpvotedDetails={isUpvotedDetails}
+								// isDownvotedDetails={isDownvotedDetails}
+								// downvoteActive={getDownvote}
+							/>
+							<CommentSection
+								comments={singleFeedback.comments}
+								feedbackId={id}
+								currentFeedback={singleFeedback}
+							/>
+						</div>
+					</motion.main>
 				</>
 			) : (
 				<h1>Loading ,,,</h1>
