@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import { ReplyContext } from '../Comment/Comment';
 import { useFormik } from 'formik';
 import { addReply } from '../../../reducers/feedbackCommentsReducer';
@@ -14,11 +13,7 @@ const ReplyForm = ({
 	replyToReply,
 	getReplyName,
 }) => {
-	const [replyBody, setReplyBody] = useState('');
-	const [replyName, setReplyName] = useState('');
-	const singleFeedback = useSelector(state => state.singleFeedback);
 	const dispatch = useDispatch();
-	console.log(comment);
 
 	const formik = useFormik({
 		initialValues: {

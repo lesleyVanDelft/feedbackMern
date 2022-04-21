@@ -79,6 +79,11 @@
 		margin-top: 55px;
 		.Form {
 			padding-bottom: 2rem;
+			textarea {
+				// padding: 0;
+				padding-left: 1rem;
+				padding-top: 0.8rem;
+			}
 			&__group--buttons {
 				// justify-content: center;
 				flex-direction: column;

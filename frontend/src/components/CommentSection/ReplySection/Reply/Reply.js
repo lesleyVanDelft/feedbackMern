@@ -8,8 +8,6 @@ import { deleteReply } from '../../../../reducers/feedbackCommentsReducer';
 const Reply = ({
 	replyData,
 	currentFeedback,
-	// replyingTo,
-	// replyActive,
 	replyToReply,
 	setActive,
 	comment,
@@ -20,10 +18,6 @@ const Reply = ({
 	const [repliedBy, setRepliedBy] = useState('');
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
-	// const currFb = useSelector(state => state.feedbackComments);
-	// console.log(currentFeedback);
-	// console.log(comment);
-	// console.log(replyData);
 	const handleDelete = () => {
 		dispatch(deleteReply(currentFeedback._id, comment._id, replyData._id));
 	};

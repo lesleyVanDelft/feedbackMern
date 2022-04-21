@@ -6,18 +6,13 @@ import { getFeedbacks } from '../../reducers/feedbackReducer';
 import SuggestionsHeader from '../../components/Suggestions/SuggestionsHeader/SuggestionsHeader';
 import './Roadmap.css';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
-import { useNavigate } from 'react-router-dom';
 import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { useSwipeable } from 'react-swipeable';
 
 const RoadmapPage = () => {
 	const [active, setActive] = useState('in-progress');
-	const [mobileSwipe, setMobileSwipe] = useState(0);
 	const feedbacks = useSelector(state => state.feedbacks);
-	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
-
-	const navigate = useNavigate();
 	const handlers = useSwipeable({
 		// onSwipedLeft: () => {
 		// 	return mobileSwipe < 2
@@ -51,11 +46,7 @@ const RoadmapPage = () => {
 	useEffect(() => {
 		dispatch(setUser());
 		dispatch(getFeedbacks());
-	}, []);
-	// if (!user) {
-	// 	navigate('/login');
-	// }
-
+	}, [dispatch]);
 	if (!feedbacks) {
 		return <h1>Loading</h1>;
 	}
@@ -78,17 +69,6 @@ const RoadmapPage = () => {
 		  })
 		: [];
 
-	// const borderVariant = {
-	// 	hidden: {
-	// 		opacity: 0,
-	// 	},
-	// 	show: {
-	// 		opacity:1,
-	// 		transition:{
-	// 			delay: 0.5
-	// 		}
-	// 	}
-	// }
 	const initialMotion = {
 		initial: {
 			opacity: 0,
