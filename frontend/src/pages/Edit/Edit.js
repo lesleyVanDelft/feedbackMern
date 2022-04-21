@@ -1,19 +1,11 @@
-import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaChevronLeft } from 'react-icons/fa';
-import Spinner from '../../components/Spinner';
-import {
-	getSingleFeedback,
-	reset,
-} from '../../features/feedbacks/feedbackSlice';
 import { useParams } from 'react-router-dom';
-import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
-import './Edit.css';
-import CommentSection from '../../components/CommentSection/CommentSection';
 import EditFeedbackForm from '../../components/EditFeedbackForm/EditFeedbackForm';
-import { getFeedbackComments } from '../../reducers/feedbackCommentsReducer';
 import LogoBar from '../../components/LogoBar/LogoBar';
+import { motion } from 'framer-motion';
+import './Edit.css';
 
 const Edit = () => {
 	const user = useSelector(state => state.user);
@@ -25,11 +17,27 @@ const Edit = () => {
 	if (!singleFeedback) {
 		return <h2>Loading</h2>;
 	}
+	const initialMotion = {
+		initial: {
+			opacity: 0,
+		},
+		animate: {
+			opacity: 1,
+			transition: {
+				duration: 0.3,
+				// ease: [0.87, 0, 0.13, 1],
+			},
+		},
+	};
 
 	return (
-		<>
+		<motion.section
+			className="Edit"
+			variants={initialMotion}
+			initial="initial"
+			animate="animate">
 			<LogoBar />
-			<section className="Edit">
+			<div className="Edit__content">
 				<div className="Edit__backButton">
 					<button className="back">
 						<Link to="/">
@@ -38,8 +46,8 @@ const Edit = () => {
 					</button>
 				</div>
 				<EditFeedbackForm feedbackData={singleFeedback} />
-			</section>
-		</>
+			</div>
+		</motion.section>
 	);
 };
 

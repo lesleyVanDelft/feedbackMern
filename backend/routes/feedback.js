@@ -33,13 +33,15 @@ const router = express.Router();
 router.post('/upvote/:id', auth, upvoteFeedback);
 router.post('/details/upvote/:id', auth, upvoteFeedback);
 // DOWNVOTE id post link
-router.post('/downvote/:id', downvoteFeedback);
+
+router.post('/downvote/:id', auth, downvoteFeedback);
+// router.post('/details/downvote/:id', auth, downvoteFeedback);
 
 // get ALL feedbacks
 router.get('/homepage', auth, getFeedbacks);
 
 // get SINGLE feedback
-router.get('/details/:id', getSingleFeedback);
+router.get('/details/:id', auth, getSingleFeedback);
 // post comment
 router.post('/details/:id', auth, postComment);
 // reply to comment

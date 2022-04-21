@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { FaHome } from 'react-icons/fa';
 import './LogoBar.css';
 const LogoBar = () => {
 	return (
@@ -11,6 +12,10 @@ const LogoBar = () => {
 					<p>Feedback Board</p>
 				</Link>
 			</div>
+
+			<Link to="/">
+				<FaHome className="homeIcon" />
+			</Link>
 		</header>
 	);
 };

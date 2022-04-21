@@ -30,7 +30,9 @@
 
 @media screen and (max-width: 768px) {
 	.Create {
-		padding: 0 1.5rem;
+		&__content {
+			padding: 0 1.5rem;
+		}
 
 		&__backButton {
 			padding-top: 25px;

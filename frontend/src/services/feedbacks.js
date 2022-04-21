@@ -18,7 +18,8 @@ const setConfig = () => {
 
 // get user feedbacks
 const getFeedbacks = async () => {
-	const response = await axios.get(API_URL + '/homepage', setConfig());
+	const response = await axios.get(API_URL + 'homepage', setConfig());
+
 	// console.log();
 	return response.data;
 };
@@ -57,10 +58,29 @@ const upvoteFeedback = async id => {
 	);
 	return response.data;
 };
+const upvoteFeedbackDetails = async id => {
+	const response = await axios.post(
+		`${API_URL + 'upvote/' + id}`,
+		// `${API_URL + id + '/upvote'}`,
+		null,
+		setConfig()
+	);
+	return response.data;
+};
 
 const downvoteFeedback = async id => {
 	const response = await axios.post(
-		`${API_URL + '/downvote/' + id}`,
+
+		`${API_URL + 'downvote/' + id}`,
+		null,
+		setConfig()
+	);
+	return response.data;
+};
+const downvoteFeedbackDetails = async id => {
+	const response = await axios.post(
+		`${API_URL + 'downvote/' + id}`,
+
 		null,
 		setConfig()
 	);
@@ -145,6 +165,8 @@ const feedbackService = {
 	postReply,
 	updateReply,
 	removeReply,
+	upvoteFeedbackDetails,
+	downvoteFeedbackDetails,
 };
 
 export default feedbackService;

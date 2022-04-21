@@ -10,9 +10,30 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		padding: 2rem 1rem;
+
+		padding: 1rem 1rem;
+		// padding-left: 1rem;
+		padding-bottom: 1.5rem;
+		// padding-top: 0;
 
 		.text {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: space-around;
+
+			&__user {
+				color: $white;
+				opacity: 0.86;
+				margin-bottom: 1.5rem;
+				letter-spacing: 0.35px;
+				font-size: 0.9375rem;
+
+				.username {
+					font-weight: 500;
+				}
+			}
 			h2 {
 				font-size: 1.25rem;
 				letter-spacing: -0.25px;
@@ -34,6 +55,11 @@
 		.mobile {
 			display: none;
 		}
+	}
+
+	.logout {
+		margin-top: 2rem;
+		align-self: flex-start;
 	}
 }
 

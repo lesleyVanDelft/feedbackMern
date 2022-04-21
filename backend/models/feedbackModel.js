@@ -71,15 +71,15 @@ const feedbackModel = new mongoose.Schema(
 		details: {
 			name: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			username: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			email: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 		},
 		title: {
@@ -109,6 +109,7 @@ const feedbackModel = new mongoose.Schema(
 		pointsCoint: {
 			type: Number,
 			default: 0,
+			required: true,
 		},
 		comments: [commentSchema],
 		commentCount: {

@@ -13,37 +13,37 @@ const getSingleFeedback = async (req, res) => {
 	// return res.status(200).json(singleFeedback);
 
 	const { id } = req.params;
-	const feedback = await Feedback.findById(id);
+	const singleFeedback = await Feedback.findById(id);
 
-	if (!feedback) {
+	if (!singleFeedback) {
 		return res
 			.status(404)
 			.send({ message: `Feedback with ID:${id} does not exist` });
 	}
 
 	// const populatedFeedback = await feedback.populate('author', 'username');
-	const populatedFeedback = await feedback.populate([
-		{
-			path: 'author',
-			populate: 'username',
-		},
-		{
-			path: 'comments',
-			populate: [
-				{
-					path: 'comments.commentedBy',
-					select: ['username'],
-					// ,'commentBody'
-				},
-				{
-					path: 'comments.replies',
-					select: ['username'],
-				},
-			],
-		},
-	]);
+	// const populatedFeedback = await feedback.populate([
+	// 	{
+	// 		path: 'author',
+	// 		populate: 'username',
+	// 	},
+	// 	{
+	// 		path: 'comments',
+	// 		populate: [
+	// 			{
+	// 				path: 'comments.commentedBy',
+	// 				select: ['username'],
+	// 				// ,'commentBody'
+	// 			},
+	// 			{
+	// 				path: 'comments.replies',
+	// 				select: ['username'],
+	// 			},
+	// 		],
+	// 	},
+	// ]);
 
-	return res.status(200).json(populatedFeedback);
+	return res.status(200).json(singleFeedback);
 };
 
 const getFeedbackAndComments = async (req, res) => {

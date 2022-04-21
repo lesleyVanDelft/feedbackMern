@@ -6,25 +6,49 @@ import { getFeedbacks } from '../../reducers/feedbackReducer';
 import SuggestionsHeader from '../../components/Suggestions/SuggestionsHeader/SuggestionsHeader';
 import './Roadmap.css';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
-import { useNavigate } from 'react-router-dom';
-import { toggleUpvote } from '../../reducers/feedbackReducer';
+import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
+import { useSwipeable } from 'react-swipeable';
 
 const RoadmapPage = () => {
 	const [active, setActive] = useState('in-progress');
 	const feedbacks = useSelector(state => state.feedbacks);
-	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
+	const handlers = useSwipeable({
+		// onSwipedLeft: () => {
+		// 	return mobileSwipe < 2
+		// 		? setMobileSwipe(mobileSwipe + 1)
+		// 		: setMobileSwipe(0);
+		// },
+		// onSwipedRight: () => {
+		// 	return mobileSwipe === 0
+		// 		? setMobileSwipe(2)
+		// 		: setMobileSwipe(mobileSwipe - 1);
+		// },
+		onSwipedLeft: () => {
+			if (active === 'in-progress') {
+				setActive('live');
+			} else if (active === 'planned') {
+				setActive('in-progress');
+			}
+			// return active === 'in-progress' ? setActive('live') : null;
+		},
+		onSwipedRight: () => {
+			if (active === 'in-progress') {
+				setActive('planned');
+			} else if (active === 'live') {
+				setActive('in-progress');
+			}
+		},
+		delta: 10,
+		preventDefaultTouchmoveEvent: true,
+	});
+
 	useEffect(() => {
 		dispatch(setUser());
 		dispatch(getFeedbacks());
-	}, []);
-
+	}, [dispatch]);
 	if (!feedbacks) {
 		return <h1>Loading</h1>;
-	}
-	if (!user) {
-		navigate('/login');
 	}
 
 	const plannedFeedbacks = feedbacks
@@ -45,20 +69,26 @@ const RoadmapPage = () => {
 		  })
 		: [];
 
-	// const borderVariant = {
-	// 	hidden: {
-	// 		opacity: 0,
-	// 	},
-	// 	show: {
-	// 		opacity:1,
-	// 		transition:{
-	// 			delay: 0.5
-	// 		}
-	// 	}
-	// }
+	const initialMotion = {
+		initial: {
+			opacity: 0,
+		},
+		animate: {
+			opacity: 1,
+			transition: {
+				duration: 0.5,
+				// ease: [0.87, 0, 0.13, 1],
+			},
+		},
+	};
 
 	return (
-		<main className="RoadmapPage">
+		<motion.main
+			className="RoadmapPage"
+			{...handlers}
+			variants={initialMotion}
+			initial="initial"
+			animate="animate">
 			<SuggestionsHeader roadmap={true} />
 
 			<div className="headers">
@@ -114,6 +144,7 @@ const RoadmapPage = () => {
 										roadmap={true}
 										status={'planned'}
 										toggleUpvote={toggleUpvote}
+										toggleDownvote={toggleDownvote}
 									/>
 								);
 							})}
@@ -135,6 +166,7 @@ const RoadmapPage = () => {
 										roadmap={true}
 										status={'in-progress'}
 										toggleUpvote={toggleUpvote}
+										toggleDownvote={toggleDownvote}
 									/>
 								);
 							})}
@@ -159,7 +191,7 @@ const RoadmapPage = () => {
 					</div>
 				</div>
 			</div>
-		</main>
+		</motion.main>
 	);
 };
 

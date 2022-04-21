@@ -1,5 +1,3 @@
 export const errorHandler = err => {
-	return console.log('dookie');
+	return err.response;
 };
-
-export default errorHandler;

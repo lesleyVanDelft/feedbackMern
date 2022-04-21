@@ -1,12 +1,8 @@
 const pointsCalculator = (upvotes, downvotes, createdDate) => {
-	const result = {};
+	const result = 0;
 	const points = upvotes - downvotes;
 
-	if (points <= 0) {
-		result.pointsCount = 0;
-	} else {
-		result.pointsCount = points;
-	}
+	result.pointsCount = points;
 
 	return result;
 };

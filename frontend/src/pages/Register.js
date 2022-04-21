@@ -6,6 +6,7 @@ import { FaUser } from 'react-icons/fa';
 import { registerUser } from '../reducers/userReducer';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { motion } from 'framer-motion';
 // import Spinner from '../components/Spinner';
 import Header from '../components/Header/Header';
 
@@ -88,10 +89,26 @@ const Register = () => {
 	// if (isLoading) {
 	// 	return <Spinner />;
 	// }
+	const initialMotion = {
+		initial: {
+			opacity: 0,
+		},
+		animate: {
+			opacity: 1,
+			transition: {
+				duration: 0.3,
+				// ease: [0.87, 0, 0.13, 1],
+			},
+		},
+	};
 
 	return (
-		<main className="Register">
-			<Header login={true} />
+		<motion.main
+			className="Register"
+			variants={initialMotion}
+			initial="initial"
+			animate="animate">
+			<Header login={false} />
 			<section className="Register__form">
 				<form onSubmit={formik.handleSubmit}>
 					<div className="heading">
@@ -187,7 +204,7 @@ const Register = () => {
 				</form>
 			</section>
 			<ToastContainer autoClose={3500} />
-		</main>
+		</motion.main>
 	);
 };
 

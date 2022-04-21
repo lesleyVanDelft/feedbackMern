@@ -1,18 +1,14 @@
 import { motion } from 'framer-motion';
 import { FaChevronDown, FaChevronUp, FaComment } from 'react-icons/fa';
-// import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import {
-// 	getFeedbacks,
-// 	likeComment,
-// } from '../../features/feedbacks/feedbackSlice';
-import { UpvoteButton } from './VoteButtons/VoteButtons';
+import { DownvoteButton, UpvoteButton } from './VoteButtons/VoteButtons';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { getFeedbacks } from '../../reducers/feedbackReducer';
+import {
+	toggleUpvoteDetails,
+	toggleDownvoteDetails,
+} from '../../reducers/feedbackCommentsReducer';
 import { useEffect, useState } from 'react';
-// import { UpvoteButton } from './VoteButtons/VoteButtons';
 import './FeedbackItem.css';
 
 const FeedbackItem = ({
@@ -21,51 +17,110 @@ const FeedbackItem = ({
 	toggleUpvote,
 	toggleDownvote,
 	roadmap,
+	detailsPage,
+	detailsCount,
+	isUpvotedDetails,
+	isDownvotedDetails,
 	status,
 }) => {
 	const [upvoted, setUpvoted] = useState(false);
-	const dispatch = useDispatch();
+	const [downvoted, setDownvoted] = useState(false);
+	const [count, setCount] = useState(0);
 	const user = useSelector(state => state.user);
 	const singleFeedback = useSelector(state => state.singleFeedback);
-	const isUpvoted = user && feedback.upvotedBy.includes(user.id);
-	const isDownvoted = user && feedback.downvotedBy.includes(user.id);
-	// const currentFeedback = useSelector(state => state.feedbackComments);
+	const feedbacks = useSelector(state => state.feedbacks);
+	const isUpvoted = user && feedback && feedback.upvotedBy.includes(user.id);
+	const isDownvoted =
+		user && feedback && feedback.downvotedBy.includes(user.id);
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
+		if (!feedback) {
+			return <h1>Loading feedback</h1>;
+		}
 		if (!user) {
 			return <h1>loading...</h1>;
 		}
 
-		if (!feedback) {
-			return <h1>Loading feedback</h1>;
-		}
 		if (feedback.upvotedBy.includes(user.id)) {
 			setUpvoted(true);
-		} else {
+			setDownvoted(false);
+		}
+		if (feedback.downvotedBy.includes(user.id)) {
+			setDownvoted(true);
 			setUpvoted(false);
 		}
-	}, [user, feedback.upvotedBy, feedback]);
+		if (feedback.pointsCount === undefined) {
+			setCount(feedback.upvotedBy.length - feedback.downvotedBy.length);
+		} else {
+			setCount(feedback.pointsCount);
+		}
+	}, [user, feedback.upvotedBy, feedback.downvotedBy, feedback]);
 
 	const handleUpvoteToggle = async e => {
 		e.preventDefault();
 		try {
 			if (isUpvoted) {
-				const updatedUpvotedBy = feedback.upvotedBy.filter(u => u !== user.id);
-				dispatch(
-					toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
+				const updatedUpvotedBy = feedback.upvotedBy.filter(
+					upvote => upvote !== user.id
 				);
-				setUpvoted(true);
-				// dispatch(getFeedbacks());
+				feedbacks.length <= 0
+					? dispatch(
+							toggleUpvoteDetails(
+								feedback._id,
+								updatedUpvotedBy,
+								feedback.downvotedBy
+							)
+					  )
+					: dispatch(
+							toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
+					  );
+				setUpvoted(!upvoted);
+				// console.log(object);
+				console.log('isUpvoted is now false');
+				// setDownvoted(false);
 			} else {
 				const updatedUpvotedBy = [...feedback.upvotedBy, user.id];
 				const updatedDownvotedBy = feedback.downvotedBy.filter(
-					d => d !== user.id
+					downvote => downvote !== user.id
 				);
 				dispatch(
 					toggleUpvote(feedback._id, updatedUpvotedBy, updatedDownvotedBy)
 				);
-				setUpvoted(false);
-				// dispatch(getFeedbacks());
+				setUpvoted(!upvoted);
+				console.log('isUpvoted is now true');
+				// setDownvoted(false);
+			}
+		} catch (err) {
+			// dispatch(notify(getErrorMsg(err), 'error'));
+			console.log(err);
+		}
+	};
+	const handleDownvoteToggle = async e => {
+		e.preventDefault();
+		try {
+			if (isDownvoted) {
+				const updatedDownvotedBy = feedback.downvotedBy.filter(
+					downvote => downvote !== user.id
+				);
+				dispatch(
+					toggleDownvote(feedback._id, updatedDownvotedBy, feedback.upvotedBy)
+				);
+				setDownvoted(!downvoted);
+				console.log('isDownvoted is now false');
+			} else {
+				const updatedDownvotedBy = [...feedback.downvotedBy, user.id];
+				const updatedUpvotedBy = feedback.upvotedBy.filter(
+					upvote => upvote !== user.id
+				);
+				dispatch(
+					toggleDownvote(feedback._id, updatedDownvotedBy, updatedUpvotedBy)
+				);
+				// setVoteCount(prevState => prevState - 1);
+				setDownvoted(!downvoted);
+				// setUpvoted(false);
+				console.log('isDownvoted is now true');
 			}
 		} catch (err) {
 			// dispatch(notify(getErrorMsg(err), 'error'));
@@ -105,15 +160,28 @@ const FeedbackItem = ({
 									user={user}
 									body={feedback}
 									active={upvoted}
+									notActive={downvoted}
 									handleUpvote={handleUpvoteToggle}
 								/>
 								<span className="votes__count">
-									{feedback.upvotedBy.length}
+									{/* {feedback.upvotedBy.length} */}
+									{/* {feedback.pointsCount === undefined
+										? feedback.upvotedBy.length
+										: feedback.pointsCount} */}
+									{/* {feedback.upvotedBy.length - feedback.downvotedBy.length} */}
+									{detailsPage ? detailsCount : count}
 								</span>
 
-								<button className="votes__downvote">
+								{/* <button className="votes__downvote">
 									<FaChevronDown className="chevronDown" />
-								</button>
+								</button> */}
+								<DownvoteButton
+									user={user}
+									body={feedback}
+									active={downvoted}
+									notActive={upvoted}
+									handleDownvote={handleDownvoteToggle}
+								/>
 							</div>
 						</div>
 						<div className="FeedbackItem__left--content">

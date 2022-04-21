@@ -1,19 +1,27 @@
 import { useEffect, useState } from 'react';
 import { IoMenuSharp } from 'react-icons/io5/index.esm';
 import { AiOutlineClose } from 'react-icons/ai';
+import { IoCloseSharp } from 'react-icons/io5/index.esm';
 import { useMediaQuery } from 'react-responsive';
 import { motion, LayoutGroup } from 'framer-motion';
 import MobileDashboard from '../MobileDashboard/MobileDashboard';
 import './Dashboard.css';
 import FilterButtons from './FilterButtons/FilterButtons';
 import Roadmap from './Roadmap/Roadmap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutUser } from '../../reducers/userReducer';
 const Dashboard = ({ category, mobileOpen }) => {
 	const [categoryState, setCategoryState] = useState('all');
 	const [active, setActive] = useState(false);
-
+	const user = useSelector(state => state.user);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	// lock body scrolling when mobile menu is open
 	useEffect(() => {
+		if (!user) {
+			return <h1>loading user</h1>;
+		}
 		return active
 			? (document.body.style.overflow = 'hidden')
 			: (document.body.style.overflow = 'unset');
@@ -28,6 +36,10 @@ const Dashboard = ({ category, mobileOpen }) => {
 	const handleMobileClick = () => {
 		setActive(!active);
 		mobileOpen(active);
+	};
+	const handleLogout = () => {
+		dispatch(logoutUser());
+		navigate('/login');
 	};
 
 	// NPM React query, check if user is on mobile
@@ -51,6 +63,8 @@ const Dashboard = ({ category, mobileOpen }) => {
 		hidden: { opacity: 0 },
 		show: { opacity: 1 },
 	};
+	if (!user) {
+	}
 
 	return (
 		<section className="Dashboard">
@@ -64,8 +78,14 @@ const Dashboard = ({ category, mobileOpen }) => {
 					<motion.div variants={framerItem} className="Dashboard__logo">
 						<Link to="/">
 							<div className="text">
-								<h2>Frontend Mentor</h2>
-								<p>Feedback Board</p>
+								<span className="text__user">
+									Welcome,{' '}
+									<span className="username">@{user && user.username}</span>
+								</span>
+								<div>
+									<h2>Frontend Mentor</h2>
+									<p>Feedback Board</p>
+								</div>
 							</div>
 						</Link>
 
@@ -81,6 +101,12 @@ const Dashboard = ({ category, mobileOpen }) => {
 					<motion.div variants={framerItem} className="Dashboard__roadmap ">
 						<Roadmap />
 					</motion.div>
+					<motion.button
+						variants={framerItem}
+						className="btn btn-darkBlue logout"
+						onClick={handleLogout}>
+						Logout
+					</motion.button>
 				</motion.div>
 			)}
 
@@ -99,7 +125,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 							onClick={() => {
 								handleMobileClick();
 							}}>
-							{active ? <AiOutlineClose /> : <IoMenuSharp />}
+							{active ? <IoCloseSharp /> : <IoMenuSharp />}
 						</div>
 					</div>
 
