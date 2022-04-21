@@ -1,27 +1,9 @@
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	useNavigate,
-	useLocation,
-} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getFeedbacks } from './reducers/feedbackReducer';
-import { setUser } from './reducers/userReducer';
 import { useSelector } from 'react-redux';
 import AppRoutes from './components/AppRoutes';
-// import Header from './components/Header/Header';
-// import Homepage from './pages/Homepage';
-// import Login from './pages/Login';
-// import Register from './pages/Register';
-// import Create from './pages/Create/Create';
-// import Details from './pages/Details/Details';
-// import Edit from './pages/Edit/Edit';
-// import Test from './pages/Test';
-// import Cookies from 'js-cookie';
-// import RoadmapPage from './pages/Roadmap/Roadmap';
-// import RoadmapPage from './components/Dashboard/Roadmap/Roadmap';
 function App() {
 	// const location = useLocation();
 	const dispatch = useDispatch();
