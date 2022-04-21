@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { token } from './auth';
 import Cookies from 'js-cookie';
-
 const API_URL = '/api/feedbacks';
 
 const tokenCookie = Cookies.get('jwt');
