@@ -54,7 +54,7 @@ export const loginUser = credentials => {
 					payload: user,
 				});
 
-				toast.info(`Welcome ${user.username}`, {
+				toast.info(`Welcome, ${user.username}!`, {
 					autoClose: 5000,
 					icon: '👋',
 				});

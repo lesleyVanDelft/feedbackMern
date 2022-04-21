@@ -2,41 +2,31 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import EditImg from '../../assets/shared/icon-edit-feedback.svg';
-import { toast } from 'react-toastify';
-// import {
-// 	// getSingleFeedback,
-// 	reset,
-// 	editFeedback,
-// 	deleteFeedback,
-// 	getSingleFeedback,
-// } from '../../features/feedbacks/feedbackSlice';
-import { updateFeedback } from '../../reducers/feedbackCommentsReducer';
-import { removeFeedback } from '../../reducers/feedbackReducer';
+import {
+	updateFeedback,
+	removeFeedback,
+} from '../../reducers/feedbackCommentsReducer';
+// import { removeFeedback } from '../../reducers/feedbackReducer';
 import { useParams } from 'react-router-dom';
+import Modal from '../Modal/Modal';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './EditFeedbackForm.css';
 
-// 01:25 11-3-2022, needs edit form and functionality. Create button gives errors ._.' nvm fixed it, somehow got removed from app.js routes -.-
+// Modal.setAppElement('#EditFeedbackForm');
 
 const EditFeedbackForm = ({ feedbackData }) => {
 	const [titleContent, setTitleContent] = useState('');
 	const [category, setCategory] = useState('');
 	const [detailContent, setDetailContent] = useState('');
+	const [showModal, setShowModal] = useState(false);
+	const [confirmDelete, setConfirmDelete] = useState(false);
 	const singleFeedback = useSelector(state => state.singleFeedback);
-	// get user state from auth redux store
-	const user = useSelector(state => state.user);
-	// const feedback = useSelector(state => state.feedbackComments);
-	// const feedbacks  = useSelector(state => {
-	// 	return state.feedbacks;
-	// });
-	// console.log(feedbacks);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	let { id } = useParams();
 
-	// let data = {};
 	useEffect(() => {
 		setTitleContent(singleFeedback.title);
 		setCategory(singleFeedback.feedbackType);
@@ -54,16 +44,24 @@ const EditFeedbackForm = ({ feedbackData }) => {
 		dispatch(updateFeedback(id, data));
 	};
 
-	const handleDelete = () => {
-		// e.preventDefault();
-		dispatch(removeFeedback(id));
-		// setTimeout(navigate('/'), 1000);
-		// dispatch(reset());
-		// navigate('/');
+	const openModal = e => {
+		e.preventDefault();
+		setShowModal(true);
+	};
+	const closeModal = e => {
+		e.preventDefault();
+		setShowModal(false);
+	};
 
-		// dispatch(feedbackData)
-		// console.log(feedbackData);
-		toast('Deleted?');
+	const handleDelete = e => {
+		e.preventDefault();
+		dispatch(removeFeedback(id));
+		setShowModal(false);
+		navigate('/');
+	};
+
+	const handleCancel = () => {
+		navigate('/');
 	};
 
 	if (!singleFeedback) {
@@ -128,24 +126,26 @@ const EditFeedbackForm = ({ feedbackData }) => {
 					/>
 				</div>
 
+				<Modal
+					active={showModal}
+					closeModal={closeModal}
+					feedback={singleFeedback}
+					handleDelete={handleDelete}
+				/>
+
 				<div className="Form__group--buttons">
-					<Link to="/">
-						<button
-							className="btn btn-red"
-							type="button"
-							onClick={() => {
-								handleDelete();
-							}}>
-							Delete
-						</button>
-					</Link>
-					<Link to="/">
-						<button className="btn btn-darkBlue" type="button" onClick={null}>
-							Cancel
-						</button>
-					</Link>
 					<button className="btn btn-purple" type="submit">
 						Add Changes
+					</button>
+					<button
+						className="btn btn-darkBlue"
+						type="button"
+						onClick={handleCancel}>
+						Cancel
+					</button>
+
+					<button className="btn btn-red" type="button" onClick={openModal}>
+						Delete
 					</button>
 				</div>
 			</form>

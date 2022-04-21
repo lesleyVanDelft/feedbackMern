@@ -10,10 +10,7 @@ const feedbackReducer = (state = [], action) => {
 		case 'CREATE_NEW_FEEDBACK':
 			return {
 				...state,
-				feedbacks: [
-					...state.feedbacks,
-					state.feedbacks.push(...action.payload),
-				],
+				feedbacks: [state.feedbacks, state.feedbacks.push(action.payload)],
 			};
 		case 'TOGGLE_UPVOTE':
 			return state.map(fb => {
@@ -158,7 +155,7 @@ export const removeFeedback = id => {
 			type: 'DELETE_FEEDBACK',
 			payload: id,
 		});
-		// toast.warn('Feedback Deleted');
+		toast.warn('Feedback Deleted');
 	};
 };
 

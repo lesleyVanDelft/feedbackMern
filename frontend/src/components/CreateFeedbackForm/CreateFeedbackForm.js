@@ -41,7 +41,7 @@ const CreateFeedbackForm = () => {
 				text,
 				feedbackType,
 				author,
-				// details,
+				details,
 				status: 'planned',
 			})
 		);

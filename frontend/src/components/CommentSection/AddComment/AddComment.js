@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 // import { addComment } from '../../../features/feedbacks/commentSlice';
 import { addComment } from '../../../reducers/feedbackCommentsReducer';
@@ -32,7 +33,7 @@ const AddComment = ({ feedbackData }) => {
 	const onSubmit = e => {
 		// const finalComment = `${user.name}: ${comment}`;
 		e.preventDefault();
-		dispatch(addComment(user.id, data));
+		dispatch(addComment(id, data));
 		setComment('');
 		// setTimeout(() => {
 		// 	navigate(`/details/${id}`);

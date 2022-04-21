@@ -41,12 +41,18 @@
 		left: 42px;
 	}
 
-	.btn-red {
-		margin-right: auto;
-	}
+	.Form__group--buttons {
+		// background-color: rebeccapurple;
+		padding-left: 5rem;
+		display: flex;
+		justify-content: space-around;
+		.btn-red {
+			margin-right: 0;
+		}
 
-	.btn-darkBlue {
-		margin-right: 1rem;
+		.btn-darkBlue {
+			margin-right: 0rem;
+		}
 	}
 
 	textarea {
@@ -71,11 +77,20 @@
 @media screen and (max-width: 768px) {
 	.EditFeedbackForm {
 		margin-top: 55px;
-		.btn {
-			margin: 0;
+		.Form {
+			padding-bottom: 2rem;
+			&__group--buttons {
+				// justify-content: center;
+				flex-direction: column;
+				padding: 0;
+				padding-bottom: 1rem;
+				.btn {
+					margin: 0;
 
-			&-darkBlue {
-				margin: 1rem 0;
+					&-darkBlue {
+						margin: 1rem 0;
+					}
+				}
 			}
 		}
 	}

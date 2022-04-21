@@ -7,6 +7,9 @@ const feedbackPageReducer = (state = null, action) => {
 			return { ...state, ...action.payload };
 		case 'UPDATE_FEEDBACK':
 			return { ...state, ...action.payload };
+		case 'DELETE_FEEDBACK':
+			return state.filter(fb => fb.id !== action.payload);
+
 		case 'TOGGLE_UPVOTE_DETAILS':
 			return {
 				...(state._id !== action.payload.id
@@ -33,6 +36,15 @@ const feedbackPageReducer = (state = null, action) => {
 			return {
 				...state,
 				comments: [...state.comments, action.payload],
+				// ...state,
+				// comments: state.comments.map(comment => {
+				// 	return comment._id !== action.payload.feedbackId
+				// 		? comment
+				// 		: {
+				// 				...comment,
+				// 				...state.comments.push(action.payload.addedComment),
+				// 		  };
+				// }),
 			};
 		// case 'ADD_COMMENT':
 		// 	return action.payload;
@@ -207,6 +219,18 @@ export const updateFeedback = (id, feedbackObj) => {
 // 		await feedbackService.downvoteFeedback(id);
 // 	};
 // };
+
+export const removeFeedback = id => {
+	return async dispatch => {
+		await feedbackService.deleteFeedback(id);
+
+		dispatch({
+			type: 'DELETE_FEEDBACK',
+			payload: id,
+		});
+		toast.warn('Feedback Deleted');
+	};
+};
 
 export const addComment = (feedbackId, comment) => {
 	return async dispatch => {

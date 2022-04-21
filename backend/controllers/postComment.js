@@ -29,7 +29,7 @@ const postComment = async (req, res) => {
 	feedback.comments = feedback.comments.concat({
 		name: user.name,
 		username: user.username,
-		commentedBy: user,
+		commentedBy: user.id,
 		commentBody: comment.comment,
 		// upvotedBy: [user._id],
 		pointsCount: 1,

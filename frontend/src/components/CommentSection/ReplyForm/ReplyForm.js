@@ -18,7 +18,7 @@ const ReplyForm = ({
 	const [replyName, setReplyName] = useState('');
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const dispatch = useDispatch();
-	// console.log(comment);
+	console.log(comment);
 
 	const formik = useFormik({
 		initialValues: {

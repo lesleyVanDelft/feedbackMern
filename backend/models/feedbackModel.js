@@ -71,15 +71,15 @@ const feedbackModel = new mongoose.Schema(
 		details: {
 			name: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			username: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 			email: {
 				type: String,
-				// required: true,
+				required: true,
 			},
 		},
 		title: {

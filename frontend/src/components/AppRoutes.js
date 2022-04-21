@@ -7,7 +7,6 @@ import Create from '../pages/Create/Create';
 import Details from '../pages/Details/Details';
 import Edit from '../pages/Edit/Edit';
 import Test from '../pages/Test';
-import Cookies from 'js-cookie';
 import RoadmapPage from '../pages/Roadmap/Roadmap';
 import { AnimatePresence } from 'framer-motion';
 
