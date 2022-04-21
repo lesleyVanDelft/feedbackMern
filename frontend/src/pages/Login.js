@@ -13,7 +13,9 @@ import axios from 'axios';
 const Login = () => {
 	const user = useSelector(state => state.user);
 	const [error, setError] = useState(null);
+	const [blurMessage, setBlurMessage] = useState('');
 	const errorMessage = useSelector(state => state.errorMessage);
+
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -59,6 +61,7 @@ const Login = () => {
 
 	const onChange = e => {
 		setError(null);
+
 		setFormData(prevState => ({
 			...prevState,
 			[e.target.name]: e.target.value,
@@ -98,6 +101,11 @@ const Login = () => {
 		return errorMessage ? setError(errorMessage) : null;
 	}, [errorMessage]);
 
+	const handleBlur = e => {
+		setBlurMessage(e.target.value);
+	};
+	console.log(blurMessage);
+
 	return (
 		<main className="Login">
 			<Header login={true} />
@@ -125,9 +133,13 @@ const Login = () => {
 							// onChange={formik.handleChange}
 							onChange={onChange}
 							// onBlur={formik.handleBlur}
+							onBlur={handleBlur}
 						/>
-						{formik.touched.email && formik.errors.email ? (
+						{/* {formik.touched.email && formik.errors.email ? (
 							<p className="formikErrorMessage">{formik.errors.email}</p>
+						) : null} */}
+						{blurMessage !== '' ? (
+							<p className="formikErrorMessage">Please enter your email</p>
 						) : null}
 					</div>
 					<div className="form-group">

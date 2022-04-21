@@ -19,6 +19,9 @@ const Dashboard = ({ category, mobileOpen }) => {
 	const navigate = useNavigate();
 	// lock body scrolling when mobile menu is open
 	useEffect(() => {
+		if (!user) {
+			return <h1>loading user</h1>;
+		}
 		return active
 			? (document.body.style.overflow = 'hidden')
 			: (document.body.style.overflow = 'unset');
@@ -60,6 +63,8 @@ const Dashboard = ({ category, mobileOpen }) => {
 		hidden: { opacity: 0 },
 		show: { opacity: 1 },
 	};
+	if (!user) {
+	}
 
 	return (
 		<section className="Dashboard">
@@ -74,7 +79,8 @@ const Dashboard = ({ category, mobileOpen }) => {
 						<Link to="/">
 							<div className="text">
 								<span className="text__user">
-									Welcome, <span className="username">@{user.username}</span>
+									Welcome,{' '}
+									<span className="username">@{user && user.username}</span>
 								</span>
 								<div>
 									<h2>Frontend Mentor</h2>
