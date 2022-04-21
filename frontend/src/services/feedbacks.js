@@ -18,7 +18,7 @@ const setConfig = () => {
 
 // get user feedbacks
 const getFeedbacks = async () => {
-	const response = await axios.get(API_URL + 'homepage', setConfig());
+	const response = await axios.get(API_URL + '/homepage', setConfig());
 
 	// console.log();
 	return response.data;
@@ -70,7 +70,6 @@ const upvoteFeedbackDetails = async id => {
 
 const downvoteFeedback = async id => {
 	const response = await axios.post(
-
 		`${API_URL + 'downvote/' + id}`,
 		null,
 		setConfig()
