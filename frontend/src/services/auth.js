@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import backendUrl from '../backendUrl';
 // import { errorHandler } from '../utils/getErrorMsg';
 import { errorHandler } from '../utils/errorHandler';
 
-const API_URL = '/api/users/';
+const API_URL = `${backendUrl}/api/users`;
 
 export let token = null;
 
@@ -12,14 +13,14 @@ const setToken = newToken => {
 };
 
 const login = async (loginData, getError) => {
-	const response = await axios.post(API_URL + 'login', loginData, token);
+	const response = await axios.post(API_URL + '/login', loginData, token);
 	return response.data;
 };
 
 const register = async registerData => {
 	try {
 		const response = await axios.post(
-			API_URL + 'register',
+			API_URL + '/register',
 			registerData,
 			token
 		);
