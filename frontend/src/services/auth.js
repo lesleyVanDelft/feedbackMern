@@ -13,13 +13,13 @@ const setToken = newToken => {
 	token = newToken;
 };
 
-const loginPage = async () => {
-	const response = await axios.get(API_URL + '/login');
+const getLoginPage = () => {
+	const response = axios.get('/login');
 	return response.data;
 };
 
-const login = async (loginData, getError) => {
-	const response = await axios.post(API_URL + '/login', loginData, token);
+const login = async loginData => {
+	const response = await axios.post(API_URL + '/login', loginData);
 	return response.data;
 };
 
@@ -36,6 +36,6 @@ const register = async registerData => {
 	}
 };
 
-const authService = { setToken, login, register };
+const authService = { setToken, login, register, getLoginPage };
 
 export default authService;

@@ -72,6 +72,8 @@ export const loginUser = credentials => {
 					autoClose: 5000,
 					icon: '👋',
 				});
+			} else {
+				return await authService.getLoginPage();
 			}
 		} catch (err) {
 			dispatch({

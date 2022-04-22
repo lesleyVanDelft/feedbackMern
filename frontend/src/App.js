@@ -7,15 +7,12 @@ import AppRoutes from './components/AppRoutes';
 function App() {
 	// const location = useLocation();
 	const dispatch = useDispatch();
-	// const navigate = useNavigate();
 	const user = useSelector(state => state.user);
 
 	useEffect(() => {
 		try {
 			if (user) {
 				dispatch(getFeedbacks());
-			} else {
-				<h1>no user App.js</h1>;
 			}
 		} catch (err) {
 			console.log(err.response);
@@ -25,7 +22,7 @@ function App() {
 	return (
 		<div className="App">
 			<Router>
-				<AppRoutes />
+				<AppRoutes user={user} />
 			</Router>
 		</div>
 	);

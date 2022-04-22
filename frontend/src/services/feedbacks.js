@@ -62,7 +62,7 @@ const upvoteFeedback = async id => {
 };
 const upvoteFeedbackDetails = async id => {
 	const response = await axios.post(
-		`${API_URL + 'upvote/' + id}`,
+		`${API_URL + '/upvote/' + id}`,
 		// `${API_URL + id + '/upvote'}`,
 		null,
 		setConfig()
@@ -72,7 +72,7 @@ const upvoteFeedbackDetails = async id => {
 
 const downvoteFeedback = async id => {
 	const response = await axios.post(
-		`${API_URL + 'downvote/' + id}`,
+		`${API_URL + '/downvote/' + id}`,
 		null,
 		setConfig()
 	);
@@ -80,7 +80,7 @@ const downvoteFeedback = async id => {
 };
 const downvoteFeedbackDetails = async id => {
 	const response = await axios.post(
-		`${API_URL + 'downvote/' + id}`,
+		`${API_URL + '/downvote/' + id}`,
 
 		null,
 		setConfig()
@@ -128,7 +128,7 @@ const updateComment = async (feedbackId, commentId, commentObj) => {
 
 const removeComment = async (feedbackId, commentId) => {
 	const response = await axios.delete(
-		`${API_URL}${feedbackId}/comment/${commentId}`
+		`${API_URL}/${feedbackId}/comment/${commentId}`
 		// setConfig()
 	);
 	return response.data;

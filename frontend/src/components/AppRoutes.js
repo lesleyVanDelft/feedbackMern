@@ -12,10 +12,12 @@ import { AnimatePresence } from 'framer-motion';
 
 const AppRoutes = () => {
 	const location = useLocation();
+	// const user = useSelector(state => state.user);
+	const user = localStorage.getItem('user');
 	return (
 		<AnimatePresence exitBeforeEnter>
 			<Routes location={location} key={location.pathname}>
-				<Route exact path="/" element={<Homepage />} />
+				<Route exact path="/" element={user ? <Homepage /> : <Login />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/details/:id" element={<Details />} />

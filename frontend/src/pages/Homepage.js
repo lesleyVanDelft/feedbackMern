@@ -48,11 +48,11 @@ const Homepage = () => {
 	};
 
 	useEffect(() => {
+		if (!user) {
+			// dispatch(setUser());
+			navigate('/login');
+		}
 		try {
-			if (!user) {
-				// dispatch(setUser());
-				navigate('/login');
-			}
 			if (user) {
 				dispatch(getFeedbacks());
 			}
