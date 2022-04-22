@@ -4,7 +4,7 @@ import { backendUrl } from '../backendUrl';
 import Cookies from 'js-cookie';
 
 // const API_URL = `${backendUrl}/api/feedbacks`;
-const API_URL = `/api/feedbacks`;
+const API_URL = `https://feedback-lesley.herokuapp.com/api/feedbacks`;
 
 const tokenCookie = Cookies.get('jwt');
 // console.log(tokenCookie);

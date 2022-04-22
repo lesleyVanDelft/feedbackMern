@@ -4,7 +4,7 @@ import backendUrl from '../backendUrl';
 // import { errorHandler } from '../utils/getErrorMsg';
 import { errorHandler } from '../utils/errorHandler';
 
-const API_URL = `/api/users`;
+const API_URL = `https://feedback-lesley.herokuapp.com/api/users`;
 // const API_URL = `${backendUrl}/api/users`;
 
 export let token = null;

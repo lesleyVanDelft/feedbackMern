@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 const host = '0.0.0.0';
 // const { errorHandler } = require('./utils/middleware');
 const connectDB = require('./config/db');
@@ -38,8 +38,8 @@ app.use(morgan('tiny'));
 // });
 
 // app.use('/api', authRoutes);
-app.use('/api/users', authRoutes);
 app.use('/api/feedbacks', feedbackRoutes);
+app.use('/api/users', authRoutes);
 app.use(middleware.unknownEndpointHandler);
 
 // app.use(middleware.errorHandler);
@@ -48,17 +48,18 @@ app.use(middleware.unknownEndpointHandler);
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-	app.get('/', (req, res) => {
+	app.get('*', (req, res) => {
 		res.sendFile(
 			path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
 		);
 	});
-} else {
-	app.get('/', (req, res) => res.send('Please set to production'));
 }
+// else {
+// 	app.get('*', (req, res) => res.send('Please set to production'));
+// }
 
 // app.use(errorHandler);
 
-app.listen(port, () =>
-	console.log(`Feedbackmern backend is running on port ${port}`)
+app.listen(PORT, () =>
+	console.log(`Feedbackmern backend is running on port ${PORT}`)
 );
