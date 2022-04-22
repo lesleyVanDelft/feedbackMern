@@ -62,8 +62,8 @@ const registerUser = async (req, res) => {
 	}
 
 	try {
-		// const salt = await bcryptjs.genSalt();
-		const hashedPassword = await bcryptjs.hash(req.body.password, 10);
+		const salt = await bcryptjs.genSalt();
+		const hashedPassword = await bcryptjs.hash(req.body.password, salt);
 		// Create user
 		const user = await User.create({
 			name,
@@ -104,6 +104,10 @@ const loginUser = async (req, res, next) => {
 	// 		errMsg: err,
 	// 	});
 	// }
+	if (!req.body) {
+		res.status(402);
+		res.send('no req body');
+	}
 
 	if (!user) {
 		console.error('wrong email - auth controller');

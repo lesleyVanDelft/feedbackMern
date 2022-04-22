@@ -3,7 +3,8 @@ import { token } from './auth';
 import { backendUrl } from '../backendUrl';
 import Cookies from 'js-cookie';
 
-const API_URL = `${backendUrl}/api/feedbacks`;
+// const API_URL = `${backendUrl}/api/feedbacks`;
+const API_URL = `/api/feedbacks`;
 
 const tokenCookie = Cookies.get('jwt');
 // console.log(tokenCookie);

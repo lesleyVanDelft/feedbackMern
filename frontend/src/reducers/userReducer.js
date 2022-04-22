@@ -40,6 +40,20 @@ const userReducer = (state = null, action) => {
 	}
 };
 
+//
+//
+//
+
+// export const getLoginPage = () => {
+// 	return async dispatch  => {
+// 		try {
+
+// 		} catch (error) {
+
+// 		}
+// 	}
+// }
+
 export const loginUser = credentials => {
 	return async dispatch => {
 		try {

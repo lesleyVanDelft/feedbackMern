@@ -4,12 +4,18 @@ import backendUrl from '../backendUrl';
 // import { errorHandler } from '../utils/getErrorMsg';
 import { errorHandler } from '../utils/errorHandler';
 
-const API_URL = `${backendUrl}/api/users`;
+const API_URL = `/api/users`;
+// const API_URL = `${backendUrl}/api/users`;
 
 export let token = null;
 
 const setToken = newToken => {
 	token = newToken;
+};
+
+const loginPage = async () => {
+	const response = await axios.get(API_URL + '/login');
+	return response.data;
 };
 
 const login = async (loginData, getError) => {
