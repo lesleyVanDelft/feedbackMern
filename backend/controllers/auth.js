@@ -96,6 +96,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res, next) => {
 	const { email, password } = req.body;
 	const user = await User.findOne({ email });
+	// console.log(req.user);
 
 	// if (!req.user) {
 	// 	// res.status(401).send('login controller');
@@ -126,9 +127,11 @@ const loginUser = async (req, res, next) => {
 			});
 		} else {
 			console.error('wrong password - auth controller');
-			res.status(401);
+			// res.status(401);
 			res.send('Wrong password');
 		}
+	} else {
+		res.send('auth controller backend went wrong');
 	}
 };
 

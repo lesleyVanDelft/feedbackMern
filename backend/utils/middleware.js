@@ -4,25 +4,28 @@ const User = require('../models/userModel');
 const auth = async (req, res, next) => {
 	let token;
 	try {
-		if (req.cookies.jwt) token = req.cookies.jwt;
-		// verify token
-		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+		if (req.cookies.jwt) {
+			token = req.cookies.jwt;
+			// verify token
+			const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-		// get user from the token
-		req.user = await User.findById(decoded.id).select('-password');
+			// get user from the token
+			req.user = await User.findById(decoded.id).select('-password');
+		}
+		next();
 	} catch (error) {
 		console.log(error);
 		res
 			.status(401)
 			.send({ authErrorMsg: 'Not authorized, no token. - utils auth' });
 		// throw new Error('Not authorized, no token / authmiddleware');
+		// next();
 	}
 
 	// else if (!token) {
 	// 	res.status(401);
 	// 	throw new Error('Not authorized, no token / authmiddleware');
 	// }
-	// next();
 };
 
 const unknownEndpointHandler = (_req, res) => {

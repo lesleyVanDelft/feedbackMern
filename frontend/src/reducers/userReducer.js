@@ -61,8 +61,8 @@ export const loginUser = credentials => {
 
 			if (user) {
 				storageService.saveUser(user);
-				storageService.loadUser();
-
+				await storageService.loadUser();
+				Cookies.set('jwt', user.token);
 				dispatch({
 					type: 'LOGIN',
 					payload: user,
@@ -77,7 +77,7 @@ export const loginUser = credentials => {
 			// 	return await authService.getLoginPage();
 			// }
 		} catch (err) {
-			// console.log(err, 'userreducer.js');
+			// console.log(err, '');
 			dispatch({
 				type: 'SET_LOGIN_ERROR',
 				payload: err.response,

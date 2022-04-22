@@ -14,8 +14,8 @@ if (process.env.NODE_ENV === 'development') {
 // https://feedback-lesley.herokuapp.com
 
 // console.log(tokenCookie);
+const tokenCookie = Cookies.get('jwt');
 const setConfig = () => {
-	const tokenCookie = Cookies.get('jwt');
 	return {
 		headers: { Authorization: `Bearer ${tokenCookie}` },
 	};

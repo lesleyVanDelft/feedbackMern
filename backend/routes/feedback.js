@@ -22,6 +22,7 @@ const {
 	deleteReply,
 	updateReply,
 } = require('../controllers/postComment');
+const { loginUser } = require('../controllers/auth');
 
 const router = express.Router();
 
@@ -40,6 +41,8 @@ router.post('/downvote/:id', auth, downvoteFeedback);
 // get ALL feedbacks
 router.get('/', auth, getFeedbacks);
 router.post('/', auth, createNewFeedback);
+// router.post('/login', loginUser);
+// router.get('/login', loginUser);
 
 // get SINGLE feedback
 router.get('/details/:id', auth, getSingleFeedback);

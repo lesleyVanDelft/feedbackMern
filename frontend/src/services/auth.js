@@ -26,7 +26,7 @@ const getLoginPage = () => {
 };
 
 const login = async loginData => {
-	const response = await axios.post(API_URL + '/login', loginData, token);
+	const response = await axios.post(API_URL + '/login', loginData);
 	return response.data;
 };
 

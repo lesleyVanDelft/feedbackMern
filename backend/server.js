@@ -36,8 +36,8 @@ app.use(morgan('tiny'));
 // app.get('/', authRoutes);
 
 // app.use('/api', authRoutes);
-app.use('/api/users', authRoutes);
 app.use('/api/feedbacks', feedbackRoutes);
+app.use('/api/users', authRoutes);
 app.use(middleware.unknownEndpointHandler);
 
 // app.use(middleware.errorHandler);
