@@ -41,13 +41,14 @@ const protect = asyncHandler(async (req, res, next) => {
 				// res.redirect('/login');
 			} else {
 				console.log(decodedToken);
-				res.redirect('/');
+				res.redirect('/login');
 				next();
 			}
 		});
 	} else {
-		// res.redirect('/login');
+		res.redirect(401, '/login');
 		console.log('protect failed authmiddle backend');
+		next();
 	}
 });
 // const refresh = asyncHandler(async (req, res, next) => {});

@@ -39,6 +39,7 @@ router.post('/downvote/:id', auth, downvoteFeedback);
 
 // get ALL feedbacks
 router.get('/', auth, getFeedbacks);
+router.post('/', auth, createNewFeedback);
 
 // get SINGLE feedback
 router.get('/details/:id', auth, getSingleFeedback);
@@ -53,7 +54,6 @@ router.post('/details/:id/comment/:commentId/reply', auth, postReply);
 // router.get('/details/:id', auth, getFeedbacks);
 // // // // // // // // // // // // // // // // // // // // // // // // //
 
-router.post('/', auth, createNewFeedback);
 router.patch('/:id', updateFeedback);
 router.delete('/:id', deleteFeedback);
 

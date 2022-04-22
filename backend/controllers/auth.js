@@ -96,23 +96,18 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res, next) => {
 	const { email, password } = req.body;
 	const user = await User.findOne({ email });
-	// if (err) {
-	// 	console.log('-------------------------');
-	// 	console.log(err);
-	// 	console.log('-------------------------');
-	// 	res.status(401).send({
-	// 		errMsg: err,
-	// 	});
+
+	// if (!req.user) {
+	// 	// res.status(401).send('login controller');
+	// 	res.redirect(401, '/login');
 	// }
 	if (!req.body) {
-		res.status(402);
-		res.send('no req body');
+		res.status(402).send('no req body');
 	}
 
 	if (!user) {
 		console.error('wrong email - auth controller');
-		res.status(400);
-		res.send('Email is not registered');
+		res.status(400).send('Email is not registered');
 	}
 
 	if (user) {

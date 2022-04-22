@@ -5,11 +5,15 @@ const { auth } = require('../utils/middleware');
 
 const router = express.Router();
 
+// router.route('/register').get(registerUser).post(registerUser)
+// router.get('/login', (req, res) => {
+// 	res.send('hi');
+// });
+router.post('/login', loginUser);
+router.get('/logout', logoutUser);
+
 router.get('/register', registerUser);
 router.post('/register', registerUser);
 // router.get('/', loginUser);
-// router.get('/getLogin');
-router.post('/login', loginUser);
-router.get('/logout', logoutUser);
 
 module.exports = router;

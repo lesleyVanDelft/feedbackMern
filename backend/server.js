@@ -9,14 +9,14 @@ const morgan = require('morgan');
 const port = process.env.PORT || 5000;
 const host = '0.0.0.0';
 // const { errorHandler } = require('./utils/middleware');
-// const connectDB = require('./config/db');
-require('./config/db');
+const connectDB = require('./config/db');
+// require('./config/db');
 const middleware = require('./utils/middleware');
 const authRoutes = require('./routes/auth');
 const feedbackRoutes = require('./routes/feedback');
 const userRoutes = require('./routes/user');
 
-// connectDB();
+connectDB();
 
 const app = express();
 
@@ -30,12 +30,18 @@ app.use(morgan('tiny'));
 // these get used in redux service files
 // app.use('/api/feedbacks', require('./routes/feedbackRoutes'));
 // app.use('/api/users', require('./routes/userRoutes'));
+// app.get('/api/login', (req, res) => {
+// 	res.send('login...');
+// });
+// app.get('/api', (req, res) => {
+// 	res.send('hi');
+// });
 
 // app.use('/api', authRoutes);
-app.use('/api/feedbacks', feedbackRoutes);
 app.use('/api/users', authRoutes);
-
+app.use('/api/feedbacks', feedbackRoutes);
 app.use(middleware.unknownEndpointHandler);
+
 // app.use(middleware.errorHandler);
 
 // Serve frontend
