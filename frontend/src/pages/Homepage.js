@@ -28,6 +28,16 @@ const Homepage = () => {
 	// useEffect(() => {
 	// 	dispatch(getFeedbacks());
 	// }, []);
+	// useEffect(() => {
+	// 	try {
+	// 		if (user) {
+	// 			dispatch(getFeedbacks());
+	// 		}
+	// 	} catch (err) {
+	// 		console.log(err.response);
+	// 		console.log('homepage.js');
+	// 	}
+	// }, [dispatch, user]);
 
 	// category filter button state
 	const [categoryState, setCategoryState] = useState('all');
@@ -98,6 +108,7 @@ const Homepage = () => {
 
 			<section className={`Homepage__content`}>
 				{/* mobile animation overlay */}
+				{/* <h1>hello</h1> */}
 				<motion.div
 					className={`overlay ${mobileState ? 'active' : null}`}
 					variants={menuVisibility}

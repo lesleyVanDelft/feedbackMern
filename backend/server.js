@@ -33,13 +33,11 @@ app.use(morgan('tiny'));
 // app.get('/api/login', (req, res) => {
 // 	res.send('login...');
 // });
-// app.get('/api', (req, res) => {
-// 	res.send('hi');
-// });
+// app.get('/', authRoutes);
 
 // app.use('/api', authRoutes);
-app.use('/api/feedbacks', feedbackRoutes);
 app.use('/api/users', authRoutes);
+app.use('/api/feedbacks', feedbackRoutes);
 app.use(middleware.unknownEndpointHandler);
 
 // app.use(middleware.errorHandler);

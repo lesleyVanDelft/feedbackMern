@@ -10,8 +10,6 @@ const auth = async (req, res, next) => {
 
 		// get user from the token
 		req.user = await User.findById(decoded.id).select('-password');
-
-		next();
 	} catch (error) {
 		console.log(error);
 		res
@@ -24,6 +22,7 @@ const auth = async (req, res, next) => {
 	// 	res.status(401);
 	// 	throw new Error('Not authorized, no token / authmiddleware');
 	// }
+	// next();
 };
 
 const unknownEndpointHandler = (_req, res) => {

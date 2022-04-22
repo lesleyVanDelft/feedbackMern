@@ -72,10 +72,12 @@ export const loginUser = credentials => {
 					autoClose: 5000,
 					icon: '👋',
 				});
-			} else {
-				return await authService.getLoginPage();
 			}
+			// else {
+			// 	return await authService.getLoginPage();
+			// }
 		} catch (err) {
+			// console.log(err, 'userreducer.js');
 			dispatch({
 				type: 'SET_LOGIN_ERROR',
 				payload: err.response,

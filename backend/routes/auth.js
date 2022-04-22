@@ -10,6 +10,8 @@ const router = express.Router();
 // 	res.send('hi');
 // });
 router.post('/login', loginUser);
+router.get('/login');
+
 router.get('/logout', logoutUser);
 
 router.get('/register', registerUser);
