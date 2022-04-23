@@ -4,20 +4,22 @@ import { backendUrl } from '../backendUrl';
 import Cookies from 'js-cookie';
 
 // const API_URL = `${backendUrl}/api/feedbacks`;
-// const API_URL = `/api/feedbacks`;
-let API_URL;
-if (process.env.NODE_ENV === 'development') {
-	API_URL = 'http://localhost:5000/api/feedbacks';
-} else if (process.env.NODE_ENV === 'production') {
-	API_URL = 'https://feedback-lesley.herokuapp.com/api/feedbacks';
-}
+const API_URL = `http://localhost:5000/api/feedbacks`;
+// let API_URL;
+// if (process.env.NODE_ENV === 'development') {
+// 	API_URL = 'http://localhost:5000/api/feedbacks';
+// } else if (process.env.NODE_ENV === 'production') {
+// 	API_URL = 'https://feedback-lesley.herokuapp.com/api/feedbacks';
+// }
 // https://feedback-lesley.herokuapp.com
 
 // console.log(tokenCookie);
-const tokenCookie = Cookies.get('jwt');
 const setConfig = () => {
+	const tokenCookie = Cookies.get('jwt');
+	// console.log(tokenCookie);
 	return {
 		headers: { Authorization: `Bearer ${tokenCookie}` },
+		credentials: 'include',
 	};
 };
 

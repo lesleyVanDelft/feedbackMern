@@ -5,9 +5,9 @@ const pointsCalculator = require('../utils/pointsCalculator');
 
 const upvoteFeedback = async (req, res) => {
 	const { id } = req.params;
-
 	const feedback = await Feedback.findById(id);
 	const user = await User.findById(req.user);
+	// console.log(feedback.author);
 
 	if (!feedback) {
 		return res.status(404).send({
@@ -19,13 +19,13 @@ const upvoteFeedback = async (req, res) => {
 		return res.status(404).send({ message: 'User does not exist in database' });
 	}
 
-	const author = await User.findById(feedback.author);
+	// const author = await User.findById(feedback.author);
 
-	if (!author) {
-		return res
-			.status(404)
-			.send({ message: 'Author does not exist in database' });
-	}
+	// if (!author) {
+	// 	return res
+	// 		.status(404)
+	// 		.send({ message: 'Author does not exist in database' });
+	// }
 
 	if (feedback.upvotedBy.includes(user._id.toString())) {
 		feedback.upvotedBy = feedback.upvotedBy.filter(
@@ -64,7 +64,7 @@ const upvoteFeedback = async (req, res) => {
 	// feedback.pointsCount = calculatedData.pointsCount;
 
 	await feedback.save();
-	await author.save();
+	// await author.save();
 
 	res.status(201).end();
 };
@@ -73,7 +73,7 @@ const downvoteFeedback = async (req, res) => {
 	const { id } = req.params;
 
 	const feedback = await Feedback.findById(id);
-	const user = await User.findById(req.user);
+	const user = await User.findById(feedback.author);
 
 	if (!feedback) {
 		return res.status(404).send({
@@ -85,13 +85,13 @@ const downvoteFeedback = async (req, res) => {
 		return res.status(404).send({ message: 'User does not exist in database' });
 	}
 
-	const author = await User.findById(feedback.author);
+	// const author = await User.findById(feedback.author);
 
-	if (!author) {
-		return res
-			.status(404)
-			.send({ message: 'Author does not exist in database' });
-	}
+	// if (!author) {
+	// 	return res
+	// 		.status(404)
+	// 		.send({ message: 'Author does not exist in database' });
+	// }
 
 	if (feedback.downvotedBy.includes(user._id.toString())) {
 		feedback.downvotedBy = feedback.downvotedBy.filter(
@@ -121,7 +121,7 @@ const downvoteFeedback = async (req, res) => {
 	feedback.pointsCount = calculatedData.pointsCount;
 
 	await feedback.save();
-	await author.save();
+	// await author.save();
 
 	res.status(201).end();
 };

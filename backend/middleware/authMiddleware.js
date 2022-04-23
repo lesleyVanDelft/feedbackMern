@@ -12,8 +12,6 @@ const checkUser = asyncHandler(async (req, res, next) => {
 			if (err) {
 				console.log(err.message + 'checkUser mw');
 				// res.locals.user = null;
-
-				next();
 			} else {
 				console.log(decodedToken);
 				let user = await User.findById(decodedToken.id);
@@ -42,13 +40,12 @@ const protect = asyncHandler(async (req, res, next) => {
 			} else {
 				console.log(decodedToken);
 				res.redirect('/login');
-				next();
 			}
 		});
+		next();
 	} else {
 		res.redirect(401, '/login');
 		console.log('protect failed authmiddle backend');
-		next();
 	}
 });
 // const refresh = asyncHandler(async (req, res, next) => {});

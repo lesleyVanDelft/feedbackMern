@@ -14,6 +14,7 @@ const getSingleFeedback = async (req, res) => {
 
 	const { id } = req.params;
 	const singleFeedback = await Feedback.findById(id);
+	// console.log(req.user);
 
 	if (!singleFeedback) {
 		return res

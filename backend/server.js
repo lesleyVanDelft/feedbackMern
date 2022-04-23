@@ -33,7 +33,10 @@ app.use(morgan('tiny'));
 // app.get('/api/login', (req, res) => {
 // 	res.send('login...');
 // });
-// app.get('/', authRoutes);
+app.get('/', (req, res) => {
+	res.redirect('http://localhost:3000/login');
+	// res.send('hi');
+});
 
 // app.use('/api', authRoutes);
 app.use('/api/feedbacks', feedbackRoutes);

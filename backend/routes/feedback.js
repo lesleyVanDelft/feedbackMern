@@ -32,7 +32,7 @@ const router = express.Router();
 
 // UPVOTE id post link
 router.post('/upvote/:id', auth, upvoteFeedback);
-router.post('/details/upvote/:id', auth, upvoteFeedback);
+// router.post('/details/upvote/:id', auth, upvoteFeedback);
 // DOWNVOTE id post link
 
 router.post('/downvote/:id', auth, downvoteFeedback);
@@ -57,8 +57,8 @@ router.post('/details/:id/comment/:commentId/reply', auth, postReply);
 // router.get('/details/:id', auth, getFeedbacks);
 // // // // // // // // // // // // // // // // // // // // // // // // //
 
-router.patch('/:id', updateFeedback);
-router.delete('/:id', deleteFeedback);
+router.patch('/:id', auth, updateFeedback);
+router.delete('/:id', auth, deleteFeedback);
 
 //post comments routes
 

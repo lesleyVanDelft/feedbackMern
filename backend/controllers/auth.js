@@ -128,10 +128,9 @@ const loginUser = async (req, res, next) => {
 		} else {
 			console.error('wrong password - auth controller');
 			// res.status(401);
-			res.send('Wrong password');
+			res.status(401).send('Wrong password');
 		}
-	} else {
-		res.send('auth controller backend went wrong');
+		console.log(req.user);
 	}
 };
 
