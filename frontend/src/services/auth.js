@@ -4,7 +4,7 @@ import backendUrl from '../backendUrl';
 // import { errorHandler } from '../utils/getErrorMsg';
 import { errorHandler } from '../utils/errorHandler';
 
-const API_URL = `http://localhost:5000/api/users`;
+const API_URL = `/api/users`;
 // const API_URL = `${backendUrl}/api/users`;
 // https://feedback-lesley.herokuapp.com
 // let API_URL;

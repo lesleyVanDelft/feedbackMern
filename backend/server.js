@@ -34,7 +34,7 @@ app.use(morgan('tiny'));
 // 	res.send('login...');
 // });
 app.get('/', (req, res) => {
-	res.redirect('http://localhost:3000/login');
+	res.redirect('https://feedback-lesley.herokuapp.com/login');
 	// res.send('hi');
 });
 
