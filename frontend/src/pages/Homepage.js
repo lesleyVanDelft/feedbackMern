@@ -62,24 +62,27 @@ const Homepage = () => {
 			// dispatch(setUser());
 			navigate('/login');
 		}
-		try {
-			if (user) {
+		if (user) {
+			try {
+				navigate('/');
 				dispatch(getFeedbacks());
+
+				// setTimeout(() => {
+				// 	// if (user) {
+				// 	// 	dispatch(getFeedbacks());
+				// 	// }
+				// 	if (!user) {
+				// 		navigate('/login');
+				// 	}
+				// }, 300);
+				// if (!user) {
+				// 	navigate('/login');
+				// }
+			} catch (error) {
+				console.log(error);
 			}
-			// setTimeout(() => {
-			// 	// if (user) {
-			// 	// 	dispatch(getFeedbacks());
-			// 	// }
-			// 	if (!user) {
-			// 		navigate('/login');
-			// 	}
-			// }, 300);
-			// if (!user) {
-			// 	navigate('/login');
-			// }
-		} catch (error) {
-			console.log(error);
 		}
+
 		dispatch(setUser());
 	}, []);
 

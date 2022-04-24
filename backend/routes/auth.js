@@ -1,6 +1,7 @@
 const express = require('express');
-const res = require('express/lib/response');
+let User = require('../models/userModel');
 const { loginUser, registerUser, logoutUser } = require('../controllers/auth');
+
 const { protect } = require('../middleware/authMiddleware');
 const { auth } = require('../utils/middleware');
 
@@ -10,8 +11,16 @@ const router = express.Router();
 // router.get('/login', (req, res) => {
 // 	res.send('hi');
 // });
-router.get('/login', (req, res) => {
-	res.send('hi');
+router.get('/', (req, res) => {
+	// if (req.user) {
+	res.redirect('/api/feedbacks');
+	// } else {
+	// 	res.redirect('/api/users/login');
+	// }
+	// User.find()
+	// 	.then(users => res.json(users))
+	// 	.catch(err => res.status(400).json('Error get login: ' + err));
+
 	// res.redirect('/login');
 });
 router.post('/login', loginUser);
