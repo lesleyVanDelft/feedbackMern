@@ -4,7 +4,10 @@ const User = require('../models/userModel');
 
 // check user
 const checkUser = asyncHandler(async (req, res, next) => {
-	const token = req.cookies.jwt;
+	let token;
+	if (req.cookies.jwt) {
+		token = req.cookies.jwt;
+	}
 
 	if (token) {
 		jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {

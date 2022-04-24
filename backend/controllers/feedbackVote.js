@@ -8,7 +8,7 @@ const upvoteFeedback = async (req, res) => {
 	const feedback = await Feedback.findById(id);
 	const user = await User.findById(req.user);
 	// console.log(feedback.author);
-
+	// console.log(req.user);
 	if (!feedback) {
 		return res.status(404).send({
 			message: `Post with ID: ${id} does not exist in database./feedbackvote controller`,
@@ -16,7 +16,7 @@ const upvoteFeedback = async (req, res) => {
 	}
 
 	if (!user) {
-		return res.status(404).send({ message: 'User does not exist in database' });
+		return res.status(401).send({ message: 'User does not exist in database' });
 	}
 
 	// const author = await User.findById(feedback.author);
@@ -73,7 +73,7 @@ const downvoteFeedback = async (req, res) => {
 	const { id } = req.params;
 
 	const feedback = await Feedback.findById(id);
-	const user = await User.findById(feedback.author);
+	const user = await User.findById(req.user);
 
 	if (!feedback) {
 		return res.status(404).send({

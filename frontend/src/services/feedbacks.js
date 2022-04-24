@@ -4,7 +4,7 @@ import { backendUrl } from '../backendUrl';
 import Cookies from 'js-cookie';
 
 // const API_URL = `${backendUrl}/api/feedbacks`;
-const API_URL = `http://localhost:5000/api/feedbacks`;
+const API_URL = `/api/feedbacks`;
 // let API_URL;
 // if (process.env.NODE_ENV === 'development') {
 // 	API_URL = 'http://localhost:5000/api/feedbacks';
@@ -19,7 +19,7 @@ const setConfig = () => {
 	// console.log(tokenCookie);
 	return {
 		headers: { Authorization: `Bearer ${tokenCookie}` },
-		credentials: 'include',
+		// credentials: 'include',
 	};
 };
 
@@ -137,8 +137,8 @@ const updateComment = async (feedbackId, commentId, commentObj) => {
 
 const removeComment = async (feedbackId, commentId) => {
 	const response = await axios.delete(
-		`${API_URL}/${feedbackId}/comment/${commentId}`
-		// setConfig()
+		`${API_URL}/${feedbackId}/comment/${commentId}`,
+		setConfig()
 	);
 	return response.data;
 };

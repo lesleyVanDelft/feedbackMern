@@ -12,7 +12,7 @@ const postComment = async (req, res) => {
 
 	// current feedback id comes with comment post object
 	const feedback = await Feedback.findById(comment._id);
-	const user = await User.findById(feedback.author);
+	const user = await User.findById(req.user);
 
 	// feedback.author = user comes from auth middleware
 	if (!feedback) {
@@ -52,7 +52,8 @@ const deleteComment = async (req, res) => {
 	const { id, commentId } = req.params;
 
 	const feedback = await Feedback.findById(id);
-	const user = await User.findById(feedback.author);
+	const user = await User.findById(req.user);
+	console.log(user);
 
 	if (!feedback) {
 		return res.status(404).send({
@@ -193,7 +194,7 @@ const postReply = async (req, res) => {
 	}
 
 	const feedback = await Feedback.findById(id);
-	const user = await User.findById(feedback.author);
+	const user = await User.findById(req.user);
 
 	if (!feedback) {
 		return res.status(404).send({
@@ -267,7 +268,7 @@ const deleteReply = async (req, res) => {
 	const { id, commentId, replyId } = req.params;
 
 	const feedback = await Feedback.findById(id);
-	const user = await User.findById(feedback.author);
+	const user = await User.findById(req.user);
 
 	if (!feedback) {
 		return res.status(404).send({

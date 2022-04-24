@@ -20,8 +20,8 @@ connectDB();
 
 const app = express();
 
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -34,13 +34,13 @@ app.use(morgan('tiny'));
 // 	res.send('login...');
 // });
 app.get('/', (req, res) => {
-	res.redirect('https://feedback-lesley.herokuapp.com/login');
+	res.redirect('http://localhost:3000/login');
 	// res.send('hi');
 });
 
 // app.use('/api', authRoutes);
-app.use('/api/feedbacks', feedbackRoutes);
 app.use('/api/users', authRoutes);
+app.use('/api/feedbacks', feedbackRoutes);
 app.use(middleware.unknownEndpointHandler);
 
 // app.use(middleware.errorHandler);
