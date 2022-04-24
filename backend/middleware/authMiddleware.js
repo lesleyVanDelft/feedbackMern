@@ -32,23 +32,27 @@ const checkUser = asyncHandler(async (req, res, next) => {
 });
 
 const protect = asyncHandler(async (req, res, next) => {
-	const token = req.cookies.jwt;
+	let token;
 
-	// check jwt exists and verified
-	if (token) {
-		jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-			if (err) {
-				console.log(err.message);
-				// res.redirect('/login');
-			} else {
-				console.log(decodedToken);
-				res.redirect('/login');
-			}
-		});
-		next();
-	} else {
-		res.redirect(401, '/login');
-		console.log('protect failed authmiddle backend');
+	if (
+		req.headers.authorization &&
+		req.headers.authorization.startsWith('Bearer')
+	) {
+		try {
+			token = req.headers.authorization.split(' ')[1];
+
+			const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+			req.user = await User.findById(decoded.id).select('-password');
+
+			next();
+		} catch (err) {
+			res.status(401).send('Token failed.');
+		}
+	}
+
+	if (!token) {
+		res.status(401).send('No token.');
 	}
 });
 // const refresh = asyncHandler(async (req, res, next) => {});

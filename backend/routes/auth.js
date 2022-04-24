@@ -13,7 +13,7 @@ const router = express.Router();
 // });
 router.get('/', (req, res) => {
 	// if (req.user) {
-	res.redirect('/api/feedbacks');
+	// res.redirect('/api/feedbacks');
 	// } else {
 	// 	res.redirect('/api/users/login');
 	// }
@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
 	// 	.catch(err => res.status(400).json('Error get login: ' + err));
 
 	// res.redirect('/login');
+	res.status(200);
 });
 router.post('/login', loginUser);
 // router.get('/login', (req, res) => {
