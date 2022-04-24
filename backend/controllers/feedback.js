@@ -8,7 +8,8 @@ const getFeedbacks = async (req, res) => {
 	if (req.user) {
 		res.status(200).json(allFeedbacks);
 	} else if (!req.user) {
-		res.status(401).send('Not allowed, no user found');
+		// res.status(401).send('Not allowed, no user found');
+		res.redirect(401, '/login');
 	}
 };
 
