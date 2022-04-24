@@ -10,8 +10,9 @@ const router = express.Router();
 // router.get('/login', (req, res) => {
 // 	res.send('hi');
 // });
-router.get('/login', (req, user) => {
+router.get('/login', (req, res) => {
 	res.send('hi');
+	// res.redirect('/login');
 });
 router.post('/login', loginUser);
 // router.get('/login', (req, res) => {

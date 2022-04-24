@@ -4,8 +4,12 @@ const User = require('../models/userModel');
 
 const getFeedbacks = async (req, res) => {
 	const allFeedbacks = await Feedback.find({});
-
-	return res.status(200).json(allFeedbacks);
+	// const user = await User.findById(req.user._id);
+	if (req.user) {
+		res.status(200).json(allFeedbacks);
+	} else if (!req.user) {
+		res.status(401).send('Not allowed, no user found');
+	}
 };
 
 const getSingleFeedback = async (req, res) => {
