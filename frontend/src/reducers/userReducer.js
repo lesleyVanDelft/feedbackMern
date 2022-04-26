@@ -4,25 +4,9 @@ import storageService from '../utils/localStorage';
 import feedbackService from '../services/feedbacks';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
-import { errorHandler } from '../utils/errorHandler';
-import { setError } from './errorReducer';
-
-// const initialLoadState = {
-// 	user: localStorage.getItem('readifyUserKey') ? localStorage.getItem('readifyUserKey') : null,
-// 	feedbacks: [],
-// };
-// const initialLoadState = {
-// 	user: localStorage.getItem('user'),
-// 	feedbacks: [null],
-// };
 
 const userReducer = (state = null, action) => {
 	switch (action.type) {
-		// case 'SET_LOGIN_ERROR':
-		// 	return {
-		// 		...state,
-		// 		errorMessage: action.payload.data,
-		// 	};
 		case 'LOGIN':
 			return action.payload;
 		case 'SIGNUP':
@@ -102,11 +86,6 @@ export const registerUser = credentials => {
 			type: 'SIGNUP',
 			payload: user,
 		});
-
-		// dispatch({
-		// 	type: 'SET_USER',
-		// 	payload: user,
-		// });
 
 		toast.info(`Welcome, ${user.username}`, {
 			autoClose: 3000,

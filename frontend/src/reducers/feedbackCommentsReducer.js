@@ -36,29 +36,9 @@ const feedbackPageReducer = (state = null, action) => {
 			return {
 				...state,
 				comments: [...state.comments, action.payload],
-				// ...state,
-				// comments: state.comments.map(comment => {
-				// 	return comment._id !== action.payload.feedbackId
-				// 		? comment
-				// 		: {
-				// 				...comment,
-				// 				...state.comments.push(action.payload.addedComment),
-				// 		  };
-				// }),
 			};
-		// case 'ADD_COMMENT':
-		// 	return action.payload;
 
 		case 'ADD_REPLY':
-			// return {
-			// 	...state,
-			// 	comments: state.comments.map(c =>
-			// 		c.id !== action.payload.commentId
-			// 			? c
-			// 			: { ...c, replies: [...c.replies, action.payload.addedReply] }
-			// 	),
-			// };
-			// let comments = state.comments;
 			return {
 				...state,
 				comments: state.comments.map(comment => {
@@ -134,6 +114,8 @@ const feedbackPageReducer = (state = null, action) => {
 					}
 				}),
 			};
+		case 'LOGOUT':
+			return null;
 		default:
 			return state;
 	}
@@ -187,38 +169,6 @@ export const updateFeedback = (id, feedbackObj) => {
 		toast.success('Feedback updated');
 	};
 };
-
-// export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
-// 	return async dispatch => {
-// 		let pointsCount = upvotedBy.length - downvotedBy.length;
-// 		if (pointsCount < 0) {
-// 			pointsCount = 0;
-// 		}
-
-// 		dispatch({
-// 			type: 'TOGGLE_VOTE',
-// 			payload: { upvotedBy, pointsCount, downvotedBy },
-// 		});
-
-// 		await feedbackService.upvoteFeedback(id);
-// 	};
-// };
-
-// export const toggleDownvote = (id, downvotedBy, upvotedBy) => {
-// 	return async dispatch => {
-// 		let pointsCount = upvotedBy.length - downvotedBy.length;
-// 		if (pointsCount < 0) {
-// 			pointsCount = 0;
-// 		}
-
-// 		dispatch({
-// 			type: 'TOGGLE_VOTE',
-// 			payload: { upvotedBy, pointsCount, downvotedBy },
-// 		});
-
-// 		await feedbackService.downvoteFeedback(id);
-// 	};
-// };
 
 export const removeFeedback = id => {
 	return async dispatch => {
@@ -305,14 +255,5 @@ export const deleteReply = (feedbackId, commentId, replyId) => {
 		});
 	};
 };
-
-// export const sortComments = (sortBy) => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: 'SORT_COMMENTS',
-//       payload: sortBy,
-//     });
-//   };
-// };
 
 export default feedbackPageReducer;

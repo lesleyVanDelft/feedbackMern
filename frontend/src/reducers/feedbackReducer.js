@@ -29,23 +29,8 @@ const feedbackReducer = (state = [], action) => {
 				...state,
 				results: state.results.filter(fb => fb.id !== action.payload),
 			};
-		case 'LOGOUT_FEEDBACK':
-			return null;
-		// comments //
-		// // // // //
-		// case 'ADD_COMMENT':
-		// 	// return [...state, action.payload];
-		// 	let comments = state.comments;
-		// 	comments.push(action.payload);
-		// 	return {
-		// 		...state,
-		// 		comments,
-		// 	};
-		// case 'DELETE_COMMENT':
-		// 	return state.filter(comment => comment._id !== action.payload);
-		// // ...state,
-		// // comments: state.comments.filter(c => c.id !== action.payload),
-
+		case 'LOGOUT':
+			return [];
 		default:
 			return state;
 	}
@@ -118,10 +103,7 @@ export const createNewFeedback = feedbackObj => {
 export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
 	return async dispatch => {
 		let pointsCount = upvotedBy.length - downvotedBy.length;
-		// if (pointsCount < 0) {
-		// 	pointsCount = 0;
-		// }
-		// console.log(id);
+
 		dispatch({
 			type: 'TOGGLE_UPVOTE',
 			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
@@ -134,9 +116,6 @@ export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
 export const toggleDownvote = (id, downvotedBy, upvotedBy) => {
 	return async dispatch => {
 		let pointsCount = upvotedBy.length - downvotedBy.length;
-		// if (pointsCount < 0) {
-		// 	pointsCount = 0;
-		// }
 
 		dispatch({
 			type: 'TOGGLE_DOWNVOTE',
@@ -158,14 +137,5 @@ export const removeFeedback = id => {
 		toast.warn('Feedback Deleted');
 	};
 };
-
-// export const resetFeedbacks = () => {
-// 	return async dispatch => {
-// 		dispatch({
-// 			type: 'LOGOUT_FEEDBACKS',
-// 			payload: null,
-// 		});
-// 	};
-// };
 
 export default feedbackReducer;
