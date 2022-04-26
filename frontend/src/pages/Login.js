@@ -61,37 +61,19 @@ const Login = () => {
 	// fire off functions from authSlice
 	const dispatch = useDispatch();
 
-	const onChange = e => {
-		setError(null);
+	// const onChange = e => {
+	// 	setError(null);
 
-		setFormData(prevState => ({
-			...prevState,
-			[e.target.name]: e.target.value,
-		}));
-	};
-
-	// const onSubmit = e => {
-	// 	e.preventDefault();
-	// 	// user && navigate('/');
-	// 	try {
-	// 		const userData = {
-	// 			email,
-	// 			password,
-	// 		};
-	// 		dispatch(loginUser(userData));
-	// 		// dispatch(setUser());
-	// 		setTimeout(() => {
-	// 			navigate('/');
-	// 		}, 300);
-	// 	} catch (error) {
-	// 		console.log('login page error');
-	// 		console.log(error.message);
-	// 	}
+	// 	setFormData(prevState => ({
+	// 		...prevState,
+	// 		[e.target.name]: e.target.value,
+	// 	}));
 	// };
-	const handleSubmit = e => {
-		e.preventDefault();
-		dispatch(loginUser(formData));
-	};
+
+	// const handleSubmit = e => {
+	// 	e.preventDefault();
+	// 	dispatch(loginUser(formData));
+	// };
 
 	useEffect(() => {
 		if (user) {
@@ -100,6 +82,9 @@ const Login = () => {
 	}, [user, navigate]);
 
 	useEffect(() => {
+		// setTimeout(() => {
+		// 	setError(null);
+		// }, 5000);
 		return errorMessage ? setError(errorMessage) : null;
 	}, [errorMessage]);
 

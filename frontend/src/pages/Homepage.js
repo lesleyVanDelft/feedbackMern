@@ -17,10 +17,12 @@ import FeedbackList from '../components/FeedbackList/FeedbackList';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 const Homepage = () => {
 	const feedbacks = useSelector(state => state.feedbacks);
-	const user = useSelector(state => state.user);
+	// const user = useSelector(state => state.user);
+	const user = JSON.parse(localStorage.getItem('user'));
 	const [pageLoading, setPageLoading] = useState(false);
 	// const [feedbackData, setFeedbackData] = useState([]);
 	const navigate = useNavigate();
@@ -60,6 +62,7 @@ const Homepage = () => {
 	useEffect(() => {
 		if (!user) {
 			// dispatch(setUser());
+			Cookies.remove('jwt', { path: '/' });
 			navigate('/login');
 		}
 		if (user) {
@@ -86,9 +89,9 @@ const Homepage = () => {
 		dispatch(setUser());
 	}, []);
 
-	if (!feedbacks) {
-		return <h1>Loading </h1>;
-	}
+	// if (!feedbacks) {
+	// 	return <h1>Loading </h1>;
+	// }
 	const initialMotion = {
 		initial: {
 			opacity: 0,
@@ -119,7 +122,11 @@ const Homepage = () => {
 					animate="visible"></motion.div>
 
 				{/* <FeedbackList category={categoryState} feedbackData={feedbacks} /> */}
-				{feedbacks && <FeedbackList category={categoryState} />}
+				{feedbacks ? (
+					<FeedbackList category={categoryState} />
+				) : (
+					<LoadingSpinner />
+				)}
 			</section>
 
 			<ToastContainer autoClose={2000} />

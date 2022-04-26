@@ -31,28 +31,60 @@
 // });
 
 // export default store;
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+
+// pre redux persist test v2
+///////////////////////////
+// import { createStore, combineReducers, applyMiddleware } from 'redux';
+// import { composeWithDevTools } from 'redux-devtools-extension';
+// import thunk from 'redux-thunk';
+// // import notificationReducer from './reducers/notificationReducer';
+// import userReducer from '../reducers/userReducer';
+// import feedbackReducer from '../reducers/feedbackReducer';
+// // import feedbackCommentsReducer from '../reducers/feedbackCommentsReducer';
+// import feedbackPageReducer from '../reducers/feedbackCommentsReducer';
+// import errorReducer from '../reducers/errorReducer';
+
+// const reducer = combineReducers({
+// 	user: userReducer,
+// 	//   notification: notificationReducer,
+// 	feedbacks: feedbackReducer,
+// 	// singleFeedback: feedbackCommentsReducer,
+// 	singleFeedback: feedbackPageReducer,
+// 	errorMessage: errorReducer,
+// });
+
+// export const store = createStore(
+// 	reducer,
+// 	composeWithDevTools(applyMiddleware(thunk))
+// );
+
+// export default store;
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
-// import notificationReducer from './reducers/notificationReducer';
 import userReducer from '../reducers/userReducer';
 import feedbackReducer from '../reducers/feedbackReducer';
-// import feedbackCommentsReducer from '../reducers/feedbackCommentsReducer';
 import feedbackPageReducer from '../reducers/feedbackCommentsReducer';
 import errorReducer from '../reducers/errorReducer';
 
 const reducer = combineReducers({
 	user: userReducer,
-	//   notification: notificationReducer,
 	feedbacks: feedbackReducer,
-	// singleFeedback: feedbackCommentsReducer,
 	singleFeedback: feedbackPageReducer,
 	errorMessage: errorReducer,
 });
 
-export const store = createStore(
-	reducer,
-	composeWithDevTools(applyMiddleware(thunk))
-);
+const persistConfig = {
+	key: 'root',
+	storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducer);
+
+const store = configureStore({
+	reducer: persistedReducer,
+	middleware: [thunk],
+});
 
 export default store;

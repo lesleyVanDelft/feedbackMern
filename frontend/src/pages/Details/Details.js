@@ -21,6 +21,7 @@ import {
 } from '../../reducers/feedbackCommentsReducer';
 import { motion } from 'framer-motion';
 import './Details.css';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 const Details = () => {
 	// const [upvoteActive, setUpvoteActive] = useState(false);
@@ -47,9 +48,9 @@ const Details = () => {
 		dispatch(setUser());
 	}, [dispatch, id]);
 
-	if (!singleFeedback) {
-		return <h1>loading</h1>;
-	}
+	// if (!singleFeedback) {
+	// 	return <h1>loading</h1>;
+	// }
 
 	const initialMotion = {
 		initial: {
@@ -116,7 +117,7 @@ const Details = () => {
 					</motion.main>
 				</>
 			) : (
-				<h1>Loading ,,,</h1>
+				<LoadingSpinner />
 			)}
 		</>
 	);

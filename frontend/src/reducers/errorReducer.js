@@ -1,12 +1,11 @@
-import { errorHandler } from '../utils/errorHandler';
-const initialState = {
-	errorMessage: '',
-};
-
 const errorReducer = (state = null, action) => {
 	switch (action.type) {
 		case 'SET_LOGIN_ERROR':
 			return action.payload;
+		case 'LOGIN':
+			return null;
+		case 'LOGOUT':
+			return null;
 		default:
 			return state;
 	}

@@ -1,0 +1,64 @@
+@import '../../sass/main.scss';
+.LoadingSpinner {
+	// width: 100%;
+	// height: 100%;
+	// display: flex;
+	// flex-direction: column;
+	// align-items: center;
+	// justify-content: center;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	&__container {
+		width: 50px;
+		height: 50px;
+		margin-left: 1rem;
+		margin-bottom: 0.5rem;
+		position: relative;
+		&--content {
+			width: 100%;
+			height: 100%;
+			background-color: none;
+			border-radius: 50%;
+			border: 5px solid $purple;
+			border-top-color: #f0f2ff;
+			animation: spin infinite 1.5s ease;
+		}
+		&::before {
+			position: absolute;
+			content: '';
+			width: 25px;
+			height: 25px;
+			border-radius: 50%;
+			// left: 50%;
+			right: 25%;
+			// top: 0;
+			bottom: 25%;
+			border: 3px solid $orange;
+			border-bottom-color: #f0f2ff;
+			animation: spinReverse infinite 1.5s ease;
+		}
+	}
+	h2 {
+		color: $darkBlue1;
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+@keyframes spinReverse {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(-360deg);
+	}
+}

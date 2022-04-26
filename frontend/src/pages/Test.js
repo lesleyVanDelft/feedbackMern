@@ -1,8 +1,10 @@
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
+
 const Test = () => {
 	return (
-		<div className="Test">
-			<h1>test</h1>
-		</div>
+		<>
+			<LoadingSpinner />
+		</>
 	);
 };
 
