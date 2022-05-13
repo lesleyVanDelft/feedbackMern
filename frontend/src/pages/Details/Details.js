@@ -14,6 +14,7 @@ import {
 } from '../../reducers/feedbackCommentsReducer';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import moment from 'moment';
 import './Details.css';
 
 const Details = () => {
@@ -68,6 +69,10 @@ const Details = () => {
 								<span className="username">
 									@{singleFeedback.details.username}
 								</span>
+								,{' '}
+								{moment(singleFeedback.createdAt).format(
+									'dddd, MMMM  Do YYYY, HH:mm:ss'
+								)}
 							</span>
 							<FeedbackItem
 								feedback={singleFeedback}

@@ -8,22 +8,14 @@ import {
 import { motion } from 'framer-motion';
 import FeedbackItem from '../FeedbackItem/FeedbackItem';
 import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
-
-import './FeedbackList.css';
-import Suggestions from '../Suggestions/Suggestions';
 import Sorter from '../Sorter/Sorter';
 import SuggestionsHeader from '../Suggestions/SuggestionsHeader/SuggestionsHeader';
+import './FeedbackList.css';
 
 const FeedbackList = ({ category }) => {
 	const [sortBy, setSortBy] = useState('Most Upvotes');
 	const feedbacks = useSelector(state => state.feedbacks);
-	const user = useSelector(state => state.user);
-	const dispatch = useDispatch();
-
-	// console.log(feedbacks);
-	// useEffect(() => {
-	// 	dispatch(getFeedbacks());
-	// }, []);
+	// console.log(feedbacks.map(el => el.createdAt));
 
 	if (!feedbacks) {
 		return <h1>Loading</h1>;
@@ -34,7 +26,6 @@ const FeedbackList = ({ category }) => {
 		feedbacks.filter(feedback => {
 			return feedback.feedbackType.toString().toLowerCase() === category;
 		});
-	// const filteredFeedbacks = [];
 
 	const getSortBy = sortState => {
 		setSortBy(sortState);

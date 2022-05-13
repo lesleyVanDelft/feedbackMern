@@ -47,8 +47,10 @@ const SuggestionSortBy = ({ getSortState }) => {
 	return (
 		<motion.div
 			className={`SuggestionSortBy SuggestionsHeader__sort`}
-			onFocus={() => handleClick()}
-			onBlur={() => handleClick()}>
+			onClick={handleClick}
+			// onFocus={() => handleClick()}
+			// onBlur={() => handleClick()}>
+		>
 			<span className="sortBy">Sort by: </span>
 			<button>
 				<span className="selected">{selected}</span>{' '}

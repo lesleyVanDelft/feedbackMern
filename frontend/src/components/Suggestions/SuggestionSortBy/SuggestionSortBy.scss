@@ -3,12 +3,22 @@
 	position: relative;
 	background: none;
 	border: none;
+	transition: all 0.25s ease-in-out;
 	&:hover {
-		span.sortBy,
+		.sortBy {
+			transition: all 0.25s ease-in-out;
+			color: lighten($color: $skyBlue, $amount: 15%);
+		}
 		button {
-			opacity: 0.85;
+			transition: all 0.25s ease-in-out;
+			color: lighten($color: $skyBlue, $amount: 15%);
+			.selected {
+				transition: all 0.25s ease-in-out;
+				color: lighten($color: $skyBlue, $amount: 15%);
+			}
 		}
 	}
+
 	span {
 		color: $white;
 	}
