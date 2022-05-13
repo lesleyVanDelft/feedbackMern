@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-	getFeedbacks,
-	toggleUpvote,
-	toggleDownvote,
-} from '../../reducers/feedbackReducer';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { motion } from 'framer-motion';
 import FeedbackItem from '../FeedbackItem/FeedbackItem';
 import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
@@ -15,7 +11,6 @@ import './FeedbackList.css';
 const FeedbackList = ({ category }) => {
 	const [sortBy, setSortBy] = useState('Most Upvotes');
 	const feedbacks = useSelector(state => state.feedbacks);
-	// console.log(feedbacks.map(el => el.createdAt));
 
 	if (!feedbacks) {
 		return <h1>Loading</h1>;
