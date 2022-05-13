@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Homepage from '../pages/Homepage';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -12,20 +12,7 @@ import User from '../pages/User/User';
 
 const AppRoutes = () => {
 	const location = useLocation();
-	// const user = useSelector(state => state.user);
-	const user = JSON.parse(localStorage.getItem('user'));
-	// useEffect(() => {
-	// 	console.log(user.name);
-	// });
-	const navigate = useNavigate();
 
-	// useEffect(() => {
-	// 	if (user) {
-	// 		navigate('/');
-	// 	} else {
-	// 		navigate('/login');
-	// 	}
-	// }, []);
 	return (
 		<AnimatePresence exitBeforeEnter>
 			<Routes location={location} key={location.pathname}>

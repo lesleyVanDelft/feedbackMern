@@ -1,10 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { VscTriangleDown } from 'react-icons/vsc';
 import FilterButtons from '../Dashboard/FilterButtons/FilterButtons';
 import Roadmap from '../Dashboard/Roadmap/Roadmap';
 import { motion, AnimatePresence } from 'framer-motion';
-import { logoutUser } from '../../reducers/userReducer';
 import { useState } from 'react';
 import UserDropdown from '../Dashboard/UserDropdown/UserDropdown';
 
@@ -17,13 +15,7 @@ const menuVisibility = {
 const MobileDashboard = ({ category, isVisible, logout }) => {
 	const [userActive, setUserActive] = useState(false);
 	const user = useSelector(state => state.user);
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
-	const onLogout = () => {
-		dispatch(logoutUser());
-		navigate('/login');
-	};
 	const handleUserClick = () => {
 		setUserActive(!userActive);
 	};

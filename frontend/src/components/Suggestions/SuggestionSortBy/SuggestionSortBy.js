@@ -14,7 +14,6 @@ const SuggestionSortBy = ({ getSortState }) => {
 
 	const handleClick = () => {
 		setActive(!active);
-		// getSuggestionSort(selected);
 	};
 
 	// framer motion
@@ -43,11 +42,6 @@ const SuggestionSortBy = ({ getSortState }) => {
 				delay: 0,
 			},
 		},
-	};
-
-	const handleSelect = e => {
-		// setSelected(e.target.value);
-		console.log(e.target.value);
 	};
 
 	return (
