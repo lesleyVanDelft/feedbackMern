@@ -1,6 +1,7 @@
 @import '../../sass/main.scss';
 
 .Dashboard {
+	// Frontend Mentor logo
 	&__logo {
 		height: 8.5625rem;
 		width: 15.9375rem;
@@ -10,11 +11,15 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-
 		padding: 1rem 1rem;
-		// padding-left: 1rem;
 		padding-bottom: 1.5rem;
-		// padding-top: 0;
+
+		.hamburger {
+			display: none;
+		}
+		a {
+			width: fit-content;
+		}
 
 		.text {
 			height: 100%;
@@ -22,13 +27,16 @@
 			flex-direction: column;
 			justify-content: flex-start;
 			align-items: space-around;
+			cursor: default;
 
 			&__user {
 				color: $white;
-				opacity: 0.86;
+				opacity: 1;
+				// opacity: 0.86;
 				margin-bottom: 1.5rem;
 				letter-spacing: 0.35px;
-				font-size: 0.9375rem;
+				font-size: 0.9975rem;
+				font-weight: lighter;
 
 				.username {
 					font-weight: 500;
@@ -57,6 +65,15 @@
 		}
 	}
 
+	&__user {
+		width: 255px;
+		height: fit-content;
+		background-color: $white;
+		border-radius: 10px;
+		margin-top: 1.5rem;
+	}
+
+	// logout btn
 	.logout {
 		margin-top: 2rem;
 		align-self: flex-start;
@@ -72,17 +89,26 @@
 		margin-bottom: 40px;
 		justify-content: space-between;
 		&__logo {
-			// flex: 1;
 			height: 11.125rem;
 			width: 223px;
 			background-image: url('../../assets/suggestions/tablet/background-header.png');
-			padding: 0 0 1.5rem 1.5rem;
+			padding: 1.5rem 0 2.1rem 1.5rem;
+
+			.text {
+				justify-content: space-between;
+				// align-items: flex-end;
+			}
 		}
 
 		&__desktop {
 			width: 100%;
 			display: flex;
 			justify-content: space-between;
+		}
+		// logout btn
+		.logout {
+			margin-top: 0rem;
+			align-self: flex-start;
 		}
 	}
 }
@@ -106,15 +132,12 @@
 		// mobile
 		&__mobile {
 			width: 100%;
-			// position: relative;
 			.btn {
 				width: fit-content;
 				align-self: flex-start;
 				margin-top: 1.5rem;
-				margin-left: 2.2rem;
-			}
-			&.active {
-				// right: 0%;
+				margin-left: 0rem;
+				// margin-left: 2.2rem;
 			}
 
 			&--logo {
@@ -157,14 +180,20 @@
 				background: $lightGray;
 				display: flex;
 				flex-direction: column;
-				align-items: center;
+				align-items: flex-start;
 				justify-content: flex-start;
-				padding-top: 1.5rem;
+				padding: 1.5rem;
+				// padding-top: 1.5rem;
 				gap: 1rem;
 				width: 291px;
 				right: 0;
 				height: calc(100vh - 4.5rem);
 			}
 		}
+		// logout btn
+		// .logout {
+		// 	margin-top: 0rem;
+		// 	align-self: flex-start;
+		// }
 	}
 }

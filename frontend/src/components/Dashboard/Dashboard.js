@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { IoMenuSharp } from 'react-icons/io5/index.esm';
-import { AiOutlineClose } from 'react-icons/ai';
 import { IoCloseSharp } from 'react-icons/io5/index.esm';
 import { useMediaQuery } from 'react-responsive';
 import { motion, LayoutGroup } from 'framer-motion';
@@ -25,6 +24,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 		return active
 			? (document.body.style.overflow = 'hidden')
 			: (document.body.style.overflow = 'unset');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [active]);
 
 	// get state through onclick on category buttons
@@ -76,18 +76,16 @@ const Dashboard = ({ category, mobileOpen }) => {
 					animate="show"
 					className="Dashboard__desktop">
 					<motion.div variants={framerItem} className="Dashboard__logo">
-						<Link to="/">
-							<div className="text">
-								<span className="text__user">
-									Welcome,{' '}
-									<span className="username">@{user && user.username}</span>
-								</span>
-								<div>
-									<h2>Frontend Mentor</h2>
-									<p>Feedback Board</p>
-								</div>
+						<div className="text">
+							<h3 className="text__user">
+								Welcome,
+								<span className="username"> @{user && user.username}</span>
+							</h3>
+							<div>
+								<h2>Frontend Mentor</h2>
+								<p>Feedback Board</p>
 							</div>
-						</Link>
+						</div>
 
 						<div
 							className="hamburger"
@@ -95,6 +93,13 @@ const Dashboard = ({ category, mobileOpen }) => {
 								setActive(!active);
 							}}></div>
 					</motion.div>
+
+					{/* <motion.div variants={framerItem} className="Dashboard__user">
+						<h3 className="userWelcome">
+							Welcome, <span className="user">@{user.username}</span>
+						</h3>
+					</motion.div> */}
+
 					<motion.div variants={framerItem} className="Dashboard__buttons ">
 						<FilterButtons category={getCategoryState} />
 					</motion.div>

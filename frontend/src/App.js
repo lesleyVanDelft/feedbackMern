@@ -7,6 +7,9 @@ function App() {
 	return (
 		<div className="App">
 			<Router>
+				{/* <h3 className="userWelcome">
+					Welcome, <span className="user">@{user.username}</span>
+				</h3> */}
 				<AppRoutes user={user} />
 			</Router>
 		</div>

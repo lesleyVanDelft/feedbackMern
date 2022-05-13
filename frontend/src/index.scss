@@ -37,6 +37,13 @@ a {
 	padding: 0 8rem;
 	padding-top: 1.5rem;
 
+	h3.userWelcome {
+		font-weight: lighter;
+		span.user {
+			font-weight: 500;
+		}
+	}
+
 	.btn {
 		border: none;
 		padding: 0.7rem 1.5rem;
