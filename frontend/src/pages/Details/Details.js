@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaChevronLeft } from 'react-icons/fa';
-import Spinner from '../../components/Spinner';
-// import { getSingleFeedback } from '../../reducers/feedbackCommentsReducer';
 import { getSingleFeedback } from '../../reducers/feedbackCommentsReducer';
 import { useParams } from 'react-router-dom';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
@@ -11,46 +9,23 @@ import CommentSection from '../../components/CommentSection/CommentSection';
 import { setUser } from '../../reducers/userReducer';
 import LogoBar from '../../components/LogoBar/LogoBar';
 import {
-	toggleUpvote,
-	toggleDownvote,
-	getFeedbacks,
-} from '../../reducers/feedbackReducer';
-import {
 	toggleUpvoteDetails,
 	toggleDownvoteDetails,
 } from '../../reducers/feedbackCommentsReducer';
 import { motion } from 'framer-motion';
-import './Details.css';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import './Details.css';
 
 const Details = () => {
-	// const [upvoteActive, setUpvoteActive] = useState(false);
-	// const [downvoteActive, setDownvoteActive] = useState(false);
-	const [feedbackComments, setFeedbackComments] = useState([]);
-	const [replies, setReplies] = useState([]);
 	const singleFeedback = useSelector(state => state.singleFeedback);
-	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
-	// const isUpvotedDetails = user && singleFeedback.upvotedBy.includes(user.id);
-	// const isDownvotedDetails =
-	// 	user && singleFeedback.downvotedBy.includes(user.id);
-	// console.log(isUpvotedDetails, 'upvote');
-	// console.log(isDownvotedDetails, 'downvote');
-
-	// hooks
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
-
 	let { id } = useParams();
 
 	useEffect(() => {
 		dispatch(getSingleFeedback(id));
 		dispatch(setUser());
 	}, [dispatch, id]);
-
-	// if (!singleFeedback) {
-	// 	return <h1>loading</h1>;
-	// }
 
 	const initialMotion = {
 		initial: {
@@ -60,7 +35,6 @@ const Details = () => {
 			opacity: 1,
 			transition: {
 				duration: 0.5,
-				// ease: [0.87, 0, 0.13, 1],
 			},
 		},
 	};
@@ -104,9 +78,6 @@ const Details = () => {
 									singleFeedback.upvotedBy.length -
 									singleFeedback.downvotedBy.length
 								}
-								// isUpvotedDetails={isUpvotedDetails}
-								// isDownvotedDetails={isDownvotedDetails}
-								// downvoteActive={getDownvote}
 							/>
 							<CommentSection
 								comments={singleFeedback.comments}

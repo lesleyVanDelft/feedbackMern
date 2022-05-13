@@ -14,23 +14,12 @@ const RoadmapPage = () => {
 	const feedbacks = useSelector(state => state.feedbacks);
 	const dispatch = useDispatch();
 	const handlers = useSwipeable({
-		// onSwipedLeft: () => {
-		// 	return mobileSwipe < 2
-		// 		? setMobileSwipe(mobileSwipe + 1)
-		// 		: setMobileSwipe(0);
-		// },
-		// onSwipedRight: () => {
-		// 	return mobileSwipe === 0
-		// 		? setMobileSwipe(2)
-		// 		: setMobileSwipe(mobileSwipe - 1);
-		// },
 		onSwipedLeft: () => {
 			if (active === 'in-progress') {
 				setActive('live');
 			} else if (active === 'planned') {
 				setActive('in-progress');
 			}
-			// return active === 'in-progress' ? setActive('live') : null;
 		},
 		onSwipedRight: () => {
 			if (active === 'in-progress') {

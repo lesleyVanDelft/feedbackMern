@@ -36,33 +36,19 @@ const feedbackReducer = (state = [], action) => {
 	}
 };
 
-export const getFeedbacks = sortBy => {
+// GET - all feedbacks
+export const getFeedbacks = () => {
 	return async dispatch => {
 		let feedbacks;
-
 		feedbacks = await feedbackService.getFeedbacks();
-		// console.log(feedbacks);
-
 		dispatch({
 			type: 'GET_ALL_FEEDBACKS',
 			payload: feedbacks,
 		});
-
-		// toast.success('success');
 	};
 };
 
-// export const getSingleFeedback = id => {
-// 	return async dispatch => {
-// 		const fetchedFeedback = await feedbackService.getSingleFeedback(id);
-
-// 		dispatch({
-// 			type: 'GET_SINGLE_FEEDBACK',
-// 			payload: fetchedFeedback,
-// 		});
-// 	};
-// };
-
+// POST - create feedback
 export const createNewFeedback = feedbackObj => {
 	return async dispatch => {
 		const addedFeedback = await feedbackService.addNew(feedbackObj);
@@ -76,30 +62,7 @@ export const createNewFeedback = feedbackObj => {
 	};
 };
 
-// export const addComment = (feedbackId, comment) => {
-// 	return async dispatch => {
-// 		const addedComment = await feedbackService.postComment(feedbackId, {
-// 			comment,
-// 		});
-
-// 		dispatch({
-// 			type: 'ADD_COMMENT',
-// 			payload: addedComment,
-// 		});
-// 	};
-// };
-
-// export const deleteComment = (feedbackId, commentId) => {
-// 	return async dispatch => {
-// 		await feedbackService.removeComment(feedbackId, commentId);
-
-// 		dispatch({
-// 			type: 'DELETE_COMMENT',
-// 			payload: commentId,
-// 		});
-// 	};
-// };
-
+// POST - upvote feedback
 export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
 	return async dispatch => {
 		let pointsCount = upvotedBy.length - downvotedBy.length;
@@ -113,6 +76,7 @@ export const toggleUpvote = (id, upvotedBy, downvotedBy) => {
 	};
 };
 
+// POST - downvote feedback
 export const toggleDownvote = (id, downvotedBy, upvotedBy) => {
 	return async dispatch => {
 		let pointsCount = upvotedBy.length - downvotedBy.length;
@@ -126,6 +90,7 @@ export const toggleDownvote = (id, downvotedBy, upvotedBy) => {
 	};
 };
 
+// DELETE - delete feedback
 export const removeFeedback = id => {
 	return async dispatch => {
 		await feedbackService.deleteFeedback(id);
