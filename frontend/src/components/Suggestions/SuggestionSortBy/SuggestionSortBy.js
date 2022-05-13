@@ -60,7 +60,7 @@ const SuggestionSortBy = ({ getSortState }) => {
 				<span className="selected">{selected}</span>{' '}
 				{active ? <HiChevronUp /> : <HiChevronDown />}
 			</button>
-			<AnimatePresence exitBeforeEnter={true}>
+			<AnimatePresence>
 				{active && (
 					<motion.ul
 						variants={framerList}

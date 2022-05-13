@@ -1,21 +1,26 @@
 import { useEffect, useState } from 'react';
 import { IoMenuSharp } from 'react-icons/io5/index.esm';
 import { IoCloseSharp } from 'react-icons/io5/index.esm';
+import { VscTriangleDown } from 'react-icons/vsc';
 import { useMediaQuery } from 'react-responsive';
-import { motion, LayoutGroup } from 'framer-motion';
+import { motion, LayoutGroup, AnimatePresence } from 'framer-motion';
 import MobileDashboard from '../MobileDashboard/MobileDashboard';
-import './Dashboard.css';
 import FilterButtons from './FilterButtons/FilterButtons';
 import Roadmap from './Roadmap/Roadmap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../../reducers/userReducer';
+import UserDropdown from './UserDropdown/UserDropdown';
+import './Dashboard.css';
+
 const Dashboard = ({ category, mobileOpen }) => {
 	const [categoryState, setCategoryState] = useState('all');
 	const [active, setActive] = useState(false);
+	const [userActive, setUserActive] = useState(false);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
 	// lock body scrolling when mobile menu is open
 	useEffect(() => {
 		if (!user) {
@@ -37,6 +42,11 @@ const Dashboard = ({ category, mobileOpen }) => {
 		setActive(!active);
 		mobileOpen(active);
 	};
+
+	const handleUserClick = () => {
+		setUserActive(!userActive);
+	};
+
 	const handleLogout = () => {
 		dispatch(logoutUser());
 		navigate('/login');
@@ -77,9 +87,17 @@ const Dashboard = ({ category, mobileOpen }) => {
 					className="Dashboard__desktop">
 					<motion.div variants={framerItem} className="Dashboard__logo">
 						<div className="text">
-							<h3 className="text__user">
+							<h3 className="welcomeMessage text__user">
 								Welcome,
-								<span className="username"> @{user && user.username}</span>
+								<span
+									className={`username ${userActive && 'active'}`}
+									onClick={handleUserClick}>
+									@{user && user.username}
+									<VscTriangleDown />
+									<AnimatePresence>
+										{userActive && <UserDropdown logout={handleLogout} />}
+									</AnimatePresence>
+								</span>
 							</h3>
 							<div>
 								<h2>Frontend Mentor</h2>
@@ -93,12 +111,6 @@ const Dashboard = ({ category, mobileOpen }) => {
 								setActive(!active);
 							}}></div>
 					</motion.div>
-
-					{/* <motion.div variants={framerItem} className="Dashboard__user">
-						<h3 className="userWelcome">
-							Welcome, <span className="user">@{user.username}</span>
-						</h3>
-					</motion.div> */}
 
 					<motion.div variants={framerItem} className="Dashboard__buttons ">
 						<FilterButtons category={getCategoryState} />
@@ -139,6 +151,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 							<MobileDashboard
 								category={getCategoryState}
 								isVisible={active}
+								logout={handleLogout}
 								layout
 							/>
 						</LayoutGroup>

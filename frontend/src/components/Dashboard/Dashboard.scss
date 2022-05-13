@@ -21,6 +21,7 @@
 			width: fit-content;
 		}
 
+		// Logo text content
 		.text {
 			height: 100%;
 			display: flex;
@@ -29,17 +30,43 @@
 			align-items: space-around;
 			cursor: default;
 
+			// Welcome message user
 			&__user {
 				color: $white;
 				opacity: 1;
-				// opacity: 0.86;
 				margin-bottom: 1.5rem;
 				letter-spacing: 0.35px;
 				font-size: 0.9975rem;
 				font-weight: lighter;
+				display: flex;
 
+				// @username span
 				.username {
 					font-weight: 500;
+					display: flex;
+					align-items: center;
+					padding-left: 0.3rem;
+					cursor: pointer;
+					transition: all 0.1s ease-in-out;
+					position: relative;
+					svg {
+						margin-left: 0.15rem;
+						font-size: 1rem;
+						transition: all 0.1s ease-in-out;
+					}
+
+					&:hover {
+						svg {
+							color: $skyBlue;
+						}
+					}
+
+					&.active {
+						svg {
+							transition: all 0.2s ease-in-out;
+							transform: rotate(180deg);
+						}
+					}
 				}
 			}
 			h2 {
@@ -96,7 +123,6 @@
 
 			.text {
 				justify-content: space-between;
-				// align-items: flex-end;
 			}
 		}
 
@@ -138,6 +164,30 @@
 				margin-top: 1.5rem;
 				margin-left: 0rem;
 				// margin-left: 2.2rem;
+			}
+
+			&--user {
+				.userWelcome {
+					display: flex;
+					.user {
+						display: flex;
+						align-items: center;
+						margin-left: 0.3rem;
+
+						svg {
+							font-size: 1rem;
+							margin-left: 0.1rem;
+							transition: all 0.2s ease-in-out;
+						}
+
+						&.active {
+							svg {
+								transform: rotate(180deg);
+								color: $skyBlue;
+							}
+						}
+					}
+				}
 			}
 
 			&--logo {
