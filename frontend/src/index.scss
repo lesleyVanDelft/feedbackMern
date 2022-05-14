@@ -19,6 +19,7 @@ body {
 #root {
 	min-height: 100%;
 	background: $lightGray;
+	overflow-x: hidden;
 }
 
 a {
