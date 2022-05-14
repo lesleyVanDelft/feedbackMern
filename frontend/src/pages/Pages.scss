@@ -119,26 +119,30 @@
 			height: 100%;
 			width: 100%;
 			justify-content: space-around;
-			// padding: 0 1.5rem;
-			&--feedbacks {
+			.FeedbackList {
 				.feedbacks {
-					padding: 0 1.5rem;
+					padding: 0 1rem;
 				}
 			}
 
 			.overlay {
-				position: fixed;
+				position: absolute;
+				// display: none;
+				right: 0;
+				bottom: 0;
 				top: 0;
-				left: 0;
 				background-color: rgba(0, 0, 0, 0.5);
 				z-index: 49;
-				// opacity: 0
+				// transition: all 1s ease-in-out;
+				opacity: 0;
 
 				&.active {
 					right: 0;
 					bottom: 0;
-					top: 4.5rem;
+					top: 0;
+					// top: 4.5rem;
 					// opacity: 1;
+					// display: block;
 				}
 			}
 		}

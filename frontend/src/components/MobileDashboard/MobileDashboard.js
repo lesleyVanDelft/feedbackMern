@@ -9,7 +9,7 @@ import UserDropdown from '../Dashboard/UserDropdown/UserDropdown';
 const menuVisibility = {
 	hidden: { opacity: 0, right: -150 },
 	visible: { opacity: 1, right: 0 },
-	exit: { opacity: 0, right: -150 },
+	exit: { opacity: 0, right: -350, transition: { duration: 0.4 } },
 };
 
 const MobileDashboard = ({ category, isVisible, logout }) => {
@@ -20,14 +20,14 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 		setUserActive(!userActive);
 	};
 	return (
-		<AnimatePresence>
+		<>
 			{isVisible && (
 				<motion.nav
 					className="MobileDashboard"
 					key="mobileNav"
 					variants={menuVisibility}
 					initial="hidden"
-					animate={isVisible ? 'visible' : 'hidden'}
+					animate="visible"
 					exit="exit">
 					<div className="Dashboard__mobile--user">
 						<h3 className="userWelcome">
@@ -50,7 +50,7 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 					</button>
 				</motion.nav>
 			)}
-		</AnimatePresence>
+		</>
 	);
 };
 

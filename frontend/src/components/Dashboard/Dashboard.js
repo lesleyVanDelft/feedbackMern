@@ -73,8 +73,19 @@ const Dashboard = ({ category, mobileOpen }) => {
 		hidden: { opacity: 0 },
 		show: { opacity: 1 },
 	};
-	if (!user) {
-	}
+
+	// framer mobile
+	const framerMobile = {
+		hidden: {
+			opacity: 0,
+		},
+		show: {
+			opacity: 1,
+		},
+		exit: {
+			opacity: 0,
+		},
+	};
 
 	return (
 		<section className="Dashboard">
@@ -128,6 +139,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 			)}
 
 			{/* Mobile Nav + Dashboard  */}
+
 			{isMobile && (
 				<div className={`Dashboard__mobile ${active ? 'active' : null}`}>
 					<div className="Dashboard__mobile--logo">
@@ -146,16 +158,18 @@ const Dashboard = ({ category, mobileOpen }) => {
 						</div>
 					</div>
 
-					{active ? (
-						<LayoutGroup>
+					<AnimatePresence>
+						{active && (
+							// <LayoutGroup>
 							<MobileDashboard
 								category={getCategoryState}
 								isVisible={active}
 								logout={handleLogout}
-								layout
+								// layout
 							/>
-						</LayoutGroup>
-					) : null}
+							// </LayoutGroup>
+						)}
+					</AnimatePresence>
 				</div>
 			)}
 		</section>
