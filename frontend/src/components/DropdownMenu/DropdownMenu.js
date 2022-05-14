@@ -7,10 +7,9 @@ const DropdownMenu = ({ category }) => {
 	const [menuActive, setMenuActive] = useState(false);
 	const [selected, setSelected] = useState('Feature');
 
-	const openDropdown = e => {
-		e.preventDefault();
-		setMenuActive(!menuActive);
-	};
+	// const openDropdown = e => {
+	// 	setMenuActive(!menuActive);
+	// };
 	category(selected);
 
 	const handleSelect = select => {
@@ -24,55 +23,47 @@ const DropdownMenu = ({ category }) => {
 		hidden: {
 			translateY: -30,
 			opacity: 0,
-			transition: {
-				duration: 0.2,
-				delay: 0,
-			},
 		},
 		show: {
 			translateY: 0,
 			opacity: 1,
-			transition: {
-				duration: 0.2,
-				delay: 0,
-			},
 		},
 		exit: {
-			translateY: -25,
+			translateY: -10,
 			opacity: 0,
-			transition: {
-				duration: 0.2,
-				delay: 0,
-			},
 		},
 	};
 	const categoryArray = ['Feature', 'UI', 'UX', 'Enhancement', 'Bug'];
 	return (
 		<div className="DropdownMenu">
 			<button
-				onClick={openDropdown}
+				type="button"
+				onFocus={() => setMenuActive(true)}
+				onBlur={() => setMenuActive(false)}
 				className={`DropdownMenu__btn ${menuActive && 'active'}`}>
 				{selected} <FaChevronDown />
 			</button>
 			<AnimatePresence>
-				<motion.ul
-					variants={framerList}
-					initial="hidden"
-					animate="show"
-					exit="exit"
-					className={`DropdownMenu__list ${menuActive && 'active'}`}>
-					{categoryArray.map((category, i) => {
-						return (
-							<li
-								className="DropdownMenu__list--item"
-								key={i}
-								onClick={() => handleSelect(category)}>
-								{category}
-								{category === selected && <FaCheck />}
-							</li>
-						);
-					})}
-				</motion.ul>
+				{menuActive && (
+					<motion.ul
+						variants={framerList}
+						initial="hidden"
+						animate="show"
+						exit="exit"
+						className={`DropdownMenu__list ${menuActive && 'active'}`}>
+						{categoryArray.map((category, i) => {
+							return (
+								<li
+									className="DropdownMenu__list--item"
+									key={i}
+									onClick={() => handleSelect(category)}>
+									{category}
+									{category === selected && <FaCheck />}
+								</li>
+							);
+						})}
+					</motion.ul>
+				)}
 			</AnimatePresence>
 		</div>
 	);
