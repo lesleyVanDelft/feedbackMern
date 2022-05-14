@@ -228,6 +228,10 @@ export const deleteComment = (feedbackId, commentId) => {
 			type: 'DELETE_COMMENT',
 			payload: commentId,
 		});
+		toast.warn('Comment deleted!', {
+			icon: '👏',
+			autoClose: 2000,
+		});
 	};
 };
 
@@ -252,6 +256,10 @@ export const deleteReply = (feedbackId, commentId, replyId) => {
 		dispatch({
 			type: 'DELETE_REPLY',
 			payload: { commentId, replyId },
+		});
+		toast.warn('Reply deleted!', {
+			icon: '👏',
+			autoClose: 2000,
 		});
 	};
 };

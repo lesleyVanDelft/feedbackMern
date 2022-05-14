@@ -10,11 +10,13 @@ const CommentSection = ({ comments, feedbackId, currentFeedback }) => {
 	const [commentCount, setCommentCount] = useState(0);
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const user = useSelector(state => state.user);
-	// console.log(comments);
 
-	useEffect(() => {
-		setCommentCount(singleFeedback.commentCount);
-	}, [singleFeedback.commentCount]);
+	let replyCount = 0;
+	singleFeedback.comments.map(comm => {
+		return (replyCount += comm.replies.length + singleFeedback.comments.length);
+	});
+	let totalCount = replyCount + singleFeedback.comments.length;
+	console.log(replyCount);
 
 	if (!singleFeedback) {
 		return <h1>Loading</h1>;
@@ -27,6 +29,7 @@ const CommentSection = ({ comments, feedbackId, currentFeedback }) => {
 	return (
 		<section className="CommentSection">
 			<h2 className="CommentSection__count">
+				{/* {replyCount} Comments */}
 				{singleFeedback.commentCount} Comments
 			</h2>
 			<div className="CommentSection__comments">

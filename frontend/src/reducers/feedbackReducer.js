@@ -8,10 +8,12 @@ const feedbackReducer = (state = [], action) => {
 		case 'GET_ALL_FEEDBACKS':
 			return action.payload;
 		case 'CREATE_NEW_FEEDBACK':
-			return {
-				...state,
-				feedbacks: [state.feedbacks, state.feedbacks.push(action.payload)],
-			};
+			return [...state, action.payload];
+
+		// return {
+		// 	...state,
+		// 	feedbacks: [...state, action.payload],
+		// };
 		case 'TOGGLE_UPVOTE':
 			return state.map(fb => {
 				return fb._id !== action.payload.id
@@ -58,7 +60,7 @@ export const createNewFeedback = feedbackObj => {
 			payload: addedFeedback,
 		});
 
-		return addedFeedback.id;
+		// return addedFeedback.id;
 	};
 };
 
