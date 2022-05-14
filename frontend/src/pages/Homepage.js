@@ -21,25 +21,9 @@ import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 const Homepage = () => {
 	const feedbacks = useSelector(state => state.feedbacks);
-	// const user = useSelector(state => state.user);
 	const user = JSON.parse(localStorage.getItem('user'));
-	const [pageLoading, setPageLoading] = useState(false);
-	// const [feedbackData, setFeedbackData] = useState([]);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	dispatch(getFeedbacks());
-	// }, []);
-	// useEffect(() => {
-	// 	try {
-	// 		if (user) {
-	// 			dispatch(getFeedbacks());
-	// 		}
-	// 	} catch (err) {
-	// 		console.log(err.response);
-	// 		console.log('homepage.js');
-	// 	}
-	// }, [dispatch, user]);
 
 	// category filter button state
 	const [categoryState, setCategoryState] = useState('all');
@@ -61,7 +45,6 @@ const Homepage = () => {
 
 	useEffect(() => {
 		if (!user) {
-			// dispatch(setUser());
 			Cookies.remove('jwt', { path: '/' });
 			navigate('/login');
 		}
@@ -69,18 +52,6 @@ const Homepage = () => {
 			try {
 				navigate('/');
 				dispatch(getFeedbacks());
-
-				// setTimeout(() => {
-				// 	// if (user) {
-				// 	// 	dispatch(getFeedbacks());
-				// 	// }
-				// 	if (!user) {
-				// 		navigate('/login');
-				// 	}
-				// }, 300);
-				// if (!user) {
-				// 	navigate('/login');
-				// }
 			} catch (error) {
 				console.log(error);
 			}
@@ -89,9 +60,6 @@ const Homepage = () => {
 		dispatch(setUser());
 	}, []);
 
-	// if (!feedbacks) {
-	// 	return <h1>Loading </h1>;
-	// }
 	const initialMotion = {
 		initial: {
 			opacity: 0,
@@ -100,7 +68,6 @@ const Homepage = () => {
 			opacity: 1,
 			transition: {
 				duration: 0.5,
-				// ease: [0.87, 0, 0.13, 1],
 			},
 		},
 	};
@@ -114,14 +81,12 @@ const Homepage = () => {
 
 			<section className={`Homepage__content`}>
 				{/* mobile animation overlay */}
-				{/* <h1>hello</h1> */}
 				<motion.div
 					className={`overlay ${mobileState ? 'active' : null}`}
 					variants={menuVisibility}
 					initial="hidden"
 					animate="visible"></motion.div>
 
-				{/* <FeedbackList category={categoryState} feedbackData={feedbacks} /> */}
 				{feedbacks ? (
 					<FeedbackList category={categoryState} />
 				) : (
@@ -135,11 +100,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-
-// {name: "tester", email: "test@test.nl", username: "tester1", id: "62239c97eb2f4493437026f7",…}
-// email: "test@test.nl"
-// id: "62239c97eb2f4493437026f7"
-// name: "tester"
-// profileImg: {exists: false, imageId: "null", imageLink: "null"}
-// token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjM5Yzk3ZWIyZjQ0OTM0MzcwMjZmNyIsInVzZXJuYW1lIjoidGVzdGVyMSIsIm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2NDk2OTYzMDQsImV4cCI6MTY1MjI4ODMwNH0.Z-q4Hu2a94Kh7tMs31lJnYlifLy6A942nDPpA6NkVvM"
-// username: "tester1"

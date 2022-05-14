@@ -77,9 +77,7 @@ const FeedbackItem = ({
 							toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
 					  );
 				setUpvoted(!upvoted);
-				// console.log(object);
 				console.log('isUpvoted is now false');
-				// setDownvoted(false);
 			} else {
 				const updatedUpvotedBy = [...feedback.upvotedBy, user.id];
 				const updatedDownvotedBy = feedback.downvotedBy.filter(
@@ -90,10 +88,8 @@ const FeedbackItem = ({
 				);
 				setUpvoted(!upvoted);
 				console.log('isUpvoted is now true');
-				// setDownvoted(false);
 			}
 		} catch (err) {
-			// dispatch(notify(getErrorMsg(err), 'error'));
 			console.log(err);
 		}
 	};
@@ -117,13 +113,10 @@ const FeedbackItem = ({
 				dispatch(
 					toggleDownvote(feedback._id, updatedDownvotedBy, updatedUpvotedBy)
 				);
-				// setVoteCount(prevState => prevState - 1);
 				setDownvoted(!downvoted);
-				// setUpvoted(false);
 				console.log('isDownvoted is now true');
 			}
 		} catch (err) {
-			// dispatch(notify(getErrorMsg(err), 'error'));
 			console.log(err);
 		}
 	};
@@ -164,17 +157,9 @@ const FeedbackItem = ({
 									handleUpvote={handleUpvoteToggle}
 								/>
 								<span className="votes__count">
-									{/* {feedback.upvotedBy.length} */}
-									{/* {feedback.pointsCount === undefined
-										? feedback.upvotedBy.length
-										: feedback.pointsCount} */}
-									{/* {feedback.upvotedBy.length - feedback.downvotedBy.length} */}
 									{detailsPage ? detailsCount : count}
 								</span>
 
-								{/* <button className="votes__downvote">
-									<FaChevronDown className="chevronDown" />
-								</button> */}
 								<DownvoteButton
 									user={user}
 									body={feedback}
@@ -201,12 +186,10 @@ const FeedbackItem = ({
 					</div>
 
 					<div className="FeedbackItem__right">
-						<FaComment className="commentIcon" />
-						<span className="commentLength">
-							<Link to={`/details/${feedback._id}`}>
-								{feedback.commentCount}
-							</Link>
-						</span>
+						<Link to={`/details/${feedback._id}`}>
+							<FaComment className="commentIcon" />
+							<span className="commentLength">{feedback.commentCount}</span>
+						</Link>
 					</div>
 				</motion.div>
 			)}

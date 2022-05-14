@@ -59,7 +59,9 @@ export const createNewFeedback = feedbackObj => {
 			type: 'CREATE_NEW_FEEDBACK',
 			payload: addedFeedback,
 		});
-
+		toast.success('Feedback added!', {
+			icon: '👌',
+		});
 		// return addedFeedback.id;
 	};
 };

@@ -1,0 +1,78 @@
+@import '../../sass/main.scss';
+.DropdownMenu {
+	width: 100%;
+	border-radius: 5px;
+	z-index: 1;
+	position: relative;
+	&__btn {
+		width: 100%;
+		border: none;
+		height: 3rem;
+		font-family: inherit;
+		font-size: 0.9375rem;
+		font-weight: 500;
+		color: $darkBlue1;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-radius: 4px;
+		cursor: pointer;
+		padding: 0 1.5rem;
+
+		svg {
+			transition: transform 0.2s ease-in-out;
+		}
+
+		&.active {
+			svg {
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	&__list {
+		list-style: none;
+		box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.21);
+		display: none;
+		position: absolute;
+		top: 4rem;
+		z-index: 101;
+		width: 100%;
+		border-radius: 10px;
+
+		&--item {
+			font-size: 1rem;
+			padding: 0.85rem 1.3rem;
+			border-bottom: 1px solid darken($color: $inputGray, $amount: 3%);
+			cursor: pointer;
+			background-color: $white;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			svg {
+				color: $purple;
+				// font-size: 2rem;
+			}
+
+			&:first-child {
+				border-radius: 10px 10px 0px 0px;
+			}
+			&:last-child {
+				border-radius: 0px 0px 10px 10px;
+			}
+			&:hover {
+				// background: rgb(250, 250, 250);
+				background-color: darken($color: #ffffff, $amount: 3%);
+				color: $purple;
+			}
+			&:last-child {
+				border: none;
+			}
+		}
+		&.active {
+			display: block;
+		}
+	}
+}

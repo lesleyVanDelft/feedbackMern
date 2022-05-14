@@ -52,6 +52,7 @@
 		&__content {
 			gap: 0;
 			padding: 0;
+
 			.list {
 				padding: 0 1rem;
 				width: 100%;
@@ -73,6 +74,7 @@
 			align-items: center;
 			padding: 0;
 			margin: 0;
+			transition: all 0.2s ease-in-out;
 
 			&__item {
 				display: grid;

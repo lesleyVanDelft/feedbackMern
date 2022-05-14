@@ -9,15 +9,13 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	// animation: border 4s ease-in-out;
+	transition: box-shadow 0.1s ease-in-out;
 
 	&__left {
 		display: flex;
 		align-items: flex-start;
 
 		&--voteBtn {
-			// background-color: $lightBlueGray;
-			// width: fit-content;
 			display: flex;
 			justify-content: flex-start;
 
@@ -119,6 +117,13 @@
 	&__right {
 		display: flex;
 		align-items: center;
+		transition: all 0.1s ease-in-out;
+		padding: 0.3rem;
+		border-radius: 10px;
+		a {
+			display: flex;
+			align-items: center;
+		}
 		.commentIcon {
 			color: $darkGray;
 			margin-right: 8px;
@@ -126,6 +131,10 @@
 		.commentLength {
 			font-size: 1rem;
 			font-weight: bold;
+		}
+
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.046);
 		}
 	}
 
@@ -234,6 +243,11 @@
 			}
 		}
 	}
+
+	// Hover
+	&:hover {
+		box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.076);
+	}
 }
 
 @media screen and (max-width: 768px) {
@@ -282,7 +296,7 @@
 		&__right {
 			position: absolute;
 			right: 24px;
-			bottom: 31px;
+			bottom: 29px;
 		}
 	}
 

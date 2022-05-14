@@ -6,11 +6,13 @@ import './CreateFeedbackForm.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 const CreateFeedbackForm = () => {
 	const [text, setText] = useState('');
 	const [title, setTitle] = useState('');
-	const [feedbackType, setFeedbackType] = useState('UI');
+	// const [feedbackType, setFeedbackType] = useState('UI');
+	const [category, setCategory] = useState('Feature');
 	const user = useSelector(state => state.user);
 	const author = user.id;
 	const dispatch = useDispatch();
@@ -28,9 +30,10 @@ const CreateFeedbackForm = () => {
 		username: user.username,
 		email: user.email,
 	};
-
-	const toastNotify = () =>
-		toast.success('Feedback added!', { autoClose: 3000 });
+	// get category state from dropdown
+	const getCategory = ctg => {
+		return setCategory(ctg);
+	};
 
 	const onSubmit = e => {
 		e.preventDefault();
@@ -39,7 +42,7 @@ const CreateFeedbackForm = () => {
 			createNewFeedback({
 				title,
 				text,
-				feedbackType,
+				feedbackType: category,
 				author,
 				details,
 				status: 'planned',
@@ -47,7 +50,7 @@ const CreateFeedbackForm = () => {
 		);
 		setText('');
 		setTitle('');
-		setFeedbackType('UI');
+		setCategory('Feature');
 
 		navigate('/');
 	};
@@ -73,7 +76,7 @@ const CreateFeedbackForm = () => {
 					<label htmlFor="feedbackType">
 						Choose a category for your feedback
 					</label>
-					<select
+					{/* <select
 						name="feedbackType"
 						id="feedbackType"
 						value={feedbackType}
@@ -83,7 +86,8 @@ const CreateFeedbackForm = () => {
 						<option value="Enhancement">Enhancement</option>
 						<option value="Bug">Bug</option>
 						<option value="Feature">Feature</option>
-					</select>
+					</select> */}
+					<DropdownMenu category={getCategory} />
 				</div>
 				<div className="Form__group">
 					<h3>Feedback Detail</h3>
@@ -105,10 +109,7 @@ const CreateFeedbackForm = () => {
 					<Link to="/">
 						<button className="btn btn-darkBlue">Cancel</button>
 					</Link>
-					<button
-						className="btn btn-purple"
-						type="submit"
-						onClick={() => toastNotify()}>
+					<button className="btn btn-purple" type="submit">
 						Add Feedback
 					</button>
 				</div>

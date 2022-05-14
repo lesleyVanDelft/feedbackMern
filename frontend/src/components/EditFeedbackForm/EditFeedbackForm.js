@@ -1,26 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import EditImg from '../../assets/shared/icon-edit-feedback.svg';
 import {
 	updateFeedback,
 	removeFeedback,
 } from '../../reducers/feedbackCommentsReducer';
-// import { removeFeedback } from '../../reducers/feedbackReducer';
 import { useParams } from 'react-router-dom';
 import Modal from '../Modal/Modal';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './EditFeedbackForm.css';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
-// Modal.setAppElement('#EditFeedbackForm');
-
-const EditFeedbackForm = ({ feedbackData }) => {
+const EditFeedbackForm = () => {
 	const [titleContent, setTitleContent] = useState('');
 	const [category, setCategory] = useState('');
 	const [detailContent, setDetailContent] = useState('');
 	const [showModal, setShowModal] = useState(false);
-	const [confirmDelete, setConfirmDelete] = useState(false);
 	const singleFeedback = useSelector(state => state.singleFeedback);
 
 	const navigate = useNavigate();
@@ -39,6 +36,7 @@ const EditFeedbackForm = ({ feedbackData }) => {
 		text: detailContent,
 	};
 
+	// Submit edit form
 	const onSubmit = e => {
 		e.preventDefault();
 		dispatch(updateFeedback(id, data));
@@ -53,6 +51,7 @@ const EditFeedbackForm = ({ feedbackData }) => {
 		setShowModal(false);
 	};
 
+	// Delete feedback - edit form
 	const handleDelete = e => {
 		e.preventDefault();
 		dispatch(removeFeedback(id));
@@ -60,6 +59,11 @@ const EditFeedbackForm = ({ feedbackData }) => {
 		navigate('/');
 	};
 
+	// get category state from dropdown
+	const getCategory = ctg => {
+		return setCategory(ctg);
+	};
+	// Cancel edit
 	const handleCancel = () => {
 		navigate('/');
 	};
@@ -93,17 +97,8 @@ const EditFeedbackForm = ({ feedbackData }) => {
 					<label htmlFor="feedbackType">
 						Choose a category for your feedback
 					</label>
-					<select
-						name="feedbackType"
-						id="feedbackType"
-						value={category}
-						onChange={e => setCategory(e.target.value)}>
-						<option value="UI">UI</option>
-						<option value="UX">UX</option>
-						<option value="Enhancement">Enhancement</option>
-						<option value="Bug">Bug</option>
-						<option value="Feature">Feature</option>
-					</select>
+
+					<DropdownMenu className="dropdown" category={getCategory} />
 				</div>
 
 				<div className="Form__group">
@@ -131,8 +126,8 @@ const EditFeedbackForm = ({ feedbackData }) => {
 				/>
 
 				<div className="Form__group--buttons">
-					<button className="btn btn-purple" type="submit">
-						Add Changes
+					<button className="btn btn-red" type="button" onClick={openModal}>
+						Delete
 					</button>
 					<button
 						className="btn btn-darkBlue"
@@ -140,9 +135,8 @@ const EditFeedbackForm = ({ feedbackData }) => {
 						onClick={handleCancel}>
 						Cancel
 					</button>
-
-					<button className="btn btn-red" type="button" onClick={openModal}>
-						Delete
+					<button className="btn btn-purple" type="submit">
+						Add Changes
 					</button>
 				</div>
 			</form>

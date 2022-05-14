@@ -32,7 +32,7 @@ const postComment = async (req, res) => {
 		commentedBy: user.id,
 		commentBody: comment.comment,
 		// upvotedBy: [user._id],
-		pointsCount: 1,
+		// pointsCount: 1,
 	});
 	feedback.commentCount = numOfComments(feedback.comments);
 	const savedFeedback = await feedback.save();
@@ -232,6 +232,7 @@ const postReply = async (req, res) => {
 		c._id.toString() !== commentId ? c : targetComment
 	);
 	feedback.commentCount = numOfComments(feedback.comments);
+
 	await feedback.save();
 
 	// const populatedFeedback = await savedFeedback
