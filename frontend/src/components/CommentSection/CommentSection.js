@@ -23,15 +23,10 @@ const CommentSection = ({ comments, feedbackId, currentFeedback }) => {
 	if (!comments) {
 		return <h2>Loading comments..</h2>;
 	}
-	let count = 0;
 
 	return (
-		// <section className="CommentSection">
-		// 	<h2 className="CommentSection__count">
-		// 		{feedbackComments.commentCount} Comments</h2>
 		<section className="CommentSection">
 			<h2 className="CommentSection__count">
-				{/* {currentFeedback.commentCount} Comments */}
 				{singleFeedback.commentCount} Comments
 			</h2>
 			<div className="CommentSection__comments">

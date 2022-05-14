@@ -23,6 +23,12 @@
 		&:nth-child(3) {
 			text-transform: uppercase;
 		}
+
+		&:hover {
+			background-color: $blue;
+			opacity: 0.8;
+			color: $white;
+		}
 	}
 
 	&__button.active {
@@ -34,7 +40,6 @@
 @media screen and(max-width: 1024px) {
 	.FilterButtons {
 		margin: 0 0rem;
-		// width: 100%;
 		width: 13.9375rem;
 		height: 11.125rem;
 		display: flex;

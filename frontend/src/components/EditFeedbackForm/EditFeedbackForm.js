@@ -67,9 +67,6 @@ const EditFeedbackForm = ({ feedbackData }) => {
 	if (!singleFeedback) {
 		return <h2>Loading</h2>;
 	}
-	// if (!feedbackData) {
-	// 	return <h2>Loading</h2>;
-	// }
 
 	return (
 		<section className="EditFeedbackForm">

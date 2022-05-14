@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReplyForm from '../../ReplyForm/ReplyForm';
 import BlankProfilePic from '../../../../assets/blank-profile-picture.png';
+import Modal from '../../../../components/Modal/Modal';
 import './Reply.css';
 import { deleteReply } from '../../../../reducers/feedbackCommentsReducer';
 
@@ -16,8 +17,10 @@ const Reply = ({
 }) => {
 	const [replyActive, setReplyActive] = useState(false);
 	const [repliedBy, setRepliedBy] = useState('');
+	const [showModal, setShowModal] = useState(false);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
+
 	const handleDelete = () => {
 		dispatch(deleteReply(currentFeedback._id, comment._id, replyData._id));
 	};
@@ -29,11 +32,27 @@ const Reply = ({
 		setReplyActive(act);
 	};
 
+	const openModal = e => {
+		e.preventDefault();
+		setShowModal(true);
+	};
+	const closeModal = e => {
+		e.preventDefault();
+		setShowModal(false);
+	};
+
 	const replyingTo = replyData.replyBody.split(' ')[0];
 	const trimmedText = replyData.replyBody.split(' ').slice(1).join(' ');
 
 	return (
 		<article className="Reply">
+			<Modal
+				active={showModal}
+				closeModal={closeModal}
+				handleDelete={handleDelete}
+				isComment={false}
+				isReply={true}
+			/>
 			<div className="Reply__userBar">
 				<img
 					src={BlankProfilePic}
@@ -53,7 +72,7 @@ const Reply = ({
 						Reply
 					</button>
 					{replyData.repliedBy === user.id && (
-						<button className="delete" onClick={handleDelete}>
+						<button className="delete" onClick={openModal}>
 							delete
 						</button>
 					)}
@@ -81,6 +100,14 @@ const Reply = ({
 					replyToReply={true}
 				/>
 			)}
+
+			{/* <Modal
+				active={showModal}
+				closeModal={closeModal}
+				handleDelete={handleDelete}
+				isComment={true}
+				isReply={false}
+			/> */}
 		</article>
 	);
 };
