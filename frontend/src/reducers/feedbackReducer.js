@@ -32,10 +32,12 @@ const feedbackReducer = (state = [], action) => {
 			// 		? state
 			// 		: { ...state, ...action.payload.data }),
 			// };
-			const filteredArrayUpvote = state.filter(
-				fb => fb._id === action.payload.id
-			);
-			return filteredArrayUpvote.map(fb => {
+			// console.log(state);
+			// const filteredArrayUpvote = state.filter(
+			// 	fb => fb._id === action.payload.id
+			// );
+			// console.log(state.map(el => el._id));
+			return state.map(fb => {
 				return fb._id !== action.payload.id
 					? fb
 					: { ...fb, ...action.payload.data };

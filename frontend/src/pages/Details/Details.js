@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaChevronLeft } from 'react-icons/fa';
@@ -57,14 +57,7 @@ const Details = () => {
 						<PageLogo />
 						<div className="Details__content">
 							<div className="Details__content--buttons">
-								{/* <button className="back">
-									<Link to="/">
-										<FaChevronLeft /> <span>Go Back</span>
-									</Link>
-								</button> */}
-								{/* <Link to="/"> */}
 								<BackBtn currentPage="details" />
-								{/* </Link> */}
 								{singleFeedback.author === user.id && (
 									<Link to={`/edit/${id}`}>
 										<button className="btn btn-blue edit">Edit Feedback</button>
