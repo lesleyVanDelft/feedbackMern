@@ -1,0 +1,28 @@
+@import '../../sass/main.scss';
+
+.PageLogo {
+	background-image: url('../../assets/suggestions/desktop/background-header.png');
+	background-size: cover;
+	background-clip: text;
+	background-position: 0%;
+	-webkit-background-clip: text;
+	color: transparent;
+	cursor: default;
+	padding-bottom: 1rem;
+	h1 {
+		// .underline {
+		// 	text-decoration: 1px wavy underline
+		// 		lighten($color: $purple, $amount: 30%);
+		// 	// opacity: 0.8;
+		// }
+	}
+	h2 {
+		font-size: 1.3rem;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.PageLogo {
+		display: none;
+	}
+}

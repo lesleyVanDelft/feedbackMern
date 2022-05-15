@@ -7,7 +7,8 @@ import { getFeedbacks } from '../../reducers/feedbackReducer';
 import {
 	toggleUpvoteDetails,
 	toggleDownvoteDetails,
-} from '../../reducers/feedbackCommentsReducer';
+} from '../../reducers/feedbackReducer';
+// import{toggle}
 import { useEffect, useState } from 'react';
 import './FeedbackItem.css';
 
@@ -65,17 +66,20 @@ const FeedbackItem = ({
 				const updatedUpvotedBy = feedback.upvotedBy.filter(
 					upvote => upvote !== user.id
 				);
-				feedbacks.length <= 0
-					? dispatch(
-							toggleUpvoteDetails(
-								feedback._id,
-								updatedUpvotedBy,
-								feedback.downvotedBy
-							)
-					  )
-					: dispatch(
-							toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
-					  );
+				// feedbacks.length <= 0
+				// 	? dispatch(
+				// 			toggleUpvoteDetails(
+				// 				feedback._id,
+				// 				updatedUpvotedBy,
+				// 				feedback.downvotedBy
+				// 			)
+				// 	  )
+				// 	: dispatch(
+				// 			toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
+				// 	  );
+				dispatch(
+					toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
+				);
 				setUpvoted(!upvoted);
 				console.log('isUpvoted is now false');
 			} else {
@@ -93,6 +97,7 @@ const FeedbackItem = ({
 			console.log(err);
 		}
 	};
+
 	const handleDownvoteToggle = async e => {
 		e.preventDefault();
 		try {
@@ -151,9 +156,9 @@ const FeedbackItem = ({
 							<div className="votes">
 								<UpvoteButton
 									user={user}
-									body={feedback}
-									active={upvoted}
-									notActive={downvoted}
+									feedback={feedback}
+									upvote={upvoted}
+									downvote={downvoted}
 									handleUpvote={handleUpvoteToggle}
 								/>
 								<span className="votes__count">
@@ -162,9 +167,9 @@ const FeedbackItem = ({
 
 								<DownvoteButton
 									user={user}
-									body={feedback}
-									active={downvoted}
-									notActive={upvoted}
+									feedback={feedback}
+									downvote={downvoted}
+									upvote={upvoted}
 									handleDownvote={handleDownvoteToggle}
 								/>
 							</div>

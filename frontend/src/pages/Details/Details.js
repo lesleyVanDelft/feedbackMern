@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaChevronLeft } from 'react-icons/fa';
@@ -11,13 +11,15 @@ import LogoBar from '../../components/LogoBar/LogoBar';
 import {
 	toggleUpvoteDetails,
 	toggleDownvoteDetails,
-} from '../../reducers/feedbackCommentsReducer';
+} from '../../reducers/feedbackReducer';
 import { motion } from 'framer-motion';
 import { ToastContainer } from 'react-toastify';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import moment from 'moment';
 import 'react-toastify/dist/ReactToastify.min.css';
 import './Details.css';
+import PageLogo from '../../components/PageLogo/PageLogo';
+import BackBtn from '../../components/Buttons/BackBtn/BackBtn';
 
 const Details = () => {
 	const singleFeedback = useSelector(state => state.singleFeedback);
@@ -52,14 +54,10 @@ const Details = () => {
 						initial="initial"
 						animate="animate">
 						<LogoBar />
-
+						<PageLogo />
 						<div className="Details__content">
 							<div className="Details__content--buttons">
-								<button className="back">
-									<Link to="/">
-										<FaChevronLeft /> <span>Go Back</span>
-									</Link>
-								</button>
+								<BackBtn currentPage="details" />
 								{singleFeedback.author === user.id && (
 									<Link to={`/edit/${id}`}>
 										<button className="btn btn-blue edit">Edit Feedback</button>

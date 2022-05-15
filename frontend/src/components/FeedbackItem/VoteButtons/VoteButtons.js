@@ -1,21 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
-export const UpvoteButton = ({
-	body,
-	user,
-	handleUpvote,
-	active,
-	notActive,
-}) => {
-	// const [active, setActive] = useState()
-	// const [notActive, setNotActive] = useState()
+export const UpvoteButton = ({ feedback, user, handleUpvote }) => {
+	const [upvotedBy, setUpvotedBy] = useState([]);
+	const [downvotedBy, setDownvotedBy] = useState([]);
+	useEffect(() => {
+		setUpvotedBy(feedback.upvotedBy.filter(id => id === user.id));
+	}, [feedback.upvotedBy, user.id]);
 
+	useEffect(() => {
+		setDownvotedBy(feedback.downvotedBy.filter(id => id === user.id));
+	}, [feedback.downvotedBy, user.id]);
 	return (
 		<button
+			type="button"
 			user={user}
-			// body={body}
-			className={`votes__upvote ${active && !notActive ? 'upvoteActive' : ''}`}
+			className={`votes__upvote ${
+				upvotedBy.includes(user.id) ? 'upvoteActive' : ''
+			}`}
 			onClick={e => {
 				handleUpvote(e);
 			}}>
@@ -24,33 +27,30 @@ export const UpvoteButton = ({
 	);
 };
 export const DownvoteButton = ({
-	body,
 	user,
+	feedback,
 	handleDownvote,
-	active,
-	notActive,
+	upvote,
+	downvote,
 }) => {
+	const [upvotedBy, setUpvotedBy] = useState([]);
+	const [downvotedBy, setDownvotedBy] = useState([]);
+	useEffect(() => {
+		setUpvotedBy(feedback.upvotedBy.filter(id => id === user.id));
+	}, [feedback.upvotedBy, user.id]);
+
+	useEffect(() => {
+		setDownvotedBy(feedback.downvotedBy.filter(id => id === user.id));
+	}, [feedback.downvotedBy, user.id]);
 	return (
 		<button
+			type="button"
 			user={user}
-			// body={body}
 			className={`votes__downvote ${
-				active && !notActive ? 'downvoteActive' : ''
+				downvotedBy.includes(user.id) ? 'downvoteActive' : ''
 			}`}
 			onClick={e => handleDownvote(e)}>
 			<FaChevronDown className="chevronUp" />
 		</button>
 	);
 };
-
-// const CompleteButton = (user, handleDownvote, active, count) => {
-// 	return (
-// 		<>
-// 			<button className={`votes__downvote`}>
-// 				<FaChevronUp className="chevronUp" />
-// 			</button>
-// 		</>
-// 	);
-// };
-
-// export default CompleteButton;

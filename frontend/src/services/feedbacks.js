@@ -57,12 +57,12 @@ const upvoteFeedback = async id => {
 
 // POST - upvote details page -- NOT SURE IF NEEDED YET
 const upvoteFeedbackDetails = async id => {
-	const response = await axios.post(
-		`${API_URL + '/upvote/' + id}`,
-		null,
-		setConfig()
-	);
-	return response.data;
+	// const response = await axios.post(
+	// 	`${API_URL + '/upvote/' + id}`,
+	// 	null,
+	// 	setConfig()
+	// );
+	// return response.data;
 };
 
 // POST - downvote feedback

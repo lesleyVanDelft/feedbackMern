@@ -160,16 +160,17 @@ const Dashboard = ({ category, mobileOpen }) => {
 
 					<AnimatePresence>
 						{active && (
-							// <LayoutGroup>
 							<MobileDashboard
 								category={getCategoryState}
 								isVisible={active}
 								logout={handleLogout}
-								// layout
 							/>
-							// </LayoutGroup>
 						)}
 					</AnimatePresence>
+
+					{/* <AnimatePresence>
+						{active && <div className="overlay"></div>}
+					</AnimatePresence> */}
 				</div>
 			)}
 		</section>

@@ -4,10 +4,11 @@ import { setUser } from '../../reducers/userReducer';
 import { motion } from 'framer-motion';
 import { getFeedbacks } from '../../reducers/feedbackReducer';
 import SuggestionsHeader from '../../components/Suggestions/SuggestionsHeader/SuggestionsHeader';
-import './Roadmap.css';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { useSwipeable } from 'react-swipeable';
+import './Roadmap.css';
+import PageLogo from '../../components/PageLogo/PageLogo';
 
 const RoadmapPage = () => {
 	const [active, setActive] = useState('in-progress');
@@ -77,6 +78,7 @@ const RoadmapPage = () => {
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
+			<PageLogo />
 			<SuggestionsHeader roadmap={true} />
 
 			<div className="headers">

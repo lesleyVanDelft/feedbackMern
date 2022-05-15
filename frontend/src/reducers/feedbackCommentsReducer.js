@@ -11,6 +11,8 @@ const feedbackPageReducer = (state = null, action) => {
 			return state.filter(fb => fb.id !== action.payload);
 
 		case 'TOGGLE_UPVOTE_DETAILS':
+			// console.log(state);
+			// return state;
 			return {
 				...(state._id !== action.payload.id
 					? state
@@ -129,32 +131,6 @@ export const getSingleFeedback = id => {
 			type: 'GET_SINGLE_FEEDBACK',
 			payload: fetchedFeedback,
 		});
-	};
-};
-
-export const toggleUpvoteDetails = (id, upvotedBy, downvotedBy) => {
-	return async dispatch => {
-		let pointsCount = upvotedBy.length - downvotedBy.length;
-
-		dispatch({
-			type: 'TOGGLE_UPVOTE_DETAILS',
-			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
-		});
-
-		await feedbackService.upvoteFeedbackDetails(id);
-	};
-};
-
-export const toggleDownvoteDetails = (id, downvotedBy, upvotedBy) => {
-	return async dispatch => {
-		let pointsCount = upvotedBy.length - downvotedBy.length;
-
-		dispatch({
-			type: 'TOGGLE_DOWNVOTE_DETAILS',
-			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
-		});
-
-		await feedbackService.downvoteFeedbackDetails(id);
 	};
 };
 

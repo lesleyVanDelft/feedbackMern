@@ -285,6 +285,11 @@
 					&__downvote {
 						border-radius: 0px 10px 10px 0px;
 						padding: 0.5rem 0.8rem;
+
+						&:active {
+							background-color: $red;
+							opacity: 1;
+						}
 					}
 
 					&__count {
