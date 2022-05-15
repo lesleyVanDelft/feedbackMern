@@ -7,7 +7,8 @@ import { getFeedbacks } from '../../reducers/feedbackReducer';
 import {
 	toggleUpvoteDetails,
 	toggleDownvoteDetails,
-} from '../../reducers/feedbackCommentsReducer';
+} from '../../reducers/feedbackReducer';
+// import{toggle}
 import { useEffect, useState } from 'react';
 import './FeedbackItem.css';
 
@@ -152,8 +153,8 @@ const FeedbackItem = ({
 								<UpvoteButton
 									user={user}
 									body={feedback}
-									active={upvoted}
-									notActive={downvoted}
+									upvote={upvoted}
+									downvote={downvoted}
 									handleUpvote={handleUpvoteToggle}
 								/>
 								<span className="votes__count">
@@ -163,8 +164,8 @@ const FeedbackItem = ({
 								<DownvoteButton
 									user={user}
 									body={feedback}
-									active={downvoted}
-									notActive={upvoted}
+									downvote={downvoted}
+									upvote={upvoted}
 									handleDownvote={handleDownvoteToggle}
 								/>
 							</div>

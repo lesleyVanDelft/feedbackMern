@@ -11,7 +11,7 @@ import LogoBar from '../../components/LogoBar/LogoBar';
 import {
 	toggleUpvoteDetails,
 	toggleDownvoteDetails,
-} from '../../reducers/feedbackCommentsReducer';
+} from '../../reducers/feedbackReducer';
 import { motion } from 'framer-motion';
 import { ToastContainer } from 'react-toastify';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';

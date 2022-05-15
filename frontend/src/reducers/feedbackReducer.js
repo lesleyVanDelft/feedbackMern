@@ -26,6 +26,35 @@ const feedbackReducer = (state = [], action) => {
 					? fb
 					: { ...fb, ...action.payload.data };
 			});
+		case 'TOGGLE_UPVOTE_DETAILS':
+			// return {
+			// 	...(state._id !== action.payload.id
+			// 		? state
+			// 		: { ...state, ...action.payload.data }),
+			// };
+			const filteredArrayUpvote = state.filter(
+				fb => fb._id === action.payload.id
+			);
+			return filteredArrayUpvote.map(fb => {
+				return fb._id !== action.payload.id
+					? fb
+					: { ...fb, ...action.payload.data };
+			});
+
+		case 'TOGGLE_DOWNVOTE_DETAILS':
+			// return {
+			// 	...(state._id !== action.payload.id
+			// 		? state
+			// 		: { ...state, ...action.payload.data }),
+			// };
+			const filteredArrayDownvote = state.filter(
+				fb => fb._id === action.payload.id
+			);
+			return filteredArrayDownvote.map(fb => {
+				return fb._id !== action.payload.id
+					? fb
+					: { ...fb, ...action.payload.data };
+			});
 		case 'DELETE_FEEDBACK':
 			return {
 				...state,
@@ -36,6 +65,28 @@ const feedbackReducer = (state = [], action) => {
 		default:
 			return state;
 	}
+};
+
+export const toggleUpvoteDetails = (id, upvotedBy, downvotedBy) => {
+	return async dispatch => {
+		let pointsCount = upvotedBy.length - downvotedBy.length;
+		dispatch({
+			type: 'TOGGLE_UPVOTE_DETAILS',
+			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
+		});
+		await feedbackService.upvoteFeedback(id);
+	};
+};
+
+export const toggleDownvoteDetails = (id, downvotedBy, upvotedBy) => {
+	return async dispatch => {
+		let pointsCount = upvotedBy.length - downvotedBy.length;
+		dispatch({
+			type: 'TOGGLE_DOWNVOTE_DETAILS',
+			payload: { id, data: { upvotedBy, pointsCount, downvotedBy } },
+		});
+		await feedbackService.downvoteFeedback(id);
+	};
 };
 
 // GET - all feedbacks

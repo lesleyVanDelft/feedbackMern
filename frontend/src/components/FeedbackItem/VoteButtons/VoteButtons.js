@@ -1,21 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
 
 export const UpvoteButton = ({
 	body,
 	user,
 	handleUpvote,
-	active,
-	notActive,
+	upvote,
+	downvote,
 }) => {
-	// const [active, setActive] = useState()
-	// const [notActive, setNotActive] = useState()
-
 	return (
 		<button
+			type="button"
 			user={user}
-			// body={body}
-			className={`votes__upvote ${active && !notActive ? 'upvoteActive' : ''}`}
+			// className={`votes__upvote ${upvote && !downvote ? 'upvoteActive' : ''}`}
+			className={`votes__upvote ${upvote === true ? 'upvoteActive' : ''}`}
 			onClick={e => {
 				handleUpvote(e);
 			}}>
@@ -23,20 +21,22 @@ export const UpvoteButton = ({
 		</button>
 	);
 };
-export const DownvoteButton = ({
-	body,
-	user,
-	handleDownvote,
-	active,
-	notActive,
-}) => {
+export const DownvoteButton = ({ user, handleDownvote, upvote, downvote }) => {
+	const [active, setActive] = useState();
+
+	useEffect(() => {
+		downvote && setActive('downvote');
+	}, [downvote]);
 	return (
 		<button
+			type="button"
 			user={user}
-			// body={body}
 			className={`votes__downvote ${
-				active && !notActive ? 'downvoteActive' : ''
+				active === 'downvote' ? 'downvoteActive' : ''
 			}`}
+			// className={`votes__downvote ${
+			// 	downvote && !upvote ? 'downvoteActive' : ''
+			// }`}
 			onClick={e => handleDownvote(e)}>
 			<FaChevronDown className="chevronUp" />
 		</button>
