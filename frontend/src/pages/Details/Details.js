@@ -18,6 +18,8 @@ import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import moment from 'moment';
 import 'react-toastify/dist/ReactToastify.min.css';
 import './Details.css';
+import PageLogo from '../../components/PageLogo/PageLogo';
+import BackBtn from '../../components/Buttons/BackBtn/BackBtn';
 
 const Details = () => {
 	const singleFeedback = useSelector(state => state.singleFeedback);
@@ -52,14 +54,17 @@ const Details = () => {
 						initial="initial"
 						animate="animate">
 						<LogoBar />
-
+						<PageLogo />
 						<div className="Details__content">
 							<div className="Details__content--buttons">
-								<button className="back">
+								{/* <button className="back">
 									<Link to="/">
 										<FaChevronLeft /> <span>Go Back</span>
 									</Link>
-								</button>
+								</button> */}
+								{/* <Link to="/"> */}
+								<BackBtn currentPage="details" />
+								{/* </Link> */}
 								{singleFeedback.author === user.id && (
 									<Link to={`/edit/${id}`}>
 										<button className="btn btn-blue edit">Edit Feedback</button>

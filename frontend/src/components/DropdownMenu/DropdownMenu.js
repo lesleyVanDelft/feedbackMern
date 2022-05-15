@@ -10,7 +10,7 @@ const DropdownMenu = ({ category }) => {
 	// const openDropdown = e => {
 	// 	setMenuActive(!menuActive);
 	// };
-	category(selected);
+	// category(selected);
 
 	const handleSelect = select => {
 		setSelected(select);
