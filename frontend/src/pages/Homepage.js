@@ -87,7 +87,7 @@ const Homepage = () => {
 
 			<section className={`Homepage__content`}>
 				{/* mobile animation overlay */}
-				<AnimatePresence>
+				{/* <AnimatePresence>
 					{mobileState && (
 						<motion.div
 							className={`overlay`}
@@ -96,7 +96,7 @@ const Homepage = () => {
 							animate="visible"
 							exit="exit"></motion.div>
 					)}
-				</AnimatePresence>
+				</AnimatePresence> */}
 
 				{/* <motion.div
 					className={`overlay ${mobileState ? 'active' : null}`}

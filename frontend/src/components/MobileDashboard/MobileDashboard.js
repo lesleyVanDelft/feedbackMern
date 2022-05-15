@@ -9,7 +9,12 @@ import UserDropdown from '../Dashboard/UserDropdown/UserDropdown';
 const menuVisibility = {
 	hidden: { opacity: 0, right: -150 },
 	visible: { opacity: 1, right: 0 },
-	exit: { opacity: 0, right: -350, transition: { duration: 0.4 } },
+	exit: { opacity: 0, right: -350 },
+};
+const overlayVisibility = {
+	hidden: { opacity: 0, right: -150 },
+	visible: { opacity: 0.5, right: 0 },
+	exit: { opacity: 0, right: -350 },
 };
 
 const MobileDashboard = ({ category, isVisible, logout }) => {
@@ -22,33 +27,43 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 	return (
 		<>
 			{isVisible && (
-				<motion.nav
-					className="MobileDashboard"
-					key="mobileNav"
-					variants={menuVisibility}
-					initial="hidden"
-					animate="visible"
-					exit="exit">
-					<div className="Dashboard__mobile--user">
-						<h3 className="userWelcome">
-							Hi there,
-							<span
-								className={`user ${userActive && 'active'}`}
-								onClick={handleUserClick}>
-								@{user && user.username}
-								<VscTriangleDown />
-								<AnimatePresence>
-									{userActive && <UserDropdown mobile={true} logout={logout} />}
-								</AnimatePresence>
-							</span>
-						</h3>
-					</div>
-					<FilterButtons category={category} />
-					<Roadmap />
-					<button className="btn btn-darkBlue" onClick={logout}>
-						Log Out
-					</button>
-				</motion.nav>
+				<>
+					<motion.nav
+						className="MobileDashboard"
+						key="mobileNav"
+						variants={menuVisibility}
+						initial="hidden"
+						animate="visible"
+						exit="exit">
+						<div className="Dashboard__mobile--user">
+							<h3 className="userWelcome">
+								Hi there,
+								<span
+									className={`user ${userActive && 'active'}`}
+									onClick={handleUserClick}>
+									@{user && user.username}
+									<VscTriangleDown />
+									<AnimatePresence>
+										{userActive && (
+											<UserDropdown mobile={true} logout={logout} />
+										)}
+									</AnimatePresence>
+								</span>
+							</h3>
+						</div>
+						<FilterButtons category={category} />
+						<Roadmap />
+						<button className="btn btn-darkBlue" onClick={logout}>
+							Log Out
+						</button>
+					</motion.nav>
+					<motion.div
+						className="overlay"
+						variants={overlayVisibility}
+						initial="hidden"
+						animate="visible"
+						exit="exit"></motion.div>
+				</>
 			)}
 		</>
 	);

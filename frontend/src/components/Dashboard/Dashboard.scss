@@ -145,6 +145,7 @@
 		margin: 0;
 		width: 100%;
 		position: relative;
+
 		&__logo {
 			.hamburger {
 				svg {
@@ -158,6 +159,7 @@
 		// mobile
 		&__mobile {
 			width: 100%;
+
 			.btn {
 				width: fit-content;
 				align-self: flex-start;
@@ -226,7 +228,7 @@
 
 			.MobileDashboard {
 				position: absolute;
-				z-index: 50;
+				z-index: 101;
 				background: $lightGray;
 				display: flex;
 				flex-direction: column;
@@ -237,6 +239,17 @@
 				width: 291px;
 				right: 0;
 				height: calc(100vh - 4.5rem);
+			}
+
+			.overlay {
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				top: 4.5rem;
+				right: 0;
+				background-color: $black;
+				opacity: 0.5;
+				z-index: 100;
 			}
 		}
 		// logout btn
