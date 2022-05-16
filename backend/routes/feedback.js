@@ -33,12 +33,12 @@ router.post('/downvote/:id', auth, downvoteFeedback);
 
 // get SINGLE feedback
 // '/api/feedbacks/details/:id'
-router.get('/details/:id', auth, getSingleFeedback);
+router.get('/:id', auth, getSingleFeedback);
 // get ALL feedbacks
 router.get('/', auth, getFeedbacks);
 router.post('/', auth, createNewFeedback);
 // post comment
-router.post('/details/:id', auth, postComment);
+router.post('/:id', auth, postComment);
 // reply to comment
 router.post('/details/:id/comment/:commentId/reply', auth, postReply);
 

@@ -20,7 +20,7 @@ const getFeedbacks = async () => {
 
 // GET - single feedback
 const getSingleFeedback = async id => {
-	const response = await axios.get(`${API_URL}/details/${id}`, setConfig());
+	const response = await axios.get(`${API_URL}/${id}`, setConfig());
 	return response.data;
 };
 
@@ -42,7 +42,7 @@ const editFeedback = async (id, feedbackObj) => {
 
 // GET - single feedback ? -- NOT SURE IF NEEDED YET
 const getFeedbackComments = async id => {
-	const response = await axios.get(`${API_URL}/details/${id}`, setConfig());
+	const response = await axios.get(`${API_URL}/${id}`, setConfig());
 	return response.data;
 };
 
