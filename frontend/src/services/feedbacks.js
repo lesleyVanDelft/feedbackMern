@@ -87,6 +87,7 @@ const downvoteFeedbackDetails = async id => {
 	return response.data;
 };
 
+//
 // DELETE - delete feedback
 const deleteFeedback = async id => {
 	const response = await axios.delete(`${API_URL}/` + id);
