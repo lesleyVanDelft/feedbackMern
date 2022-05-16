@@ -29,9 +29,8 @@ const auth = async (req, res, next) => {
 	// }
 };
 
-const unknownEndpointHandler = (error, _req, res, next) => {
+const unknownEndpointHandler = (_req, res) => {
 	res.status(404).send({ message: 'Unknown endpoint' });
-	next();
 };
 
 const errorHandler = (error, _req, res, next) => {
