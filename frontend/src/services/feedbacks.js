@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 // const API_URL = `/api/feedbacks`;
-const API_URL = `https://feedback-lesley.herokuapp.com/api/feedbacks`;
+const API_URL = `/api/feedbacks`;
 
 // Gets jwt token from cookie and adds it to request header
 const setConfig = () => {

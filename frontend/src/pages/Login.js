@@ -33,8 +33,6 @@ const Login = () => {
 	useEffect(() => {
 		if (user) {
 			navigate('/');
-		} else {
-			navigate('/login');
 		}
 	}, [user, navigate]);
 
@@ -55,7 +53,7 @@ const Login = () => {
 	};
 
 	return (
-		<motion.main
+		<main
 			className="Login"
 			variants={initialMotion}
 			initial="initial"
@@ -125,7 +123,7 @@ const Login = () => {
 					</button>
 				</form>
 			</section>
-		</motion.main>
+		</main>
 	);
 };
 

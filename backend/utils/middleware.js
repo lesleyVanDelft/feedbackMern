@@ -49,4 +49,16 @@ const errorHandler = (error, _req, res, next) => {
 	// next(error);
 };
 
-module.exports = { auth, unknownEndpointHandler, errorHandler };
+const pushStateRouting = () => (req, res, next) => {
+	if (req.method === 'GET' && !req.url.startsWith('/api')) {
+		return res.sendFile(path.join(__dirname, '../frontend/build'));
+	}
+	next();
+};
+
+module.exports = {
+	auth,
+	unknownEndpointHandler,
+	errorHandler,
+	pushStateRouting,
+};

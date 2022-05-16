@@ -13,6 +13,8 @@ const authRoutes = require('./routes/auth');
 const feedbackRoutes = require('./routes/feedback');
 const userRoutes = require('./routes/user');
 
+const staticDir = path.join(__dirname, '../frontend/build');
+
 connectDB();
 
 const app = express();
@@ -25,6 +27,13 @@ app.use(cookieParser());
 app.use(morgan('tiny'));
 
 // app.use('/api', authRoutes);
+// app.get('/login', (req, res) => {
+// 	console.log('login req test');
+// 	res.status(200).send('GET req login page');
+// });
+// app.get('/register', (req, res) => {
+// 	res.status(200).send('GET req register page');
+// });
 app.use('/api/users', authRoutes);
 app.use('/api/feedbacks', feedbackRoutes);
 
@@ -35,19 +44,19 @@ app.use('/api/feedbacks', feedbackRoutes);
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-	app.get('*', (req, res) => {
-		res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+	app.get('/*', (req, res) => {
+		res.sendFile(
+			path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
+		);
 	});
 } else {
 	app.get('/', (req, res) => {
 		res.send('API is running');
 	});
 }
-// else {
-// 	app.get('*', (req, res) => res.send('Please set to production'));
-// }
 
 app.use(middleware.unknownEndpointHandler);
+app.use(middleware.pushStateRouting());
 
 // app.use(errorHandler);
 

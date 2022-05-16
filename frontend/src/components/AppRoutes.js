@@ -16,9 +16,9 @@ const AppRoutes = () => {
 	return (
 		<AnimatePresence exitBeforeEnter>
 			<Routes location={location} key={location.pathname}>
-				<Route path="/" element={<Homepage />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/register" element={<Register />} />
+				<Route exact path="/" element={<Homepage />} />
+				<Route exact path="/login" element={<Login />} />
+				<Route exact path="/register" element={<Register />} />
 				<Route path="/details/:id" element={<Details />} />
 				<Route path="/edit/:id" element={<Edit />} />
 				<Route path="/create" element={<Create />} />
