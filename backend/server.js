@@ -27,14 +27,16 @@ app.use(cookieParser());
 app.use(morgan('tiny'));
 
 // app.use('/api', authRoutes);
-// app.get('/login', (req, res) => {
-// 	console.log('login req test');
-// 	res.status(200).send('GET req login page');
-// });
+app.get('/login', (req, res) => {
+	// console.log('login req test');
+	// res.status(200).send('GET req login page');
+	res.status(200).send('GET req login page');
+});
 
-// app.get('/register', (req, res) => {
-// 	res.status(200).send('GET req register page');
-// });
+app.get('/register', (req, res) => {
+	// res.status(200).send('GET req register page');
+	res.status(200).send('GET req register page');
+});
 app.use('/api/users', authRoutes);
 app.use('/api/feedbacks', feedbackRoutes);
 
