@@ -2,7 +2,7 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
-const auth = async (req, res, next) => {
+const auth = async (error, req, res, next) => {
 	let token;
 	try {
 		if (req.cookies.jwt) {
@@ -29,8 +29,9 @@ const auth = async (req, res, next) => {
 	// }
 };
 
-const unknownEndpointHandler = (_req, res) => {
+const unknownEndpointHandler = (error, _req, res, next) => {
 	res.status(404).send({ message: 'Unknown endpoint' });
+	next();
 };
 
 const errorHandler = (error, _req, res, next) => {
