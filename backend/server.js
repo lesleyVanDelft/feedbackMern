@@ -7,10 +7,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const PORT = process.env.PORT || 5000;
-const host = '0.0.0.0';
-// const { errorHandler } = require('./utils/middleware');
 const connectDB = require('./config/db');
-// require('./config/db');
 const middleware = require('./utils/middleware');
 const authRoutes = require('./routes/auth');
 const feedbackRoutes = require('./routes/feedback');
@@ -26,17 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan('tiny'));
-
-// these get used in redux service files
-// app.use('/api/feedbacks', require('./routes/feedbackRoutes'));
-// app.use('/api/users', require('./routes/userRoutes'));
-// app.get('/api/login', (req, res) => {
-// 	res.send('login...');
-// });
-// app.get('/', (req, res) => {
-// 	res.redirect('/');
-// 	// res.send('hi');
-// });
 
 // app.use('/api', authRoutes);
 app.use('/api/users', authRoutes);

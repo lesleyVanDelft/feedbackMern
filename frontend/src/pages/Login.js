@@ -5,22 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { loginUser } from '../reducers/userReducer';
-import Spinner from '../components/Spinner';
 import Header from '../components/Header/Header';
 import { motion } from 'framer-motion';
-import { errorHandler } from '../utils/errorHandler';
-import axios from 'axios';
+import PageLogo from '../components/PageLogo/PageLogo';
 
 const Login = () => {
 	const user = useSelector(state => state.user);
 	const [error, setError] = useState(null);
-	const [blurMessage, setBlurMessage] = useState('');
 	const errorMessage = useSelector(state => state.errorMessage);
 
-	const [formData, setFormData] = useState({
-		email: '',
-		password: '',
-	});
 	const formik = useFormik({
 		initialValues: {
 			email: '',
@@ -32,70 +25,23 @@ const Login = () => {
 		}),
 		onSubmit: values => {
 			dispatch(loginUser(values));
-			// handleSubmit(values);
 		},
-		// onSubmit: async values => {
-		// 	try {
-		// 		// const response = await axios({
-		// 		// 	method: 'POST',
-		// 		// 	url: `/api/users/login`,
-		// 		// 	data: {
-		// 		// 		email: values.email,
-		// 		// 		password: values.password,
-		// 		// 	},
-		// 		// });
-		// 		// return response.data;
-
-		// 			dispatch(loginUser(values))
-
-		// 	} catch (err) {
-		// 		setError(err);
-		// 		console.log(err);
-		// 	}
-		// },
 	});
-	// destructure useState
-	// const { email, password } = formData;
-	// useNavigate
 	const navigate = useNavigate();
-	// fire off functions from authSlice
 	const dispatch = useDispatch();
-
-	// const onChange = e => {
-	// 	setError(null);
-
-	// 	setFormData(prevState => ({
-	// 		...prevState,
-	// 		[e.target.name]: e.target.value,
-	// 	}));
-	// };
-
-	// const handleSubmit = e => {
-	// 	e.preventDefault();
-	// 	dispatch(loginUser(formData));
-	// };
 
 	useEffect(() => {
 		if (user) {
 			navigate('/');
+		} else {
+			navigate('/login');
 		}
 	}, [user, navigate]);
 
 	useEffect(() => {
-		// setTimeout(() => {
-		// 	setError(null);
-		// }, 5000);
 		return errorMessage ? setError(errorMessage) : null;
 	}, [errorMessage]);
 
-	// useEffect(() => {
-	// 	setBlurMessage(formData.email);
-	// }, [formData.email]);
-
-	// const handleBlur = e => {
-	// 	return blurMessage !== '' ? e.target.value : '';
-	// };
-	// console.log(blurMessage);
 	const initialMotion = {
 		initial: {
 			opacity: 0,
@@ -104,7 +50,6 @@ const Login = () => {
 			opacity: 1,
 			transition: {
 				duration: 0.3,
-				// ease: [0.87, 0, 0.13, 1],
 			},
 		},
 	};
@@ -115,6 +60,7 @@ const Login = () => {
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
+			<PageLogo />
 			<Header login={true} />
 			<section className="Login__form form">
 				<div className="heading">
