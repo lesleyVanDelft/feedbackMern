@@ -2,7 +2,7 @@
 	"name": "backend",
 	"version": "1.0.0",
 	"description": "",
-	"main": "server.js",
+	"main": "backend/server.js",
 	"scripts": {
 		"start": "node backend/server.js",
 		"server": "nodemon backend/server.js",
@@ -34,6 +34,5 @@
 	},
 	"engines": {
 		"node": "16.x"
-	},
-	"homepage": "https://feedback-lesley.herokuapp.com"
+	}
 }

@@ -35,37 +35,37 @@ app.use(morgan('tiny'));
 // app.get('/register', (req, res) => {
 // 	res.status(200).send('GET req register page');
 // });
-// app.use('/api/users', authRoutes);
-// app.use('/api/feedbacks', feedbackRoutes);
+app.use('/api/users', authRoutes);
+app.use('/api/feedbacks', feedbackRoutes);
 
 // app.use(middleware.errorHandler);
 
 // Serve frontend
 // const __dirname = path.resolve();
-// if (process.env.NODE_ENV === 'production') {
-// 	app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-// 	app.get('/*', (req, res) => {
-// 		res.sendFile(
-// 			path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
-// 		);
-// 	});
-// } else {
-// 	app.get('/', (req, res) => {
-// 		res.send('API is running');
-// 	});
-// }
-
 if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('../frontend/build'));
+	app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+	app.get('/*', (req, res) => {
+		res.sendFile(
+			path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
+		);
+	});
+} else {
+	app.get('/', (req, res) => {
+		res.send('API is running');
+	});
 }
 
-app.use('/api/users', authRoutes);
-app.use('/api/feedbacks', feedbackRoutes);
+// if (process.env.NODE_ENV === 'production') {
+// 	app.use(express.static('../frontend/build'));
+// }
 
-app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-});
+// app.use('/api/users', authRoutes);
+// app.use('/api/feedbacks', feedbackRoutes);
+
+// app.get('*', (req, res) => {
+// 	res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+// });
 app.use(middleware.unknownEndpointHandler);
 // app.use(middleware.pushStateRouting(staticDir));
 
