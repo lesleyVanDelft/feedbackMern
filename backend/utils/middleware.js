@@ -1,3 +1,4 @@
+const path = require('path');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
@@ -49,4 +50,16 @@ const errorHandler = (error, _req, res, next) => {
 	// next(error);
 };
 
-module.exports = { auth, unknownEndpointHandler, errorHandler };
+const pushStateRouting = staticDir => (req, res, next) => {
+	if (req.method === 'GET' && !req.url.startsWith('/api')) {
+		return res.sendFile(path.join(staticDir, 'index.html'));
+	}
+	next();
+};
+
+module.exports = {
+	auth,
+	unknownEndpointHandler,
+	errorHandler,
+	pushStateRouting,
+};

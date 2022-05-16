@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
 import { registerUser } from '../reducers/userReducer';
 import { useFormik } from 'formik';
+import PageLogo from '../components/PageLogo/PageLogo';
 import * as Yup from 'yup';
 import { motion } from 'framer-motion';
 // import Spinner from '../components/Spinner';
@@ -103,11 +104,12 @@ const Register = () => {
 	};
 
 	return (
-		<motion.main
+		<main
 			className="Register"
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
+			<PageLogo />
 			<Header login={false} />
 			<section className="Register__form">
 				<form onSubmit={formik.handleSubmit}>
@@ -204,7 +206,7 @@ const Register = () => {
 				</form>
 			</section>
 			<ToastContainer autoClose={3500} />
-		</motion.main>
+		</main>
 	);
 };
 

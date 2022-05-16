@@ -8,7 +8,9 @@ import { logoutUser } from '../../reducers/userReducer';
 import './Header.css';
 
 const Header = ({ login }) => {
-	const [location, setLocation] = useState(login);
+	// const [location, setLocation] = useState('login');
+	const [active, setActive] = useState(login);
+	// console.log(login);
 	// console.log(login);
 
 	const navigate = useNavigate();
@@ -20,8 +22,11 @@ const Header = ({ login }) => {
 		navigate('/login');
 	};
 
+	// const handleClick = () => {
+	// 	setLocation(!location);
+	// };
 	const handleClick = () => {
-		setLocation(!location);
+		setActive(!active);
 	};
 
 	return (
@@ -29,8 +34,9 @@ const Header = ({ login }) => {
 			<div className="HeaderLogin__content">
 				<Link
 					to="/login"
-					onClick={() => handleClick()}
-					className={`loginBtn ${location === true ? 'active' : ''}`}>
+					onClick={() => setActive(true)}
+					// onClick={() => setLocation('login')}
+					className={`loginBtn ${active ? 'active' : ''}`}>
 					{/* <button
 							onClick={handleClick}
 							className={`btn ${location === 'login' ? 'active' : null}`}>
@@ -41,8 +47,9 @@ const Header = ({ login }) => {
 
 				<Link
 					to="/register"
-					onClick={() => handleClick()}
-					className={`registerBtn ${location === false ? 'active' : ''}`}>
+					onClick={() => setActive(false)}
+					// onClick={() => setLocation('register')}
+					className={`registerBtn ${!active ? 'active' : ''}`}>
 					{/* <button
 							onClick={handleClick}
 							className={`btn ${location === 'register' ? 'active' : null}`}>

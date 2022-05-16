@@ -7,6 +7,8 @@ const feedbackReducer = (state = [], action) => {
 	switch (action.type) {
 		case 'GET_ALL_FEEDBACKS':
 			return action.payload;
+		case 'GET_SINGLE_FEEDBACK':
+			return [...state];
 		case 'CREATE_NEW_FEEDBACK':
 			return [...state, action.payload];
 

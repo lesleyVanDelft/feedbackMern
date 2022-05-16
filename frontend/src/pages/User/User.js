@@ -5,6 +5,7 @@ const User = () => {
 		<>
 			<LogoBar />
 			<h1>User</h1>
+			{}
 		</>
 	);
 };
