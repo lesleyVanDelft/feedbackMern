@@ -13,7 +13,7 @@ const auth = async (req, res, next) => {
 			// get user from the token
 			req.user = await User.findById(decoded.id).select('-password');
 		}
-		// next();
+		next();
 	} catch (error) {
 		console.log(error);
 		res
@@ -31,7 +31,7 @@ const auth = async (req, res, next) => {
 
 const unknownEndpointHandler = (error, _req, res, next) => {
 	res.status(404).send({ message: 'Unknown endpoint' });
-	// next();
+	next();
 };
 
 const errorHandler = (error, _req, res, next) => {
