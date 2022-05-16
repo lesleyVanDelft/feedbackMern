@@ -22,27 +22,18 @@ const {
 	deleteReply,
 	updateReply,
 } = require('../controllers/postComment');
-const { loginUser } = require('../controllers/auth');
 
 const router = express.Router();
 
-//CRUD posts routes
-//posts vote routes
-// router.get('*', checkUser);
-
 // UPVOTE id post link
 router.post('/upvote/:id', auth, upvoteFeedback);
-// router.post('/details/upvote/:id', auth, upvoteFeedback);
-// DOWNVOTE id post link
 
+// DOWNVOTE id post link
 router.post('/downvote/:id', auth, downvoteFeedback);
-// router.post('/details/downvote/:id', auth, downvoteFeedback);
 
 // get ALL feedbacks
 router.get('/', auth, getFeedbacks);
 router.post('/', auth, createNewFeedback);
-// router.post('/login', loginUser);
-// router.get('/login', loginUser);
 
 // get SINGLE feedback
 router.get('/details/:id', auth, getSingleFeedback);
@@ -64,7 +55,6 @@ router.delete('/:id', auth, deleteFeedback);
 
 router.delete('/:id/comment/:commentId', auth, deleteComment);
 router.patch('/:id/comment/:commentId', auth, updateComment);
-// router.post('/:id/comment/:commentId/reply', auth, postReply);
 router.delete('/:id/comment/:commentId/reply/:replyId', auth, deleteReply);
 router.patch('/:id/comment/:commentId/reply/:replyId', auth, updateReply);
 
