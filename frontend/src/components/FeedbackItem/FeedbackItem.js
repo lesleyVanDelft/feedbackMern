@@ -180,7 +180,7 @@ const FeedbackItem = ({
 									<li>{status}</li>
 								</ul>
 							)}
-							<Link to={`/details/${feedback._id}`}>
+							<Link to={`/${feedback._id}`}>
 								<h3 className="title">{feedback.title}</h3>
 							</Link>
 							<p className="text">{feedback.text}</p>
