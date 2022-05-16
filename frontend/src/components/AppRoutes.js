@@ -19,7 +19,7 @@ const AppRoutes = () => {
 				<Route exact path="/" element={<Homepage />} />
 				<Route exact path="/login" element={<Login />} />
 				<Route exact path="/register" element={<Register />} />
-				<Route exact path="/:id" element={<Details />} />
+				<Route path="/:id" element={<Details />} />
 				<Route exact path="/edit/:id" element={<Edit />} />
 				<Route exact path="/create" element={<Create />} />
 				<Route exact path="/roadmap" element={<RoadmapPage />} />
