@@ -47,7 +47,9 @@ app.get('/register', (req, res) => {
 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
 });
 app.get('/details/:id', (req, res) => {
-	res.status(301).redirect('https://feedback-lesley.herokuapp.com/details/:id');
+	res
+		.status(301)
+		.redirect(`https://feedback-lesley.herokuapp.com/${req.params.id}`);
 });
 // app.get('/user', (req, res) => {
 // 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
