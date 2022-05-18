@@ -17,7 +17,7 @@ const getSingleFeedback = async (req, res) => {
 	// const singleFeedback = await Feedback.findById(req.params.id);
 	// return res.status(200).json(singleFeedback);
 
-	const { id } = req.params.id;
+	const { id } = req.params;
 	const singleFeedback = await Feedback.findById(id);
 	// console.log(req.user);
 
@@ -118,7 +118,7 @@ const createNewFeedback = async (req, res) => {
 };
 
 const updateFeedback = async (req, res) => {
-	const { id } = req.params.id;
+	const { id } = req.params;
 	// console.log(req.user);
 	// const { title, feedbackType, text } = req.body;
 

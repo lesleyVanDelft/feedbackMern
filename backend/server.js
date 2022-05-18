@@ -27,8 +27,8 @@ app.use(cookieParser());
 app.use(morgan('tiny'));
 
 // app.use('/api', authRoutes);
-app.use('/api/users', authRoutes);
-app.use('/api/feedbacks', feedbackRoutes);
+// app.use('/api/users', authRoutes);
+// app.use('/api/feedbacks', feedbackRoutes);
 
 // app.get('/login', (req, res) => {
 // 	// console.log('login req test');
@@ -41,14 +41,14 @@ app.use('/api/feedbacks', feedbackRoutes);
 // 	res.status(200);
 // });
 app.get('/login', (req, res) => {
-	res.status(301);
+	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
 });
 app.get('/register', (req, res) => {
-	res.status(301);
+	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
 });
-app.get('/user', (req, res) => {
-	res.status(301);
-});
+// app.get('/user', (req, res) => {
+// 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
+// });
 app.use('/api/users', authRoutes);
 app.use('/api/feedbacks', feedbackRoutes);
 
