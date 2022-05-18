@@ -40,16 +40,27 @@ app.use(morgan('tiny'));
 // 	// res.status(200).send('GET req register page');
 // 	res.status(200);
 // });
+
+// app.get('/', (req, res) => {
+// 	res.status(200).json({
+// 		status: 'success',
+// 	});
+// });
 app.get('/login', (req, res) => {
 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
 });
-app.get('/register', (req, res) => {
-	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
-});
+// app.get('/register', (req, res) => {
+// 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
+// });
 app.get('/:id', (req, res) => {
 	res
 		.status(301)
 		.redirect(`https://feedback-lesley.herokuapp.com/details/${req.params.id}`);
+	// res.status(301).redirect(`http://localhost:3000/details/${req.params.id}`);
+	// res.send('fili');
+});
+app.get('/roadmap', (req, res) => {
+	res.status(301).send('roadmap');
 });
 // app.get('/user', (req, res) => {
 // 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
@@ -62,9 +73,9 @@ app.use('/api/feedbacks', feedbackRoutes);
 // Serve frontend
 // const __dirname = path.resolve();
 if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.join(__dirname, '../frontend/build')));
+	app.use(express.static('../frontend/build'));
 
-	app.get('/', (req, res) => {
+	app.get('*', (req, res) => {
 		res.sendFile(
 			path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
 		);
