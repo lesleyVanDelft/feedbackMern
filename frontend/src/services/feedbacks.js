@@ -14,7 +14,7 @@ const setConfig = () => {
 
 // GET - all feedbacks
 const getFeedbacks = async () => {
-	const response = await axios.get(API_URL, setConfig());
+	const response = await axios.get(API_URL + '/', setConfig());
 	return response.data;
 };
 

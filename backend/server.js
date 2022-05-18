@@ -40,6 +40,21 @@ app.use('/api/feedbacks', feedbackRoutes);
 // 	// res.status(200).send('GET req register page');
 // 	res.status(200);
 // });
+<<<<<<< HEAD
+=======
+app.get('/login', (req, res) => {
+	res.status(301).redirect('http://localhost:3000/login');
+});
+app.get('/register', (req, res) => {
+	res.status(301).redirect('http://localhost:3000/register');
+});
+app.get('/user', (req, res) => {
+	res.status(301).redirect('http://localhost:3000/user');
+});
+app.use('/api/users', authRoutes);
+app.use('/api/feedbacks', feedbackRoutes);
+
+>>>>>>> generalfixes
 // app.use(middleware.errorHandler);
 
 // Serve frontend

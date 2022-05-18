@@ -12,8 +12,18 @@ const SuggestionSortBy = ({ getSortState }) => {
 		getSortState(selected);
 	}, [getSortState, selected]);
 
-	const handleClick = () => {
+	const handleClick = e => {
+		e.preventDefault();
+		active ? setActive(false) : setActive(true);
+	};
+
+	const handleFocus = e => {
+		e.preventDefault();
 		setActive(!active);
+	};
+	const handleBlur = e => {
+		e.preventDefault();
+		setActive(false);
 	};
 
 	// framer motion
@@ -48,8 +58,8 @@ const SuggestionSortBy = ({ getSortState }) => {
 		<motion.div
 			className={`SuggestionSortBy SuggestionsHeader__sort`}
 			// onClick={handleClick}
-			onFocus={handleClick}
-			onBlur={handleClick}>
+			onFocus={handleFocus}
+			onBlur={handleBlur}>
 			<span className="sortBy">Sort by: </span>
 			<button>
 				<span className="selected">{selected}</span>{' '}
@@ -64,19 +74,19 @@ const SuggestionSortBy = ({ getSortState }) => {
 						exit="exit"
 						className={`dropdown  ${active ? 'active' : null}`}>
 						<li onClick={() => setSelected('Most Upvotes')}>
-							<span>Most Upvotes</span>{' '}
+							<span>Most Upvotes</span>
 							{selected === 'Most Upvotes' && <FiCheck />}
 						</li>
 						<li onClick={() => setSelected('Least Upvotes')}>
-							<span>Least Upvotes</span>{' '}
+							<span>Least Upvotes</span>
 							{selected === 'Least Upvotes' && <FiCheck />}
 						</li>
 						<li onClick={() => setSelected('Most Comments')}>
-							<span>Most Comments</span>{' '}
+							<span>Most Comments</span>
 							{selected === 'Most Comments' && <FiCheck />}
 						</li>
 						<li onClick={() => setSelected('Least Comments')}>
-							<span>Least Comments</span>{' '}
+							<span>Least Comments</span>
 							{selected === 'Least Comments' && <FiCheck />}
 						</li>
 					</motion.ul>

@@ -37,18 +37,6 @@ const Homepage = () => {
 		setMobileState(!mobile);
 	};
 
-	// framer motion
-	// const menuVisibility = {
-	// 	visible: { opacity: 1 },
-	// 	hidden: { opacity: 0 },
-	// };
-
-	const menuVisibility = {
-		hidden: { opacity: 0, right: 0, left: 0 },
-		visible: { opacity: 1, right: 0, left: 0 },
-		exit: { opacity: 0, right: -350, transition: { duration: 0.4 } },
-	};
-
 	useEffect(() => {
 		if (!user) {
 			Cookies.remove('jwt', { path: '/' });
@@ -86,24 +74,6 @@ const Homepage = () => {
 			<Dashboard category={getCategoryState} mobileOpen={getMobileState} />
 
 			<section className={`Homepage__content`}>
-				{/* mobile animation overlay */}
-				{/* <AnimatePresence>
-					{mobileState && (
-						<motion.div
-							className={`overlay`}
-							variants={menuVisibility}
-							initial="hidden"
-							animate="visible"
-							exit="exit"></motion.div>
-					)}
-				</AnimatePresence> */}
-
-				{/* <motion.div
-					className={`overlay ${mobileState ? 'active' : null}`}
-					variants={menuVisibility}
-					initial="hidden"
-					animate="visible"></motion.div> */}
-
 				{feedbacks ? (
 					<FeedbackList category={categoryState} />
 				) : (

@@ -74,19 +74,6 @@ const Dashboard = ({ category, mobileOpen }) => {
 		show: { opacity: 1 },
 	};
 
-	// framer mobile
-	const framerMobile = {
-		hidden: {
-			opacity: 0,
-		},
-		show: {
-			opacity: 1,
-		},
-		exit: {
-			opacity: 0,
-		},
-	};
-
 	return (
 		<section className="Dashboard">
 			{/* desktop + tablet dashboard */}
@@ -141,8 +128,11 @@ const Dashboard = ({ category, mobileOpen }) => {
 			{/* Mobile Nav + Dashboard  */}
 
 			{isMobile && (
-				<div className={`Dashboard__mobile ${active ? 'active' : null}`}>
-					<div className="Dashboard__mobile--logo">
+				<div
+					className={`mobileNavgiation Dashboard__mobile ${
+						active ? 'active' : null
+					}`}>
+					<div className="Dashboard__mobile--navigation">
 						<Link to="/">
 							<div className="text">
 								<h2>Frontend Mentor</h2>
@@ -150,11 +140,14 @@ const Dashboard = ({ category, mobileOpen }) => {
 							</div>
 						</Link>
 						<div
-							className="hamburger"
+							className={`hamburger ${active ? 'active' : ''}`}
 							onClick={() => {
 								handleMobileClick();
 							}}>
-							{active ? <IoCloseSharp /> : <IoMenuSharp />}
+							{/* {active ? <IoCloseSharp /> : <IoMenuSharp />} */}
+							<span></span>
+							<span></span>
+							<span></span>
 						</div>
 					</div>
 

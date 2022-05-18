@@ -1,0 +1,182 @@
+@import '../../sass/main.scss';
+
+.User {
+	height: 100%;
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	color: $darkBlue1;
+	overflow-y: scroll;
+
+	&__information {
+		display: flex;
+		flex-direction: column;
+		width: 25%;
+		height: 100%;
+
+		&--logo {
+			margin-bottom: 2rem;
+		}
+		&--details {
+			height: 50%;
+			width: 100%;
+
+			h2.welcomeMessage {
+				font-weight: lighter;
+				font-size: 1.7rem;
+				padding-bottom: 2rem;
+				color: $darkBlue1;
+				// text-align: center;
+				span.bold {
+					font-weight: bold;
+				}
+			}
+
+			.profileImg {
+				background-color: #fff;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding: 2rem 0;
+				border-radius: 5px;
+				img.profileImage {
+					max-width: 150px;
+					max-height: 150px;
+					border-radius: 50%;
+				}
+				button {
+					margin-top: 1.3rem;
+					text-transform: capitalize;
+					border: none;
+					background-color: $purple;
+					font-size: 1rem;
+					border-radius: 5px;
+					padding: 0.5rem;
+					color: $white;
+					align-self: center;
+					cursor: pointer;
+					transition: background-color 0.1s ease-in-out;
+					display: flex;
+					align-items: center;
+
+					svg.editSvg {
+						margin-right: 0.2rem;
+						font-size: 0.9rem;
+						color: white;
+					}
+					&:hover {
+						background-color: lighten($color: $purple, $amount: 10%);
+					}
+				}
+			}
+
+			.userInfo {
+				margin-top: 1rem;
+				background-color: #fff;
+				border-radius: 5px;
+			}
+		}
+	}
+
+	&__userFeedbackList {
+		// background-color: red;
+		height: fit-content;
+		margin-top: 9.4rem;
+		width: 80%;
+		padding-left: 2rem;
+		// justify-self: center;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.User {
+		flex-direction: column;
+		justify-content: flex-start;
+		&__information {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			&--logo {
+				width: 100%;
+				button {
+					margin-top: 1.5rem;
+					margin-left: 2.5rem;
+				}
+			}
+
+			&--details {
+				height: 50%;
+				width: 70%;
+
+				h2.welcomeMessage {
+					font-weight: lighter;
+					font-size: 1.7rem;
+					padding-bottom: 1.5rem;
+					span.bold {
+						font-weight: bold;
+					}
+				}
+
+				.userInfo {
+					font-size: 1.1rem;
+					padding: 1.5rem 2rem;
+					height: fit-content;
+
+					p {
+						margin-bottom: 0.35rem;
+						font-weight: 400;
+						span {
+							font-weight: 600;
+							font-size: 1.2rem;
+						}
+					}
+					button {
+						margin-top: 1.8rem;
+						text-transform: capitalize;
+						border: none;
+						background-color: transparent;
+						border: 1px solid $darkBlue1;
+						font-size: 1rem;
+						border-radius: 5px;
+						padding: 0.5rem;
+						color: $black;
+						align-self: center;
+						cursor: pointer;
+						transition: background-color 0.1s ease-in-out;
+						display: flex;
+						align-items: center;
+
+						svg {
+							margin-right: 0.2rem;
+							font-size: 0.9rem;
+							color: $black;
+						}
+						&:hover {
+							background-color: lighten($color: $darkBlue1, $amount: 10%);
+						}
+					}
+				}
+			}
+		}
+		&__userFeedbackList {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			overflow-y: scroll;
+			padding: 0;
+			padding: 0 1rem;
+
+			h2 {
+				padding: 2rem 0rem 0.8rem 0rem;
+			}
+			&--content {
+				height: 100%;
+				margin: 0;
+				overflow-y: scroll;
+			}
+		}
+	}
+}

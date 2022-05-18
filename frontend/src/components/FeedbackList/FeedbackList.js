@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { motion } from 'framer-motion';
@@ -16,6 +16,7 @@ const FeedbackList = ({ category }) => {
 		return <h1>Loading</h1>;
 	}
 
+	// Filter feedbacks on selected category
 	const filteredFeedbacks =
 		feedbacks.length > 0 &&
 		feedbacks.filter(feedback => {
@@ -35,14 +36,14 @@ const FeedbackList = ({ category }) => {
 				roadmap={false}
 			/>
 
-			{/* if everything is empty */}
+			{/* If everything is empty */}
 			{feedbacks.length <= 0 && category === 'all' ? (
 				<div className="feedbacks">
 					<EmptyFeedback />
 				</div>
 			) : null}
 
-			{/* Loop if feedbacks is true and category */}
+			{/* Loop if feedbacks is true and category is ALL, else map over and render filteredFeedbacks array */}
 			{feedbacks && category === 'all' ? (
 				<motion.div className="feedbacks">
 					<Sorter by={sortBy}>
@@ -58,7 +59,7 @@ const FeedbackList = ({ category }) => {
 					</Sorter>
 				</motion.div>
 			) : (
-				<div className="feedbacks">
+				<motion.div className="feedbacks">
 					<Sorter by={sortBy}>
 						{filteredFeedbacks.length > 0 && category !== 'all' ? (
 							filteredFeedbacks.map((feedback, i) => {
@@ -76,7 +77,7 @@ const FeedbackList = ({ category }) => {
 							<EmptyFeedback />
 						)}
 					</Sorter>
-				</div>
+				</motion.div>
 			)}
 			{/* {filteredFeedbacks.length <= 0 ? <EmptyFeedback /> : null} */}
 		</motion.section>
