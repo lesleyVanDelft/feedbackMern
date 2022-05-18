@@ -14,13 +14,13 @@ const setConfig = () => {
 
 // GET - all feedbacks
 const getFeedbacks = async () => {
-	const response = await axios.get(API_URL, setConfig());
+	const response = await axios.get(API_URL + '/', setConfig());
 	return response.data;
 };
 
 // GET - single feedback
 const getSingleFeedback = async id => {
-	const response = await axios.get(`${API_URL}/details/${id}`, setConfig());
+	const response = await axios.get(`${API_URL}/${id}`, setConfig());
 	return response.data;
 };
 

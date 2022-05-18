@@ -35,6 +35,12 @@ app.use(morgan('tiny'));
 // app.get('/register', (req, res) => {
 // 	res.status(200).send('GET req register page');
 // });
+app.get('/login', (req, res) => {
+	res.status(301).redirect('http://localhost:3000/login');
+});
+app.get('/register', (req, res) => {
+	res.status(301).redirect('http://localhost:3000/register');
+});
 app.use('/api/users', authRoutes);
 app.use('/api/feedbacks', feedbackRoutes);
 
