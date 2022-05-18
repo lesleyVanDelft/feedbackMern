@@ -74,24 +74,6 @@ const Homepage = () => {
 			<Dashboard category={getCategoryState} mobileOpen={getMobileState} />
 
 			<section className={`Homepage__content`}>
-				{/* mobile animation overlay */}
-				{/* <AnimatePresence>
-					{mobileState && (
-						<motion.div
-							className={`overlay`}
-							variants={menuVisibility}
-							initial="hidden"
-							animate="visible"
-							exit="exit"></motion.div>
-					)}
-				</AnimatePresence> */}
-
-				{/* <motion.div
-					className={`overlay ${mobileState ? 'active' : null}`}
-					variants={menuVisibility}
-					initial="hidden"
-					animate="visible"></motion.div> */}
-
 				{feedbacks ? (
 					<FeedbackList category={categoryState} />
 				) : (

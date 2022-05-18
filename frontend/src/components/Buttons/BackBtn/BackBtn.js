@@ -10,8 +10,7 @@ const BackBtn = ({ currentPage }) => {
 	}, [currentPage]);
 
 	return (
-		<button
-			className={`BackBtn ${currPage === 'details' ? 'details' : 'roadmap'}`}>
+		<button className={`BackBtn ${currPage === 'details' ? 'dark' : 'light'}`}>
 			<Link to={'/'}>
 				<FaChevronLeft /> <span>Go Back</span>
 			</Link>

@@ -24,7 +24,7 @@ const AppRoutes = () => {
 				<Route exact path="/create" element={<Create />} />
 				<Route exact path="/roadmap" element={<RoadmapPage />} />
 				<Route exact path="/test" element={<Test />} />
-				<Route exact path="/user" element={<User />} />
+				<Route path="/user" element={<User />} />
 			</Routes>
 		</AnimatePresence>
 	);

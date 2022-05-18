@@ -21,7 +21,7 @@
 	}
 }
 
-.BackBtn.roadmap {
+.BackBtn.light {
 	color: $white;
 	svg {
 		color: $white;
@@ -34,7 +34,7 @@
 	}
 }
 
-.BackBtn.details {
+.BackBtn.dark {
 	color: lighten($color: $darkBlue1, $amount: 15%);
 	svg {
 		color: $blue;
