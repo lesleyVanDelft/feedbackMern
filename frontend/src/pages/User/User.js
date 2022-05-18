@@ -8,6 +8,7 @@ import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import { motion } from 'framer-motion';
 import { GoPencil } from 'react-icons/go';
 import './User.css';
+import { useEffect } from 'react';
 
 const User = () => {
 	const user = useSelector(state => state.user);
@@ -18,6 +19,10 @@ const User = () => {
 	const isMobile = useMediaQuery({
 		query: '(max-width: 768px)',
 	});
+
+	useEffect(() => {
+		document.body.style.overflow = 'unset';
+	}, []);
 	const initialMotion = {
 		initial: {
 			opacity: 0,

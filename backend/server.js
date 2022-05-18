@@ -41,13 +41,13 @@ app.use('/api/feedbacks', feedbackRoutes);
 // 	res.status(200);
 // });
 app.get('/login', (req, res) => {
-	res.status(301).redirect('https://feedback-lesley.herokuapp.com/login');
+	res.status(301);
 });
 app.get('/register', (req, res) => {
-	res.status(301).redirect('https://feedback-lesley.herokuapp.com/register');
+	res.status(301);
 });
 app.get('/user', (req, res) => {
-	res.status(301).redirect('https://feedback-lesley.herokuapp.com/user');
+	res.status(301);
 });
 app.use('/api/users', authRoutes);
 app.use('/api/feedbacks', feedbackRoutes);
