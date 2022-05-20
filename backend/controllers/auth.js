@@ -130,7 +130,7 @@ const loginUser = async (req, res, next) => {
 			// res.status(401);
 			res.status(401).send('Wrong password');
 		}
-		console.log(req.user);
+		// console.log(req.user);
 	}
 };
 

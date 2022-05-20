@@ -3,7 +3,6 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "backend/server.js",
-	"homepage": "https://feedback-lesley.herokuapp.com",
 	"scripts": {
 		"start": "node backend/server.js",
 		"server": "nodemon backend/server.js",
@@ -23,6 +22,7 @@
 		"dotenv": "^16.0.0",
 		"express": "^4.17.3",
 		"express-async-handler": "^1.2.0",
+		"http-proxy-middleware": "^2.0.6",
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^6.2.4",
 		"mongoose-unique-validator": "^3.0.0",

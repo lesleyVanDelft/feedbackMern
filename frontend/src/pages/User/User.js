@@ -89,12 +89,12 @@ const User = () => {
 			<div className="User__userFeedbackList">
 				<h2>Feedbacks posted by you:</h2>
 				<div className="User__userFeedbackList--content">
-					{userFeedbacks ? (
+					{!userFeedbacks.length ? (
+						<p>None found</p>
+					) : (
 						userFeedbacks.map((feedback, i) => {
 							return <FeedbackItem key={i} feedback={feedback} />;
 						})
-					) : (
-						<p>None found</p>
 					)}
 				</div>
 			</div>
