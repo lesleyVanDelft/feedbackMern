@@ -73,9 +73,9 @@ app.get('/:id', (req, res) => {
 	// res.status(301).redirect(`http://localhost:3000/details/${req.params.id}`);
 	// res.send('fili');
 });
-app.get('/', (req, res) => {
-	res.status(301).redirect('https://feedback-lesley.herokuapp.com/');
-});
+// app.get('/', (req, res) => {
+// 	res.status(301).redirect('https://feedback-lesley.herokuapp.com/');
+// });
 app.get('/roadmap', (req, res) => {
 	res.status(301).send('roadmap');
 });
