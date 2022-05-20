@@ -12,6 +12,7 @@ const middleware = require('./utils/middleware');
 const authRoutes = require('./routes/auth');
 const feedbackRoutes = require('./routes/feedback');
 const userRoutes = require('./routes/user');
+const { getFeedbacks } = require('./controllers/feedback');
 
 const staticDir = path.join(__dirname, '../frontend/build');
 
@@ -62,6 +63,7 @@ app.get('/login', (req, res) => {
 	// res.status(301).redirect('https://feedback-lesley.herokuapp.com');
 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
 });
+app.get('/roadmap', getFeedbacks);
 
 // app.get('/:id', (req, res) => {
 // 	res

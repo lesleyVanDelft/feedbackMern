@@ -97,7 +97,7 @@ const deleteFeedback = async id => {
 // POST - post a comment
 const postComment = async (feedbackId, commentObj) => {
 	const response = await axios.post(
-		`${API_URL + '/details/' + feedbackId}`,
+		`${API_URL + '/' + feedbackId}`,
 		commentObj,
 		setConfig()
 	);
@@ -107,7 +107,7 @@ const postComment = async (feedbackId, commentObj) => {
 // POST - post a reply to comment
 const postReply = async (feedbackId, commentId, replyObj) => {
 	const response = await axios.post(
-		`${API_URL + '/details/' + feedbackId}/comment/${commentId}/reply`,
+		`${API_URL + '/' + feedbackId}/comment/${commentId}/reply`,
 		replyObj,
 		setConfig()
 	);

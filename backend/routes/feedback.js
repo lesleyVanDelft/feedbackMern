@@ -53,7 +53,7 @@ router.post('/', auth, createNewFeedback);
 // post comment
 router.post('/:id', auth, postComment);
 // reply to comment
-router.post('/details/:id/comment/:commentId/reply', auth, postReply);
+router.post('/:id/comment/:commentId/reply', auth, postReply);
 
 // // // // // // // // // // // // // // // // // // // // // // // // // //
 // get details page - current feedback and comments related to feedback   //
