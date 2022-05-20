@@ -28,7 +28,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 		}
 		return active
 			? (document.body.style.overflow = 'hidden')
-			: (document.body.style.overflow = 'unset');
+			: (document.body.style.overflow = 'scroll');
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [active]);
 
