@@ -23,7 +23,20 @@ const {
 	updateReply,
 } = require('../controllers/postComment');
 
+const app = express();
 const router = express.Router();
+
+app.use(function (req, res, next) {
+	res.header(
+		'Access-Control-Allow-Origin',
+		'https://feedback-lesley.herokuapp.com/api/feedbacks'
+	); // update to match the domain you will make the request from
+	res.header(
+		'Access-Control-Allow-Headers',
+		'Origin, X-Requested-With, Content-Type, Accept'
+	);
+	next();
+});
 
 // UPVOTE id post link
 router.post('/upvote/:id', auth, upvoteFeedback);
