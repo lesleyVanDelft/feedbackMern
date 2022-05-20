@@ -5,6 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 import PageLogo from '../../components/PageLogo/PageLogo';
 import BackBtn from '../../components/Buttons/BackBtn/BackBtn';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
+import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
 import { motion } from 'framer-motion';
 import { GoPencil } from 'react-icons/go';
 import './User.css';
@@ -90,7 +91,7 @@ const User = () => {
 				<h2>Feedbacks posted by you:</h2>
 				<div className="User__userFeedbackList--content">
 					{!userFeedbacks.length ? (
-						<p>None found</p>
+						<EmptyFeedback userDetails={true} />
 					) : (
 						userFeedbacks.map((feedback, i) => {
 							return <FeedbackItem key={i} feedback={feedback} />;

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { FaChevronDown, FaChevronUp, FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { DownvoteButton, UpvoteButton } from './VoteButtons/VoteButtons';
@@ -143,7 +143,7 @@ const FeedbackItem = ({
 
 	return (
 		<>
-			{(feedback || singleFeedback) && (
+			{feedback && (
 				<motion.div
 					initial={framerList.initial}
 					animate={framerList.animate}

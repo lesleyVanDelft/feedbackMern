@@ -147,15 +147,14 @@ export const updateFeedback = (id, feedbackObj) => {
 };
 
 export const removeFeedback = id => {
-	return async dispatch => {
-		await feedbackService.deleteFeedback(id);
-
-		dispatch({
-			type: 'DELETE_FEEDBACK',
-			payload: id,
-		});
-		toast.warn('Feedback Deleted');
-	};
+	// return async dispatch => {
+	// 	await feedbackService.deleteFeedback(id);
+	// 	dispatch({
+	// 		type: 'DELETE_FEEDBACK',
+	// 		payload: id,
+	// 	});
+	// 	toast.warn('Feedback Deleted');
+	// };
 };
 
 export const addComment = (feedbackId, comment) => {

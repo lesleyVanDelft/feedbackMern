@@ -11,6 +11,11 @@ const feedbackReducer = (state = [], action) => {
 			return [...state];
 		case 'CREATE_NEW_FEEDBACK':
 			return [...state, action.payload];
+		case 'DELETE_FEEDBACK':
+			return [
+				...state.feedbacks,
+				state.feedbacks.filter(fb => fb.id !== action.payload),
+			];
 
 		// return {
 		// 	...state,
@@ -59,11 +64,11 @@ const feedbackReducer = (state = [], action) => {
 					? fb
 					: { ...fb, ...action.payload.data };
 			});
-		case 'DELETE_FEEDBACK':
-			return {
-				...state,
-				results: state.results.filter(fb => fb.id !== action.payload),
-			};
+		// case 'DELETE_FEEDBACK':
+		// 	return {
+		// 		...state,
+		// 		results: state.results.filter(fb => fb.id !== action.payload),
+		// 	};
 		case 'LOGOUT':
 			return [];
 		default:
@@ -120,6 +125,18 @@ export const createNewFeedback = feedbackObj => {
 		// return addedFeedback.id;
 	};
 };
+
+// export const removeFeedback = id => {
+// 	return async dispatch => {
+// 		await feedbackService.deleteFeedback(id);
+
+// 		dispatch({
+// 			type: 'DELETE_FEEDBACK',
+// 			payload: id,
+// 		});
+// 		toast.warn('Feedback Deleted');
+// 	};
+// };
 
 // POST - upvote feedback
 export const toggleUpvote = (id, upvotedBy, downvotedBy) => {

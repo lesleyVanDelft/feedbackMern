@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import EditImg from '../../assets/shared/icon-edit-feedback.svg';
 import {
 	updateFeedback,
-	removeFeedback,
+	// removeFeedback,
 } from '../../reducers/feedbackCommentsReducer';
+import { removeFeedback } from '../../reducers/feedbackReducer';
 import { useParams } from 'react-router-dom';
 import Modal from '../Modal/Modal';
 import { ToastContainer } from 'react-toastify';

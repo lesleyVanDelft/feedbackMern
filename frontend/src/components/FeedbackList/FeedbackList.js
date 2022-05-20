@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import FeedbackItem from '../FeedbackItem/FeedbackItem';
 import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
 import Sorter from '../Sorter/Sorter';
@@ -39,7 +39,7 @@ const FeedbackList = ({ category }) => {
 			{/* If everything is empty */}
 			{feedbacks.length <= 0 && category === 'all' ? (
 				<div className="feedbacks">
-					<EmptyFeedback />
+					<EmptyFeedback userDetails={false} />
 				</div>
 			) : null}
 
@@ -59,7 +59,7 @@ const FeedbackList = ({ category }) => {
 					</Sorter>
 				</motion.div>
 			) : (
-				<motion.div className="feedbacks">
+				<div className="feedbacks">
 					<Sorter by={sortBy}>
 						{filteredFeedbacks.length > 0 && category !== 'all' ? (
 							filteredFeedbacks.map((feedback, i) => {
@@ -74,10 +74,10 @@ const FeedbackList = ({ category }) => {
 								);
 							})
 						) : (
-							<EmptyFeedback />
+							<EmptyFeedback userDetails={false} />
 						)}
 					</Sorter>
-				</motion.div>
+				</div>
 			)}
 			{/* {filteredFeedbacks.length <= 0 ? <EmptyFeedback /> : null} */}
 		</motion.section>
