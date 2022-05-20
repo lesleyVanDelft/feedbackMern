@@ -39,8 +39,8 @@ app.use(function (req, res, next) {
 });
 
 // app.use('/api', authRoutes);
-app.use('/api/users', authRoutes);
 app.use('/api/feedbacks', feedbackRoutes);
+app.use('/api/users', authRoutes);
 
 // app.get('/login', (req, res) => {
 // 	// console.log('login req test');
@@ -62,19 +62,14 @@ app.get('/login', (req, res) => {
 	// res.status(301).redirect('https://feedback-lesley.herokuapp.com');
 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
 });
-// app.get('/register', (req, res) => {
-// 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
-// });
-app.get('/:id', (req, res) => {
-	res
-		.status(301)
-		// .redirect(`https://feedback-lesley.herokuapp.com/details/${req.params.id}`);
-		.redirect(`https://feedback-lesley.herokuapp.com/${req.params.id}`);
-	// res.status(301).redirect(`http://localhost:3000/details/${req.params.id}`);
-	// res.send('fili');
-});
-// app.get('/', (req, res) => {
-// 	res.status(301).redirect('https://feedback-lesley.herokuapp.com/');
+
+// app.get('/:id', (req, res) => {
+// 	res
+// 		.status(301)
+// 		// .redirect(`https://feedback-lesley.herokuapp.com/details/${req.params.id}`);
+// 		.redirect(`https://feedback-lesley.herokuapp.com/${req.params.id}`);
+// 	// res.status(301).redirect(`http://localhost:3000/details/${req.params.id}`);
+// 	// res.send('fili');
 // });
 app.get('/roadmap', (req, res) => {
 	res.status(301).send('roadmap');
