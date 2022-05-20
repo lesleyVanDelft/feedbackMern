@@ -39,6 +39,9 @@ app.use(function (req, res, next) {
 });
 
 // app.use('/api', authRoutes);
+// app.get('/api', (req, res) => {
+// 	res.send('/api connected');
+// });
 app.use('/api/feedbacks', feedbackRoutes);
 app.use('/api/users', authRoutes);
 
@@ -92,12 +95,11 @@ if (process.env.NODE_ENV === 'production') {
 			path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
 		);
 	});
+} else {
+	app.get('/', (req, res) => {
+		res.send('API is running');
+	});
 }
-// else {
-// 	app.get('/', (req, res) => {
-// 		res.send('API is running');
-// 	});
-// }
 
 // if (process.env.NODE_ENV === 'production') {
 // 	app.use(express.static('../frontend/build'));

@@ -3,5 +3,13 @@
 	"clean_urls": false,
 	"routes": {
 		"/**": "index.html"
+	},
+	"proxies": {
+		"/api/feedbacks": {
+			"origin": "https://feedback-lesley.herokuapp.com/api/feedbacks"
+		},
+		"/api/users": {
+			"origin": "https://feedback-lesley.herokuapp.com/api/users"
+		}
 	}
 }
