@@ -52,6 +52,7 @@ const Reply = ({
 				handleDelete={handleDelete}
 				isComment={false}
 				isReply={true}
+				param="reply"
 			/>
 			<div className="Reply__userBar">
 				<img

@@ -12,16 +12,34 @@ html,
 body {
 	height: 100%;
 	width: 100%;
-	overflow-x: hidden;
+	background: $lightGray;
 }
-html {
+body {
+	overflow-y: scroll;
 }
 
 body {
-	overflow-y: scroll;
-	overflow-x: hidden;
-	// overflow-y: scroll;
-	// overflow-y: scroll;
+	// scrollbar itself
+	&::-webkit-scrollbar {
+		background-color: transparent;
+		width: 10px;
+	}
+	// scrollbar track
+	&::-webkit-scrollbar-track {
+		background: rgb(173, 31, 234);
+		background: linear-gradient(
+			180deg,
+			rgba(173, 31, 234, 0.5) 0%,
+			rgba(244, 159, 134, 0.7) 38%
+		);
+		border-radius: 5px;
+	}
+	// scrollbar moving part
+	&::-webkit-scrollbar-thumb {
+		background-color: lighten($color: $blue, $amount: 20%);
+		border-radius: 5px;
+		border: 1px solid darken($color: $blue, $amount: 0%);
+	}
 }
 
 #root {
@@ -149,6 +167,29 @@ a {
 }
 
 @media screen and (max-width: 768px) {
+	// body {
+	// 	// scrollbar itself
+	// 	&::-webkit-scrollbar {
+	// 		background-color: transparent;
+	// 		// width: 0px;
+	// 	}
+
+	// 	// scrollbar track
+	// 	&::-webkit-scrollbar-track {
+	// 		background: rgb(173, 31, 234);
+	// 		background: linear-gradient(
+	// 			180deg,
+	// 			rgba(173, 31, 234, 1) 0%,
+	// 			rgba(244, 159, 134, 1) 38%
+	// 		);
+	// 	}
+
+	// 	// scrollbar moving part itself
+	// 	&::-webkit-scrollbar-thumb {
+	// 		// border-radius: initial;
+	// 		width: 2px;
+	// 	}
+	// }
 	.App {
 		padding: 0;
 		padding-bottom: 2rem;

@@ -124,6 +124,7 @@ const EditFeedbackForm = () => {
 					closeModal={closeModal}
 					feedback={singleFeedback}
 					handleDelete={handleDelete}
+					param="feedback"
 				/>
 
 				<div className="Form__group--buttons">

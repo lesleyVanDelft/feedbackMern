@@ -58,7 +58,7 @@ const Login = () => {
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
-			<PageLogo />
+			<PageLogo className="logo" />
 			<Header login={true} />
 			<section className="Login__form form">
 				<div className="heading">

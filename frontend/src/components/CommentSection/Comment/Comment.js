@@ -56,6 +56,7 @@ const Comment = ({ commentData, currentFeedback, user, username }) => {
 						handleDelete={handleDelete}
 						isComment={true}
 						isReply={false}
+						param="comment"
 					/>
 				</div>
 			</div>

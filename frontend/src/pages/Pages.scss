@@ -3,7 +3,6 @@
 .Homepage {
 	display: flex;
 	width: 100%;
-	// overflow-y: scroll;
 
 	&__content {
 		width: 100%;
@@ -22,7 +21,6 @@
 	display: grid;
 	place-content: center;
 	padding-top: 5.5rem;
-	// overflow-y: visible;
 
 	&__form {
 		background: $white;
@@ -84,19 +82,21 @@
 			}
 
 			&::placeholder {
-				font-size: 0.8rem;
+				font-size: 1rem;
 				letter-spacing: 0.25px;
 				color: $lightBlueGray;
 				opacity: 0.65;
 			}
 		}
 		input:-webkit-autofill {
+			box-shadow: 0 0 0px 1000px $inputGray2 inset;
 			-webkit-box-shadow: 0 0 0px 1000px $inputGray2 inset;
 		}
 
 		button.btnSubmit {
 			background: $darkBlue1;
 			margin-top: 1rem;
+			font-size: 1.1rem;
 		}
 	}
 }
@@ -126,22 +126,6 @@
 					padding: 0 1rem;
 				}
 			}
-
-			// .overlay {
-			// 	position: absolute;
-			// 	right: 0;
-			// 	bottom: 0;
-			// 	top: 0;
-			// 	background-color: rgba(0, 0, 0, 1);
-			// 	z-index: 49;
-			// 	opacity: 0;
-
-			// 	&.active {
-			// 		right: 0;
-			// 		bottom: 0;
-			// 		top: 0;
-			// 	}
-			// }
 		}
 	}
 
@@ -156,13 +140,21 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
+		align-items: flex-start;
 		// padding-left: 3rem;
+
+		.PageLogo {
+			margin: 0;
+			padding: 0;
+			display: inline-block;
+		}
 
 		&__form {
 			width: 100%;
 			padding: 2rem;
 		}
+	}
+	.Login {
 	}
 	.Register {
 	}

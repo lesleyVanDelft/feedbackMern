@@ -31,33 +31,33 @@ const Header = ({ login }) => {
 
 	return (
 		<nav className={`HeaderLogin ${user === null ? 'active' : ''}`}>
-			<div className="HeaderLogin__content">
-				<Link
-					to="/login"
-					onClick={() => setActive(true)}
-					// onClick={() => setLocation('login')}
-					className={`loginBtn ${active ? 'active' : ''}`}>
-					{/* <button
+			{/* <div className="HeaderLogin__content"> */}
+			<Link
+				to="/login"
+				onClick={() => setActive(true)}
+				// onClick={() => setLocation('login')}
+				className={`loginBtn ${active ? 'active' : ''}`}>
+				{/* <button
 							onClick={handleClick}
 							className={`btn ${location === 'login' ? 'active' : null}`}>
 							
 						</button> */}
-					<FaSignInAlt /> <span>Login</span>
-				</Link>
+				<FaSignInAlt /> <span>Login</span>
+			</Link>
 
-				<Link
-					to="/register"
-					onClick={() => setActive(false)}
-					// onClick={() => setLocation('register')}
-					className={`registerBtn ${!active ? 'active' : ''}`}>
-					{/* <button
+			<Link
+				to="/register"
+				onClick={() => setActive(false)}
+				// onClick={() => setLocation('register')}
+				className={`registerBtn ${!active ? 'active' : ''}`}>
+				{/* <button
 							onClick={handleClick}
 							className={`btn ${location === 'register' ? 'active' : null}`}>
 							
 						</button> */}
-					<FaUser /> <span>Register</span>
-				</Link>
-			</div>
+				<FaUser /> <span>Register</span>
+			</Link>
+			{/* </div> */}
 		</nav>
 	);
 };

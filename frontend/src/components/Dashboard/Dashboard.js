@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-import { IoMenuSharp } from 'react-icons/io5/index.esm';
-import { IoCloseSharp } from 'react-icons/io5/index.esm';
 import { VscTriangleDown } from 'react-icons/vsc';
 import { useMediaQuery } from 'react-responsive';
-import { motion, LayoutGroup, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import MobileDashboard from '../MobileDashboard/MobileDashboard';
 import FilterButtons from './FilterButtons/FilterButtons';
 import Roadmap from './Roadmap/Roadmap';
@@ -21,14 +19,24 @@ const Dashboard = ({ category, mobileOpen }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	// NPM React query, check if user is on mobile
+	const isMobile = useMediaQuery({
+		query: '(max-width: 768px)',
+	});
+
 	// lock body scrolling when mobile menu is open
 	useEffect(() => {
 		if (!user) {
 			return <h1>loading user</h1>;
 		}
-		return active
-			? (document.body.style.overflow = 'hidden')
-			: (document.body.style.overflow = 'scroll');
+		// active
+		// 	? (document.body.style.overflow = 'hidden')
+		// 	: (document.body.style.overflow = 'auto');
+
+		active && isMobile
+			? (document.body.style.overflowY = 'hidden')
+			: (document.body.style.overflowY = 'scroll');
+		// (active && isMobile)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [active]);
 
@@ -51,11 +59,6 @@ const Dashboard = ({ category, mobileOpen }) => {
 		dispatch(logoutUser());
 		navigate('/login');
 	};
-
-	// NPM React query, check if user is on mobile
-	const isMobile = useMediaQuery({
-		query: '(max-width: 768px)',
-	});
 
 	// framer motion
 	const framerList = {
@@ -129,7 +132,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 
 			{isMobile && (
 				<div
-					className={`mobileNavgiation Dashboard__mobile ${
+					className={`mobileNavigation Dashboard__mobile ${
 						active ? 'active' : null
 					}`}>
 					<div className="Dashboard__mobile--navigation">
