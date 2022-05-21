@@ -101,6 +101,12 @@
 	}
 }
 
+// TESTING
+.Test {
+	display: flex;
+	flex-direction: column;
+}
+
 @media screen and (max-width: 1024px) {
 	.Homepage {
 		flex-direction: column;
