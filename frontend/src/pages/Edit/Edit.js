@@ -8,11 +8,7 @@ import { motion } from 'framer-motion';
 import './Edit.css';
 
 const Edit = () => {
-	const user = useSelector(state => state.user);
 	const singleFeedback = useSelector(state => state.singleFeedback);
-	const navigate = useNavigate();
-	const dispatch = useDispatch();
-	let { id } = useParams();
 
 	if (!singleFeedback) {
 		return <h2>Loading</h2>;
@@ -25,7 +21,6 @@ const Edit = () => {
 			opacity: 1,
 			transition: {
 				duration: 0.3,
-				// ease: [0.87, 0, 0.13, 1],
 			},
 		},
 	};

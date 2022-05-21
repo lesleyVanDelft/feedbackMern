@@ -83,8 +83,7 @@ const RoadmapPage = () => {
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
-			<LogoBar />
-			<PageLogo />
+			{isMobile ? <LogoBar /> : <PageLogo />}
 			<SuggestionsHeader roadmap={true} />
 
 			<div className="headers">

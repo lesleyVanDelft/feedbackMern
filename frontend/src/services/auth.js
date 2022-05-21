@@ -9,11 +9,6 @@ const setToken = newToken => {
 	token = newToken;
 };
 
-// const getLoginPage = () => {
-// 	const response = axios.get('/');
-// 	return response.data;
-// };
-
 const login = async loginData => {
 	const response = await axios.post(API_URL + '/login', loginData);
 	return response.data;

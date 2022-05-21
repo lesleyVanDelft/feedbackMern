@@ -13,7 +13,6 @@ const initialMotion = {
 		opacity: 1,
 		transition: {
 			duration: 0.3,
-			// ease: [0.87, 0, 0.13, 1],
 		},
 	},
 };

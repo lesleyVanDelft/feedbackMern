@@ -1,14 +1,8 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import { FaChevronDown, FaChevronUp, FaComment } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaComment } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { DownvoteButton, UpvoteButton } from './VoteButtons/VoteButtons';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFeedbacks } from '../../reducers/feedbackReducer';
-import {
-	toggleUpvoteDetails,
-	toggleDownvoteDetails,
-} from '../../reducers/feedbackReducer';
-// import{toggle}
 import { useEffect, useState } from 'react';
 import './FeedbackItem.css';
 
@@ -20,16 +14,12 @@ const FeedbackItem = ({
 	roadmap,
 	detailsPage,
 	detailsCount,
-	isUpvotedDetails,
-	isDownvotedDetails,
 	status,
 }) => {
 	const [upvoted, setUpvoted] = useState(false);
 	const [downvoted, setDownvoted] = useState(false);
 	const [count, setCount] = useState(0);
 	const user = useSelector(state => state.user);
-	const singleFeedback = useSelector(state => state.singleFeedback);
-	const feedbacks = useSelector(state => state.feedbacks);
 	const isUpvoted = user && feedback && feedback.upvotedBy.includes(user.id);
 	const isDownvoted =
 		user && feedback && feedback.downvotedBy.includes(user.id);
@@ -66,17 +56,6 @@ const FeedbackItem = ({
 				const updatedUpvotedBy = feedback.upvotedBy.filter(
 					upvote => upvote !== user.id
 				);
-				// feedbacks.length <= 0
-				// 	? dispatch(
-				// 			toggleUpvoteDetails(
-				// 				feedback._id,
-				// 				updatedUpvotedBy,
-				// 				feedback.downvotedBy
-				// 			)
-				// 	  )
-				// 	: dispatch(
-				// 			toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
-				// 	  );
 				dispatch(
 					toggleUpvote(feedback._id, updatedUpvotedBy, feedback.downvotedBy)
 				);
@@ -200,7 +179,6 @@ const FeedbackItem = ({
 			)}
 		</>
 	);
-	// return <div>{feedback._id}</div>;
 };
 
 export default FeedbackItem;

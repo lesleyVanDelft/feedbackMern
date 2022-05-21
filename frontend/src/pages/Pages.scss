@@ -132,8 +132,6 @@
 	.Login,
 	.Register {
 		width: 100%;
-		// margin: 0;
-		// margin-right: 0;
 		padding-top: 2rem;
 		padding-left: 2rem;
 		padding-right: 2rem;
@@ -141,7 +139,6 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: flex-start;
-		// padding-left: 3rem;
 
 		.PageLogo {
 			margin: 0;
@@ -153,9 +150,5 @@
 			width: 100%;
 			padding: 2rem;
 		}
-	}
-	.Login {
-	}
-	.Register {
 	}
 }

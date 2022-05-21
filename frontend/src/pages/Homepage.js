@@ -1,18 +1,11 @@
-import { createContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../reducers/userReducer';
-import { motion, AnimatePresence } from 'framer-motion';
-// import GoalForm from '../components/GoalForm';
-// import FeedbackForm from '../components/FeedbackForm/FeedbackForm';
-import Spinner from '../components/Spinner';
-// import { getFeedbacks, reset } from '../features/feedbacks/feedbackSlice';
+import { motion } from 'framer-motion';
 import { getFeedbacks } from '../reducers/feedbackReducer';
-import FeedbackItem from '../components/FeedbackItem/FeedbackItem';
 import Dashboard from '../components/Dashboard/Dashboard';
-import Suggestions from '../components/Suggestions/Suggestions';
 import './Pages.css';
-import EmptyFeedback from '../components/EmptyFeedback/EmptyFeedback';
 import FeedbackList from '../components/FeedbackList/FeedbackList';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,12 +23,6 @@ const Homepage = () => {
 	const getCategoryState = catState => {
 		setCategoryState(catState);
 	};
-
-	// mobile menu open or closed, needed for darkened modal
-	// const [mobileState, setMobileState] = useState(false);
-	// const getMobileState = mobile => {
-	// 	// setMobileState(!mobile);
-	// };
 
 	useEffect(() => {
 		if (!user) {

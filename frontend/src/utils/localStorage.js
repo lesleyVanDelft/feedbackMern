@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie';
-const storageKeyToken = 'readifyUserKey';
 const storageKeyDarkMode = 'readifyDarkMode';
 
 const saveUser = user => localStorage.setItem('user', JSON.stringify(user));

@@ -24,20 +24,6 @@ const userReducer = (state = null, action) => {
 	}
 };
 
-//
-//
-//
-
-// export const getLoginPage = () => {
-// 	return async dispatch  => {
-// 		try {
-
-// 		} catch (error) {
-
-// 		}
-// 	}
-// }
-
 export const loginUser = credentials => {
 	return async dispatch => {
 		try {
@@ -57,30 +43,20 @@ export const loginUser = credentials => {
 					icon: '👋',
 				});
 			}
-			// else {
-			// 	return await authService.getLoginPage();
-			// }
 		} catch (err) {
-			// console.log(err, '');
 			dispatch({
 				type: 'SET_LOGIN_ERROR',
 				payload: err.response,
 			});
-			// dispatch(setError(err));
-			// errorHandler(err);
-
 			console.log(err.response);
-			// console.log('fuck u');
 		}
 	};
 };
 
 export const registerUser = credentials => {
 	return async dispatch => {
-		// const token = Cookies.get('jwt');
 		const user = await authService.register(credentials);
 		storageService.saveUser(user);
-		// storageService.loadUser();
 
 		dispatch({
 			type: 'SIGNUP',
@@ -97,7 +73,6 @@ export const registerUser = credentials => {
 export const logoutUser = () => {
 	return dispatch => {
 		storageService.logoutUser();
-		// authService.setToken(null);
 		Cookies.remove('jwt', { path: '/' });
 
 		dispatch({
@@ -112,7 +87,6 @@ export const setUser = () => {
 		const loggedUser = storageService.loadUser();
 
 		if (loggedUser) {
-			// authService.setToken(loggedUser.token);
 			dispatch({
 				type: 'SET_USER',
 				payload: loggedUser,

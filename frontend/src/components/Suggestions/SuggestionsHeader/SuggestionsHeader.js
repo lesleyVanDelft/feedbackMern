@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { FaChevronLeft } from 'react-icons/fa';
-import { HiOutlineLightBulb, HiChevronDown, HiChevronUp } from 'react-icons/hi';
+import { HiOutlineLightBulb } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import BackBtn from '../../Buttons/BackBtn/BackBtn';
 import SuggestionSortBy from '../SuggestionSortBy/SuggestionSortBy';
@@ -31,9 +30,8 @@ const SuggestionsHeader = ({ suggestionCount, sortBy, roadmap }) => {
 	) : (
 		<header className="SuggestionsHeader">
 			<div className="Roadmap__header">
-				{/* <Link to="/"> */}
 				<BackBtn currentPage="roadmap" />
-				{/* </Link> */}
+
 				<h3>Roadmap</h3>
 			</div>
 			<Link to="/create" className="btnLink">

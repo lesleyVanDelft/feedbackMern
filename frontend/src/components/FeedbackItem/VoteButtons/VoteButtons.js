@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
 
 export const UpvoteButton = ({ feedback, user, handleUpvote }) => {
 	const [upvotedBy, setUpvotedBy] = useState([]);
@@ -26,13 +25,7 @@ export const UpvoteButton = ({ feedback, user, handleUpvote }) => {
 		</button>
 	);
 };
-export const DownvoteButton = ({
-	user,
-	feedback,
-	handleDownvote,
-	upvote,
-	downvote,
-}) => {
+export const DownvoteButton = ({ user, feedback, handleDownvote }) => {
 	const [upvotedBy, setUpvotedBy] = useState([]);
 	const [downvotedBy, setDownvotedBy] = useState([]);
 	useEffect(() => {

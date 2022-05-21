@@ -142,8 +142,6 @@ a {
 		}
 
 		&.text {
-			// width: 456px;
-			// height: 96px;
 			text-align: start;
 			padding: 0rem;
 			padding-bottom: 3rem;
@@ -167,29 +165,6 @@ a {
 }
 
 @media screen and (max-width: 768px) {
-	// body {
-	// 	// scrollbar itself
-	// 	&::-webkit-scrollbar {
-	// 		background-color: transparent;
-	// 		// width: 0px;
-	// 	}
-
-	// 	// scrollbar track
-	// 	&::-webkit-scrollbar-track {
-	// 		background: rgb(173, 31, 234);
-	// 		background: linear-gradient(
-	// 			180deg,
-	// 			rgba(173, 31, 234, 1) 0%,
-	// 			rgba(244, 159, 134, 1) 38%
-	// 		);
-	// 	}
-
-	// 	// scrollbar moving part itself
-	// 	&::-webkit-scrollbar-thumb {
-	// 		// border-radius: initial;
-	// 		width: 2px;
-	// 	}
-	// }
 	.App {
 		padding: 0;
 		padding-bottom: 2rem;

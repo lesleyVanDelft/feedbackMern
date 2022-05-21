@@ -1,7 +1,5 @@
 import { toast } from 'react-toastify';
 import feedbackService from '../services/feedbacks';
-// import feedbackPageReducer from "./detailsPageReducer";
-// import storageService from '../utils/localStorage';
 
 const feedbackReducer = (state = [], action) => {
 	switch (action.type) {
@@ -16,11 +14,6 @@ const feedbackReducer = (state = [], action) => {
 				...state.feedbacks,
 				state.feedbacks.filter(fb => fb.id !== action.payload),
 			];
-
-		// return {
-		// 	...state,
-		// 	feedbacks: [...state, action.payload],
-		// };
 		case 'TOGGLE_UPVOTE':
 			return state.map(fb => {
 				return fb._id !== action.payload.id
@@ -34,16 +27,6 @@ const feedbackReducer = (state = [], action) => {
 					: { ...fb, ...action.payload.data };
 			});
 		case 'TOGGLE_UPVOTE_DETAILS':
-			// return {
-			// 	...(state._id !== action.payload.id
-			// 		? state
-			// 		: { ...state, ...action.payload.data }),
-			// };
-			// console.log(state);
-			// const filteredArrayUpvote = state.filter(
-			// 	fb => fb._id === action.payload.id
-			// );
-			// console.log(state.map(el => el._id));
 			return state.map(fb => {
 				return fb._id !== action.payload.id
 					? fb
@@ -51,11 +34,6 @@ const feedbackReducer = (state = [], action) => {
 			});
 
 		case 'TOGGLE_DOWNVOTE_DETAILS':
-			// return {
-			// 	...(state._id !== action.payload.id
-			// 		? state
-			// 		: { ...state, ...action.payload.data }),
-			// };
 			const filteredArrayDownvote = state.filter(
 				fb => fb._id === action.payload.id
 			);
@@ -64,11 +42,6 @@ const feedbackReducer = (state = [], action) => {
 					? fb
 					: { ...fb, ...action.payload.data };
 			});
-		// case 'DELETE_FEEDBACK':
-		// 	return {
-		// 		...state,
-		// 		results: state.results.filter(fb => fb.id !== action.payload),
-		// 	};
 		case 'LOGOUT':
 			return [];
 		default:

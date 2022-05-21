@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -7,19 +6,9 @@ import { registerUser } from '../reducers/userReducer';
 import { useFormik } from 'formik';
 import PageLogo from '../components/PageLogo/PageLogo';
 import * as Yup from 'yup';
-import { motion } from 'framer-motion';
-// import Spinner from '../components/Spinner';
 import Header from '../components/Header/Header';
 
 const Register = () => {
-	const [formData, setFormData] = useState({
-		name: '',
-		email: '',
-		username: '',
-		password: '',
-		password2: '',
-	});
-
 	const formik = useFormik({
 		initialValues: {
 			name: '',
@@ -44,52 +33,12 @@ const Register = () => {
 		onSubmit: values => {
 			dispatch(registerUser(values));
 			navigate('/');
-			// console.log('submit test register');
 		},
 	});
-
-	const { name, email, username, password, password2 } = formData;
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const onChange = e => {
-		setFormData(prevState => ({
-			...prevState,
-			[e.target.name]: e.target.value,
-		}));
-	};
-
-	const onSubmit = e => {
-		e.preventDefault();
-		try {
-			// if (!name || !email || !username || !password || !password2) {
-			// 	alert('add all fields');
-			// }
-			const userData = {
-				name,
-				email,
-				username,
-				password,
-			};
-
-			dispatch(registerUser(userData));
-
-			navigate('/');
-		} catch (error) {
-			console.log(error.message);
-		}
-
-		// if (password !== password2) {
-		// 	toast.error('Passwords do not match');
-		// } else {
-
-		// }
-	};
-
-	// if (isLoading) {
-	// 	return <Spinner />;
-	// }
 	const initialMotion = {
 		initial: {
 			opacity: 0,
@@ -98,7 +47,6 @@ const Register = () => {
 			opacity: 1,
 			transition: {
 				duration: 0.3,
-				// ease: [0.87, 0, 0.13, 1],
 			},
 		},
 	};

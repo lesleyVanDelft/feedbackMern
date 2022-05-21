@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import FeedbackItem from '../FeedbackItem/FeedbackItem';
 import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
 import Sorter from '../Sorter/Sorter';

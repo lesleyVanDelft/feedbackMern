@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { FaChevronLeft } from 'react-icons/fa';
 import { getSingleFeedback } from '../../reducers/feedbackCommentsReducer';
 import { useParams } from 'react-router-dom';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
