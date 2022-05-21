@@ -7,13 +7,18 @@ import SuggestionsHeader from '../../components/Suggestions/SuggestionsHeader/Su
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { useSwipeable } from 'react-swipeable';
-import './Roadmap.css';
+import { useMediaQuery } from 'react-responsive';
 import PageLogo from '../../components/PageLogo/PageLogo';
+import './Roadmap.css';
+import LogoBar from '../../components/LogoBar/LogoBar';
 
 const RoadmapPage = () => {
 	const [active, setActive] = useState('in-progress');
 	const feedbacks = useSelector(state => state.feedbacks);
 	const dispatch = useDispatch();
+	const isMobile = useMediaQuery({
+		query: '(max-width: 768px)',
+	});
 	const handlers = useSwipeable({
 		onSwipedLeft: () => {
 			if (active === 'in-progress') {
@@ -78,6 +83,7 @@ const RoadmapPage = () => {
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
+			<LogoBar />
 			<PageLogo />
 			<SuggestionsHeader roadmap={true} />
 

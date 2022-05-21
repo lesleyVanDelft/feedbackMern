@@ -6,7 +6,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { loginUser } from '../reducers/userReducer';
 import Header from '../components/Header/Header';
-import { motion } from 'framer-motion';
 import PageLogo from '../components/PageLogo/PageLogo';
 
 const Login = () => {
@@ -79,24 +78,16 @@ const Login = () => {
 							id="email"
 							name="email"
 							value={formik.values.email}
-							// value={formData.email}
 							placeholder="Enter your email"
 							onChange={formik.handleChange}
-							// onChange={onChange}
 							onBlur={formik.handleBlur}
-							// onBlur={handleBlur}
+							autoComplete="off"
 						/>
 						{formik.touched.email && formik.errors.email ? (
 							<p className="formikErrorMessage">{formik.errors.email}</p>
 						) : null}
-						{/* {blurMessage !== '' ? (
-							<p className="formikErrorMessage">Please enter your email</p>
-						) : null} */}
 					</div>
 					<div className="form-group">
-						{/* {error && (
-							<span className="error">{error.response.data.message}</span>
-						)} */}
 						{error && error.status === 401 && (
 							<span className="errorMsg">{error.data}</span>
 						)}
@@ -107,10 +98,8 @@ const Login = () => {
 							id="password"
 							name="password"
 							value={formik.values.password}
-							// value={formData.password}
 							placeholder="Enter your password"
 							onChange={formik.handleChange}
-							// onChange={onChange}
 							onBlur={formik.handleBlur}
 						/>
 						{formik.touched.password && formik.errors.password ? (

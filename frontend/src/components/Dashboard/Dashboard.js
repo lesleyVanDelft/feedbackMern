@@ -29,14 +29,11 @@ const Dashboard = ({ category, mobileOpen }) => {
 		if (!user) {
 			return <h1>loading user</h1>;
 		}
-		// active
-		// 	? (document.body.style.overflow = 'hidden')
-		// 	: (document.body.style.overflow = 'auto');
 
-		active && isMobile
-			? (document.body.style.overflowY = 'hidden')
-			: (document.body.style.overflowY = 'scroll');
-		// (active && isMobile)
+		!active
+			? (document.body.style.overflowY = 'scroll')
+			: (document.body.style.overflowY = 'hidden');
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [active]);
 
@@ -48,7 +45,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 
 	const handleMobileClick = () => {
 		setActive(!active);
-		mobileOpen(active);
+		// mobileOpen(active);
 	};
 
 	const handleUserClick = () => {
@@ -56,8 +53,12 @@ const Dashboard = ({ category, mobileOpen }) => {
 	};
 
 	const handleLogout = () => {
-		dispatch(logoutUser());
-		navigate('/login');
+		setActive(false);
+
+		setTimeout(() => {
+			dispatch(logoutUser());
+			navigate('/login');
+		}, 100);
 	};
 
 	// framer motion

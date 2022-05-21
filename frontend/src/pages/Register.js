@@ -121,6 +121,7 @@ const Register = () => {
 					</div>
 					<div className="form-group">
 						<input
+							autoComplete="off"
 							required
 							type="text"
 							className="form-control"
@@ -137,6 +138,7 @@ const Register = () => {
 					</div>
 					<div className="form-group">
 						<input
+							autoComplete="off"
 							required
 							type="text"
 							className="form-control"
@@ -153,6 +155,7 @@ const Register = () => {
 					</div>
 					<div className="form-group">
 						<input
+							autoComplete="off"
 							required
 							type="email"
 							className="form-control"
@@ -169,6 +172,7 @@ const Register = () => {
 					</div>
 					<div className="form-group">
 						<input
+							autoComplete="off"
 							required
 							type="password"
 							className="form-control"
@@ -185,6 +189,7 @@ const Register = () => {
 					</div>
 					<div className="form-group">
 						<input
+							autoComplete="off"
 							required
 							type="password"
 							className="form-control"

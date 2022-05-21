@@ -29,7 +29,7 @@ const FeedbackList = ({ category }) => {
 
 	return (
 		<motion.section className="FeedbackList">
-			{/* <Suggestions suggestionCount={feedbacks && feedbacks.length} /> */}
+			{/* Contains Sort By and total feedback count */}
 			<SuggestionsHeader
 				suggestionCount={feedbacks && feedbacks.length}
 				sortBy={getSortBy}

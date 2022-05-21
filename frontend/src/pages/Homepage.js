@@ -32,10 +32,10 @@ const Homepage = () => {
 	};
 
 	// mobile menu open or closed, needed for darkened modal
-	const [mobileState, setMobileState] = useState(false);
-	const getMobileState = mobile => {
-		setMobileState(!mobile);
-	};
+	// const [mobileState, setMobileState] = useState(false);
+	// const getMobileState = mobile => {
+	// 	// setMobileState(!mobile);
+	// };
 
 	useEffect(() => {
 		if (!user) {
@@ -71,7 +71,7 @@ const Homepage = () => {
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
-			<Dashboard category={getCategoryState} mobileOpen={getMobileState} />
+			<Dashboard category={getCategoryState} mobileOpen={null} />
 
 			<section className={`Homepage__content`}>
 				{feedbacks ? (
