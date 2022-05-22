@@ -1,7 +1,11 @@
 require('dotenv').config();
 const path = require('path');
+const fs = require('fs');
+const util = require('node:util');
+const unlinkFile = util.promisify(fs.unlink);
 const express = require('express');
 const multer = require('multer');
+const sharp = require('sharp');
 const colors = require('colors');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -38,11 +42,9 @@ app.get('/images/:key', (req, res) => {
 });
 app.post('/images', upload.single('image'), async (req, res) => {
 	const file = req.file;
-	console.log(file);
+	// console.log(file);
 
-	// apply filter
 	// resize
-
 	const result = await uploadFile(file);
 	await unlinkFile(file.path);
 	console.log(result);

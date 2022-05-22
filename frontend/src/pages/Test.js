@@ -22,13 +22,15 @@ const Test = () => {
 	const submit = async e => {
 		e.preventDefault();
 		const result = await postImage({ image: file, description });
-		setImages([result.image, ...images]);
+		setImages([...images, result.image]);
 	};
 
 	const fileSelected = event => {
 		const file = event.target.files[0];
 		setFile(file);
 	};
+
+	// console.log(images);
 
 	return (
 		<>
@@ -40,9 +42,16 @@ const Test = () => {
 					type="text"></input>
 				<button type="submit">Submit</button>
 			</form>
-			{/* <img src="/images/488de294972ef2af03acab95322ad2f6" alt="" /> */}
+			<img
+				src="/images/013c6b5038044cefac16abad310c4151"
+				alt=""
+				// style={{ width: '800px', height: '500px' }}
+			/>
+			{/* <img
+				src="https://feedback-lesley.s3.eu-west-2.amazonaws.com/19df987588d2e5dc104dfd2c63a4d9b2"
+				alt=""
+			/> */}
 		</>
-		// <h1>test</h1>
 	);
 };
 
