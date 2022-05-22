@@ -1,0 +1,66 @@
+@import '../../../sass/main.scss';
+
+.UserModal {
+	display: none;
+	// opacity: 0;
+	position: absolute;
+	bottom: 0%;
+	left: 50%;
+	transform: translateX(-50%);
+	width: fit-content;
+	height: fit-content;
+	padding: 0.5rem 0.8rem;
+	background-color: transparent;
+	background: rgba(255, 255, 255, 0.39);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+	backdrop-filter: blur(7.3px);
+	-webkit-backdrop-filter: blur(7.3px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 5px;
+	// cursor: pointer;
+	transition: all 0.2s ease-in-out;
+
+	input[type='file']::-webkit-file-upload-button {
+		// visibility: hidden;
+		content: 'test';
+	}
+
+	// .custom-file-input::-webkit-file-upload-button {
+	// 	visibility: hidden;
+	// }
+	// .file {
+	// 	input {
+	// 		overflow: hidden;
+	// 		width: 0;
+	// 	}
+
+	// 	&__custom {
+	// 		cursor: pointer;
+	// 		width: 100%;
+	// 		height: 100%;
+	// 		color: $black;
+	// 		border: none;
+	// 		background-color: transparent;
+	// 		font-size: 1rem;
+	// 	}
+	// }
+
+	button {
+		cursor: pointer;
+		width: 50%;
+		height: 100%;
+		color: $black;
+		border: none;
+		background-color: white;
+		font-size: 1rem;
+	}
+
+	&.active {
+		display: block;
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.65);
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+		}
+	}
+}

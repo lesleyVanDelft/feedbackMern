@@ -12,12 +12,11 @@ const Modal = ({
 		<div className={`Modal ${active ? 'active' : ''}`}>
 			<div className="Modal__content">
 				<h3>
-					Are you sure you want to{' '}
 					{{
-						feedback: 'delete your feedback?',
-						comment: 'delete your comment?',
-						reply: 'delete your reply?',
-					}[param] || 'delete your feedback?'}
+						feedback: 'Are you sure you want to delete your feedback?',
+						comment: 'Are you sure you want to delete your comment?',
+						reply: 'Are you sure you want to delete your reply?',
+					}[param] || 'You are not allowed to do that. :('}
 				</h3>
 				<div className="buttons">
 					<button className="btn btn-darkBlue" onClick={closeModal}>

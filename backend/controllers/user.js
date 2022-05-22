@@ -1,6 +1,6 @@
 const aws = require('aws-sdk');
 const multer = require('multer');
-const multerS3 = require('multer-s3');
+const { uploadFile, getFileStream } = require('../s3');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
@@ -87,44 +87,38 @@ const removeUserAvatar = async (req, res) => {
 	res.status(204).end();
 };
 
-const upload = bucketName => {
-	multer({
-		storage: multerS3({
-			s3,
-			bucket: bucketName,
-			metadata: function (req, file, cb) {
-				cb(null, { fieldName: file.fieldname });
+// const upload = bucketName => {
+// 	multer({
+// 		storage: multerS3({
+// 			s3,
+// 			bucket: bucketName,
+// 			metadata: function (req, file, cb) {
+// 				cb(null, { fieldName: file.fieldname });
+// 			},
+// 			key: function (req, file, cb) {
+// 				cb(null, `image-${Date.now()}.jpeg`);
+// 			},
+// 		}),
+// 	});
+// };
+
+const setProfileImage = async key => {
+	return async (req, res, next) => {
+		const token = req.cookies.jwt;
+		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+		console.log(decoded);
+		const updatedUser = await User.findByIdAndUpdate(decoded.id, {
+			profileImg: {
+				exists: true,
+				imageLink: key.toString(),
+				imageId: '',
 			},
-			key: function (req, file, cb) {
-				cb(null, `image-${Date.now()}.jpeg`);
-			},
-		}),
-	});
-};
+		});
 
-const setProfileImage = async (req, res) => {
-	const token = req.cookies.jwt;
-	const decoded = jwt.verify(token, process.env.JWT_SECRET);
-	const uploadSingle = upload('feedback-lesley-profileImg').single(
-		'profileImg'
-	);
-
-	uploadSingle(req, res, async err => {
-		if (err) {
-			return res.status(400).json({ succes: false, message: err.message });
-		}
-
-		await User.findByIdAndUpdate(
-			{ _id: decoded.id },
-			{
-				profileImg: {
-					exists: true,
-					imageLink: req.file.location,
-					imageId: '',
-				},
-			}
-		);
-	});
+		res.status(204).json(updatedUser);
+		next();
+	};
 };
 
 module.exports = { getUser, setUserAvatar, removeUserAvatar, setProfileImage };

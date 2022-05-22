@@ -1,59 +1,59 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-const postImage = async ({ image, description }) => {
-	const formData = new FormData();
-	formData.append('image', image);
-	formData.append('description', description);
-
-	// const result = await axios.post('/uploadProfileImg', formData, {
-	// 	headers: { 'Content-Type': 'multipart/form-data' },
-	// });
-	const result = await axios.post('/images', formData, {
-		headers: { 'Content-Type': 'multipart/form-data' },
-	});
-	return result.data;
-};
-
 const Test = () => {
+	const postImage = async ({ image }) => {
+		const formData = new FormData();
+		formData.append('image', image);
+
+		const result = await axios.post('/images', formData, {
+			headers: { 'Content-Type': 'multipart/form-data' },
+		});
+		return result.data;
+	};
+
 	const [file, setFile] = useState();
-	const [description, setDescription] = useState('');
 	const [images, setImages] = useState([]);
-	const feedbacks = useSelector(state => state.feedbacks);
 
 	const submit = async e => {
 		e.preventDefault();
-		const result = await postImage({ image: file, description });
-		setImages([...images, result.image]);
+		const result = await postImage({ image: file });
+		setImages([result.image]);
 	};
 
 	const fileSelected = event => {
 		const file = event.target.files[0];
+		// console.log(file);
 		setFile(file);
 	};
 
-	// console.log(images);
+	useEffect(() => {
+		// setCurrImage(file);
+		// console.log(images);
+		console.log(file);
+		// axios.get(`/images/`);
+	}, [file]);
+
+	// console.log(currImage);
 
 	return (
 		<>
 			<form onSubmit={submit}>
 				<input onChange={fileSelected} type="file" accept="image/*"></input>
-				<input
-					value={description}
-					onChange={e => setDescription(e.target.value)}
-					type="text"></input>
+
 				<button type="submit">Submit</button>
 			</form>
+
+			{/* {images.map(im => (
+				<img src={im} alt="lol"></img>
+			))} */}
 			{/* <img
-				src="/images/312d77b3cba494c5e87804e6d66a48a3"
+				src="/images/27200047cdf99136d197811bfbaff511"
 				alt=""
 				// style={{ width: '800px', height: '500px' }}
 			/> */}
-			{/* <img
-				src="https://feedback-lesley.s3.eu-west-2.amazonaws.com/19df987588d2e5dc104dfd2c63a4d9b2"
-				alt=""
-			/> */}
+			{/* <img src={currImage} alt="" /> */}
 		</>
 	);
 };

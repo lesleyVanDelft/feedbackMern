@@ -17,6 +17,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/auth');
 const feedbackRoutes = require('./routes/feedback');
 const { getFeedbacks } = require('./controllers/feedback');
+const { setProfileImage } = require('./controllers/user');
 // const { setProfileImage } = require('./controllers/user');
 const { uploadFile, getFileStream } = require('./s3');
 
@@ -44,7 +45,7 @@ app.post('/images', upload.single('image'), async (req, res) => {
 	const result = await uploadFile(file);
 	await unlinkFile(file.path);
 	console.log(result);
-	const description = req.body.description;
+	// const description = req.body.description;
 	res.send({ imagePath: `/images/${result.Key}` });
 });
 app.get('/images/:key', (req, res) => {
@@ -52,7 +53,11 @@ app.get('/images/:key', (req, res) => {
 	const readStream = getFileStream(key);
 
 	readStream.pipe(res);
+
+	// console.log(key);
+	// setProfileImage(key);
 });
+
 // router.post('/uploadProfileImg', setProfileImage);
 
 app.get('/login', (req, res) => {
