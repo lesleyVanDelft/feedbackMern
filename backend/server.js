@@ -1,6 +1,7 @@
 require('dotenv').config();
 const path = require('path');
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+// const brcyptjs = require('bryptjs');
 const fs = require('fs');
 const util = require('node:util');
 const unlinkFile = util.promisify(fs.unlink);
@@ -19,6 +20,7 @@ const feedbackRoutes = require('./routes/feedback');
 const { getFeedbacks } = require('./controllers/feedback');
 const { setProfileImage } = require('./controllers/user');
 // const { setProfileImage } = require('./controllers/user');
+const User = require('./models/userModel');
 const { uploadFile, getFileStream } = require('./s3');
 
 connectDB();
@@ -37,28 +39,31 @@ app.use(morgan('tiny'));
 app.use('/api/feedbacks', feedbackRoutes);
 app.use('/api/users', authRoutes);
 
-app.post('/images', upload.single('image'), async (req, res) => {
-	const file = req.file;
-	// console.log(file);
-
-	// resize
-	const result = await uploadFile(file);
-	await unlinkFile(file.path);
-	console.log(result);
-	// const description = req.body.description;
-	res.send({ imagePath: `/images/${result.Key}` });
-});
 app.get('/images/:key', (req, res) => {
 	const key = req.params.key;
 	const readStream = getFileStream(key);
 
 	readStream.pipe(res);
-
-	// console.log(key);
-	// setProfileImage(key);
 });
+app.post('/images', upload.single('image'), async (req, res) => {
+	const token = req.cookies.jwt;
+	const decoded = jwt.verify(token, process.env.JWT_SECRET);
+	// console.log(decoded);
+	const user = await User.findById(decoded.id);
+	// console.log(user);
+	const file = req.file;
 
-// router.post('/uploadProfileImg', setProfileImage);
+	const result = await uploadFile(file);
+	await User.findByIdAndUpdate(decoded.id, {
+		profileImg: {
+			exists: true,
+			imageLink: '',
+			imageId: result.Key,
+		},
+	});
+	await unlinkFile(file.path);
+	res.send({ imagePath: `/images/${result.Key}` });
+});
 
 app.get('/login', (req, res) => {
 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
