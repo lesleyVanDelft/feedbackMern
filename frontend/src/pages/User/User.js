@@ -53,7 +53,7 @@ const User = () => {
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
-			{/* <img src="/images/45657fb8213c34422aab18e6242e9249" alt="" /> */}
+			{/* <img src="/images/27200047cdf99136d197811bfbaff511" alt="" /> */}
 			<div className="User__logo">
 				{isMobile ? <LogoBar /> : <PageLogo />}
 				<BackBtn currentPage="details" />
@@ -67,7 +67,8 @@ const User = () => {
 					<div className="User__information--details">
 						<div className="profileImg">
 							<img
-								src={BlankProfilePic}
+								src={`/images/${user.profileImg.imageId}`}
+								// src={BlankProfilePic}
 								alt="User profile"
 								className="profileImage"
 							/>
