@@ -1,5 +1,6 @@
 require('dotenv').config();
 const path = require('path');
+// const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const util = require('node:util');
 const unlinkFile = util.promisify(fs.unlink);
@@ -16,6 +17,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/auth');
 const feedbackRoutes = require('./routes/feedback');
 const { getFeedbacks } = require('./controllers/feedback');
+// const { setProfileImage } = require('./controllers/user');
 const { uploadFile, getFileStream } = require('./s3');
 
 connectDB();
@@ -34,12 +36,6 @@ app.use(morgan('tiny'));
 app.use('/api/feedbacks', feedbackRoutes);
 app.use('/api/users', authRoutes);
 
-app.get('/images/:key', (req, res) => {
-	const key = req.params.key;
-	const readStream = getFileStream(key);
-
-	readStream.pipe(res);
-});
 app.post('/images', upload.single('image'), async (req, res) => {
 	const file = req.file;
 	// console.log(file);
@@ -51,6 +47,13 @@ app.post('/images', upload.single('image'), async (req, res) => {
 	const description = req.body.description;
 	res.send({ imagePath: `/images/${result.Key}` });
 });
+app.get('/images/:key', (req, res) => {
+	const key = req.params.key;
+	const readStream = getFileStream(key);
+
+	readStream.pipe(res);
+});
+// router.post('/uploadProfileImg', setProfileImage);
 
 app.get('/login', (req, res) => {
 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
+// const uniqueValidator = require('mongoose-unique-validator');
 const { isEmail } = require('validator');
-const schemaCleaner = require('../utils/schemaCleaner');
-const bcryptjs = require('bcryptjs');
+// const schemaCleaner = require('../utils/schemaCleaner');
+// const bcryptjs = require('bcryptjs');
 
 const userModel = mongoose.Schema(
 	{

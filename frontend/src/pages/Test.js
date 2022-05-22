@@ -7,6 +7,9 @@ const postImage = async ({ image, description }) => {
 	formData.append('image', image);
 	formData.append('description', description);
 
+	// const result = await axios.post('/uploadProfileImg', formData, {
+	// 	headers: { 'Content-Type': 'multipart/form-data' },
+	// });
 	const result = await axios.post('/images', formData, {
 		headers: { 'Content-Type': 'multipart/form-data' },
 	});
@@ -42,11 +45,11 @@ const Test = () => {
 					type="text"></input>
 				<button type="submit">Submit</button>
 			</form>
-			<img
-				src="/images/013c6b5038044cefac16abad310c4151"
+			{/* <img
+				src="/images/312d77b3cba494c5e87804e6d66a48a3"
 				alt=""
 				// style={{ width: '800px', height: '500px' }}
-			/>
+			/> */}
 			{/* <img
 				src="https://feedback-lesley.s3.eu-west-2.amazonaws.com/19df987588d2e5dc104dfd2c63a4d9b2"
 				alt=""

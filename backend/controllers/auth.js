@@ -44,11 +44,7 @@ const generateToken = user => {
 };
 
 // register
-// const registerUser_get = (req, res) => {
-// 	res.render('register');
-// };
 const registerUser = async (req, res) => {
-	// const { name, username, email, password } = req.body;
 	const { name, username, email } = req.body;
 
 	const existingUser = await User.findOne({
@@ -64,6 +60,7 @@ const registerUser = async (req, res) => {
 	try {
 		const salt = await bcryptjs.genSalt();
 		const hashedPassword = await bcryptjs.hash(req.body.password, salt);
+
 		// Create user
 		const user = await User.create({
 			name,
@@ -90,18 +87,10 @@ const registerUser = async (req, res) => {
 };
 
 // login
-// const loginUser_get = (req, res) => {
-// 	res.render('login');
-// };
-const loginUser = async (req, res, next) => {
+const loginUser = async (req, res) => {
 	const { email, password } = req.body;
 	const user = await User.findOne({ email });
-	// console.log(req.user);
 
-	// if (!req.user) {
-	// 	// res.status(401).send('login controller');
-	// 	res.redirect(401, '/login');
-	// }
 	if (!req.body) {
 		res.status(402).send('no req body');
 	}
@@ -127,58 +116,19 @@ const loginUser = async (req, res, next) => {
 			});
 		} else {
 			console.error('wrong password - auth controller');
-			// res.status(401);
+
 			res.status(401).send('Wrong password');
 		}
-		// console.log(req.user);
 	}
+	req.currentUser = user;
 };
 
 const logoutUser = async (req, res) => {
 	return res.cookie('jwt', '', { maxAge: 1 });
-	// res.redirect('/');
 };
 
 module.exports = {
 	loginUser,
-	// loginUser_get,
 	registerUser,
-	// registerUser_get,
 	logoutUser,
 };
-
-// login
-// const user = await User.findOne({ email });
-// if (!user) {
-// 	return res.status(400).send({
-// 		message:
-// 			'No account with this email has been registered. / controller auth.js',
-// 	});
-// }
-
-// const credentialsValid = await bcrypt.compare(password, user.password);
-
-// if (!credentialsValid) {
-// 	return res.status(401).send({ message: 'Invalid login info' });
-// }
-
-// const payloadForToken = {
-// 	id: user._id,
-// };
-
-// const token = jwt.sign(payloadForToken, process.env.JWT_SECRET);
-// // res.cookie('jwt', token)
-
-// // check for user password
-// if (user && (await bcrypt.compare(password, user.password))) {
-// 	res.status(201).json({
-// 		_id: user.id,
-// 		name: user.name,
-// 		email: user.email,
-// 		username: user.username,
-// 		token: generateToken(user._id),
-// 	});
-// } else {
-// 	res.status(400);
-// 	throw new Error('Invalid login data');
-// }
