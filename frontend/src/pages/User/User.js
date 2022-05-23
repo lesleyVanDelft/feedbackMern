@@ -39,6 +39,10 @@ const User = () => {
 		document.body.style.overflow = 'unset';
 	}, []);
 
+	useEffect(() => {
+		console.log(user.profileImg.imageId);
+	}, [user.profileImg.imageId]);
+
 	const initialMotion = {
 		initial: {
 			opacity: 0,
