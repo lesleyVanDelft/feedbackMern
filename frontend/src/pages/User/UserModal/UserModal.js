@@ -34,7 +34,7 @@ const UserModal = ({ active, getImage }) => {
 	};
 
 	const submit = async e => {
-		e.preventDefault();
+		// e.preventDefault();
 		const result = await postImage({ image: file });
 		setImages([...images, result.image]);
 	};

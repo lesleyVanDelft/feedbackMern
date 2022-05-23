@@ -36,7 +36,8 @@
 		display: grid;
 
 		img {
-			width: 70vw;
+			// width: 70vw;
+			width: fit-content;
 			height: fit-content;
 		}
 	}
