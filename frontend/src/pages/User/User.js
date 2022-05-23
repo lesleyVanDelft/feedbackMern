@@ -1,19 +1,22 @@
 import LogoBar from '../../components/LogoBar/LogoBar';
 import { useSelector } from 'react-redux';
 import BlankProfilePic from '../../assets/blank-profile-picture.png';
+import ImageModal from '../../components/ImageModal/ImageModal';
 import { useMediaQuery } from 'react-responsive';
 import PageLogo from '../../components/PageLogo/PageLogo';
 import BackBtn from '../../components/Buttons/BackBtn/BackBtn';
 import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
 import UserModal from './UserModal/UserModal';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { GoPencil } from 'react-icons/go';
 import './User.css';
 import { useEffect, useState } from 'react';
 
 const User = () => {
 	const [active, setActive] = useState(false);
+	const [imgModal, setImgModal] = useState(false);
+	const [imgModalState, setImgModalState] = useState(false);
 	const [image, setImage] = useState();
 	const user = useSelector(state => state.user);
 	const feedbacks = useSelector(state => state.feedbacks);
@@ -23,17 +26,18 @@ const User = () => {
 	const isMobile = useMediaQuery({
 		query: '(max-width: 768px)',
 	});
+
+	const getImageModal = mdl => {
+		setImgModal(mdl);
+	};
+
 	const getImage = img => {
 		setImage(img);
 	};
-	console.log(image);
+
 	useEffect(() => {
 		document.body.style.overflow = 'unset';
 	}, []);
-
-	// useEffect(() =>{
-
-	// },[])
 
 	const initialMotion = {
 		initial: {
@@ -53,7 +57,6 @@ const User = () => {
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
-			{/* <img src="/images/27200047cdf99136d197811bfbaff511" alt="" /> */}
 			<div className="User__logo">
 				{isMobile ? <LogoBar /> : <PageLogo />}
 				<BackBtn currentPage="details" />
@@ -62,25 +65,43 @@ const User = () => {
 				Hello again,{' '}
 				<span className="bold">@{user ? user.username : 'not found'}</span>!
 			</h2>
+
 			<div className="flex-container">
 				<div className="User__information">
 					<div className="User__information--details">
 						<div className="profileImg">
-							<img
-								src={`/images/${user.profileImg.imageId}`}
-								// src={BlankProfilePic}
-								alt="User profile"
-								className="profileImage"
-							/>
+							<div
+								onClick={() => setImgModal(!imgModal)}
+								className={'profileImg__container'}>
+								<img
+									src={
+										user.profileImg.exists
+											? `/images/${user.profileImg.imageId}`
+											: BlankProfilePic
+									}
+									alt="User profile"
+									className="profileImage"
+								/>
+							</div>
 
-							<button
-								onClick={() => setActive(!active)}
-								// onBlur={() => setActive(false)}
-								className="editImage">
+							<button onClick={() => setActive(!active)} className="editImage">
 								<GoPencil className="editSvg" /> edit profile image
 							</button>
 
-							<UserModal active={active} getImage={getImage} />
+							<AnimatePresence>
+								{active && <UserModal getImage={getImage} />}
+							</AnimatePresence>
+							{imgModal && (
+								<ImageModal
+									active={imgModal}
+									getState={getImageModal}
+									image={
+										user.profileImg.exists
+											? `/images/${user.profileImg.imageId}`
+											: BlankProfilePic
+									}
+								/>
+							)}
 						</div>
 
 						<div className="userInfo">

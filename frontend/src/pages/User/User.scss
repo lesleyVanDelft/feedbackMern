@@ -48,15 +48,25 @@
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				padding: 2rem 0;
+				padding: 1.5rem 0;
 				border-radius: 5px;
 				position: relative;
 
-				img.profileImage {
-					max-width: 150px;
-					max-height: 150px;
-					border-radius: 50%;
-					// object-fit: cover;
+				&__container {
+					width: 150px;
+					height: 150px;
+					cursor: pointer;
+					position: relative;
+
+					img.profileImage {
+						width: 100%;
+						height: 100%;
+						border-radius: 50%;
+						object-fit: cover;
+					}
+					&:hover {
+						opacity: 0.85;
+					}
 				}
 				.editImage {
 					margin-top: 1.3rem;

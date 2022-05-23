@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import './UserModal.css';
 import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
+import './UserModal.css';
 
 // Axios post image
 const postImage = async ({ image, description }) => {
@@ -20,6 +21,18 @@ const UserModal = ({ active, getImage }) => {
 	const [images, setImages] = useState([]);
 	const user = useSelector(state => state.user);
 
+	const framerVariants = {
+		hidden: {
+			opacity: 0,
+		},
+		show: {
+			opacity: 1,
+		},
+		exit: {
+			opacity: 0,
+		},
+	};
+
 	const submit = async e => {
 		e.preventDefault();
 		const result = await postImage({ image: file });
@@ -28,33 +41,28 @@ const UserModal = ({ active, getImage }) => {
 
 	// Pass image state to User page
 	useEffect(() => {
-		return user.profileImg.exists ? getImage(file) : getImage('fuku');
+		return user.profileImg.exists
+			? getImage(file)
+			: getImage('image file not found');
 	}, [file, getImage, user.profileImg.exists]);
 
-	// useEffect(() =>{
-	//     setFile(e.target.files[0])
-	// }, [])
 	const fileSelected = e => {
 		const file = e.target.files[0];
 		setFile(file);
 	};
 
-	const handleClick = e => {
-		e.preventDefault();
-	};
-
 	return (
-		// <form className={`UserModal ${active ? 'active' : ''}`}>
-		// 	<label className="file">
-		// 		<input type="file" accept="image/*" onChange={fileSelected} />
-		// 		<span className="file__custom">Upload a photo...</span>
-		// 	</label>
-		// </form>
-
-		<form onSubmit={submit} className={`UserModal ${active ? 'active' : ''}`}>
+		<motion.form
+			variants={framerVariants}
+			initial="hidden"
+			animate="show"
+			exit="exit"
+			onSubmit={submit}
+			// className={`UserModal ${active ? 'active' : ''}`}
+			className={`UserModal }`}>
 			<input onChange={fileSelected} type="file" accept="image/*" />
 			<button type="submit">Submit</button>
-		</form>
+		</motion.form>
 	);
 };
 

@@ -1,0 +1,43 @@
+@import '../../sass/main.scss';
+
+.ImageModal {
+	min-height: 100vh;
+	min-width: 100vw;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: grid;
+	place-items: center;
+	z-index: 100;
+	display: none;
+
+	&__content {
+		img {
+			width: 150px;
+			height: 150px;
+		}
+
+		.close {
+			cursor: pointer;
+			position: absolute;
+			top: 0;
+			right: 5%;
+			svg {
+				color: $white;
+				font-size: 3rem;
+			}
+		}
+	}
+
+	&.active {
+		display: grid;
+
+		img {
+			width: 70vw;
+			height: fit-content;
+		}
+	}
+}

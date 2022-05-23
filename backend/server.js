@@ -39,6 +39,10 @@ app.use(morgan('tiny'));
 app.use('/api/feedbacks', feedbackRoutes);
 app.use('/api/users', authRoutes);
 
+app.get('/user', (req, res) => {
+	res.status(301);
+});
+
 app.get('/images/:key', (req, res) => {
 	const key = req.params.key;
 	const readStream = getFileStream(key);
