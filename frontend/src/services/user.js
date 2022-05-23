@@ -14,6 +14,17 @@ const getUser = async (username, limit, page) => {
 	return response.data;
 };
 
+// Upload profile picture
+const postImage = async img => {
+	const formData = new FormData();
+	formData.append('image', img);
+
+	const result = await axios.post('/images', formData, {
+		headers: { 'Content-Type': 'multipart/form-data' },
+	});
+	return result.data;
+};
+
 const uploadAvatar = async avatarObj => {
 	const response = await axios.post(
 		`${API_URL}/avatar`,
@@ -28,6 +39,6 @@ const removeAvatar = async () => {
 	return response.data;
 };
 
-const userService = { getUser, uploadAvatar, removeAvatar };
+const userService = { getUser, uploadAvatar, removeAvatar, postImage };
 
 export default userService;

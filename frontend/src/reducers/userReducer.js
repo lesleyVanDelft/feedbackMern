@@ -1,7 +1,6 @@
 import authService from '../services/auth';
 import userService from '../services/user';
 import storageService from '../utils/localStorage';
-import feedbackService from '../services/feedbacks';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
@@ -14,6 +13,8 @@ const userReducer = (state = null, action) => {
 		case 'LOGOUT':
 			return null;
 		case 'SET_USER':
+			return action.payload;
+		case 'SET_PROFILE_IMG':
 			return action.payload;
 		// case 'SET_AVATAR':
 		// 	return { ...state, ...action.payload };
@@ -92,6 +93,19 @@ export const setUser = () => {
 				payload: loggedUser,
 			});
 		}
+	};
+};
+
+export const setProfileImage = img => {
+	return async dispatch => {
+		const uploadedImage = await userService.postImage(img);
+		const prevUser = storageService.loadUser();
+		storageService.saveUser({ ...prevUser, ...uploadedImage });
+
+		dispatch({
+			type: 'SET_PROFILE_IMAGE',
+			payload: uploadedImage,
+		});
 	};
 };
 

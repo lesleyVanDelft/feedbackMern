@@ -1,47 +1,56 @@
-import LogoBar from '../../components/LogoBar/LogoBar';
-import { useSelector } from 'react-redux';
-import BlankProfilePic from '../../assets/blank-profile-picture.png';
-import ImageModal from '../../components/ImageModal/ImageModal';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import PageLogo from '../../components/PageLogo/PageLogo';
-import BackBtn from '../../components/Buttons/BackBtn/BackBtn';
-import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
-import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
-import UserModal from './UserModal/UserModal';
+import { setUser } from '../../reducers/userReducer';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GoPencil } from 'react-icons/go';
+import BlankProfilePic from '../../assets/blank-profile-picture.png';
+import BackBtn from '../../components/Buttons/BackBtn/BackBtn';
+import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
+import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
+import ImageModal from '../../components/ImageModal/ImageModal';
+import LogoBar from '../../components/LogoBar/LogoBar';
+import PageLogo from '../../components/PageLogo/PageLogo';
+import UserModal from './UserModal/UserModal';
 import './User.css';
-import { useEffect, useState } from 'react';
 
 const User = () => {
 	const [active, setActive] = useState(false);
 	const [imgModal, setImgModal] = useState(false);
-	const [imgModalState, setImgModalState] = useState(false);
 	const [image, setImage] = useState();
 	const user = useSelector(state => state.user);
 	const feedbacks = useSelector(state => state.feedbacks);
 	const userFeedbacks = feedbacks.filter(
 		feedback => feedback.author === user.id
 	);
+
+	const dispatch = useDispatch();
+
 	const isMobile = useMediaQuery({
 		query: '(max-width: 768px)',
 	});
 
+	// Get state from inside IMAGE modal, to close
 	const getImageModal = mdl => {
 		setImgModal(mdl);
 	};
 
+	// Get image state from USER dropdown modal
 	const getImage = img => {
 		setImage(img);
 	};
+	useEffect(() => {
+		dispatch(setUser());
+	}, [dispatch]);
 
+	// Reset body overflow
 	useEffect(() => {
 		document.body.style.overflow = 'unset';
 	}, []);
 
 	useEffect(() => {
 		console.log(user.profileImg.imageId);
-	}, [user.profileImg.imageId]);
+	}, [dispatch, user.profileImg.imageId]);
 
 	const initialMotion = {
 		initial: {

@@ -1,49 +1,57 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+// import userReducer from '../reducers/userReducer';
+import { setProfileImage } from '../reducers/userReducer';
 import axios from 'axios';
 
 const Test = () => {
-	const postImage = async ({ image }) => {
-		const formData = new FormData();
-		formData.append('image', image);
-
-		const result = await axios.post('/images', formData, {
-			headers: { 'Content-Type': 'multipart/form-data' },
-		});
-		return result.data;
-	};
-
-	const [file, setFile] = useState();
-	const [images, setImages] = useState([]);
-
-	const submit = async e => {
-		e.preventDefault();
-		const result = await postImage({ image: file });
-		setImages([result.image]);
-	};
-
-	const fileSelected = event => {
-		const file = event.target.files[0];
-		// console.log(file);
-		setFile(file);
-	};
-
+	const dispatch = useDispatch();
 	useEffect(() => {
-		// setCurrImage(file);
-		// console.log(images);
-		console.log(file);
-		// axios.get(`/images/`);
-	}, [file]);
+		dispatch(setProfileImage);
+	}, []);
+	// const postImage = async ({ image }) => {
+	// 	const formData = new FormData();
+	// 	formData.append('image', image);
+
+	// 	const result = await axios.post('/images', formData, {
+	// 		headers: { 'Content-Type': 'multipart/form-data' },
+	// 	});
+	// 	return result.data;
+	// };
+
+	// const [file, setFile] = useState();
+	// const [images, setImages] = useState([]);
+
+	// const submit = async e => {
+	// 	e.preventDefault();
+	// 	const result = await postImage({ image: file });
+	// 	setImages([result.image]);
+	// };
+
+	// const fileSelected = event => {
+	// 	const file = event.target.files[0];
+	// 	// console.log(file);
+	// 	setFile(file);
+	// };
+
+	// useEffect(() => {
+	// 	// setCurrImage(file);
+	// 	// console.log(images);
+	// 	console.log(file);
+	// 	// axios.get(`/images/`);
+	// }, [file]);
 
 	// console.log(currImage);
 
 	return (
 		<>
-			<form onSubmit={submit}>
+			<h1>test page</h1>
+			{}
+			{/* <form onSubmit={submit}>
 				<input onChange={fileSelected} type="file" accept="image/*"></input>
 
 				<button type="submit">Submit</button>
-			</form>
+			</form> */}
 
 			{/* {images.map(im => (
 				<img src={im} alt="lol"></img>

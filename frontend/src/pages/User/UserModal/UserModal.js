@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProfileImage } from '../../../reducers/userReducer';
 import { motion } from 'framer-motion';
 import './UserModal.css';
 
@@ -20,6 +21,7 @@ const UserModal = ({ active, getImage }) => {
 	const [file, setFile] = useState();
 	const [images, setImages] = useState([]);
 	const user = useSelector(state => state.user);
+	const dispatch = useDispatch();
 
 	const framerVariants = {
 		hidden: {
@@ -35,8 +37,8 @@ const UserModal = ({ active, getImage }) => {
 
 	const submit = async e => {
 		e.preventDefault();
-		const result = await postImage({ image: file });
-		// console.log(file)
+		// const result = await postImage({ image: file });
+		const result = dispatch(setProfileImage(file));
 		setImages([...images, result.image]);
 	};
 

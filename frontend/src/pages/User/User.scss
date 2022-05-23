@@ -106,10 +106,6 @@
 				flex-direction: column;
 				word-break: break-all;
 
-				/* Required for text-overflow to do anything */
-				// white-space: nowrap;
-				// overflow: hidden;
-
 				p {
 					margin-bottom: 0.35rem;
 					font-weight: 400;
