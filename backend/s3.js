@@ -31,10 +31,14 @@ exports.uploadFile = file => {
 
 // downloads files from s3
 exports.getFileStream = fileKey => {
-	const downloadParams = {
-		Key: fileKey,
-		Bucket: bucketName,
-	};
+	try {
+		const downloadParams = {
+			Key: fileKey,
+			Bucket: bucketName,
+		};
 
-	return s3.getObject(downloadParams).createReadStream();
+		return s3.getObject(downloadParams).createReadStream();
+	} catch (error) {
+		console.log(error);
+	}
 };

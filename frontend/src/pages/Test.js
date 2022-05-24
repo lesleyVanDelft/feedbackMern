@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import userReducer from '../reducers/userReducer';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import { setProfileImage } from '../reducers/userReducer';
 import axios from 'axios';
 
@@ -42,11 +43,16 @@ const Test = () => {
 	// }, [file]);
 
 	// console.log(currImage);
-
+	// const str = '/images/435738947598437594387593485743987u';
+	// const splitStr = str.split('/')[2];
 	return (
 		<>
+			{/* <LoadingSpinner /> */}
 			<h1>test page</h1>
-			{}
+			{/* {console.log(splitStr)} */}
+			<img src="/images/58a12bb01cc28aa36533b6ff465a0e05" alt="" />
+			{/* {} */}
+
 			{/* <form onSubmit={submit}>
 				<input onChange={fileSelected} type="file" accept="image/*"></input>
 

@@ -23,8 +23,8 @@
 		.close {
 			cursor: pointer;
 			position: absolute;
-			top: 0;
-			right: 5%;
+			top: 3rem;
+			right: 5rem;
 			svg {
 				color: $white;
 				font-size: 3rem;
@@ -39,6 +39,26 @@
 			// width: 70vw;
 			width: fit-content;
 			height: fit-content;
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.ImageModal {
+		&__content {
+			.close {
+				top: 1rem;
+			}
+		}
+		&.active {
+			.ImageModal__content {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				img {
+					width: 90%;
+				}
+			}
 		}
 	}
 }

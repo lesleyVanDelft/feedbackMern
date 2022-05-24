@@ -68,17 +68,23 @@ import feedbackReducer from '../reducers/feedbackReducer';
 import feedbackPageReducer from '../reducers/feedbackCommentsReducer';
 import errorReducer from '../reducers/errorReducer';
 
+const persistConfig = {
+	key: 'root',
+	storage,
+	// blacklist: ['user.profileImg.imageId'],
+};
+
+// const userPersistConfig = {
+// 	key: 'user',
+// 	storage,
+// 	blacklist: ['user.profileImg.imageId'],
+// };
 const reducer = combineReducers({
 	user: userReducer,
 	feedbacks: feedbackReducer,
 	singleFeedback: feedbackPageReducer,
 	errorMessage: errorReducer,
 });
-
-const persistConfig = {
-	key: 'root',
-	storage,
-};
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 

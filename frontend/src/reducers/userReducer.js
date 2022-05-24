@@ -2,6 +2,8 @@ import authService from '../services/auth';
 import userService from '../services/user';
 import storageService from '../utils/localStorage';
 import Cookies from 'js-cookie';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { toast } from 'react-toastify';
 
 const userReducer = (state = null, action) => {
@@ -15,11 +17,15 @@ const userReducer = (state = null, action) => {
 		case 'SET_USER':
 			return action.payload;
 		case 'SET_PROFILE_IMG':
-			return action.payload;
-		// case 'SET_AVATAR':
-		// 	return { ...state, ...action.payload };
-		// case 'REMOVE_AVATAR':
-		// 	return { ...state, avatar: { exists: false } };
+			return {
+				...state,
+				profileImg: {
+					...state.profileImg,
+					imageId: (state.profileImg.imageId =
+						action.payload.imagePath.split('/')[2]),
+				},
+			};
+		// return action.payload;
 		default:
 			return state;
 	}
@@ -98,12 +104,28 @@ export const setUser = () => {
 
 export const setProfileImage = img => {
 	return async dispatch => {
+		const user = storageService.loadUser();
 		const uploadedImage = await userService.postImage(img);
-		const prevUser = storageService.loadUser();
-		storageService.saveUser({ ...prevUser, ...uploadedImage });
+		// console.log(uploadedImage.imagePath);
+		const updatedLocalStorage = {
+			...user,
+			profileImg: {
+				...user.profileImg,
+				imageId: uploadedImage.imagePath.split('/')[2],
+			},
+		};
+
+		// const parsedUser = user ? JSON.parse(user) : {};
+		// console.log(parsedUser);
+
+		// parsedUser['profileImg'] = uploadedImage;
+
+		// console.log(prevUser);
+		// storageService.saveUser({ ...user, user:  });
+		storageService.saveUser(updatedLocalStorage);
 
 		dispatch({
-			type: 'SET_PROFILE_IMAGE',
+			type: 'SET_PROFILE_IMG',
 			payload: uploadedImage,
 		});
 	};
@@ -132,6 +154,12 @@ export const deleteAvatar = () => {
 			type: 'REMOVE_AVATAR',
 		});
 	};
+};
+
+export const persistConfig = {
+	key: 'imageId',
+	storage,
+	blacklist: [''],
 };
 
 export default userReducer;

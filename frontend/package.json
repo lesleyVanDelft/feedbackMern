@@ -25,6 +25,7 @@
 		"react-toastify": "^8.2.0",
 		"redux-devtools-extension": "^2.13.9",
 		"redux-persist": "^6.0.0",
+		"redux-persist-transform-filter": "^0.0.20",
 		"redux-thunk": "^2.4.1",
 		"yup": "^0.32.11"
 	},

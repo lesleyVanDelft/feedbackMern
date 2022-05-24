@@ -18,6 +18,24 @@ const loadUser = () => {
 	}
 };
 
+const removeRootUser = () => {
+	try {
+		const rootUser = localStorage.getItem('persist:root');
+
+		if (rootUser === null) {
+			return undefined;
+		}
+
+		return JSON.parse(rootUser);
+	} catch (error) {
+		console.log(error);
+		return undefined;
+	}
+};
+// const removeUser = (user) => {
+// 	return localStorage.
+// }
+
 const logoutUser = () => {
 	try {
 		localStorage.removeItem('user');

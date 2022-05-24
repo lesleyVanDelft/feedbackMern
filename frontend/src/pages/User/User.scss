@@ -160,6 +160,23 @@
 	.User {
 		flex-direction: column;
 		justify-content: flex-start;
+
+		.flex-container {
+			flex-direction: column;
+		}
+
+		&__logo {
+			margin-bottom: 1.3rem;
+			button {
+				margin-top: 1rem;
+				margin-left: 1.5rem;
+				margin-bottom: 0;
+			}
+		}
+
+		&__welcome {
+			text-align: center;
+		}
 		&__information {
 			width: 100%;
 			display: flex;
@@ -168,6 +185,7 @@
 
 			&--logo {
 				width: 100%;
+				// padding: 0;
 				button {
 					margin-top: 1.5rem;
 					margin-left: 2.5rem;
@@ -184,6 +202,12 @@
 					padding-bottom: 1.5rem;
 					span.bold {
 						font-weight: bold;
+					}
+				}
+
+				.profileImg {
+					&__container {
+						-webkit-tap-highlight-color: transparent;
 					}
 				}
 
