@@ -42,9 +42,9 @@ app.use(morgan('tiny'));
 app.use('/api/feedbacks', checkUser, feedbackRoutes);
 app.use('/api/users', authRoutes);
 
-app.get('/user', auth, (req, res) => {
-	res.status(304).send(req.user);
-});
+// app.get('/user', auth, (req, res) => {
+// 	res.status(304).send(req.user);
+// });
 
 app.get('/images/:key', (req, res) => {
 	const key = req.params.key;
@@ -78,6 +78,7 @@ app.post('/images', upload.single('image'), async (req, res) => {
 
 app.get('/login', (req, res) => {
 	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
+	// res.status(301).redirect('http://localhost:3000/login');
 });
 
 app.get('/roadmap', getFeedbacks);

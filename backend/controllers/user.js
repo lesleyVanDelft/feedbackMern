@@ -16,19 +16,21 @@ const s3 = new aws.S3({
 });
 
 const getUser = async (req, res) => {
-	const { email } = req.params;
+	try {
+		const token = req.cookies.jwt;
+		const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-	const user = await User.findOne({
-		email: email,
-	});
+		const user = await User.findById(decoded.id);
 
-	if (!user) {
-		return res
-			.status(404)
-			.send({ message: `Username '${username}' does not exist on server.` });
+		res.status(200).json(user);
+	} catch (error) {
+		console.log(error);
 	}
-
-	res.status(200).json(user);
+	// if (!user) {
+	// 	return res
+	// 		.status(404)
+	// 		.send({ message: `Username '${username}' does not exist on server.` });
+	// }
 };
 
 const setUserAvatar = async (req, res) => {

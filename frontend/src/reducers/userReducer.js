@@ -90,7 +90,8 @@ export const logoutUser = () => {
 };
 
 export const setUser = () => {
-	return dispatch => {
+	return async dispatch => {
+		const user = await userService.getUser();
 		const loggedUser = storageService.loadUser();
 
 		if (loggedUser) {
@@ -98,9 +99,21 @@ export const setUser = () => {
 				type: 'SET_USER',
 				payload: loggedUser,
 			});
+		} else {
+			dispatch({
+				type: 'SET_USER',
+				payload: user,
+			});
 		}
 	};
 };
+
+// export const getUser =  () => {
+// 	return async dispatch => {
+// 		const user = await userService.getUser();
+
+// 	}
+// }
 
 export const setProfileImage = img => {
 	return async dispatch => {
@@ -115,13 +128,6 @@ export const setProfileImage = img => {
 			},
 		};
 
-		// const parsedUser = user ? JSON.parse(user) : {};
-		// console.log(parsedUser);
-
-		// parsedUser['profileImg'] = uploadedImage;
-
-		// console.log(prevUser);
-		// storageService.saveUser({ ...user, user:  });
 		storageService.saveUser(updatedLocalStorage);
 
 		dispatch({
