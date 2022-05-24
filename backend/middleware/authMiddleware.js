@@ -18,7 +18,7 @@ const checkUser = async (req, res, next) => {
 			console.log(error + ' checkUser mw');
 		}
 	} else {
-		res.status(401).redirect('http://localhost:3000/login');
+		res.status(401).redirect('https://feedback-lesley.herokuapp.com/login');
 	}
 
 	// if (token) {

@@ -42,7 +42,7 @@ app.use('/api/feedbacks', checkUser, feedbackRoutes);
 app.use('/api/users', authRoutes);
 
 app.get('/user', checkUser, (req, res) => {
-	res.status(301).redirect('http://localhost:3000/user');
+	res.status(301).redirect('https://feedback-lesley.herokuapp.com/user');
 });
 
 app.get('/images/:key', (req, res) => {
@@ -52,11 +52,17 @@ app.get('/images/:key', (req, res) => {
 	readStream.pipe(res);
 });
 app.post('/images', upload.single('image'), async (req, res) => {
+	// Uploaded file
 	const file = req.file;
+
+	// JWT token
 	const token = req.cookies.jwt;
 	const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+	// AWS S3 upload
 	const result = await uploadFile(file);
 
+	// Updates user imageId with new AWS S3 result
 	await User.findByIdAndUpdate(decoded.id, {
 		profileImg: {
 			exists: true,
@@ -64,6 +70,7 @@ app.post('/images', upload.single('image'), async (req, res) => {
 			imageId: result.Key,
 		},
 	});
+	// Removes uploaded file from multer folder: uploads/
 	await unlinkFile(file.path);
 	res.send({ imagePath: `/images/${result.Key}` });
 });
