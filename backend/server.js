@@ -41,8 +41,8 @@ app.use(morgan('tiny'));
 app.use('/api/feedbacks', checkUser, feedbackRoutes);
 app.use('/api/users', authRoutes);
 
-app.get('/user', checkUser, async (req, res) => {
-	res.status(304);
+app.get('/user', checkUser, (req, res) => {
+	res.status(200).send(req.user);
 });
 
 app.get('/images/:key', (req, res) => {

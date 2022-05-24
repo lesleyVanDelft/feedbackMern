@@ -13,6 +13,7 @@ import LogoBar from '../../components/LogoBar/LogoBar';
 import PageLogo from '../../components/PageLogo/PageLogo';
 import UserModal from './UserModal/UserModal';
 import './User.css';
+import axios from 'axios';
 
 const User = () => {
 	const [active, setActive] = useState(false);
@@ -39,6 +40,16 @@ const User = () => {
 	const getImage = img => {
 		setImage(img);
 	};
+
+	const getUser = async () => {
+		const response = await axios.get('/user');
+		return response.data;
+	};
+
+	useEffect(() => {
+		getUser();
+	}, []);
+
 	useEffect(() => {
 		dispatch(setUser());
 	}, [dispatch]);
