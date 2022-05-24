@@ -42,12 +42,7 @@ app.use('/api/feedbacks', checkUser, feedbackRoutes);
 app.use('/api/users', authRoutes);
 
 app.get('/user', checkUser, async (req, res) => {
-	// JWT token
-	const token = req.cookies.jwt;
-	const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-	const user = await User.findById(decoded.id).select('-password');
-	res.status(200).json(user);
+	res.status(200);
 });
 
 app.get('/images/:key', (req, res) => {
