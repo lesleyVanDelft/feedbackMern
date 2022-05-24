@@ -77,8 +77,7 @@ app.post('/images', upload.single('image'), async (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-	// res.status(301).redirect('https://feedback-lesley.herokuapp.com');
-	res.status(301).redirect('http://localhost:3000/login');
+	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
 });
 
 app.get('/roadmap', getFeedbacks);
