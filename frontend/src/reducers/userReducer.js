@@ -62,18 +62,22 @@ export const loginUser = credentials => {
 
 export const registerUser = credentials => {
 	return async dispatch => {
-		const user = await authService.register(credentials);
-		storageService.saveUser(user);
+		try {
+			const user = await authService.register(credentials);
+			storageService.saveUser(user);
 
-		dispatch({
-			type: 'SIGNUP',
-			payload: user,
-		});
+			dispatch({
+				type: 'SIGNUP',
+				payload: user,
+			});
 
-		toast.info(`Welcome, ${user.username}`, {
-			autoClose: 3000,
-			icon: '🎉',
-		});
+			toast.info(`Welcome to the party, ${user.username}`, {
+				autoClose: 3000,
+				icon: '🎉',
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 };
 
@@ -91,7 +95,7 @@ export const logoutUser = () => {
 
 export const setUser = () => {
 	return async dispatch => {
-		const user = await userService.getUser();
+		// const user = await userService.getUser();
 		const loggedUser = storageService.loadUser();
 
 		if (loggedUser) {
@@ -99,12 +103,13 @@ export const setUser = () => {
 				type: 'SET_USER',
 				payload: loggedUser,
 			});
-		} else {
-			dispatch({
-				type: 'SET_USER',
-				payload: user,
-			});
 		}
+		// else {
+		// 	dispatch({
+		// 		type: 'SET_USER',
+		// 		payload: user,
+		// 	});
+		// }
 	};
 };
 
