@@ -37,9 +37,8 @@ const UserModal = ({ active, getImage }) => {
 
 	const submit = async e => {
 		e.preventDefault();
-		// const result = await postImage({ image: file });
-		const result = dispatch(setProfileImage(file));
-		setImages([...images, result.image]);
+		dispatch(setProfileImage(file));
+		// setImages([...images, result.image]);
 	};
 
 	// Pass image state to User page
@@ -62,7 +61,7 @@ const UserModal = ({ active, getImage }) => {
 			exit="exit"
 			onSubmit={submit}
 			// className={`UserModal ${active ? 'active' : ''}`}
-			className={`UserModal }`}>
+			className={`UserModal`}>
 			<input onChange={fileSelected} type="file" accept="image/*" />
 			<button type="submit">Submit</button>
 		</motion.form>

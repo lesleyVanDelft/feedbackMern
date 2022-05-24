@@ -31,11 +31,13 @@ const Homepage = () => {
 		}
 		if (user) {
 			try {
-				navigate('/');
+				// navigate('/');
 				dispatch(getFeedbacks());
 			} catch (error) {
 				console.log(error);
 			}
+		} else {
+			navigate('/login');
 		}
 
 		dispatch(setUser());

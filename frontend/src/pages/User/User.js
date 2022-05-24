@@ -48,9 +48,9 @@ const User = () => {
 		document.body.style.overflow = 'unset';
 	}, []);
 
-	useEffect(() => {
-		console.log(user.profileImg.imageId);
-	}, [dispatch, user.profileImg.imageId]);
+	// useEffect(() => {
+	// 	console.log(user.profileImg.imageId);
+	// }, [dispatch, user.profileImg.imageId]);
 
 	const initialMotion = {
 		initial: {
@@ -97,7 +97,12 @@ const User = () => {
 								/>
 							</div>
 
-							<button onClick={() => setActive(!active)} className="editImage">
+							<button
+								onClick={() => setActive(!active)}
+								// onBlur={() => {
+								// 	setActive(false);
+								// }}
+								className="editImage">
 								<GoPencil className="editSvg" /> edit profile image
 							</button>
 

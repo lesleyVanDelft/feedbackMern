@@ -18,6 +18,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/auth');
 const feedbackRoutes = require('./routes/feedback');
 const { getFeedbacks } = require('./controllers/feedback');
+const { checkUser } = require('./middleware/authMiddleware');
 const { setProfileImage } = require('./controllers/user');
 // const { setProfileImage } = require('./controllers/user');
 const User = require('./models/userModel');
@@ -36,11 +37,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan('tiny'));
 
-app.use('/api/feedbacks', feedbackRoutes);
+// checkUser sets req.user
+app.use('/api/feedbacks', checkUser, feedbackRoutes);
 app.use('/api/users', authRoutes);
 
-app.get('/user', (req, res) => {
-	res.status(301);
+app.get('/user', checkUser, (req, res) => {
+	res.status(301).redirect('http://localhost:3000/user');
 });
 
 app.get('/images/:key', (req, res) => {
@@ -50,14 +52,11 @@ app.get('/images/:key', (req, res) => {
 	readStream.pipe(res);
 });
 app.post('/images', upload.single('image'), async (req, res) => {
+	const file = req.file;
 	const token = req.cookies.jwt;
 	const decoded = jwt.verify(token, process.env.JWT_SECRET);
-	// console.log(decoded);
-	const user = await User.findById(decoded.id);
-	// console.log(user);
-	const file = req.file;
-
 	const result = await uploadFile(file);
+
 	await User.findByIdAndUpdate(decoded.id, {
 		profileImg: {
 			exists: true,
