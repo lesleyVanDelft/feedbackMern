@@ -5,9 +5,10 @@ const { protect } = require('../middleware/authMiddleware');
 const { auth } = require('../utils/middleware');
 const { getUser } = require('../controllers/user');
 
+const app = express();
 const router = express.Router();
 
-router.get('/user', getUser);
+app.get('/user', getUser);
 router.post('/login', loginUser);
 // router.get('/login', (req, res) => {
 // 	res.redirect('/login');
