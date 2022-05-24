@@ -23,6 +23,7 @@ const { setProfileImage } = require('./controllers/user');
 // const { setProfileImage } = require('./controllers/user');
 const User = require('./models/userModel');
 const { uploadFile, getFileStream } = require('./s3');
+const { auth } = require('./utils/middleware');
 
 connectDB();
 
@@ -41,8 +42,8 @@ app.use(morgan('tiny'));
 app.use('/api/feedbacks', checkUser, feedbackRoutes);
 app.use('/api/users', authRoutes);
 
-app.get('/user', checkUser, (req, res) => {
-	res.status(200).send(req.user);
+app.get('/user', auth, (req, res) => {
+	res.status(304).send(req.user);
 });
 
 app.get('/images/:key', (req, res) => {
@@ -76,7 +77,8 @@ app.post('/images', upload.single('image'), async (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-	res.status(301).redirect('https://feedback-lesley.herokuapp.com');
+	// res.status(301).redirect('https://feedback-lesley.herokuapp.com');
+	res.status(301).redirect('http://localhost:3000/login');
 });
 
 app.get('/roadmap', getFeedbacks);
