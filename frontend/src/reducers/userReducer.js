@@ -124,11 +124,19 @@ export const setProfileImage = img => {
 		const uploadedImage = await userService.postImage(img);
 		// console.log(uploadedImage.imagePath);
 		const updatedLocalStorage = {
-			...user,
-			profileImg: {
-				exists: true,
-				...user.profileImg,
-				imageId: uploadedImage.imagePath.split('/')[2],
+			// ...user,
+			// profileImg: {
+			// 	exists: true,
+			// 	...user.profileImg,
+			// 	imageId: uploadedImage.imagePath.split('/')[2],
+			// },
+			user: {
+				...user,
+				profileImg: {
+					exists: true,
+					imageLink: uploadedImage.imagePath,
+					imageId: uploadedImage.imagePath.split('/')[2],
+				},
 			},
 		};
 
