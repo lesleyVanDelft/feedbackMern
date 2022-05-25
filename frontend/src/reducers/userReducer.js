@@ -21,10 +21,7 @@ const userReducer = (state = null, action) => {
 		case 'SET_PROFILE_IMG':
 			return {
 				...state,
-				profileImg: {
-					...state.profileImg,
-					...action.payload.updatedLocalStorage,
-				},
+				profileImg: action.payload.updatedLocalStorage,
 				// imageId: (state.profileImg.imageId =
 				// 	action.payload.imagePath.split('/')[2]),
 			};
