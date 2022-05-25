@@ -20,6 +20,7 @@ const userReducer = (state = null, action) => {
 		// run build last : 23:49
 		case 'SET_PROFILE_IMG':
 			return {
+				...state,
 				profileImg: {
 					...state.profileImg,
 					...action.payload.updatedLocalStorage,
