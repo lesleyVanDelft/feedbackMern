@@ -43,8 +43,10 @@ const User = () => {
 	};
 
 	const getUser = async () => {
-		// const response = await axios.get('https://feedback-lesley.herokuapp.com/user');
-		const response = await axios.get('http://localhost:5000/user');
+		const response = await axios.get(
+			'https://feedback-lesley.herokuapp.com/user'
+		);
+		// const response = await axios.get('http://localhost:5000/user');
 		return response.data;
 	};
 

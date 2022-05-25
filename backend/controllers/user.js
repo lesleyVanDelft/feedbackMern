@@ -109,7 +109,7 @@ const setProfileImage = async key => {
 		const token = req.cookies.jwt;
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-		console.log(decoded);
+		// console.log(decoded);
 		const updatedUser = await User.findByIdAndUpdate(decoded.id, {
 			profileImg: {
 				exists: true,
