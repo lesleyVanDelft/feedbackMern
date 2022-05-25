@@ -23,9 +23,9 @@ const userReducer = (state = null, action) => {
 				...state,
 				profileImg: {
 					...state.profileImg,
-					exists: action.payload.updatedLocalStorage.exists,
-					imageLink: action.payload.updatedLocalStorage.imageLink,
-					imageId: action.payload.up,
+					exists: action.payload.exists,
+					imageLink: action.payload.imageLink,
+					imageId: action.payload.imageId,
 				},
 
 				// imageId: (state.profileImg.imageId =
