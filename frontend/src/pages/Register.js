@@ -35,7 +35,9 @@ const Register = () => {
 			dispatch(registerUser(values));
 			// dispatch(loginUser(values.email, values.password));
 
-			navigate('/');
+			setTimeout(() => {
+				navigate('/');
+			}, 150);
 		},
 	});
 

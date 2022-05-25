@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { setUser } from '../../reducers/userReducer';
+import { logoutUser } from '../../reducers/userReducer';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GoPencil } from 'react-icons/go';
 import BlankProfilePic from '../../assets/blank-profile-picture.png';
@@ -163,6 +164,12 @@ const User = () => {
 								Edit Details
 							</button>
 						</div>
+						<button
+							onClick={() => {
+								dispatch(logoutUser);
+							}}>
+							Logout
+						</button>
 					</div>
 				</div>
 
