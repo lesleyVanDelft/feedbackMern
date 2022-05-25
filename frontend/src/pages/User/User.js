@@ -19,6 +19,7 @@ const User = () => {
 	const [active, setActive] = useState(false);
 	const [imgModal, setImgModal] = useState(false);
 	const [image, setImage] = useState();
+	const [userImage, setUserImage] = useState();
 	const user = useSelector(state => state.user);
 	const feedbacks = useSelector(state => state.feedbacks);
 	const userFeedbacks = feedbacks.filter(
@@ -50,6 +51,10 @@ const User = () => {
 	useEffect(() => {
 		getUser();
 	}, []);
+
+	useEffect(() => {
+		setUserImage(user.profileImg.imageId);
+	}, [user.profileImg.imageId]);
 
 	// useEffect(() => {
 	// 	dispatch(setUser());

@@ -16,6 +16,8 @@ const userReducer = (state = null, action) => {
 			return null;
 		case 'SET_USER':
 			return action.payload;
+		//
+		// run build last : 23:49
 		case 'SET_PROFILE_IMG':
 			return {
 				...state,
