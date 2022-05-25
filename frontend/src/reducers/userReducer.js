@@ -21,10 +21,13 @@ const userReducer = (state = null, action) => {
 		case 'SET_PROFILE_IMG':
 			return {
 				...state,
-				profileImg: {
-					...state.profileImg,
-					imageId: (state.profileImg.imageId =
-						action.payload.imagePath.split('/')[2]),
+				user: {
+					...state.user,
+					profileImg: {
+						...action.payload.updatedLocalStorage,
+					},
+					// imageId: (state.profileImg.imageId =
+					// 	action.payload.imagePath.split('/')[2]),
 				},
 			};
 		// return action.payload;
@@ -130,13 +133,11 @@ export const setProfileImage = img => {
 			// 	...user.profileImg,
 			// 	imageId: uploadedImage.imagePath.split('/')[2],
 			// },
-			user: {
-				...user,
-				profileImg: {
-					exists: true,
-					imageLink: uploadedImage.imagePath,
-					imageId: uploadedImage.imagePath.split('/')[2],
-				},
+
+			profileImg: {
+				exists: true,
+				imageLink: uploadedImage.imagePath,
+				imageId: uploadedImage.imagePath.split('/')[2],
 			},
 		};
 
@@ -144,7 +145,7 @@ export const setProfileImage = img => {
 
 		dispatch({
 			type: 'SET_PROFILE_IMG',
-			payload: uploadedImage,
+			payload: updatedLocalStorage,
 		});
 	};
 };
