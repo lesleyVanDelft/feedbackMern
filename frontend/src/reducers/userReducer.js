@@ -22,10 +22,7 @@ const userReducer = (state = null, action) => {
 			return {
 				...state,
 				profileImg: {
-					...state.profileImg,
-					exists: action.payload.exists,
-					imageLink: action.payload.imageLink,
-					imageId: action.payload.imageId,
+					...action.payload,
 				},
 
 				// imageId: (state.profileImg.imageId =
