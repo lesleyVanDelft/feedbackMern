@@ -20,7 +20,7 @@ const userReducer = (state = null, action) => {
 		// run build last : 23:49
 		case 'SET_PROFILE_IMG':
 			return {
-				...state.user,
+				...state,
 				...action.payload,
 
 				// imageId: (state.profileImg.imageId =
@@ -138,7 +138,7 @@ export const setProfileImage = img => {
 			},
 		};
 
-		storageService.saveUser(updatedLocalStorage);
+		storageService.saveUser({ ...user, ...updatedLocalStorage });
 
 		dispatch({
 			type: 'SET_PROFILE_IMG',
