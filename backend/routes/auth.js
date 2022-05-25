@@ -8,7 +8,7 @@ const { getUser } = require('../controllers/user');
 const app = express();
 const router = express.Router();
 
-app.get('/user', getUser);
+router.get('/user', getUser);
 router.post('/login', loginUser);
 // router.get('/login', (req, res) => {
 // 	res.redirect('/login');

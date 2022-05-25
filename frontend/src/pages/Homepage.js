@@ -27,11 +27,11 @@ const Homepage = () => {
 	useEffect(() => {
 		if (!user) {
 			Cookies.remove('jwt', { path: '/' });
-			navigate('/login');
+			// navigate('/login');
 		}
 		if (user) {
 			try {
-				// navigate('/');
+				navigate('/');
 				dispatch(getFeedbacks());
 			} catch (error) {
 				console.log(error);
@@ -40,7 +40,7 @@ const Homepage = () => {
 			navigate('/login');
 		}
 
-		dispatch(setUser());
+		// dispatch(setUser());
 	}, []);
 
 	const initialMotion = {

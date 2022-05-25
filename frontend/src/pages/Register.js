@@ -2,11 +2,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
-import { registerUser } from '../reducers/userReducer';
+import { loginUser, registerUser } from '../reducers/userReducer';
 import { useFormik } from 'formik';
 import PageLogo from '../components/PageLogo/PageLogo';
 import * as Yup from 'yup';
 import Header from '../components/Header/Header';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
 	const formik = useFormik({
@@ -32,6 +33,8 @@ const Register = () => {
 		}),
 		onSubmit: values => {
 			dispatch(registerUser(values));
+			// dispatch(loginUser(values.email, values.password));
+
 			navigate('/');
 		},
 	});

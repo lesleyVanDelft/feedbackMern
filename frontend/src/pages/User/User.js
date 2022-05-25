@@ -41,20 +41,23 @@ const User = () => {
 		setImage(img);
 	};
 
-	// const getUser = async () => {
-	// 	// const response = await axios.get('https://feedback-lesley.herokuapp.com/user');
-	// 	const response = await axios.get('http://localhost:5000/user');
-	// 	return response.data;
-	// };
-
-	// useEffect(() => {
-	// 	getUser();
-	// }, []);
+	const getUser = async () => {
+		// const response = await axios.get('https://feedback-lesley.herokuapp.com/user');
+		const response = await axios.get('http://localhost:5000/user');
+		return response.data;
+	};
 
 	useEffect(() => {
-		dispatch(setUser());
-	}, [dispatch]);
+		getUser();
+	}, []);
 
+	// useEffect(() => {
+	// 	dispatch(setUser());
+	// }, [dispatch]);
+
+	useEffect(() => {
+		console.log(image);
+	}, [image]);
 	// Reset body overflow
 	useEffect(() => {
 		document.body.style.overflow = 'unset';

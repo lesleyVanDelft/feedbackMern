@@ -16,8 +16,8 @@ const s3 = new aws.S3({
 });
 
 const getUser = async (req, res) => {
+	const token = req.cookies.jwt;
 	try {
-		const token = req.cookies.jwt;
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
 		const user = await User.findById(decoded.id);

@@ -66,15 +66,17 @@ export const registerUser = credentials => {
 			const user = await authService.register(credentials);
 			storageService.saveUser(user);
 
-			dispatch({
-				type: 'SIGNUP',
-				payload: user,
-			});
+			if (user) {
+				dispatch({
+					type: 'SIGNUP',
+					payload: user,
+				});
 
-			toast.info(`Welcome to the party, ${user.username}`, {
-				autoClose: 3000,
-				icon: '🎉',
-			});
+				toast.info(`Welcome to the party, ${user && user.username}!`, {
+					autoClose: 3000,
+					icon: '🎉',
+				});
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -97,19 +99,13 @@ export const setUser = () => {
 	return async dispatch => {
 		// const user = await userService.getUser();
 		const loggedUser = storageService.loadUser();
-
+		// console.log(user);
 		if (loggedUser) {
 			dispatch({
 				type: 'SET_USER',
 				payload: loggedUser,
 			});
 		}
-		// else {
-		// 	dispatch({
-		// 		type: 'SET_USER',
-		// 		payload: user,
-		// 	});
-		// }
 	};
 };
 
@@ -128,6 +124,7 @@ export const setProfileImage = img => {
 		const updatedLocalStorage = {
 			...user,
 			profileImg: {
+				exists: true,
 				...user.profileImg,
 				imageId: uploadedImage.imagePath.split('/')[2],
 			},
