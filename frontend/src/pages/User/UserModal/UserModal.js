@@ -19,7 +19,6 @@ const postImage = async ({ image, description }) => {
 // Component
 const UserModal = ({ active, getImage }) => {
 	const [file, setFile] = useState();
-	const [images, setImages] = useState([]);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 
@@ -50,20 +49,34 @@ const UserModal = ({ active, getImage }) => {
 	const fileSelected = e => {
 		const file = e.target.files[0];
 		setFile(file);
+
+		dispatch(setProfileImage(file));
 	};
 
 	return (
-		<motion.form
+		<motion.div
 			variants={framerVariants}
 			initial="hidden"
 			animate="show"
 			exit="exit"
-			onSubmit={submit}
-			// className={`UserModal ${active ? 'active' : ''}`}
 			className={`UserModal`}>
-			<input onChange={fileSelected} type="file" accept="image/*" />
-			<button type="submit">Submit</button>
-		</motion.form>
+			<input
+				id="UserModal__input"
+				className="UserModal__input"
+				onChange={fileSelected}
+				type="file"
+				accept="image/*"
+			/>
+			<label htmlFor="UserModal__input" className="UserModal__labelButton">
+				<p>Upload an image...</p>
+			</label>
+
+			<div className="UserModal__delete">
+				<button className="deleteImageBtn">Delete Image</button>
+			</div>
+
+			{/* <button type="submit">Submit</button> */}
+		</motion.div>
 	);
 };
 
