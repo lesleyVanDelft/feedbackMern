@@ -18,28 +18,28 @@ const overlayVisibility = {
 	exit: { opacity: 0, right: -350 },
 };
 
-const useToggleOnFocus = (initialState = false) => {
-	const [active, toggle] = useState(initialState);
+// const useToggleOnFocus = (initialState = false) => {
+// 	const [active, toggle] = useState(initialState);
 
-	const eventHandlers = useMemo(
-		() => ({
-			onFocus: () => toggle(true),
-			onBlur: () => toggle(false),
-		}),
-		[]
-	);
+// 	const eventHandlers = useMemo(
+// 		() => ({
+// 			onFocus: () => toggle(true),
+// 			onBlur: () => toggle(false),
+// 		}),
+// 		[]
+// 	);
 
-	return [active, eventHandlers];
-};
+// 	return [active, eventHandlers];
+// };
 
 const MobileDashboard = ({ category, isVisible, logout }) => {
-	// const [userActive, setUserActive] = useState(false);
-	const [userActive, eventHandlers] = useToggleOnFocus();
+	const [userActive, setUserActive] = useState(false);
+	// const [userActive, eventHandlers] = useToggleOnFocus();
 	const user = useSelector(state => state.user);
 
-	// const handleUserClick = () => {
-	// 	setUserActive(!userActive);
-	// };
+	const handleUserClick = () => {
+		setUserActive(!userActive);
+	};
 	return (
 		<>
 			{isVisible && (
@@ -54,18 +54,19 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 						<div className="Dashboard__mobile--user">
 							<div
 								className="userWelcome"
-								// onClick={handleUserClick}
-								{...eventHandlers}>
+								onClick={handleUserClick}
+								// {...eventHandlers}
+							>
 								{/* Hi there, */}
-								{user && user.profileImg.exists && (
+								{user && user.profileImg.exists ? (
 									<img
 										src={`/images/${user.profileImg.imageId}`}
 										alt="user profile "
 									/>
-								)}
-								{user.profileImg.exist || (
+								) : null}
+								{user.profileImg.exist === false ? (
 									<img src={BlankProfileImg} alt="empty profile" />
-								)}
+								) : null}
 								<span className={`user ${userActive && 'active'}`}>
 									@{user && user.username}
 									<VscTriangleDown />
