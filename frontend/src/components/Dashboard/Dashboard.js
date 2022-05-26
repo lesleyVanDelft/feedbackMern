@@ -16,6 +16,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 	const [categoryState, setCategoryState] = useState('all');
 	const [active, setActive] = useState(false);
 	const [userActive, setUserActive] = useState(false);
+	// const [userImage, setUserImage] = useState()
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -30,7 +31,11 @@ const Dashboard = ({ category, mobileOpen }) => {
 		if (!user) {
 			return <h1>loading user</h1>;
 		}
-
+		// if(user){
+		// 	setUserImage(user.profileImg)
+		// }else{
+		// 	setUserImage(null)
+		// }
 		!active
 			? (document.body.style.overflowY = 'scroll')
 			: (document.body.style.overflowY = 'hidden');
@@ -102,15 +107,15 @@ const Dashboard = ({ category, mobileOpen }) => {
 									}
 									alt=""
 								/> */}
-								{user && user.profileImg.exists && (
+								{user && user.profileImg.exists ? (
 									<img
 										src={`/images/${user.profileImg.imageId}`}
 										alt="user profile "
 									/>
-								)}
-								{user.profileImg.exist || (
+								) : (
 									<img src={BlankProfileImg} alt="empty profile" />
 								)}
+
 								<span className={`username ${userActive && 'active'}`}>
 									{user && user.username}
 									<VscTriangleDown />

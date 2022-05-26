@@ -63,10 +63,9 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 										src={`/images/${user.profileImg.imageId}`}
 										alt="user profile "
 									/>
-								) : null}
-								{user.profileImg.exist === false ? (
+								) : (
 									<img src={BlankProfileImg} alt="empty profile" />
-								) : null}
+								)}
 								<span className={`user ${userActive && 'active'}`}>
 									@{user && user.username}
 									<VscTriangleDown />
