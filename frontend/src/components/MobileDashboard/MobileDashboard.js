@@ -3,8 +3,9 @@ import { VscTriangleDown } from 'react-icons/vsc';
 import FilterButtons from '../Dashboard/FilterButtons/FilterButtons';
 import Roadmap from '../Dashboard/Roadmap/Roadmap';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import UserDropdown from '../Dashboard/UserDropdown/UserDropdown';
+import BlankProfileImg from '../../assets/blank-profile-picture.png';
 
 const menuVisibility = {
 	hidden: { opacity: 0, right: -150 },
@@ -17,13 +18,28 @@ const overlayVisibility = {
 	exit: { opacity: 0, right: -350 },
 };
 
+const useToggleOnFocus = (initialState = false) => {
+	const [active, toggle] = useState(initialState);
+
+	const eventHandlers = useMemo(
+		() => ({
+			onFocus: () => toggle(true),
+			onBlur: () => toggle(false),
+		}),
+		[]
+	);
+
+	return [active, eventHandlers];
+};
+
 const MobileDashboard = ({ category, isVisible, logout }) => {
-	const [userActive, setUserActive] = useState(false);
+	// const [userActive, setUserActive] = useState(false);
+	const [userActive, eventHandlers] = useToggleOnFocus();
 	const user = useSelector(state => state.user);
 
-	const handleUserClick = () => {
-		setUserActive(!userActive);
-	};
+	// const handleUserClick = () => {
+	// 	setUserActive(!userActive);
+	// };
 	return (
 		<>
 			{isVisible && (
@@ -36,16 +52,20 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 						animate="visible"
 						exit="exit">
 						<div className="Dashboard__mobile--user">
-							<div className="userWelcome" onClick={handleUserClick}>
+							<div
+								className="userWelcome"
+								// onClick={handleUserClick}
+								{...eventHandlers}>
 								{/* Hi there, */}
-								<img
-									src={
-										user.profileImg.exists
-											? `/images/${user.profileImg.imageId}`
-											: ''
-									}
-									alt=""
-								/>
+								{user && user.profileImg.exists && (
+									<img
+										src={`/images/${user.profileImg.imageId}`}
+										alt="user profile "
+									/>
+								)}
+								{user.profileImg.exist || (
+									<img src={BlankProfileImg} alt="empty profile" />
+								)}
 								<span className={`user ${userActive && 'active'}`}>
 									@{user && user.username}
 									<VscTriangleDown />
