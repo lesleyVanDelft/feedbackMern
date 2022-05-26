@@ -94,14 +94,13 @@ const Dashboard = ({ category, mobileOpen }) => {
 								{/* Welcome, */}
 								<img
 									src={
-										user.profileImg.exists ? (
-											`/images/${user.profileImg.imageId}`
-										) : (
-											<BlankProfileImg />
-										)
+										user.profileImg.exists
+											? `/images/${user.profileImg.imageId}`
+											: BlankProfileImg
 									}
 									alt=""
 								/>
+
 								<span className={`username ${userActive && 'active'}`}>
 									{user && user.username}
 									<VscTriangleDown />
