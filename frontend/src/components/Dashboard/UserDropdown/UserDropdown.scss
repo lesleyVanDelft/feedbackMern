@@ -2,7 +2,7 @@
 .UserDropdown {
 	position: absolute;
 	left: 0;
-	top: 25px;
+	top: 2.8125rem;
 	min-width: 140px;
 	background-color: $white;
 	color: black;
@@ -15,7 +15,7 @@
 		list-style: none;
 
 		&--item {
-			border-bottom: 1px solid $lightBlueGray;
+			border-bottom: 1px solid lighten($color: $lightBlueGray, $amount: 40%);
 			padding: 0.5rem;
 			// border-radius: 10px;
 			font-size: 1.1rem;
@@ -43,7 +43,7 @@
 	&.mobile {
 		// right: 0;
 		left: 30%;
-		top: 55px;
+		top: 80px;
 		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.16);
 
 		.UserDropdown__list {

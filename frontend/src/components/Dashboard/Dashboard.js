@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MobileDashboard from '../MobileDashboard/MobileDashboard';
 import FilterButtons from './FilterButtons/FilterButtons';
 import Roadmap from './Roadmap/Roadmap';
+import BlankProfileImg from '../../assets/blank-profile-picture.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../../reducers/userReducer';
@@ -88,20 +89,28 @@ const Dashboard = ({ category, mobileOpen }) => {
 					animate="show"
 					className="Dashboard__desktop">
 					<motion.div variants={framerItem} className="Dashboard__logo">
-						<div className="text">
-							<h3 className="welcomeMessage text__user">
-								Welcome,
-								<span
-									className={`username ${userActive && 'active'}`}
-									onClick={handleUserClick}>
-									@{user && user.username}
+						<div className="user">
+							<div className="user__actions" onClick={handleUserClick}>
+								{/* Welcome, */}
+								<img
+									src={
+										user.profileImg.exists ? (
+											`/images/${user.profileImg.imageId}`
+										) : (
+											<BlankProfileImg />
+										)
+									}
+									alt=""
+								/>
+								<span className={`username ${userActive && 'active'}`}>
+									{user && user.username}
 									<VscTriangleDown />
 									<AnimatePresence>
 										{userActive && <UserDropdown logout={handleLogout} />}
 									</AnimatePresence>
 								</span>
-							</h3>
-							<div>
+							</div>
+							<div className="user__text">
 								<h2>Frontend Mentor</h2>
 								<p>Feedback Board</p>
 							</div>
@@ -148,7 +157,6 @@ const Dashboard = ({ category, mobileOpen }) => {
 							onClick={() => {
 								handleMobileClick();
 							}}>
-							{/* {active ? <IoCloseSharp /> : <IoMenuSharp />} */}
 							<span></span>
 							<span></span>
 							<span></span>
@@ -164,10 +172,6 @@ const Dashboard = ({ category, mobileOpen }) => {
 							/>
 						)}
 					</AnimatePresence>
-
-					{/* <AnimatePresence>
-						{active && <div className="overlay"></div>}
-					</AnimatePresence> */}
 				</div>
 			)}
 		</section>

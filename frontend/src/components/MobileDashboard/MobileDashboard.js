@@ -36,11 +36,17 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 						animate="visible"
 						exit="exit">
 						<div className="Dashboard__mobile--user">
-							<h3 className="userWelcome">
-								Hi there,
-								<span
-									className={`user ${userActive && 'active'}`}
-									onClick={handleUserClick}>
+							<div className="userWelcome" onClick={handleUserClick}>
+								{/* Hi there, */}
+								<img
+									src={
+										user.profileImg.exists
+											? `/images/${user.profileImg.imageId}`
+											: ''
+									}
+									alt=""
+								/>
+								<span className={`user ${userActive && 'active'}`}>
 									@{user && user.username}
 									<VscTriangleDown />
 									<AnimatePresence>
@@ -49,7 +55,7 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 										)}
 									</AnimatePresence>
 								</span>
-							</h3>
+							</div>
 						</div>
 						<FilterButtons category={category} />
 						<Roadmap />

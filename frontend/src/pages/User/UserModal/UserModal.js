@@ -38,7 +38,6 @@ const UserModal = ({ active, getImage }) => {
 	const submit = async e => {
 		e.preventDefault();
 		dispatch(setProfileImage(file));
-		// setImages([...images, result.image]);
 	};
 
 	// Pass image state to User page

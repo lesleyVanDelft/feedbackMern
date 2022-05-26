@@ -59,13 +59,6 @@ const User = () => {
 		setUserImage(user.profileImg.imageId);
 	}, [user.profileImg.imageId]);
 
-	// useEffect(() => {
-	// 	dispatch(setUser());
-	// }, [dispatch]);
-
-	useEffect(() => {
-		console.log(image);
-	}, [image]);
 	// Reset body overflow
 	useEffect(() => {
 		document.body.style.overflow = 'unset';
