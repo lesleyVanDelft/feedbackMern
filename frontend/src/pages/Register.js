@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
@@ -8,8 +8,14 @@ import PageLogo from '../components/PageLogo/PageLogo';
 import * as Yup from 'yup';
 import Header from '../components/Header/Header';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 const Register = () => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const user = useSelector(state => state.user);
+
+	// Register form
 	const formik = useFormik({
 		initialValues: {
 			name: '',
@@ -33,16 +39,14 @@ const Register = () => {
 		}),
 		onSubmit: values => {
 			dispatch(registerUser(values));
-			// dispatch(loginUser(values.email, values.password));
-
-			setTimeout(() => {
-				navigate('/');
-			}, 150);
 		},
 	});
 
-	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	useEffect(() => {
+		if (user) {
+			navigate('/');
+		}
+	}, [user, navigate]);
 
 	const initialMotion = {
 		initial: {
@@ -163,7 +167,6 @@ const Register = () => {
 					</button>
 				</form>
 			</section>
-			<ToastContainer autoClose={3500} />
 		</main>
 	);
 };

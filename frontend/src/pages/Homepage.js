@@ -69,8 +69,6 @@ const Homepage = () => {
 					<LoadingSpinner />
 				)}
 			</section>
-
-			<ToastContainer autoClose={2000} />
 		</motion.main>
 	);
 };

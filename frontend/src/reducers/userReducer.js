@@ -47,7 +47,7 @@ export const loginUser = credentials => {
 					payload: user,
 				});
 
-				toast.info(`Welcome, ${user.username}!`, {
+				toast.info(`Welcome back, ${user.username}!`, {
 					autoClose: 5000,
 					icon: '👋',
 				});
@@ -66,15 +66,15 @@ export const registerUser = credentials => {
 	return async dispatch => {
 		try {
 			const user = await authService.register(credentials);
-			storageService.saveUser(user);
 
 			if (user) {
+				storageService.saveUser(user);
+				await storageService.loadUser();
 				dispatch({
 					type: 'SIGNUP',
 					payload: user,
 				});
-
-				toast.info(`Welcome to the party. :)`, {
+				toast.info(`Welcome to the party, ${user.username}. :)`, {
 					autoClose: 3000,
 					icon: '🎉',
 				});
@@ -90,10 +90,7 @@ export const logoutUser = () => {
 		storageService.logoutUser();
 		Cookies.remove('jwt', { path: '/' });
 
-		dispatch({
-			type: 'LOGOUT',
-			payload: null,
-		});
+		dispatch({ type: 'LOGOUT', payload: null });
 	};
 };
 

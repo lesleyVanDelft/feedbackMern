@@ -55,34 +55,33 @@ const registerUser = async (req, res) => {
 		return res
 			.status(400)
 			.send({ message: `Email: ${email} is already registered` });
-	}
+	} else {
+		try {
+			const salt = await bcryptjs.genSalt();
+			const hashedPassword = await bcryptjs.hash(req.body.password, salt);
 
-	try {
-		const salt = await bcryptjs.genSalt();
-		const hashedPassword = await bcryptjs.hash(req.body.password, salt);
+			// Create user
+			const user = await User.create({
+				name,
+				username,
+				email,
+				password: hashedPassword,
+			});
 
-		// Create user
-		const user = await User.create({
-			name,
-			username,
-			email,
-			// username,
-			password: hashedPassword,
-		});
-
-		const token = generateToken(user);
-		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
-		return res.status(201).json({
-			name: user.name,
-			email: user.email,
-			username: user.username,
-			id: user._id,
-			profileImg: user.profileImg,
-			token,
-		});
-	} catch (err) {
-		const errors = handleError(err);
-		return res.status(500).json({ errors });
+			const token = generateToken(user);
+			res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
+			return res.status(201).json({
+				name: user.name,
+				email: user.email,
+				username: user.username,
+				id: user._id,
+				profileImg: user.profileImg,
+				token,
+			});
+		} catch (err) {
+			const errors = handleError(err);
+			return res.status(500).json({ errors });
+		}
 	}
 };
 

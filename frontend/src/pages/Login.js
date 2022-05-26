@@ -113,7 +113,6 @@ const Login = () => {
 					</button>
 				</form>
 			</section>
-			<ToastContainer />
 		</main>
 	);
 };
