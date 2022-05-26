@@ -123,7 +123,7 @@ const loginUser = async (req, res) => {
 };
 
 const logoutUser = async (req, res) => {
-	return res.cookie('jwt', '', { maxAge: 1 });
+	// return res.cookie('jwt', '', { maxAge: 1 });
 };
 
 module.exports = {

@@ -38,10 +38,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan('tiny'));
 
-// checkUser sets req.user
-app.use('/api/feedbacks', checkUser, feedbackRoutes);
-app.use('/api/users', authRoutes);
-
 // app.get('/user', auth, (req, res) => {
 // 	res.status(304).send(req.user);
 // });
@@ -75,6 +71,9 @@ app.post('/images', upload.single('image'), async (req, res) => {
 	await unlinkFile(file.path);
 	res.send({ imagePath: `/images/${result.Key}` });
 });
+// checkUser sets req.user
+app.use('/api/feedbacks', checkUser, feedbackRoutes);
+app.use('/api/users', authRoutes);
 
 app.get('/login', (req, res) => {
 	// const location = req.params.userLocation;

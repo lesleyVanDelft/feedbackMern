@@ -102,13 +102,14 @@ const Dashboard = ({ category, mobileOpen }) => {
 									}
 									alt=""
 								/> */}
-								{user.profileImg.exists ? (
+								{user && user.profileImg.exists && (
 									<img
 										src={`/images/${user.profileImg.imageId}`}
 										alt="user profile "
 									/>
-								) : (
-									<img src={BlankProfileImg} alt="blank profile" />
+								)}
+								{user.profileImg.exist || (
+									<img src={BlankProfileImg} alt="empty profile" />
 								)}
 								<span className={`username ${userActive && 'active'}`}>
 									{user && user.username}
