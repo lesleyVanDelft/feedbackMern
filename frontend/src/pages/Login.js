@@ -34,7 +34,7 @@ const Login = () => {
 		if (user) {
 			navigate('/');
 		}
-	}, [user, navigate]);
+	}, [user]);
 
 	useEffect(() => {
 		return errorMessage ? setError(errorMessage) : null;

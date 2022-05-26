@@ -92,15 +92,24 @@ const Dashboard = ({ category, mobileOpen }) => {
 						<div className="user">
 							<div className="user__actions" onClick={handleUserClick}>
 								{/* Welcome, */}
-								<img
+								{/* <img
 									src={
-										user.profileImg.exists
-											? `/images/${user.profileImg.imageId}`
-											: BlankProfileImg
+										user.profileImg.exists ? (
+											`/images/${user.profileImg.imageId}`
+										) : (
+											BlankProfileImg
+										)
 									}
 									alt=""
-								/>
-
+								/> */}
+								{user.profileImg.exists ? (
+									<img
+										src={`/images/${user.profileImg.imageId}`}
+										alt="user profile "
+									/>
+								) : (
+									<img src={BlankProfileImg} alt="blank profile" />
+								)}
 								<span className={`username ${userActive && 'active'}`}>
 									{user && user.username}
 									<VscTriangleDown />
