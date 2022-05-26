@@ -74,7 +74,7 @@ export const registerUser = credentials => {
 					payload: user,
 				});
 
-				toast.info(`Welcome to the party, ${user && user.username}!`, {
+				toast.info(`Welcome to the party. :)`, {
 					autoClose: 3000,
 					icon: '🎉',
 				});
@@ -118,32 +118,30 @@ export const setUser = () => {
 // 	}
 // }
 
+// 23:57 works now
 export const setProfileImage = img => {
 	return async dispatch => {
-		const user = storageService.loadUser();
-		const uploadedImage = await userService.postImage(img);
-		// console.log(uploadedImage.imagePath);
-		const updatedLocalStorage = {
-			// ...user,
-			// profileImg: {
-			// 	exists: true,
-			// 	...user.profileImg,
-			// 	imageId: uploadedImage.imagePath.split('/')[2],
-			// },
+		try {
+			const user = storageService.loadUser();
+			const uploadedImage = await userService.postImage(img);
 
-			profileImg: {
-				exists: true,
-				imageLink: uploadedImage.imagePath,
-				imageId: uploadedImage.imagePath.split('/')[2],
-			},
-		};
+			const updatedLocalStorage = {
+				profileImg: {
+					exists: true,
+					imageLink: uploadedImage.imagePath,
+					imageId: uploadedImage.imagePath.split('/')[2],
+				},
+			};
 
-		storageService.saveUser({ ...user, ...updatedLocalStorage });
+			storageService.saveUser({ ...user, ...updatedLocalStorage });
 
-		dispatch({
-			type: 'SET_PROFILE_IMG',
-			payload: updatedLocalStorage,
-		});
+			dispatch({
+				type: 'SET_PROFILE_IMG',
+				payload: updatedLocalStorage,
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 };
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -112,6 +113,7 @@ const Login = () => {
 					</button>
 				</form>
 			</section>
+			<ToastContainer />
 		</main>
 	);
 };
