@@ -63,7 +63,7 @@ const UserModal = ({ active, getImage }) => {
 			<input
 				id="UserModal__input"
 				className="UserModal__input"
-				onChange={e => fileSelected(e)}
+				onChange={fileSelected}
 				type="file"
 				accept="image/*"
 			/>
