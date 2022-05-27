@@ -19,21 +19,17 @@
 
 	input[type='file']::-webkit-file-upload-button {
 		visibility: hidden;
-		// display: none;
 		width: 0px;
 		height: 0px;
-		// content: 'test';
 	}
 	#UserModal__input {
 		display: none;
 	}
 
 	&__labelButton {
-		// border-bottom: 1px solid lighten($color: $darkBlue1, $amount: 20%);
 		cursor: pointer;
 		p {
 			padding: 0.7rem 1rem;
-			// background-color: orange;
 			transition: all 0.1s ease-in-out;
 			&:hover {
 				background-color: rgba(0, 0, 0, 0.09);

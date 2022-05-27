@@ -20,7 +20,6 @@ const Dashboard = ({ category, mobileOpen }) => {
 	const [active, setActive] = useState(false);
 	const [userActive, setUserActive] = useState(false);
 	const toggle = () => setUserActive(!userActive);
-	// const [userImage, setUserImage] = useState()
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -33,7 +32,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 	useEffect(
 		handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
 	);
-
+	console.log(dropdownRef);
 	useEffect(() => {
 		if (!user) {
 			return <h1>loading user</h1>;
@@ -151,7 +150,8 @@ const Dashboard = ({ category, mobileOpen }) => {
 				<div
 					className={`mobileNavigation Dashboard__mobile ${
 						active ? 'active' : null
-					}`}>
+					}`}
+					ref={dropdownRef}>
 					<div className="Dashboard__mobile--navigation">
 						<Link to="/">
 							<div className="text">
@@ -176,6 +176,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 								category={getCategoryState}
 								isVisible={active}
 								logout={handleLogout}
+								menuRef={dropdownRef}
 							/>
 						)}
 					</AnimatePresence>

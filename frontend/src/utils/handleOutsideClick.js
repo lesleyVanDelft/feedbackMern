@@ -10,8 +10,12 @@ export const handleOutsideClick = (
 		setListening(true);
 		[`click`, `touchstart`].forEach(type => {
 			document.addEventListener(`click`, e => {
-				if (dropdownRef.current.contains(e.target)) return;
-				setUserActive(false);
+				try {
+					if (dropdownRef.current.contains(e.target)) return;
+					setUserActive(false);
+				} catch (error) {
+					return null;
+				}
 			});
 		});
 	};
