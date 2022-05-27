@@ -84,7 +84,6 @@ const reducer = combineReducers({
 	feedbacks: feedbackReducer,
 	singleFeedback: feedbackPageReducer,
 	errorMessage: errorReducer,
-	profileImg: userReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

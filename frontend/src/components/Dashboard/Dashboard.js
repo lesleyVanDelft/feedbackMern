@@ -32,7 +32,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 	useEffect(
 		handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
 	);
-	console.log(dropdownRef);
+	// console.log(dropdownRef);
 	useEffect(() => {
 		if (!user) {
 			return <h1>loading user</h1>;
