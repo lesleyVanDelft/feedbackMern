@@ -157,6 +157,8 @@
 				text-transform: capitalize;
 			}
 		}
+
+		// Left side of item container - vote buttons and text content
 		.FeedbackItem__left {
 			flex-direction: column-reverse;
 			&--content {
@@ -266,6 +268,17 @@
 					align-items: center;
 					margin: 0;
 
+					button {
+						border: none;
+						font-size: 14px;
+						font-weight: bold;
+						padding: 0.5rem 0.7rem;
+						margin: 0;
+						cursor: pointer;
+						display: grid;
+						place-items: center;
+					}
+
 					svg {
 						margin-right: 0rem;
 					}
@@ -276,6 +289,15 @@
 					&__upvote {
 						border-radius: 10px 0px 0px 10px;
 						padding: 0.5rem 0.8rem;
+
+						// &:hover {
+						// 	// background-color: inherit;
+						// 	// opacity: 1;
+
+						// 	svg {
+						// 		color: $black;
+						// 	}
+						// }
 					}
 					&__downvote {
 						border-radius: 0px 10px 10px 0px;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { VscTriangleDown } from 'react-icons/vsc';
 import { useMediaQuery } from 'react-responsive';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,14 +8,18 @@ import Roadmap from './Roadmap/Roadmap';
 import BlankProfileImg from '../../assets/blank-profile-picture.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logoutUser } from '../../reducers/userReducer';
+import { logoutUser, setUser } from '../../reducers/userReducer';
 import UserDropdown from './UserDropdown/UserDropdown';
+import { handleOutsideClick } from '../../utils/handleOutsideClick';
 import './Dashboard.css';
 
 const Dashboard = ({ category, mobileOpen }) => {
+	const dropdownRef = useRef(null);
+	const [listening, setListening] = useState(false);
 	const [categoryState, setCategoryState] = useState('all');
 	const [active, setActive] = useState(false);
 	const [userActive, setUserActive] = useState(false);
+	const toggle = () => setUserActive(!userActive);
 	// const [userImage, setUserImage] = useState()
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
@@ -26,16 +30,16 @@ const Dashboard = ({ category, mobileOpen }) => {
 		query: '(max-width: 768px)',
 	});
 
-	// lock body scrolling when mobile menu is open
+	useEffect(
+		handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
+	);
+
 	useEffect(() => {
 		if (!user) {
 			return <h1>loading user</h1>;
 		}
-		// if(user){
-		// 	setUserImage(user.profileImg)
-		// }else{
-		// 	setUserImage(null)
-		// }
+
+		// lock body scrolling when mobile menu is open
 		!active
 			? (document.body.style.overflowY = 'scroll')
 			: (document.body.style.overflowY = 'hidden');
@@ -54,9 +58,9 @@ const Dashboard = ({ category, mobileOpen }) => {
 		// mobileOpen(active);
 	};
 
-	const handleUserClick = () => {
-		setUserActive(!userActive);
-	};
+	// const handleUserClick = () => {
+	// 	setUserActive();
+	// };
 
 	const handleLogout = () => {
 		setActive(false);
@@ -94,19 +98,8 @@ const Dashboard = ({ category, mobileOpen }) => {
 					animate="show"
 					className="Dashboard__desktop">
 					<motion.div variants={framerItem} className="Dashboard__logo">
-						<div className="user">
-							<div className="user__actions" onClick={handleUserClick}>
-								{/* Welcome, */}
-								{/* <img
-									src={
-										user.profileImg.exists ? (
-											`/images/${user.profileImg.imageId}`
-										) : (
-											BlankProfileImg
-										)
-									}
-									alt=""
-								/> */}
+						<div className="user" ref={dropdownRef}>
+							<div className="user__actions" onClick={toggle}>
 								{user && user.profileImg.exists ? (
 									<img
 										src={`/images/${user.profileImg.imageId}`}

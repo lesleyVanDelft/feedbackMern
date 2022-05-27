@@ -114,10 +114,11 @@ const User = () => {
 							</div>
 
 							<button
-								onClick={() => setActive(!active)}
-								// onBlur={() => {
-								// 	setActive(false);
-								// }}
+								// onClick={() =>
+								// 	active === false ? setActive(true) : setActive(false)
+								// }
+								onFocus={() => setActive(true)}
+								onBlur={() => setActive(false)}
 								className="editImage">
 								<GoPencil className="editSvg" /> edit profile image
 							</button>
