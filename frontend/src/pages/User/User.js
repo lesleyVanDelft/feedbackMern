@@ -12,13 +12,16 @@ import FeedbackItem from '../../components/FeedbackItem/FeedbackItem';
 import ImageModal from '../../components/ImageModal/ImageModal';
 import LogoBar from '../../components/LogoBar/LogoBar';
 import PageLogo from '../../components/PageLogo/PageLogo';
+import Modal from '../../components/Modal/Modal';
 import UserModal from './UserModal/UserModal';
 import './User.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const User = () => {
 	const [active, setActive] = useState(false);
 	const [imgModal, setImgModal] = useState(false);
+	const [logoutModal, setLogoutModal] = useState(false);
 	const [image, setImage] = useState();
 	const [userImage, setUserImage] = useState();
 	const user = useSelector(state => state.user);
@@ -28,6 +31,7 @@ const User = () => {
 	);
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const isMobile = useMediaQuery({
 		query: '(max-width: 768px)',
@@ -64,10 +68,6 @@ const User = () => {
 		document.body.style.overflow = 'unset';
 	}, []);
 
-	// useEffect(() => {
-	// 	console.log(user.profileImg.imageId);
-	// }, [dispatch, user.profileImg.imageId]);
-
 	const initialMotion = {
 		initial: {
 			opacity: 0,
@@ -78,6 +78,22 @@ const User = () => {
 				duration: 0.5,
 			},
 		},
+	};
+
+	const openModal = e => {
+		e.preventDefault();
+		setLogoutModal(true);
+	};
+	const closeModal = e => {
+		e.preventDefault();
+		setLogoutModal(false);
+	};
+
+	const handleLogout = () => {
+		setTimeout(() => {
+			navigate('/login');
+			dispatch(logoutUser());
+		}, 100);
 	};
 
 	return (
@@ -113,13 +129,7 @@ const User = () => {
 								/>
 							</div>
 
-							<button
-								// onClick={() =>
-								// 	active === false ? setActive(true) : setActive(false)
-								// }
-								onFocus={() => setActive(true)}
-								onBlur={() => setActive(false)}
-								className="editImage">
+							<button onClick={() => setActive(!active)} className="editImage">
 								<GoPencil className="editSvg" /> edit profile image
 							</button>
 
@@ -153,17 +163,22 @@ const User = () => {
 								Email: <span>{user ? user.email : 'not found'}</span>
 							</p>
 
-							<button disabled>
+							<button disabled className="editDetails">
 								<GoPencil />
 								Edit Details
 							</button>
+							<button onClick={openModal} className="logoutBtn">
+								Logout
+							</button>
+							<Modal
+								active={logoutModal}
+								closeModal={closeModal}
+								handleDelete={handleLogout}
+								isComment={true}
+								isReply={false}
+								param="logout"
+							/>
 						</div>
-						<button
-							onClick={() => {
-								dispatch(logoutUser);
-							}}>
-							Logout
-						</button>
 					</div>
 				</div>
 

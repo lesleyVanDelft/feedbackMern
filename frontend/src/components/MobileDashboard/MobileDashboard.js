@@ -3,7 +3,8 @@ import { VscTriangleDown } from 'react-icons/vsc';
 import FilterButtons from '../Dashboard/FilterButtons/FilterButtons';
 import Roadmap from '../Dashboard/Roadmap/Roadmap';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useMemo, useRef, useState, useEffect } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import Modal from '../Modal/Modal';
 import UserDropdown from '../Dashboard/UserDropdown/UserDropdown';
 import BlankProfileImg from '../../assets/blank-profile-picture.png';
 import { handleOutsideClick } from '../../utils/handleOutsideClick';
@@ -19,14 +20,14 @@ const overlayVisibility = {
 	exit: { opacity: 0, right: -350 },
 };
 
-const MobileDashboard = ({ category, isVisible, logout, menuRef }) => {
-	// const [userActive, setUserActive] = useState(false);
-	// const [userActive, eventHandlers] = useToggleOnFocus();
+const MobileDashboard = ({ category, isVisible, logout }) => {
 	const mobileDropdownRef = useRef(null);
 	const [listening, setListening] = useState(false);
 	const [userActive, setUserActive] = useState(false);
-	const user = useSelector(state => state.user);
 	const toggle = () => setUserActive(!userActive);
+	const [logoutModal, setLogoutModal] = useState(false);
+	const user = useSelector(state => state.user);
+	// const toggle = () => setUserActive(!userActive);
 	useEffect(
 		handleOutsideClick(
 			listening,
@@ -36,6 +37,27 @@ const MobileDashboard = ({ category, isVisible, logout, menuRef }) => {
 		)
 	);
 
+	useEffect(
+		handleOutsideClick(
+			listening,
+			setListening,
+			mobileDropdownRef,
+			setUserActive
+		)
+	);
+
+	const openModal = e => {
+		e.preventDefault();
+		setLogoutModal(true);
+	};
+	const closeModal = e => {
+		e.preventDefault();
+		setLogoutModal(false);
+	};
+
+	const handleUserClick = () => {
+		setUserActive(!userActive);
+	};
 	return (
 		<>
 			{isVisible && (
@@ -51,7 +73,10 @@ const MobileDashboard = ({ category, isVisible, logout, menuRef }) => {
 							<div
 								className="userWelcome"
 								ref={mobileDropdownRef}
-								onClick={toggle}>
+								onClick={toggle}
+
+								// {...eventHandlers}
+							>
 								{/* Hi there, */}
 								{user && user.profileImg.exists ? (
 									<img
@@ -74,9 +99,17 @@ const MobileDashboard = ({ category, isVisible, logout, menuRef }) => {
 						</div>
 						<FilterButtons category={category} />
 						<Roadmap />
-						<button className="btn btn-darkBlue" onClick={logout}>
+						<button className="btn btn-darkBlue" onClick={openModal}>
 							Log Out
 						</button>
+						<Modal
+							active={logoutModal}
+							closeModal={closeModal}
+							handleDelete={logout}
+							isComment={true}
+							isReply={false}
+							param="logout"
+						/>
 					</motion.nav>
 					<motion.div
 						className="overlay"
