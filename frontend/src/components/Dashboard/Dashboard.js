@@ -16,10 +16,10 @@ import { handleOutsideClick } from '../../utils/handleOutsideClick';
 const Dashboard = ({ category, mobileOpen }) => {
 	const dropdownRef = useRef(null);
 	const [listening, setListening] = useState(false);
-	const [categoryState, setCategoryState] = useState('all');
-	const [active, setActive] = useState(false);
 	const [userActive, setUserActive] = useState(false);
 	const toggle = () => setUserActive(!userActive);
+	const [categoryState, setCategoryState] = useState('all');
+	const [active, setActive] = useState(false);
 	// const [userImage, setUserImage] = useState()
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();

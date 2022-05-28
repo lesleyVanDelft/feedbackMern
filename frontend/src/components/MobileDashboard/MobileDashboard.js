@@ -3,9 +3,10 @@ import { VscTriangleDown } from 'react-icons/vsc';
 import FilterButtons from '../Dashboard/FilterButtons/FilterButtons';
 import Roadmap from '../Dashboard/Roadmap/Roadmap';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import UserDropdown from '../Dashboard/UserDropdown/UserDropdown';
 import BlankProfileImg from '../../assets/blank-profile-picture.png';
+import { handleOutsideClick } from '../../utils/handleOutsideClick';
 
 const menuVisibility = {
 	hidden: { opacity: 0, right: -150 },
@@ -33,9 +34,21 @@ const overlayVisibility = {
 // };
 
 const MobileDashboard = ({ category, isVisible, logout }) => {
+	const mobileDropdownRef = useRef(null);
+	const [listening, setListening] = useState(false);
 	const [userActive, setUserActive] = useState(false);
+	const toggle = () => setUserActive(!userActive);
 	// const [userActive, eventHandlers] = useToggleOnFocus();
 	const user = useSelector(state => state.user);
+
+	useEffect(
+		handleOutsideClick(
+			listening,
+			setListening,
+			mobileDropdownRef,
+			setUserActive
+		)
+	);
 
 	const handleUserClick = () => {
 		setUserActive(!userActive);
@@ -54,7 +67,9 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 						<div className="Dashboard__mobile--user">
 							<div
 								className="userWelcome"
-								onClick={handleUserClick}
+								ref={mobileDropdownRef}
+								onClick={toggle}
+
 								// {...eventHandlers}
 							>
 								{/* Hi there, */}
