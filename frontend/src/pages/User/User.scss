@@ -143,6 +143,15 @@
 							color: $white;
 						}
 					}
+					&.logoutBtn {
+						border: 1px solid $red;
+						padding: 0.5rem 1rem;
+						&:active,
+						&:hover {
+							background-color: $red;
+							color: $white;
+						}
+					}
 				}
 			}
 		}
@@ -234,8 +243,8 @@
 						font-size: 1rem;
 						border-radius: 5px;
 						padding: 0.5rem;
-						color: $black;
-						align-self: center;
+						color: $darkBlue1;
+						align-self: flex-start;
 						cursor: pointer;
 						transition: background-color 0.1s ease-in-out;
 						display: flex;
@@ -244,10 +253,15 @@
 						svg {
 							margin-right: 0.2rem;
 							font-size: 0.9rem;
-							color: $black;
+							color: $darkBlue1;
 						}
 						&:hover {
 							background-color: lighten($color: $darkBlue1, $amount: 10%);
+						}
+
+						&.logoutBtn {
+							border: 1px solid $red;
+							padding: 0.5rem 1rem;
 						}
 					}
 				}

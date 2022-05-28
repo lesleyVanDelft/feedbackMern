@@ -16,6 +16,7 @@ const Modal = ({
 						feedback: 'Are you sure you want to delete your feedback?',
 						comment: 'Are you sure you want to delete your comment?',
 						reply: 'Are you sure you want to delete your reply?',
+						logout: 'Are you sure you want to log out?',
 					}[param] || 'You are not allowed to do that. :('}
 				</h3>
 				<div className="buttons">
@@ -23,7 +24,10 @@ const Modal = ({
 						Cancel
 					</button>
 					<button className="btn btn-red" onClick={handleDelete}>
-						Delete
+						{{
+							delete: 'Delete',
+							logout: 'Logout',
+						}[param] || 'Delete'}
 					</button>
 				</div>
 			</div>
