@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { VscTriangleDown } from 'react-icons/vsc';
 import { useMediaQuery } from 'react-responsive';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,15 +11,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../../reducers/userReducer';
 import UserDropdown from './UserDropdown/UserDropdown';
 import './Dashboard.css';
+import { handleOutsideClick } from '../../utils/handleOutsideClick';
 
 const Dashboard = ({ category, mobileOpen }) => {
+	const dropdownRef = useRef(null);
+	const [listening, setListening] = useState(false);
 	const [categoryState, setCategoryState] = useState('all');
 	const [active, setActive] = useState(false);
 	const [userActive, setUserActive] = useState(false);
+	const toggle = () => setUserActive(!userActive);
 	// const [userImage, setUserImage] = useState()
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	useEffect(
+		handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
+	);
 
 	// NPM React query, check if user is on mobile
 	const isMobile = useMediaQuery({
@@ -94,8 +102,8 @@ const Dashboard = ({ category, mobileOpen }) => {
 					animate="show"
 					className="Dashboard__desktop">
 					<motion.div variants={framerItem} className="Dashboard__logo">
-						<div className="user">
-							<div className="user__actions" onClick={handleUserClick}>
+						<div className="user" ref={dropdownRef}>
+							<div className="user__actions" onClick={toggle}>
 								{/* Welcome, */}
 								{/* <img
 									src={
