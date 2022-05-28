@@ -20,20 +20,32 @@
 	height: 100%;
 	display: grid;
 	place-content: center;
-	padding-top: 1.5rem;
+	// padding-top: 1.5rem;
+	label {
+		color: $darkBlue1;
+		margin-bottom: 0.5rem;
+	}
 
 	&__form {
 		background: $white;
 		padding: 3rem 5.5rem;
+		margin-top: 1rem;
 		border-radius: 5px;
 		width: 450px;
 
 		.form-group {
 			position: relative;
+			label {
+				color: $darkBlue1;
+				padding-left: 0.2rem;
+			}
+			input {
+				margin-top: 0.4rem;
+			}
 			.formikErrorMessage {
 				position: absolute;
 				color: red;
-				bottom: 0.7rem;
+				bottom: -3px;
 				left: 5px;
 				font-size: 13px;
 				font-weight: 500;
@@ -73,7 +85,7 @@
 			border-radius: 5px;
 			font-size: 1rem;
 			padding: 0.5rem 1rem;
-			margin-bottom: 2rem;
+			margin-bottom: 1rem;
 			background: $inputGray2;
 			width: 100%;
 
@@ -138,7 +150,7 @@
 	.Login,
 	.Register {
 		width: 100%;
-		padding-top: 2rem;
+		padding-top: 1rem;
 		padding-left: 2rem;
 		padding-right: 2rem;
 		display: flex;

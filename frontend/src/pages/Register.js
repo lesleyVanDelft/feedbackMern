@@ -77,6 +77,7 @@ const Register = () => {
 						<p>Please create an account</p>
 					</div>
 					<div className="form-group">
+						<label htmlFor="name">Name: </label>
 						<input
 							autoComplete="off"
 							required
@@ -94,6 +95,7 @@ const Register = () => {
 						) : null}
 					</div>
 					<div className="form-group">
+						<label htmlFor="name">Username: </label>
 						<input
 							autoComplete="off"
 							required
@@ -111,6 +113,7 @@ const Register = () => {
 						) : null}
 					</div>
 					<div className="form-group">
+						<label htmlFor="name">Email: </label>
 						<input
 							autoComplete="off"
 							required
@@ -128,6 +131,7 @@ const Register = () => {
 						) : null}
 					</div>
 					<div className="form-group">
+						<label htmlFor="name">Password: </label>
 						<input
 							autoComplete="off"
 							required
@@ -145,6 +149,7 @@ const Register = () => {
 						) : null}
 					</div>
 					<div className="form-group">
+						<label htmlFor="name">Confirm password: </label>
 						<input
 							autoComplete="off"
 							required
