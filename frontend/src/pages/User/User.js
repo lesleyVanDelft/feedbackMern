@@ -163,7 +163,7 @@ const User = () => {
 								Email: <span>{user ? user.email : 'not found'}</span>
 							</p>
 
-							<button disabled>
+							<button disabled className="editDetails">
 								<GoPencil />
 								Edit Details
 							</button>

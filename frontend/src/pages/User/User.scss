@@ -114,12 +114,13 @@
 						font-size: 1.2rem;
 					}
 				}
-				button {
+				button.editDetails,
+				button.logoutBtn {
 					margin-top: 1.8rem;
 					text-transform: capitalize;
 					border: none;
 					background-color: transparent;
-					border: 1px solid $darkBlue1;
+
 					font-size: 1rem;
 					border-radius: 5px;
 					padding: 0.5rem;
@@ -136,6 +137,9 @@
 						font-size: 0.9rem;
 						color: $black;
 					}
+				}
+				button.editDetails {
+					outline: 1px solid $darkBlue1;
 					&:hover {
 						background-color: lighten($color: $darkBlue1, $amount: 10%);
 						color: $white;
@@ -143,14 +147,14 @@
 							color: $white;
 						}
 					}
-					&.logoutBtn {
-						border: 1px solid $red;
-						padding: 0.5rem 1rem;
-						&:active,
-						&:hover {
-							background-color: $red;
-							color: $white;
-						}
+				}
+				button.logoutBtn {
+					outline: 1px solid $red;
+					padding: 0.5rem 1rem;
+					&:active,
+					&:hover {
+						background-color: $red;
+						color: $white;
 					}
 				}
 			}
@@ -234,12 +238,11 @@
 							font-size: 1.2rem;
 						}
 					}
-					button {
+					button.editDetails {
 						margin-top: 1.8rem;
 						text-transform: capitalize;
 						border: none;
 						background-color: transparent;
-						border: 1px solid $darkBlue1;
 						font-size: 1rem;
 						border-radius: 5px;
 						padding: 0.5rem;
@@ -255,14 +258,10 @@
 							font-size: 0.9rem;
 							color: $darkBlue1;
 						}
-						&:hover {
-							background-color: lighten($color: $darkBlue1, $amount: 10%);
-						}
-
-						&.logoutBtn {
-							border: 1px solid $red;
-							padding: 0.5rem 1rem;
-						}
+					}
+					button.logoutBtn {
+						outline: 1px solid $red;
+						padding: 0.5rem 1rem;
 					}
 				}
 			}
