@@ -89,7 +89,7 @@ const RoadmapPage = () => {
 			<div className="headers">
 				<div
 					className={`headers__item ${
-						active === 'planned' ? 'orange active' : null
+						active === 'planned' ? 'orange active' : ''
 					}`}
 					onClick={() => setActive('planned')}>
 					<h4>{`Planned (${plannedFeedbacks.length})`}</h4>
@@ -97,16 +97,14 @@ const RoadmapPage = () => {
 				</div>
 				<div
 					className={`headers__item ${
-						active === 'in-progress' ? 'purple active' : null
+						active === 'in-progress' ? 'purple active' : ''
 					}`}
 					onClick={() => setActive('in-progress')}>
 					<h4>{`In-Progress (${inProgressFeedbacks.length})`}</h4>
 					<span className="description">Currently being developed</span>
 				</div>
 				<div
-					className={`headers__item ${
-						active === 'live' ? 'blue active' : null
-					}`}
+					className={`headers__item ${active === 'live' ? 'blue active' : ''}`}
 					onClick={() => setActive('live')}>
 					<h4>{`Live (${liveFeedbacks.length})`}</h4>
 					<span className="description">Released features</span>
@@ -126,8 +124,7 @@ const RoadmapPage = () => {
 				</span>
 			</div>
 			<div className="RoadmapPage__content">
-				<div
-					className={`plannedList ${active === 'planned' ? 'active' : null}`}>
+				<div className={`plannedList ${active === 'planned' ? 'active' : ''}`}>
 					<div className="list">
 						{plannedFeedbacks.length > 0 &&
 							plannedFeedbacks.map((fb, i) => {
@@ -148,7 +145,7 @@ const RoadmapPage = () => {
 
 				<div
 					className={`in-progressList ${
-						active === 'in-progress' ? 'active' : null
+						active === 'in-progress' ? 'active' : ''
 					}`}>
 					<div className="list">
 						{inProgressFeedbacks.length > 0 &&
@@ -168,7 +165,7 @@ const RoadmapPage = () => {
 					</div>
 				</div>
 
-				<div className={`liveList ${active === 'live' ? 'active' : null}`}>
+				<div className={`liveList ${active === 'live' ? 'active' : ''}`}>
 					<div className="list">
 						{liveFeedbacks.length > 0 &&
 							liveFeedbacks.map((fb, i) => {
