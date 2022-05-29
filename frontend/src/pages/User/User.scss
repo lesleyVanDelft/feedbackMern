@@ -141,6 +141,10 @@
 				}
 				button.editDetails {
 					outline: 1px solid $darkBlue1;
+					padding: 0.5rem 1rem;
+					svg {
+						margin-right: 0.3rem;
+					}
 					&:hover {
 						background-color: lighten($color: $darkBlue1, $amount: 10%);
 						color: $white;

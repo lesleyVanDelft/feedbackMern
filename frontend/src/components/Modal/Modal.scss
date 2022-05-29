@@ -52,7 +52,9 @@
 			text-align: center;
 			height: fit-content;
 			width: 85%;
+			word-break: break-word;
 			h3 {
+				word-wrap: break-word;
 				font-size: 1.2rem;
 				padding-bottom: 0.5rem;
 				padding-top: 0.5rem;

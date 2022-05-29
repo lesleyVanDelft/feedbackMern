@@ -74,8 +74,8 @@ export const registerUser = credentials => {
 					type: 'SIGNUP',
 					payload: user,
 				});
-				toast.info(`Welcome to the party, ${user.username}. :)`, {
-					autoClose: 3000,
+				toast.info(`Welcome to the team, @${user.username}! 🥳`, {
+					autoClose: 3500,
 					icon: '🎉',
 				});
 			}

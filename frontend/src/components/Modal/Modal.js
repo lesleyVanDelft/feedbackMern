@@ -16,7 +16,7 @@ const Modal = ({
 						feedback: 'Are you sure you want to delete your feedback?',
 						comment: 'Are you sure you want to delete your comment?',
 						reply: 'Are you sure you want to delete your reply?',
-						logout: 'Are you sure you want to log out?',
+						logout: 'Are you sure you want to logout?',
 					}[param] || 'You are not allowed to do that. :('}
 				</h3>
 				<div className="buttons">

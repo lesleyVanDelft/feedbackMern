@@ -39,6 +39,10 @@ const RoadmapPage = () => {
 	});
 
 	useEffect(() => {
+		document.body.style.overflow = 'unset';
+	}, []);
+
+	useEffect(() => {
 		dispatch(setUser());
 		dispatch(getFeedbacks());
 	}, [dispatch]);

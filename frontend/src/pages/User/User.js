@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
+import { FaLock } from 'react-icons/fa';
 import { setUser } from '../../reducers/userReducer';
 import { logoutUser } from '../../reducers/userReducer';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -164,8 +165,8 @@ const User = () => {
 							</p>
 
 							<button disabled className="editDetails">
-								<GoPencil />
-								Edit Details
+								<FaLock />
+								Change Password
 							</button>
 							<button onClick={openModal} className="logoutBtn">
 								Logout
