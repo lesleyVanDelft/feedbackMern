@@ -20,6 +20,7 @@ const Reply = ({
 	const [replyActive, setReplyActive] = useState(false);
 	const [repliedBy, setRepliedBy] = useState('');
 	const [showModal, setShowModal] = useState(false);
+	const [mobileDropdown, setMobileDropdown] = useState(false);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 
@@ -72,16 +73,29 @@ const Reply = ({
 						onClick={() => setReplyActive(!replyActive)}>
 						Reply
 					</button>
-					{replyData.repliedBy === user.id && !isMobile ? (
+					{replyData.repliedBy === user.id && !isMobile && (
 						<>
 							<button className="edit">edit</button>
 							<button className="delete" onClick={openModal}>
 								delete
 							</button>
 						</>
-					) : (
+					)}
+					{replyData.repliedBy === user.id && isMobile && (
 						<>
-							<BsThreeDotsVertical />
+							<BsThreeDotsVertical
+								onClick={() => {
+									setMobileDropdown(!mobileDropdown);
+								}}
+							/>
+							{mobileDropdown && (
+								<div className="dropdown">
+									<button className="edit">edit</button>
+									<button className="delete" onClick={openModal}>
+										delete
+									</button>
+								</div>
+							)}
 						</>
 					)}
 				</div>

@@ -19,6 +19,7 @@ const Comment = ({
 }) => {
 	const [replyActive, setReplyActive] = useState(false);
 	const [showModal, setShowModal] = useState(false);
+	const [mobileDropdown, setMobileDropdown] = useState(false);
 	const dispatch = useDispatch();
 
 	const setActive = actv => {
@@ -53,22 +54,34 @@ const Comment = ({
 						onClick={() => setReplyActive(!replyActive)}>
 						Reply
 					</button>
-					{commentData.commentedBy === user.id && !isMobile ? (
+					{commentData.commentedBy === user.id && !isMobile && (
 						<>
 							<button className="edit">edit</button>
 							<button className="delete" onClick={openModal}>
 								delete
 							</button>
 						</>
-					) : (
+					)}
+
+					{commentData.commentedBy === user.id && isMobile && (
 						<>
 							<BsThreeDotsVertical
 								onClick={() => {
-									console.log('hi');
+									setMobileDropdown(!mobileDropdown);
 								}}
+								className={`${mobileDropdown ? 'active' : ''}`}
 							/>
+							{mobileDropdown && (
+								<div className="dropdown">
+									<button className="edit">edit</button>
+									<button className="delete" onClick={openModal}>
+										delete
+									</button>
+								</div>
+							)}
 						</>
 					)}
+
 					<Modal
 						active={showModal}
 						closeModal={closeModal}

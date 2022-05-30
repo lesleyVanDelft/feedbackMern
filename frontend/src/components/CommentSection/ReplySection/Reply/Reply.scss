@@ -112,5 +112,33 @@
 		&__text {
 			padding-left: 0rem;
 		}
+
+		&__buttons {
+			-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			position: relative;
+			svg {
+				color: $darkBlue1;
+				font-size: 1rem;
+				opacity: 0.9;
+				margin-left: 1rem;
+			}
+			.dropdown {
+				box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+				border-radius: 5px;
+				display: flex;
+				flex-direction: column;
+				z-index: 98;
+				position: absolute;
+				right: -1rem;
+				top: 2.425rem;
+				button {
+					padding: 0.5rem 1rem;
+				}
+				button:first-of-type {
+					width: 100%;
+					border-bottom: 1px solid lighten($color: $darkBlue1, $amount: 60%);
+				}
+			}
+		}
 	}
 }
