@@ -5,6 +5,7 @@ import BlankProfilePic from '../../../../assets/blank-profile-picture.png';
 import Modal from '../../../../components/Modal/Modal';
 import './Reply.css';
 import { deleteReply } from '../../../../reducers/feedbackCommentsReducer';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 
 const Reply = ({
 	replyData,
@@ -13,6 +14,7 @@ const Reply = ({
 	setActive,
 	comment,
 	index,
+	isMobile,
 	// repliedBy,
 }) => {
 	const [replyActive, setReplyActive] = useState(false);
@@ -57,14 +59,12 @@ const Reply = ({
 			<div className="Reply__userBar">
 				<img
 					src={BlankProfilePic}
-					alt=""
-					// className="profileImage"
+					alt="empty profile img"
 					className="replyImg"
 				/>
 				<div className="Reply__usernames">
 					<h4 className="name">{replyData.name}</h4>
 					<span className="username">@{replyData.username}</span>
-					{/* {console.log(replyData.commentedBy.name)} */}
 				</div>
 				<div className="Reply__buttons">
 					<button
@@ -72,12 +72,16 @@ const Reply = ({
 						onClick={() => setReplyActive(!replyActive)}>
 						Reply
 					</button>
-					{replyData.repliedBy === user.id && (
+					{replyData.repliedBy === user.id && !isMobile ? (
 						<>
 							<button className="edit">edit</button>
 							<button className="delete" onClick={openModal}>
 								delete
 							</button>
+						</>
+					) : (
+						<>
+							<BsThreeDotsVertical />
 						</>
 					)}
 				</div>

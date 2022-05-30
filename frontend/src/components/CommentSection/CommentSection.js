@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import AddComment from './AddComment/AddComment';
 import Comment from './Comment/Comment';
 import './CommentSection.css';
@@ -8,6 +9,11 @@ const CommentSection = ({ comments, feedbackId, currentFeedback }) => {
 	const [commentCount, setCommentCount] = useState(0);
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const user = useSelector(state => state.user);
+
+	// NPM React query, check if user is on mobile
+	const isMobile = useMediaQuery({
+		query: '(max-width: 768px)',
+	});
 
 	// reduce comments and replies total length
 	const totalCommentCount = commentsArray => {
@@ -44,6 +50,7 @@ const CommentSection = ({ comments, feedbackId, currentFeedback }) => {
 							key={i}
 							user={user}
 							username={comment.username}
+							isMobile={isMobile}
 						/>
 					);
 				})}

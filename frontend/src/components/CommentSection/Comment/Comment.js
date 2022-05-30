@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import ReplySection from '../ReplySection/ReplySection';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 import Reply from '../ReplySection/Reply/Reply';
 import { useMediaQuery } from 'react-responsive';
 import BlankProfilePic from '../../../assets/blank-profile-picture.png';
@@ -9,15 +10,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../../reducers/feedbackCommentsReducer';
 import Modal from '../../Modal/Modal';
 
-const Comment = ({ commentData, currentFeedback, user, username }) => {
+const Comment = ({
+	commentData,
+	currentFeedback,
+	user,
+	username,
+	isMobile,
+}) => {
 	const [replyActive, setReplyActive] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const dispatch = useDispatch();
-
-	// NPM React query, check if user is on mobile
-	const isMobile = useMediaQuery({
-		query: '(max-width: 768px)',
-	});
 
 	const setActive = actv => {
 		setReplyActive(actv);
@@ -51,12 +53,20 @@ const Comment = ({ commentData, currentFeedback, user, username }) => {
 						onClick={() => setReplyActive(!replyActive)}>
 						Reply
 					</button>
-					{commentData.commentedBy === user.id && (
+					{commentData.commentedBy === user.id && !isMobile ? (
 						<>
 							<button className="edit">edit</button>
 							<button className="delete" onClick={openModal}>
 								delete
 							</button>
+						</>
+					) : (
+						<>
+							<BsThreeDotsVertical
+								onClick={() => {
+									console.log('hi');
+								}}
+							/>
 						</>
 					)}
 					<Modal
@@ -95,6 +105,7 @@ const Comment = ({ commentData, currentFeedback, user, username }) => {
 								index={i}
 								setActive={setActive}
 								replyToReply={true}
+								isMobile={isMobile}
 							/>
 						);
 					})}
