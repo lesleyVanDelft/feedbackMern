@@ -73,9 +73,12 @@ const Reply = ({
 						Reply
 					</button>
 					{replyData.repliedBy === user.id && (
-						<button className="delete" onClick={openModal}>
-							delete
-						</button>
+						<>
+							<button className="edit">edit</button>
+							<button className="delete" onClick={openModal}>
+								delete
+							</button>
+						</>
 					)}
 				</div>
 			</div>

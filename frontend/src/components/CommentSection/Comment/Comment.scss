@@ -16,14 +16,11 @@
 	}
 	&__usernames {
 		display: flex;
-		// flex-direction: column;
-
 		flex-wrap: wrap;
 		.name {
 			font-size: 0.875rem;
 			color: $darkBlue1;
 			text-transform: capitalize;
-			// flex-wrap: nowrap;
 		}
 		.username {
 			font-size: 0.875rem;
@@ -40,7 +37,8 @@
 			align-self: center;
 		}
 		.reply,
-		.delete {
+		.delete,
+		.edit {
 			border: none;
 			font-size: 13px;
 			background: none;
@@ -57,12 +55,11 @@
 		}
 		button.delete {
 			color: $red;
-			margin-left: 0.8rem;
-			// background: red;
-			// color: $white;
-			// opacity: 0.8;
-			padding: 0.2rem 0.4rem;
 			border-radius: 5px;
+		}
+		button.edit {
+			color: $darkBlue1;
+			margin: 0 1.2rem;
 		}
 	}
 
@@ -75,24 +72,9 @@
 	}
 
 	// replies section inside comment component
-
 	&__replies {
 		position: relative;
 		margin-left: 1.25rem;
-
-		// &::before {
-		// 	content: '';
-		// 	position: absolute;
-		// 	width: 1px;
-		// 	height: 100%;
-		// 	background: $lightBlueGray;
-		// 	opacity: 0.2;
-		// 	left: 0px;
-		// 	// top: 0;
-		// 	// bottom: 90px;
-		// 	// bottom: 38%;
-		// 	bottom: 10%;
-		// }
 	}
 }
 
@@ -105,18 +87,12 @@
 			}
 		}
 		&__text {
-			padding-left: 0rem;
-			// padding: 0;
+			padding-left: 0.4rem;
 		}
 
 		&__replies {
 			margin: 0;
-
-			// &::before {
-			// 	height: 75%;
-			// 	bottom: 25%;
-			// 	// top: 50%;
-			// }
+			padding-left: 0.7rem;
 		}
 	}
 }

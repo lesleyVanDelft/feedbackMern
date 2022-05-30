@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ReplySection from '../ReplySection/ReplySection';
 import Reply from '../ReplySection/Reply/Reply';
+import { useMediaQuery } from 'react-responsive';
 import BlankProfilePic from '../../../assets/blank-profile-picture.png';
 import ReplyForm from '../ReplyForm/ReplyForm';
 import './Comment.css';
@@ -12,6 +13,11 @@ const Comment = ({ commentData, currentFeedback, user, username }) => {
 	const [replyActive, setReplyActive] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const dispatch = useDispatch();
+
+	// NPM React query, check if user is on mobile
+	const isMobile = useMediaQuery({
+		query: '(max-width: 768px)',
+	});
 
 	const setActive = actv => {
 		setReplyActive(actv);
@@ -46,9 +52,12 @@ const Comment = ({ commentData, currentFeedback, user, username }) => {
 						Reply
 					</button>
 					{commentData.commentedBy === user.id && (
-						<button className="delete" onClick={openModal}>
-							delete
-						</button>
+						<>
+							<button className="edit">edit</button>
+							<button className="delete" onClick={openModal}>
+								delete
+							</button>
+						</>
 					)}
 					<Modal
 						active={showModal}

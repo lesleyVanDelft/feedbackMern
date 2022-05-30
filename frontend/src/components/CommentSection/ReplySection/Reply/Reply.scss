@@ -56,7 +56,8 @@
 			align-self: center;
 		}
 		.reply,
-		.delete {
+		.delete,
+		.edit {
 			border: none;
 			font-size: 13px;
 			background: none;
@@ -73,12 +74,10 @@
 		}
 		button.delete {
 			color: $red;
-			margin-left: 0.8rem;
-			// background: red;
-			// color: $white;
-			// opacity: 0.8;
-			padding: 0.2rem 0.4rem;
 			border-radius: 5px;
+		}
+		button.edit {
+			margin: 0 1.2rem;
 		}
 	}
 
