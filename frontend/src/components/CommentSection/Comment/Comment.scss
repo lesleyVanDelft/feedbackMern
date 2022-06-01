@@ -2,8 +2,21 @@
 
 .Comment {
 	width: 100%;
-	border-bottom: 1px solid rgba(128, 128, 128, 0.301);
+	height: fit-content;
+	// border-bottom: 1px solid rgba(128, 128, 128, 0.301);
 	margin-bottom: 2rem;
+	position: relative;
+	// z-index: 1;
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		background-color: $black;
+		width: 100%;
+		height: 1px;
+		// z-index: 1;
+	}
 	img {
 		width: 40px;
 		height: 40px;
@@ -76,6 +89,7 @@
 	// replies section inside comment component
 	&__replies {
 		position: relative;
+		// z-index: 99;
 		margin-left: 1.25rem;
 	}
 }
@@ -83,7 +97,11 @@
 @media screen and (max-width: 768px) {
 	.Comment {
 		padding: 0;
+		position: relative;
+		// z-index: 9;
 		&__userBar {
+			position: relative;
+			z-index: 20;
 			img {
 				margin-right: 0.9rem;
 			}
@@ -98,8 +116,20 @@
 		}
 
 		&__buttons {
-			position: relative;
-			z-index: 101;
+			// position: relative;
+
+			// &::before {
+			// 	content: '';
+			// 	position: absolute;
+			// 	width: 30px;
+			// 	height: 30px;
+			// 	background-color: rgba(0, 0, 0, 0.15);
+			// 	border-radius: 100vw;
+			// 	right: -3.5%;
+			// 	top: 12%;
+			// 	bottom: 0;
+			// 	z-index: 100;
+			// }
 			svg {
 				color: $darkBlue1;
 				font-size: 1rem;
@@ -115,8 +145,18 @@
 				right: -1rem;
 				top: 2.425rem;
 				z-index: 101;
+				background-color: white;
 				button {
 					padding: 0.7rem 1rem;
+
+					&:active {
+						background-color: darken($color: $white, $amount: 20%);
+						color: $darkBlue1;
+					}
+					&:focus,
+					&:hover {
+						color: $darkBlue1;
+					}
 				}
 				button:first-of-type {
 					width: 100%;

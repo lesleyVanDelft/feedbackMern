@@ -4,6 +4,8 @@
 	background: $white;
 	border-radius: 5px;
 	padding: 1rem 2.125rem;
+	position: relative;
+	z-index: 1;
 	svg {
 		// width: 50px;
 	}
@@ -11,6 +13,10 @@
 		color: $darkBlue1;
 		font-size: 1.225rem;
 		padding-bottom: 1.75rem;
+	}
+	&__comments {
+		position: relative;
+		z-index: 1;
 	}
 }
 

@@ -87,6 +87,9 @@ const Reply = ({
 								onClick={() => {
 									setMobileDropdown(!mobileDropdown);
 								}}
+								className={`${
+									mobileDropdown ? 'toggleDropdown active' : 'toggleDropdown'
+								}`}
 							/>
 							{mobileDropdown && (
 								<div className="dropdown">
