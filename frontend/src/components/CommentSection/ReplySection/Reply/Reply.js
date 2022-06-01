@@ -82,15 +82,14 @@ const Reply = ({
 						</>
 					)}
 					{replyData.repliedBy === user.id && isMobile && (
-						<>
-							<BsThreeDotsVertical
-								onClick={() => {
-									setMobileDropdown(!mobileDropdown);
-								}}
-								className={`${
-									mobileDropdown ? 'toggleDropdown active' : 'toggleDropdown'
-								}`}
-							/>
+						<div
+							className={`${
+								mobileDropdown ? 'dropdownToggle active' : 'dropdownToggle'
+							}`}
+							onClick={() => {
+								setMobileDropdown(!mobileDropdown);
+							}}>
+							<BsThreeDotsVertical className="toggleDropdown" />
 							{mobileDropdown && (
 								<div className="dropdown">
 									<button className="edit">edit</button>
@@ -99,7 +98,7 @@ const Reply = ({
 									</button>
 								</div>
 							)}
-						</>
+						</div>
 					)}
 				</div>
 			</div>

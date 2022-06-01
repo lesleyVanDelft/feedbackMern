@@ -64,13 +64,14 @@ const Comment = ({
 					)}
 
 					{commentData.commentedBy === user.id && isMobile && (
-						<>
-							<BsThreeDotsVertical
-								onClick={() => {
-									setMobileDropdown(!mobileDropdown);
-								}}
-								className={`${mobileDropdown ? 'active' : ''}`}
-							/>
+						<div
+							className={`${
+								mobileDropdown ? 'dropdownToggle active' : 'dropdownToggle'
+							}`}
+							onClick={() => {
+								setMobileDropdown(!mobileDropdown);
+							}}>
+							<BsThreeDotsVertical className="toggleDropdown" />
 							{mobileDropdown && (
 								<div className="dropdown">
 									<button className="edit">edit</button>
@@ -79,7 +80,7 @@ const Comment = ({
 									</button>
 								</div>
 							)}
-						</>
+						</div>
 					)}
 
 					<Modal
