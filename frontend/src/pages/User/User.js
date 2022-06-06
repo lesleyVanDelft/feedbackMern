@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { FaLock } from 'react-icons/fa';
-import { setUser } from '../../reducers/userReducer';
-import { logoutUser } from '../../reducers/userReducer';
-import { motion, AnimatePresence } from 'framer-motion';
 import { GoPencil } from 'react-icons/go';
+import { motion, AnimatePresence } from 'framer-motion';
+import { logoutUser } from '../../reducers/userReducer';
 import BlankProfilePic from '../../assets/blank-profile-picture.png';
 import BackBtn from '../../components/Buttons/BackBtn/BackBtn';
 import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
@@ -15,14 +15,14 @@ import LogoBar from '../../components/LogoBar/LogoBar';
 import PageLogo from '../../components/PageLogo/PageLogo';
 import Modal from '../../components/Modal/Modal';
 import UserModal from './UserModal/UserModal';
-import './User.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import './User.css';
 
 const User = () => {
 	const [active, setActive] = useState(false);
 	const [imgModal, setImgModal] = useState(false);
 	const [logoutModal, setLogoutModal] = useState(false);
+	const [passwordModal, setPasswordModal] = useState(false);
 	const [image, setImage] = useState();
 	const [userImage, setUserImage] = useState();
 	const user = useSelector(state => state.user);
@@ -56,6 +56,7 @@ const User = () => {
 		return response.data;
 	};
 
+	// Get current user
 	useEffect(() => {
 		getUser();
 	}, []);
@@ -69,6 +70,7 @@ const User = () => {
 		document.body.style.overflow = 'unset';
 	}, []);
 
+	// Framer motion
 	const initialMotion = {
 		initial: {
 			opacity: 0,
@@ -81,15 +83,27 @@ const User = () => {
 		},
 	};
 
-	const openModal = e => {
+	// Logout confirm  modal
+	const openLogoutModal = e => {
 		e.preventDefault();
 		setLogoutModal(true);
 	};
-	const closeModal = e => {
+	const closeLogoutModal = e => {
 		e.preventDefault();
 		setLogoutModal(false);
 	};
 
+	// Password Modal
+	const openPasswordModal = e => {
+		e.preventDefault();
+		setPasswordModal(true);
+	};
+	const closePasswordModal = e => {
+		e.preventDefault();
+		setPasswordModal(false);
+	};
+
+	// Logout handler
 	const handleLogout = () => {
 		setTimeout(() => {
 			navigate('/login');
@@ -164,21 +178,29 @@ const User = () => {
 								Email: <span>{user ? user.email : 'not found'}</span>
 							</p>
 
-							<button disabled className="editDetails">
-								<FaLock />
-								Change Password
-							</button>
-							<button onClick={openModal} className="logoutBtn">
-								Logout
-							</button>
-							<Modal
-								active={logoutModal}
-								closeModal={closeModal}
-								handleDelete={handleLogout}
-								isComment={true}
-								isReply={false}
-								param="logout"
-							/>
+							<>
+								<button className="editDetails" onClick={openPasswordModal}>
+									<FaLock />
+									Change Password
+								</button>
+								<Modal
+									active={passwordModal}
+									closeModal={closePasswordModal}
+									handleDelete={handleLogout}
+									param="password"
+								/>
+							</>
+							<>
+								<button onClick={openLogoutModal} className="logoutBtn">
+									Logout
+								</button>
+								<Modal
+									active={logoutModal}
+									closeModal={closeLogoutModal}
+									handleDelete={handleLogout}
+									param="logout"
+								/>
+							</>
 						</div>
 					</div>
 				</div>

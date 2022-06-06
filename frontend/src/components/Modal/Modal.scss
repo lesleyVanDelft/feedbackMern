@@ -67,9 +67,40 @@
 					padding: 0.7rem 1.8rem;
 					margin: 0;
 				}
-				.btn-red {
+				.btn-red,
+				.btn-blue {
 					margin-left: 0rem;
 					margin-top: 1.3rem;
+				}
+			}
+
+			.passwordForm {
+				display: flex;
+				flex-direction: column;
+
+				label {
+					text-align: left;
+					color: $lightBlueGray;
+				}
+
+				input {
+					padding: 0.3rem;
+					border-radius: 5px;
+					border: none;
+					outline: 1px solid darken($color: $darkGray, $amount: 10%);
+					margin-bottom: 0.5rem;
+					&:last-of-type {
+						margin-bottom: 2rem;
+					}
+
+					&:focus {
+						outline: 1px solid $blue;
+					}
+
+					&::placeholder {
+						opacity: 0.5;
+						padding-left: 0.3rem;
+					}
 				}
 			}
 		}

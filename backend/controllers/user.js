@@ -1,19 +1,6 @@
-const aws = require('aws-sdk');
-const multer = require('multer');
-const { uploadFile, getFileStream } = require('../s3');
 const jwt = require('jsonwebtoken');
+const bcryptjs = require('bcryptjs');
 const User = require('../models/userModel');
-
-const bucketName = process.env.AWS_BUCKET_NAME;
-const region = process.env.AWS_BUCKET_REGION;
-const accessKeyId = process.env.AWS_ACCESS_KEY;
-const secretAccessKey = process.env.AWS_SECRET_KEY;
-
-const s3 = new aws.S3({
-	accessKeyId,
-	secretAccessKey,
-	region,
-});
 
 const getUser = async (req, res) => {
 	const token = req.cookies.jwt;
@@ -123,4 +110,49 @@ const setProfileImage = async key => {
 	};
 };
 
-module.exports = { getUser, setUserAvatar, removeUserAvatar, setProfileImage };
+const changePassword = async () => {
+	return async (req, res, next) => {
+		const token = req.cookies.jwt;
+		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+		const user = await User.findById(decoded.id);
+		const password = req.body.currentPassword;
+		const newPassword = req.body.newPassword;
+
+		const currentPasswordCheck = await bcryptjs.compare(
+			user.password,
+			password
+		);
+
+		if (currentPasswordCheck && newPassword) {
+			try {
+				const salt = await bcryptjs.genSalt();
+				const hashedNewPassword = await bcryptjs.hash(newPassword, salt);
+
+				const updatedUser = await user.findByIdAndUpdate(decoded.id, {
+					password: hashedNewPassword,
+				});
+
+				res.status(200).json(updatedUser);
+			} catch (error) {
+				console.log(error);
+			}
+		} else {
+			if (currentPasswordCheck === false) {
+				res.status(403).send('Wrong password entered');
+			} else if (!newPassword) {
+				res.status(403).send('Passwords do not match');
+			}
+
+			console.log('changePassword controller');
+		}
+		next();
+	};
+};
+
+module.exports = {
+	getUser,
+	setUserAvatar,
+	removeUserAvatar,
+	setProfileImage,
+	changePassword,
+};

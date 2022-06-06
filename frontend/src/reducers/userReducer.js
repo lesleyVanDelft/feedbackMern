@@ -16,8 +16,8 @@ const userReducer = (state = null, action) => {
 			return null;
 		case 'SET_USER':
 			return action.payload;
-		//
-		// run build last : 23:49
+		case 'CHANGE_PASSWORD':
+			return;
 		case 'SET_PROFILE_IMG':
 			return {
 				...state,
@@ -74,7 +74,7 @@ export const registerUser = credentials => {
 					type: 'SIGNUP',
 					payload: user,
 				});
-				toast.info(`Welcome to the team, @${user.username}! 🥳`, {
+				toast.info(`Welcome to the team, ${user.username}! 🥳`, {
 					autoClose: 3500,
 					icon: '🎉',
 				});
@@ -108,14 +108,6 @@ export const setUser = () => {
 	};
 };
 
-// export const getUser =  () => {
-// 	return async dispatch => {
-// 		const user = await userService.getUser();
-
-// 	}
-// }
-
-// 23:57 works now
 export const setProfileImage = img => {
 	return async dispatch => {
 		try {
@@ -142,16 +134,19 @@ export const setProfileImage = img => {
 	};
 };
 
-export const setAvatar = avatarImage => {
+export const changePassword = passwordData => {
 	return async dispatch => {
-		const uploadedAvatar = await userService.uploadAvatar({ avatarImage });
-		const prevUserData = storageService.loadUser();
-		storageService.saveUser({ ...prevUserData, ...uploadedAvatar });
+		try {
+			const user = storageService.loadUser();
+			const changedPassword = await userService.changePassword(passwordData);
 
-		dispatch({
-			type: 'SET_AVATAR',
-			payload: uploadedAvatar,
-		});
+			dispatch({
+				type: 'CHANGE_PASSWORD',
+				payload: changedPassword,
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 };
 

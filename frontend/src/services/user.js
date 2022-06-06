@@ -25,6 +25,12 @@ const postImage = async img => {
 	return result.data;
 };
 
+// change password
+const changePassword = async passwordData => {
+	const response = await axios.post(API_URL + '/user', passwordData);
+	return response.data;
+};
+
 const uploadAvatar = async avatarObj => {
 	const response = await axios.post(
 		`${API_URL}/avatar`,
@@ -39,6 +45,12 @@ const removeAvatar = async () => {
 	return response.data;
 };
 
-const userService = { getUser, uploadAvatar, removeAvatar, postImage };
+const userService = {
+	getUser,
+	uploadAvatar,
+	removeAvatar,
+	postImage,
+	changePassword,
+};
 
 export default userService;
