@@ -7,6 +7,7 @@ const Modal = ({
 	isComment,
 	isReply,
 	param,
+	changePassword,
 }) => {
 	return (
 		<div className={`Modal ${active ? 'active' : ''}`}>
@@ -19,6 +20,20 @@ const Modal = ({
 						logout: 'Are you sure you want to logout?',
 					}[param] || 'You are not allowed to do that. :('}
 				</h3>
+
+				{changePassword && (
+					<form>
+						<label htmlFor="currentPassword">Enter current password:</label>
+						<input type="password" id="currentPassword" />
+
+						<label htmlFor="newPassword">Enter new password:</label>
+						<input type="password" id="newPassword" />
+
+						<label htmlFor="confirmPassword">Confirm new password:</label>
+						<input type="password" name="" id="confirmPassword" />
+					</form>
+				)}
+
 				<div className="buttons">
 					<button className="btn btn-darkBlue" onClick={closeModal}>
 						Cancel
