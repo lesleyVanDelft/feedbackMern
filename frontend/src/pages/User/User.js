@@ -17,12 +17,15 @@ import Modal from '../../components/Modal/Modal';
 import UserModal from './UserModal/UserModal';
 import axios from 'axios';
 import './User.css';
+import PasswordModal from './PasswordModal/PasswordModal';
 
 const User = () => {
 	const [active, setActive] = useState(false);
 	const [imgModal, setImgModal] = useState(false);
 	const [logoutModal, setLogoutModal] = useState(false);
 	const [passwordModal, setPasswordModal] = useState(false);
+	const [passwordData, setPasswordData] = useState('');
+
 	const [image, setImage] = useState();
 	const [userImage, setUserImage] = useState();
 	const user = useSelector(state => state.user);
@@ -48,15 +51,22 @@ const User = () => {
 		setImage(img);
 	};
 
+	// get updated password
+	const getPasswordData = data => {
+		setPasswordData(data);
+	};
+	// console.log(newPassword);
+	// ??????????????????????????????????????????????????
+
+	// Get current user
 	const getUser = async () => {
-		const response = await axios.get(
-			'https://feedback-lesley.herokuapp.com/user'
-		);
-		// const response = await axios.get('http://localhost:5000/user');
+		// const response = await axios.get(
+		// 	'https://feedback-lesley.herokuapp.com/user'
+		// );
+		const response = await axios.get(`http://localhost:5000/user/${user.id}`);
 		return response.data;
 	};
 
-	// Get current user
 	useEffect(() => {
 		getUser();
 	}, []);
@@ -99,7 +109,6 @@ const User = () => {
 		setPasswordModal(true);
 	};
 	const closePasswordModal = e => {
-		e.preventDefault();
 		setPasswordModal(false);
 	};
 
@@ -183,23 +192,34 @@ const User = () => {
 									<FaLock />
 									Change Password
 								</button>
-								<Modal
-									active={passwordModal}
-									closeModal={closePasswordModal}
-									handleDelete={handleLogout}
-									param="password"
-								/>
+								{/* {passwordModal && (
+									<Modal
+										active={passwordModal}
+										closeModal={closePasswordModal}
+										handleDelete={handleLogout}
+										getPasswordData={getPasswordData}
+										param="password"
+									/>
+								)} */}
+								{passwordModal && (
+									<PasswordModal
+										active={passwordModal}
+										closeModal={closePasswordModal}
+									/>
+								)}
 							</>
 							<>
 								<button onClick={openLogoutModal} className="logoutBtn">
 									Logout
 								</button>
-								<Modal
-									active={logoutModal}
-									closeModal={closeLogoutModal}
-									handleDelete={handleLogout}
-									param="logout"
-								/>
+								{logoutModal && (
+									<Modal
+										active={logoutModal}
+										closeModal={closeLogoutModal}
+										handleDelete={handleLogout}
+										param="logout"
+									/>
+								)}
 							</>
 						</div>
 					</div>

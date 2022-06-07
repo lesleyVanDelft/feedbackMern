@@ -19,7 +19,7 @@ const authRoutes = require('./routes/auth');
 const feedbackRoutes = require('./routes/feedback');
 const { getFeedbacks } = require('./controllers/feedback');
 const { checkUser } = require('./middleware/authMiddleware');
-const { setProfileImage } = require('./controllers/user');
+const { setProfileImage, changePassword } = require('./controllers/user');
 // const { setProfileImage } = require('./controllers/user');
 const User = require('./models/userModel');
 const { uploadFile, getFileStream } = require('./s3');
@@ -42,6 +42,7 @@ app.use(morgan('tiny'));
 // 	res.status(304).send(req.user);
 // });
 // checkUser sets req.user
+// app.post('/user', changePassword);
 app.use('/api/feedbacks', checkUser, feedbackRoutes);
 app.use('/api/users', authRoutes);
 

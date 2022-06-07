@@ -1,16 +1,18 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { token } from './auth';
 
 const API_URL = `/api/users`;
 
 const setConfig = () => {
+	const tokenCookie = Cookies.get('jwt');
 	return {
-		headers: { Authorization: `Bearer ${token}` },
+		headers: { Authorization: `Bearer ${tokenCookie}` },
 	};
 };
 
-const getUser = async () => {
-	const response = await axios.get(`${API_URL}/user`);
+const getUser = async id => {
+	const response = await axios.get(`${API_URL}/user/${id}`);
 	return response.data;
 };
 
@@ -26,8 +28,12 @@ const postImage = async img => {
 };
 
 // change password
-const changePassword = async passwordData => {
-	const response = await axios.post(API_URL + '/user', passwordData);
+const changePassword = async (id, passwordData) => {
+	const response = await axios.patch(
+		API_URL + `/${id}`,
+		passwordData,
+		setConfig()
+	);
 	return response.data;
 };
 

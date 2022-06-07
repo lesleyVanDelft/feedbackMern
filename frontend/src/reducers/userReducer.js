@@ -17,7 +17,7 @@ const userReducer = (state = null, action) => {
 		case 'SET_USER':
 			return action.payload;
 		case 'CHANGE_PASSWORD':
-			return;
+			return action.payload;
 		case 'SET_PROFILE_IMG':
 			return {
 				...state,
@@ -134,16 +134,22 @@ export const setProfileImage = img => {
 	};
 };
 
-export const changePassword = passwordData => {
+export const changePassword = (id, passwordData) => {
 	return async dispatch => {
 		try {
 			const user = storageService.loadUser();
-			const changedPassword = await userService.changePassword(passwordData);
+			const updatedUser = await userService.changePassword(id, passwordData);
 
-			dispatch({
-				type: 'CHANGE_PASSWORD',
-				payload: changedPassword,
-			});
+			if (updatedUser) {
+				dispatch({
+					type: 'CHANGE_PASSWORD',
+					payload: user,
+				});
+				toast.success(`Password changed!`, {
+					autoClose: 4000,
+					icon: '👍',
+				});
+			}
 		} catch (error) {
 			console.log(error);
 		}

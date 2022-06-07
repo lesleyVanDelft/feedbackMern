@@ -11,6 +11,7 @@ const getFeedbacks = async (req, res) => {
 		// res.status(401).send('Not allowed, no user found');
 		res.redirect(401, '/login');
 	}
+	// console.log(req.user);
 };
 
 const getSingleFeedback = async (req, res) => {

@@ -9,8 +9,11 @@ const app = express();
 const router = express.Router();
 
 // Current user
-router.get('/user', getUser);
-router.post('/user', changePassword);
+router.get('/user/:userId', getUser);
+router.patch('/:userId', changePassword);
+// router.patch('/user', (req, res) => {
+// 	console.log(req);
+// });
 // Login
 router.post('/login', loginUser);
 

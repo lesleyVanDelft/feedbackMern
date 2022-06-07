@@ -4,10 +4,13 @@ const User = require('../models/userModel');
 
 const getUser = async (req, res) => {
 	const token = req.cookies.jwt;
+
+	if (token) {
+		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
+	}
 	try {
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-		const user = await User.findById(decoded.id);
+		const user = await User.findById(req.params.userId);
 
 		res.status(200).json(user);
 	} catch (error) {
@@ -110,44 +113,70 @@ const setProfileImage = async key => {
 	};
 };
 
-const changePassword = async () => {
-	return async (req, res, next) => {
-		const token = req.cookies.jwt;
+const changePassword = async (req, res) => {
+	const token = req.cookies.jwt;
+	if (token) {
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
 		const user = await User.findById(decoded.id);
-		const password = req.body.currentPassword;
+		const currentPassword = req.body.currentPassword;
 		const newPassword = req.body.newPassword;
 
 		const currentPasswordCheck = await bcryptjs.compare(
-			user.password,
-			password
+			currentPassword,
+			user.password
 		);
 
-		if (currentPasswordCheck && newPassword) {
+		if (currentPasswordCheck) {
 			try {
 				const salt = await bcryptjs.genSalt();
 				const hashedNewPassword = await bcryptjs.hash(newPassword, salt);
 
-				const updatedUser = await user.findByIdAndUpdate(decoded.id, {
-					password: hashedNewPassword,
-				});
+				const updatedUser = await User.findByIdAndUpdate(
+					user.id,
+					{
+						password: hashedNewPassword,
+					},
+					{ new: true }
+				);
 
-				res.status(200).json(updatedUser);
+				console.log('changePassword try catch');
+
+				return res.status(200).json(updatedUser);
 			} catch (error) {
 				console.log(error);
+				res.status(403).send('Current password is incorrect');
 			}
 		} else {
-			if (currentPasswordCheck === false) {
-				res.status(403).send('Wrong password entered');
-			} else if (!newPassword) {
-				res.status(403).send('Passwords do not match');
-			}
-
-			console.log('changePassword controller');
+			console.log('entered password is wrong.');
+			res.status(403).send('Current password is wrong');
 		}
-		next();
-	};
+		// else {
+		// 	if (currentPasswordCheck === false) {
+		// 		res.status(403).send('Wrong password entered');
+		// 	} else if (!newPassword) {
+		// 		res.status(403).send('Passwords do not match');
+		// 	} else {
+		// 		console.log('changePassword controller');
+		// 	}
+		// }
+	} else {
+		console.log('No jwt token');
+		res.status(403).send('No jwt token');
+	}
 };
+
+// const changePassword = async (req, res) => {
+// 	const token = req.cookies.jwt;
+
+// 	if(token){
+// 		const updatedUser = await User.findByIdAndUpdate({})
+// 		try {
+
+// 		} catch (error) {
+
+// 		}
+// 	}
+// }
 
 module.exports = {
 	getUser,
