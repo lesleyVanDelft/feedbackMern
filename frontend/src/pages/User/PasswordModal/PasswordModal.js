@@ -43,7 +43,8 @@ const PasswordModal = ({ closeModal, active }) => {
 			),
 		}),
 		onSubmit: values => {
-			if (values.newPassword === values.confirmNewPassword) {
+			// if (values.newPassword === values.confirmNewPassword) {
+			try {
 				dispatch(
 					changePassword(user.id, {
 						currentPassword: values.currentPassword,
@@ -51,9 +52,14 @@ const PasswordModal = ({ closeModal, active }) => {
 					})
 				);
 				setPasswordChanged(true);
-			} else {
-				return null;
+			} catch (error) {
+				console.log(error);
+				setPasswordChanged(false);
 			}
+			// setPasswordChanged(true);
+			// } else {
+			// 	return setPasswordChanged(false);
+			// }
 		},
 	});
 
@@ -67,7 +73,7 @@ const PasswordModal = ({ closeModal, active }) => {
 		} else {
 			setPasswordChanged(false);
 		}
-	}, [closeModal, passwordChanged]);
+	}, [passwordChanged]);
 
 	// const handleSubmit = e => {
 	// 	e.preventDefault();

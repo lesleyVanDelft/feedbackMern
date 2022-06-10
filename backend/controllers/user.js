@@ -144,11 +144,11 @@ const changePassword = async (req, res) => {
 				return res.status(200).json(updatedUser);
 			} catch (error) {
 				console.log(error);
-				res.status(403).send('Current password is incorrect');
+				res.status(401).send('Current password is incorrect');
 			}
 		} else {
 			console.log('entered password is wrong.');
-			res.status(403).send('Current password is wrong');
+			res.status(401).send('Current password is wrong');
 		}
 		// else {
 		// 	if (currentPasswordCheck === false) {

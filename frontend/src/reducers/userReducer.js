@@ -149,6 +149,8 @@ export const changePassword = (id, passwordData) => {
 					autoClose: 4000,
 					icon: '👍',
 				});
+			} else {
+				console.log('error userreducer');
 			}
 		} catch (error) {
 			console.log(error);
