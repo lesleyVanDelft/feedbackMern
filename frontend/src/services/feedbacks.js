@@ -118,8 +118,8 @@ const postReply = async (feedbackId, commentId, replyObj) => {
 const updateComment = async (feedbackId, commentId, commentObj) => {
 	const response = await axios.patch(
 		`${API_URL}/${feedbackId}/comment/${commentId}`,
-		commentObj
-		// setConfig()
+		commentObj,
+		setConfig()
 	);
 	return response.data;
 };
@@ -137,8 +137,8 @@ const removeComment = async (feedbackId, commentId) => {
 const updateReply = async (feedbackId, commentId, replyId, replyObj) => {
 	const response = await axios.patch(
 		`${API_URL}/${feedbackId}/comment/${commentId}/reply/${replyId}`,
-		replyObj
-		// setConfig()
+		replyObj,
+		setConfig()
 	);
 	return response.data;
 };

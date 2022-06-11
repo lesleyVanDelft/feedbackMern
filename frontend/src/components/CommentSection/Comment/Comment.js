@@ -4,11 +4,15 @@ import Reply from '../ReplySection/Reply/Reply';
 import BlankProfilePic from '../../../assets/blank-profile-picture.png';
 import ReplyForm from '../ReplyForm/ReplyForm';
 import { useDispatch } from 'react-redux';
-import { deleteComment } from '../../../reducers/feedbackCommentsReducer';
+import {
+	deleteComment,
+	editComment,
+} from '../../../reducers/feedbackCommentsReducer';
 import Modal from '../../Modal/Modal';
 import DropdownEdit from '../DropdownEdit/DropdownEdit';
 import { handleOutsideClick } from '../../../utils/handleOutsideClick';
 import './Comment.css';
+import { useParams } from 'react-router-dom';
 
 const Comment = ({
 	commentData,
@@ -22,6 +26,9 @@ const Comment = ({
 	const [mobileDropdown, setMobileDropdown] = useState(false);
 	const [editActive, setEditActive] = useState(false);
 	const [editValue, setEditValue] = useState(commentData.commentBody);
+	// const [replyEditValue, setReplyActiveValue] = useState(commentData.replies);
+	// console.log(commentData.replie);
+	let { id } = useParams;
 	const dispatch = useDispatch();
 
 	// Outside click handling
@@ -31,6 +38,13 @@ const Comment = ({
 	useEffect(
 		handleOutsideClick(listening, setListening, dropdownRef, setMobileDropdown)
 	);
+	useEffect(() => {
+		setEditValue(commentData.commentBody);
+	}, [commentData.commentBody]);
+
+	// useEffect(() => {
+	// 	setReplyActiveValue(commentData.replies);
+	// }, [commentData.replies]);
 
 	// Set Edit active state through dropdown menu
 	const setEdit = edt => {
@@ -45,8 +59,18 @@ const Comment = ({
 	// Edit form submit handler
 	const handleSubmit = e => {
 		e.preventDefault();
-		alert(editValue);
+		try {
+			dispatch(
+				editComment(currentFeedback._id, commentData._id, {
+					editValue,
+				})
+			);
+		} catch (error) {
+			console.log(error);
+		}
+		setEditActive(false);
 	};
+	// console.log(currentFeedback._id);
 
 	// Set Reply active
 	const setActive = actv => {
@@ -124,7 +148,7 @@ const Comment = ({
 			</div>
 
 			{editActive === false ? (
-				<p className="Comment__text">{commentData.commentBody}</p>
+				<p className="Comment__text">{editValue}</p>
 			) : (
 				<form className="EditForm" onSubmit={handleSubmit}>
 					<textarea
@@ -175,6 +199,8 @@ const Comment = ({
 								setActive={setActive}
 								replyToReply={true}
 								isMobile={isMobile}
+								edit={setEdit}
+								// replyEditValue={replyEditValue}
 							/>
 						);
 					})}

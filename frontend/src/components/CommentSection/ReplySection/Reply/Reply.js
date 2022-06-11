@@ -4,7 +4,10 @@ import ReplyForm from '../../ReplyForm/ReplyForm';
 import BlankProfilePic from '../../../../assets/blank-profile-picture.png';
 import Modal from '../../../../components/Modal/Modal';
 import './Reply.css';
-import { deleteReply } from '../../../../reducers/feedbackCommentsReducer';
+import {
+	deleteReply,
+	editReply,
+} from '../../../../reducers/feedbackCommentsReducer';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import DropdownEdit from '../../DropdownEdit/DropdownEdit';
 import { handleOutsideClick } from '../../../../utils/handleOutsideClick';
@@ -17,20 +20,64 @@ const Reply = ({
 	comment,
 	index,
 	isMobile,
+	edit,
+	// replyEditValue,
 	// repliedBy,
 }) => {
 	const [replyActive, setReplyActive] = useState(false);
 	const [repliedBy, setRepliedBy] = useState('');
 	const [showModal, setShowModal] = useState(false);
 	const [mobileDropdown, setMobileDropdown] = useState(false);
+	const [editActive, setEditActive] = useState(false);
+	const [editValue, setEditValue] = useState(replyData.replyBody);
 	const user = useSelector(state => state.user);
+	// const singleFeedback = useSelector(state => state.singleFeedback)
+
 	const dispatch = useDispatch();
+
+	// Set Edit active state through dropdown menu
+	const setEdit = edt => {
+		setEditActive(edt);
+	};
+	// useRef outside click handle
 	const dropdownRef = useRef(null);
 	const [listening, setListening] = useState(false);
 	const toggle = () => setMobileDropdown(!mobileDropdown);
+
+	// text trim
+	const replyingTo = replyData.replyBody.split(' ')[0];
+	const trimmedText = replyData.replyBody.split(' ').slice(1).join(' ');
+
 	useEffect(
 		handleOutsideClick(listening, setListening, dropdownRef, setMobileDropdown)
 	);
+	useEffect(() => {
+		// console.log(replyData);
+		setEditValue(replyData.replyBody);
+	}, [replyData.replyBody]);
+
+	// Edit change handler
+	const editChangeHandler = e => {
+		setEditValue(e.target.value);
+	};
+
+	// Edit form submit handler
+	const handleSubmit = e => {
+		e.preventDefault();
+		try {
+			dispatch(
+				editReply(currentFeedback._id, comment._id, replyData._id, {
+					editValue,
+				})
+			);
+			// alert(editValue);
+		} catch (error) {
+			console.log(error);
+		}
+		setEditActive(false);
+		// console.log(editValue);
+		// console.log(replyEditValue);
+	};
 
 	const handleDelete = () => {
 		dispatch(deleteReply(currentFeedback._id, comment._id, replyData._id));
@@ -52,8 +99,9 @@ const Reply = ({
 		setShowModal(false);
 	};
 
-	const replyingTo = replyData.replyBody.split(' ')[0];
-	const trimmedText = replyData.replyBody.split(' ').slice(1).join(' ');
+	// useEffect(() => {
+
+	// }, [])
 
 	return (
 		<article className="Reply">
@@ -101,20 +149,48 @@ const Reply = ({
 							ref={dropdownRef}
 							onClick={toggle}>
 							<BsThreeDotsVertical className="toggleDropdown" />
-							{mobileDropdown && <DropdownEdit openModal={openModal} />}
+							{mobileDropdown && (
+								<DropdownEdit openModal={openModal} edit={setEdit} />
+							)}
 						</div>
 					)}
 				</div>
 			</div>
-			<p className="Reply__text">
-				{replyData.replyBody.split(' ')[0].includes('@') ? (
-					<span className="replyingTo">{replyingTo}</span>
-				) : (
-					replyData.replyBody.split(' ')[0]
-				)}
 
-				{trimmedText}
-			</p>
+			{editActive === false ? (
+				<p className="Reply__text">
+					{replyData.replyBody.split(' ')[0].includes('@') ? (
+						<span className="replyingTo">{replyingTo}</span>
+					) : (
+						replyData.replyBody.split(' ')[0]
+					)}
+
+					{trimmedText}
+				</p>
+			) : (
+				<form className="EditForm" onSubmit={handleSubmit}>
+					<textarea
+						className="EditForm__input"
+						type="text"
+						name="commentText"
+						// value={commentData.commentBody}
+						value={editValue}
+						onChange={editChangeHandler}
+					/>
+					<button
+						className="btn btn-darkBlue"
+						type="button"
+						onClick={() => {
+							setEditActive(false);
+							setEditValue(replyData.replyBody);
+						}}>
+						Cancel
+					</button>
+					<button className="btn btn-purple" type="submit">
+						Submit Changes
+					</button>
+				</form>
+			)}
 
 			{replyActive && (
 				<ReplyForm

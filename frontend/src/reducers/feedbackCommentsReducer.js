@@ -52,12 +52,13 @@ const feedbackPageReducer = (state = null, action) => {
 			};
 
 		case 'EDIT_COMMENT':
+			// console.log(action.payload.commentBody.editValue);
 			return {
 				...state,
-				...state.feedbackComments.comments.map(c =>
-					c.id !== action.payload.commentId
-						? c
-						: { ...c, ...action.payload.data }
+				...state.comments.map(comment =>
+					comment.id !== action.payload.commentId
+						? comment
+						: { ...comment, ...action.payload.commentBody }
 				),
 			};
 		case 'DELETE_COMMENT':
@@ -68,21 +69,22 @@ const feedbackPageReducer = (state = null, action) => {
 				),
 			};
 		case 'EDIT_REPLY':
+			console.log(action.payload.replyBody.editValue);
 			return {
 				...state,
-				comments: state.comments.map(c =>
-					c.id !== action.payload.commentId
-						? c
+				comments: state.comments.map(comment =>
+					comment.id !== action.payload.commentId
+						? comment
 						: {
-								...c,
-								replies: c.replies.map(r =>
-									r.id !== action.payload.replyId
-										? r
-										: { ...r, ...action.payload.data }
+								replies: comment.replies.map(reply =>
+									reply.id !== action.payload.replyId
+										? reply
+										: { ...reply, ...action.payload.replyBody.editValue }
 								),
 						  }
 				),
 			};
+
 		case 'DELETE_REPLY':
 			return {
 				...state,
@@ -172,11 +174,16 @@ export const addReply = (feedbackId, commentId, reply) => {
 export const editComment = (feedbackId, commentId, comment) => {
 	return async dispatch => {
 		await feedbackService.updateComment(feedbackId, commentId, { comment });
-		const updatedAt = Date.now();
+		// const updatedAt = Date.now();
 
 		dispatch({
 			type: 'EDIT_COMMENT',
-			payload: { commentId, data: { updatedAt, commentBody: comment } },
+			payload: { commentId, commentBody: comment },
+		});
+
+		toast.success('Comment updated!', {
+			icon: '👍',
+			autoClose: 2000,
 		});
 	};
 };
@@ -201,11 +208,15 @@ export const editReply = (feedbackId, commentId, replyId, reply) => {
 		await feedbackService.updateReply(feedbackId, commentId, replyId, {
 			reply,
 		});
-		const updatedAt = Date.now();
+		// const updatedAt = Date.now();
 
 		dispatch({
 			type: 'EDIT_REPLY',
-			payload: { commentId, replyId, data: { updatedAt, replyBody: reply } },
+			payload: { commentId, replyId, replyBody: reply },
+		});
+		toast.success('Reply updated!', {
+			icon: '👍',
+			autoClose: 2000,
 		});
 	};
 };

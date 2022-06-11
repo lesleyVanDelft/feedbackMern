@@ -1,6 +1,7 @@
 const Feedback = require('../models/feedbackModel');
 const User = require('../models/userModel');
 const numOfComments = require('../utils/numOfComments');
+const jwt = require('jsonwebtoken');
 
 const postComment = async (req, res) => {
 	const { id } = req.params;
@@ -93,13 +94,15 @@ const deleteComment = async (req, res) => {
 const updateComment = async (req, res) => {
 	const { id, commentId } = req.params;
 	const { comment } = req.body;
+	const token = req.cookies.jwt;
+	const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
 	if (!comment) {
 		return res.status(400).send({ message: `Comment body can't be empty.` });
 	}
 
 	const feedback = await Feedback.findById(id);
-	const user = await User.findById(feedback.author);
+	const user = await User.findById(decoded.id);
 
 	if (!feedback) {
 		return res.status(404).send({
@@ -114,28 +117,34 @@ const updateComment = async (req, res) => {
 	}
 
 	const targetComment = feedback.comments.find(
-		c => c._id.toString() === commentId
+		comment => comment._id.toString() === commentId
 	);
+	// console.log(req.body.comment.editValue);
 
 	if (!targetComment) {
 		return res.status(404).send({
-			message: `Comment with ID: '${commentId}'  does not exist in database.`,
+			message: `Comment with ID: '${commentId}' does not exist in database.`,
 		});
 	}
 
 	if (targetComment.commentedBy.toString() !== user._id.toString()) {
 		return res.status(401).send({ message: 'Access is denied.' });
 	}
+	// const updatedComment = feedback.comments.findByIdAndUpdate(
+	// 	targetComment._id,
+	// 	comment.editValue,
+	// 	{ new: true }
+	// );
 
-	targetComment.commentBody = comment;
-	targetComment.updatedAt = Date.now();
+	targetComment.commentBody = comment.editValue;
+	// targetComment.updatedAt = Date.now();
 
-	feedback.comments = feedback.comments.map(c =>
-		c._id.toString() !== commentId ? c : targetComment
+	feedback.comments = feedback.comments.map(comment =>
+		comment._id.toString() !== commentId ? comment : targetComment
 	);
 
 	await feedback.save();
-	res.status(202).end();
+	res.status(202).send('hi');
 };
 
 // const postComment = async (req, res) => {
@@ -323,13 +332,15 @@ const deleteReply = async (req, res) => {
 const updateReply = async (req, res) => {
 	const { id, commentId, replyId } = req.params;
 	const { reply } = req.body;
+	const token = req.cookies.jwt;
+	const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
 	if (!reply) {
 		return res.status(400).send({ message: `Reply body can't be empty.` });
 	}
 
 	const feedback = await Feedback.findById(id);
-	const user = await User.findById(feedback.author);
+	const user = await User.findById(decoded.id);
 
 	if (!feedback) {
 		return res.status(404).send({
@@ -344,7 +355,7 @@ const updateReply = async (req, res) => {
 	}
 
 	const targetComment = feedback.comments.find(
-		c => c._id.toString() === commentId
+		comment => comment._id.toString() === commentId
 	);
 
 	if (!targetComment) {
@@ -354,7 +365,7 @@ const updateReply = async (req, res) => {
 	}
 
 	const targetReply = targetComment.replies.find(
-		r => r._id.toString() === replyId
+		reply => reply._id.toString() === replyId
 	);
 
 	if (!targetReply) {
@@ -367,19 +378,19 @@ const updateReply = async (req, res) => {
 		return res.status(401).send({ message: 'Access is denied.' });
 	}
 
-	targetReply.replyBody = reply;
-	targetReply.updatedAt = Date.now();
+	targetReply.replyBody = reply.editValue;
+	// targetReply.updatedAt = Date.now();
 
-	targetComment.replies = targetComment.replies.map(r =>
-		r._id.toString() !== replyId ? r : targetReply
+	targetComment.replies = targetComment.replies.map(reply =>
+		reply._id.toString() !== replyId ? reply : targetReply
 	);
 
-	feedback.comments = feedback.comments.map(c =>
-		c._id.toString() !== commentId ? c : targetComment
+	feedback.comments = feedback.comments.map(comment =>
+		comment._id.toString() !== commentId ? comment : targetComment
 	);
 
 	await feedback.save();
-	res.status(202).end();
+	res.status(202).send('reply updated');
 };
 
 module.exports = {
