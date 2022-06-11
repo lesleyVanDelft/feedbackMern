@@ -56,9 +56,9 @@ const Comment = ({
 					</button>
 					{commentData.commentedBy === user.id && !isMobile && (
 						<>
-							<button className="edit">edit</button>
+							<button className="edit">Edit</button>
 							<button className="delete" onClick={openModal}>
-								delete
+								Delete
 							</button>
 						</>
 					)}
@@ -74,9 +74,9 @@ const Comment = ({
 							<BsThreeDotsVertical className="toggleDropdown" />
 							{mobileDropdown && (
 								<div className="dropdown">
-									<button className="edit">edit</button>
+									<button className="edit">Edit</button>
 									<button className="delete" onClick={openModal}>
-										delete
+										Delete
 									</button>
 								</div>
 							)}
