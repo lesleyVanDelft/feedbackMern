@@ -95,6 +95,7 @@
 @media screen and (max-width: 768px) {
 	.Reply {
 		padding-left: 1rem;
+		z-index: 100;
 
 		&::before {
 			height: 75%;
@@ -132,7 +133,7 @@
 					height: 100%;
 					// position: relative;
 					// z-index: 100;\
-					transition: color 0.3s ease-in-out;
+					transition: color 0.2s ease-in-out;
 				}
 				&::before {
 					content: '';
@@ -175,7 +176,7 @@
 				top: 2.425rem;
 				background-color: $white;
 				button {
-					padding: 0.7rem 1rem;
+					padding: 0.8rem 1.3rem;
 				}
 				button:first-of-type {
 					width: 100%;
