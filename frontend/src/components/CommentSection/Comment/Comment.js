@@ -42,6 +42,12 @@ const Comment = ({
 		setEditValue(e.target.value);
 	};
 
+	// Edit form submit handler
+	const handleSubmit = e => {
+		e.preventDefault();
+		alert(editValue);
+	};
+
 	// Set Reply active
 	const setActive = actv => {
 		setReplyActive(actv);
@@ -120,7 +126,7 @@ const Comment = ({
 			{editActive === false ? (
 				<p className="Comment__text">{commentData.commentBody}</p>
 			) : (
-				<form className="EditForm">
+				<form className="EditForm" onSubmit={handleSubmit}>
 					<textarea
 						className="EditForm__input"
 						type="text"
@@ -131,13 +137,16 @@ const Comment = ({
 					/>
 					<button
 						className="btn btn-darkBlue"
+						type="button"
 						onClick={() => {
 							setEditActive(false);
 							setEditValue(commentData.commentBody);
 						}}>
 						Cancel
 					</button>
-					<button className="btn btn-purple">Submit Changes</button>
+					<button className="btn btn-purple" type="submit">
+						Submit Changes
+					</button>
 				</form>
 			)}
 
