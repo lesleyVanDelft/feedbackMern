@@ -67,7 +67,11 @@ const Reply = ({
 			/>
 			<div className="Reply__userBar">
 				<img
-					src={BlankProfilePic}
+					src={
+						user.profileImg.exists && replyData.repliedBy === user.id
+							? `/images/${user.profileImg.imageId}`
+							: BlankProfilePic
+					}
 					alt="empty profile img"
 					className="replyImg"
 				/>

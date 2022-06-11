@@ -18,17 +18,18 @@
 	img {
 		width: 40px;
 		height: 40px;
-		border-radius: 50vh;
+		object-fit: cover;
+		border-radius: 100vh;
 		margin-right: 2rem;
 	}
 
 	&__userBar {
 		display: flex;
+		width: 100%;
 	}
 	&__usernames {
 		display: flex;
 		// flex-direction: column;
-
 		flex-wrap: wrap;
 		.name {
 			font-size: 0.875rem;
@@ -106,8 +107,11 @@
 			z-index: 20;
 
 			// User profile image
-			img.replyImg {
+			.replyImg {
 				margin-right: 0.8rem;
+				width: 40px;
+				height: 40px;
+				object-fit: cover;
 			}
 		}
 		&__text {

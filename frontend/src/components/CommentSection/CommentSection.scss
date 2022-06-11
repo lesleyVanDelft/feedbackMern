@@ -18,6 +18,38 @@
 		position: relative;
 		z-index: 1;
 	}
+
+	.EditForm {
+		display: flex;
+		flex-direction: column;
+
+		&__input {
+			border: none;
+			border-radius: 5px;
+			background-color: $lightGray;
+			// padding-top: 0.3rem;
+			padding-bottom: 2rem;
+			padding-left: 0.4rem;
+			margin-top: 0.70625rem;
+			padding-top: 0.35rem;
+			color: $lightBlueGray;
+			font-size: 0.9375rem;
+			// padding-left: 4.5rem;
+			// padding-top: 1.0625rem;
+			// padding-bottom: 1.5rem;
+
+			&:focus {
+				outline: 1px solid $blue;
+			}
+		}
+
+		button {
+			margin-top: 1rem;
+			&:last-of-type {
+				margin-bottom: 1rem;
+			}
+		}
+	}
 }
 
 @media screen and (max-width: 768px) {

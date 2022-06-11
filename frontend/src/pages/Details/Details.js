@@ -94,7 +94,7 @@ const Details = () => {
 			) : (
 				<LoadingSpinner />
 			)}
-			<ToastContainer />
+			{/* <ToastContainer /> */}
 		</>
 	);
 };
