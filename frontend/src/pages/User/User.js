@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
@@ -18,6 +18,7 @@ import UserModal from './UserModal/UserModal';
 import axios from 'axios';
 import './User.css';
 import PasswordModal from './PasswordModal/PasswordModal';
+import { handleOutsideClick } from '../../utils/handleOutsideClick';
 
 const User = () => {
 	const [active, setActive] = useState(false);
@@ -25,6 +26,14 @@ const User = () => {
 	const [logoutModal, setLogoutModal] = useState(false);
 	const [passwordModal, setPasswordModal] = useState(false);
 	const [passwordData, setPasswordData] = useState('');
+
+	const dropdownRef = useRef(null);
+	const [listening, setListening] = useState(false);
+	// const [userActive, setUserActive] = useState(false);
+	const toggle = () => setActive(!active);
+	useEffect(
+		handleOutsideClick(listening, setListening, dropdownRef, setActive)
+	);
 
 	const [image, setImage] = useState();
 	const [userImage, setUserImage] = useState();
@@ -55,8 +64,6 @@ const User = () => {
 	const getPasswordData = data => {
 		setPasswordData(data);
 	};
-	// console.log(newPassword);
-	// ??????????????????????????????????????????????????
 
 	// Get current user
 	const getUser = async () => {
@@ -153,7 +160,7 @@ const User = () => {
 								/>
 							</div>
 
-							<button onClick={() => setActive(!active)} className="editImage">
+							<button onClick={toggle} className="editImage" ref={dropdownRef}>
 								<GoPencil className="editSvg" /> edit profile image
 							</button>
 

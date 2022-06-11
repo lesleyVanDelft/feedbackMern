@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReplyForm from '../../ReplyForm/ReplyForm';
 import BlankProfilePic from '../../../../assets/blank-profile-picture.png';
@@ -6,6 +6,8 @@ import Modal from '../../../../components/Modal/Modal';
 import './Reply.css';
 import { deleteReply } from '../../../../reducers/feedbackCommentsReducer';
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import DropdownEdit from '../../DropdownEdit/DropdownEdit';
+import { handleOutsideClick } from '../../../../utils/handleOutsideClick';
 
 const Reply = ({
 	replyData,
@@ -23,6 +25,12 @@ const Reply = ({
 	const [mobileDropdown, setMobileDropdown] = useState(false);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
+	const dropdownRef = useRef(null);
+	const [listening, setListening] = useState(false);
+	const toggle = () => setMobileDropdown(!mobileDropdown);
+	useEffect(
+		handleOutsideClick(listening, setListening, dropdownRef, setMobileDropdown)
+	);
 
 	const handleDelete = () => {
 		dispatch(deleteReply(currentFeedback._id, comment._id, replyData._id));
@@ -86,18 +94,10 @@ const Reply = ({
 							className={`${
 								mobileDropdown ? 'dropdownToggle active' : 'dropdownToggle'
 							}`}
-							onClick={() => {
-								setMobileDropdown(!mobileDropdown);
-							}}>
+							ref={dropdownRef}
+							onClick={toggle}>
 							<BsThreeDotsVertical className="toggleDropdown" />
-							{mobileDropdown && (
-								<div className="dropdown">
-									<button className="edit">edit</button>
-									<button className="delete" onClick={openModal}>
-										delete
-									</button>
-								</div>
-							)}
+							{mobileDropdown && <DropdownEdit openModal={openModal} />}
 						</div>
 					)}
 				</div>

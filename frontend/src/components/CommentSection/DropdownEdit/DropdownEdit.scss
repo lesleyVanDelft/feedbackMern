@@ -1,0 +1,29 @@
+@import '../../../sass/main.scss';
+
+.DropdownEdit {
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	right: -1rem;
+	top: 2.425rem;
+	z-index: 101;
+	background-color: white;
+	button {
+		padding: 0.8rem 1.3rem;
+
+		&:active {
+			background-color: darken($color: $white, $amount: 20%);
+			color: $darkBlue1;
+		}
+		&:focus,
+		&:hover {
+			color: $darkBlue1;
+		}
+	}
+	button:first-of-type {
+		width: 100%;
+		border-bottom: 1px solid lighten($color: $darkBlue1, $amount: 60%);
+	}
+}
