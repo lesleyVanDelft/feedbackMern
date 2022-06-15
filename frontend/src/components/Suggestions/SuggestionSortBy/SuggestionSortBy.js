@@ -1,12 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi';
 import { FiCheck } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import './SuggestionSortBy.css';
+import { handleOutsideClick } from '../../../utils/handleOutsideClick';
 
 const SuggestionSortBy = ({ getSortState }) => {
 	const [active, setActive] = useState(false);
 	const [selected, setSelected] = useState('Most Upvotes');
+
+	// useRef outside click handle
+	const dropdownRef = useRef(null);
+	const [listening, setListening] = useState(false);
+	const toggle = () => setActive(!active);
+	useEffect(
+		handleOutsideClick(listening, setListening, dropdownRef, setActive)
+	);
 
 	useEffect(() => {
 		getSortState(selected);
@@ -57,8 +66,8 @@ const SuggestionSortBy = ({ getSortState }) => {
 	return (
 		<motion.div
 			className={`SuggestionSortBy SuggestionsHeader__sort`}
-			onFocus={handleFocus}
-			onBlur={handleBlur}>
+			onClick={toggle}
+			ref={dropdownRef}>
 			<span className="sortBy">Sort by: </span>
 			<button>
 				<span className="selected">{selected}</span>{' '}
