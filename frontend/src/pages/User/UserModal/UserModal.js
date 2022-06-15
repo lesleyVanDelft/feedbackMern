@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProfileImage } from '../../../reducers/userReducer';
 import { motion } from 'framer-motion';
 import './UserModal.css';
+import { handleOutsideClick } from '../../../utils/handleOutsideClick';
 
 // Axios post image
 const postImage = async ({ image, description }) => {
@@ -21,6 +22,10 @@ const UserModal = ({ active, getImage }) => {
 	const [file, setFile] = useState();
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
+
+	const dropdownRef = useRef(null);
+	const [listening, setListening] = useState(false);
+	useEffect(handleOutsideClick(listening, setListening, dropdownRef, active));
 
 	const framerVariants = {
 		hidden: {

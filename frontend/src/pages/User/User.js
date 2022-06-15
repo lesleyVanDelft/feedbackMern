@@ -160,7 +160,7 @@ const User = () => {
 								/>
 							</div>
 
-							<button onClick={toggle} className="editImage" ref={dropdownRef}>
+							<button onClick={toggle} className="editImage">
 								<GoPencil className="editSvg" /> edit profile image
 							</button>
 

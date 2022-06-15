@@ -98,10 +98,10 @@
 	.Comment {
 		padding: 0;
 		position: relative;
-		z-index: 102;
+		// z-index: 102;
 		&__userBar {
 			position: relative;
-			z-index: 20;
+			// z-index: 20;
 
 			// User profile image
 			img {

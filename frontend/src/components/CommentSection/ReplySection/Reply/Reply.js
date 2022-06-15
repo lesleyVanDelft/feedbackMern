@@ -159,13 +159,14 @@ const Reply = ({
 
 			{editActive === false ? (
 				<p className="Reply__text">
-					{replyData.replyBody.split(' ')[0].includes('@') ? (
-						<span className="replyingTo">{replyingTo}</span>
-					) : (
-						replyData.replyBody.split(' ')[0]
-					)}
+					{/* {editValue.split(' ')[0].includes('@') ? ( */}
+					<span className="replyingTo">{replyingTo}</span>
+					{/* // ) : ( */}
+					{/* // 	editValue.split(' ')[0] */}
+					{/* // )} */}
 
-					{trimmedText}
+					{/* {trimmedText} */}
+					{editValue.split(' ')[1]}
 				</p>
 			) : (
 				<form className="EditForm" onSubmit={handleSubmit}>

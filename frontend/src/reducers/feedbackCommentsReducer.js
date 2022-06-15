@@ -69,17 +69,17 @@ const feedbackPageReducer = (state = null, action) => {
 				),
 			};
 		case 'EDIT_REPLY':
-			console.log(action.payload.replyBody.editValue);
+			// console.log(action.payload.replyBody.editValue);
 			return {
 				...state,
-				comments: state.comments.map(comment =>
+				...state.comments.map(comment =>
 					comment.id !== action.payload.commentId
 						? comment
 						: {
 								replies: comment.replies.map(reply =>
 									reply.id !== action.payload.replyId
 										? reply
-										: { ...reply, ...action.payload.replyBody.editValue }
+										: { ...reply, ...action.payload.replyBody }
 								),
 						  }
 				),

@@ -26,8 +26,9 @@ const Comment = ({
 	const [mobileDropdown, setMobileDropdown] = useState(false);
 	const [editActive, setEditActive] = useState(false);
 	const [editValue, setEditValue] = useState(commentData.commentBody);
-	// const [replyEditValue, setReplyActiveValue] = useState(commentData.replies);
-	// console.log(commentData.replie);
+	// const [replyEditValue, setReplyEditValue] = useState(commentData.replies);
+	const [replyValues, setReplyValues] = useState(commentData.replies);
+	// console.log(commentData.replies);
 	let { id } = useParams;
 	const dispatch = useDispatch();
 
@@ -43,8 +44,12 @@ const Comment = ({
 	}, [commentData.commentBody]);
 
 	// useEffect(() => {
-	// 	setReplyActiveValue(commentData.replies);
+	// 	setReplyEditValue(commentData.replies);
 	// }, [commentData.replies]);
+	useEffect(() => {
+		setReplyValues(commentData.replies);
+		// console.log(replyValues);
+	}, [commentData.replies]);
 
 	// Set Edit active state through dropdown menu
 	const setEdit = edt => {
@@ -191,6 +196,7 @@ const Comment = ({
 							<Reply
 								comment={commentData}
 								replyData={reply}
+								replyValues={replyValues}
 								replyingTo={commentData.username}
 								user={user}
 								currentFeedback={currentFeedback}
