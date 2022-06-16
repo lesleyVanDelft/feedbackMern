@@ -25,6 +25,7 @@
 	}
 	#UserModal__input {
 		display: none;
+		-webkit-appearance: none;
 	}
 
 	&__labelButton {
@@ -41,11 +42,12 @@
 
 	&__delete {
 		padding: 1rem 1rem;
-		min-width: 100%;
+		// min-width: 100%;
 		width: 100%;
-		min-height: 100%;
+		// min-height: 100%;
 		height: 100%;
 		border-top: 1px solid lighten($color: $darkBlue1, $amount: 45%);
+		-webkit-appearance: none;
 		.deleteImageBtn {
 			cursor: pointer;
 			color: $red;
@@ -58,6 +60,7 @@
 			font-size: 1rem;
 			transition: all 0.1s ease-in-out;
 			-webkit-transition: all 0.1s ease-in-out;
+			-webkit-appearance: none;
 			&:hover {
 				background-color: $red;
 				color: $white;

@@ -45,9 +45,9 @@ const Dashboard = ({ category, mobileOpen }) => {
 		}
 
 		// lock body scrolling when mobile menu is open
-		!active
-			? (document.body.style.overflowY = 'scroll')
-			: (document.body.style.overflowY = 'hidden');
+		active
+			? (document.body.style.overflowY = 'hidden')
+			: (document.body.style.overflowY = 'scroll');
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [active]);

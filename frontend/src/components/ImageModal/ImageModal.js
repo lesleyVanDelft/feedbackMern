@@ -1,4 +1,4 @@
-import BlankProfilePic from '../../assets/blank-profile-picture.png';
+// import BlankProfilePic from '../../assets/blank-profile-picture.png';
 import { IoClose } from 'react-icons/io5';
 import './ImageModal.css';
 import { useEffect, useState } from 'react';
