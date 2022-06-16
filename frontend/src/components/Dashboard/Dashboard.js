@@ -40,9 +40,9 @@ const Dashboard = ({ category, mobileOpen }) => {
 	);
 	// console.log(dropdownRef);
 	useEffect(() => {
-		if (!user) {
-			return <h1>loading user</h1>;
-		}
+		// if (!user) {
+		// 	return <h1>loading user</h1>;
+		// }
 
 		// lock body scrolling when mobile menu is open
 		active
