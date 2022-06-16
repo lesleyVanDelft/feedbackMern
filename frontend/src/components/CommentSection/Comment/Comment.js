@@ -96,8 +96,17 @@ const Comment = ({
 	if (!commentData) {
 		return <h1>loading</h1>;
 	}
+	//  onClick={() => console.log(commentData)}
 	return (
-		<article className="Comment" onClick={() => console.log(commentData)}>
+		<article className="Comment">
+			<Modal
+				active={showModal}
+				closeModal={closeModal}
+				handleDelete={handleDelete}
+				isComment={true}
+				isReply={false}
+				param="comment"
+			/>
 			<div className="Comment__userBar">
 				<img
 					src={
@@ -140,15 +149,6 @@ const Comment = ({
 							)}
 						</div>
 					)}
-
-					<Modal
-						active={showModal}
-						closeModal={closeModal}
-						handleDelete={handleDelete}
-						isComment={true}
-						isReply={false}
-						param="comment"
-					/>
 				</div>
 			</div>
 

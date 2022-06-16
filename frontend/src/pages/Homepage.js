@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from '../reducers/userReducer';
 import { motion } from 'framer-motion';
 import { getFeedbacks } from '../reducers/feedbackReducer';
 import Dashboard from '../components/Dashboard/Dashboard';
-import './Pages.css';
 import FeedbackList from '../components/FeedbackList/FeedbackList';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
+import './Pages.css';
 
 const Homepage = () => {
 	const feedbacks = useSelector(state => state.feedbacks);

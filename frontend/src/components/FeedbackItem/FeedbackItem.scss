@@ -42,14 +42,6 @@
 
 				&__upvote {
 					border-radius: 10px 10px 0px 0px;
-					&:hover {
-						background-color: $green;
-						opacity: 0.5;
-
-						svg {
-							color: $white;
-						}
-					}
 
 					&.upvoteActive {
 						background-color: $green;
@@ -60,14 +52,6 @@
 				}
 				&__downvote {
 					border-radius: 0px 0px 10px 10px;
-					&:hover {
-						background-color: $red;
-						opacity: 0.8;
-
-						svg {
-							color: $white;
-						}
-					}
 
 					&.downvoteActive {
 						background-color: $red;
@@ -130,10 +114,6 @@
 		.commentLength {
 			font-size: 1rem;
 			font-weight: bold;
-		}
-
-		&:hover {
-			background-color: rgba(0, 0, 0, 0.046);
 		}
 	}
 
@@ -245,9 +225,9 @@
 	}
 
 	// Hover
-	&:hover {
-		box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.076);
-	}
+	// &:hover {
+	// 	box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.076);
+	// }
 }
 
 @media screen and (max-width: 768px) {
@@ -320,11 +300,59 @@
 			right: 24px;
 			bottom: 29px;
 		}
+
+		// &:hover {
+		// 	// box-shadow: none;
+		// }
 	}
 
 	&.roadmap {
 		.FeedbackItem__right {
 			position: static;
+		}
+	}
+}
+
+// If device is capable of hover effects, handle them here
+@media (hover: hover) {
+	.FeedbackItem {
+		&:hover {
+			box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.076);
+		}
+
+		// Left side of FeedbackItem, includes vote buttons
+		&__left {
+			&--voteBtn {
+				.votes {
+					&__upvote {
+						&:hover {
+							background-color: $green;
+							opacity: 0.5;
+
+							svg {
+								color: $white;
+							}
+						}
+					}
+					&__downvote {
+						&:hover {
+							background-color: $red;
+							opacity: 0.8;
+
+							svg {
+								color: $white;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// Right side of FeedbackItem, includes comment count
+		&__right {
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.046);
+			}
 		}
 	}
 }

@@ -161,6 +161,19 @@
 		&__mobile {
 			width: 100%;
 
+			&--filter {
+				margin-top: 0.6rem;
+				h3 {
+					color: $darkBlue1;
+					font-weight: 500;
+					margin-bottom: 0.4rem;
+					// opacity: 0.95;
+				}
+			}
+
+			&--roadmap {
+				width: 100%;
+			}
 			.btn {
 				width: fit-content;
 				align-self: flex-start;
@@ -275,8 +288,9 @@
 				gap: 1rem;
 				width: 291px;
 				right: 0;
-				height: calc(100vh - 4.5rem);
-				min-height: 100vh;
+				min-height: calc(100vh - 4.5rem);
+				// min-height: 100%;
+				height: -webkit-fill-available;
 				img {
 					width: 70px;
 					height: 70px;
@@ -289,9 +303,6 @@
 					font-size: 1.5rem;
 					color: $darkBlue1;
 
-					// &:hover {
-					// 	color: inherit;
-					// }
 					svg {
 						font-size: 0.9rem;
 						margin-left: 0.3rem;
@@ -316,6 +327,8 @@
 				background-color: $black;
 				opacity: 0.5;
 				z-index: 100;
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
 			}
 		}
 	}

@@ -159,7 +159,6 @@ const User = () => {
 									className="profileImage"
 								/>
 							</div>
-
 							<button onClick={toggle} className="editImage">
 								<GoPencil className="editSvg" /> edit profile image
 							</button>

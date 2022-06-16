@@ -12,6 +12,13 @@
 	background-color: white;
 	button {
 		padding: 0.8rem 1.3rem;
+		width: 100%;
+		color: $darkBlue1;
+
+		// &:first-of-type {
+		// 	width: 100%;
+		// 	border-bottom: 1px solid lighten($color: $darkBlue1, $amount: 60%);
+		// }
 
 		&:active {
 			background-color: darken($color: $white, $amount: 20%);
@@ -21,6 +28,9 @@
 		&:hover {
 			color: $darkBlue1;
 		}
+	}
+	button.edit {
+		border-bottom: 1px solid black;
 	}
 	button:first-of-type {
 		width: 100%;

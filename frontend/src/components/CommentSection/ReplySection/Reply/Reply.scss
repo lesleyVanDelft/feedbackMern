@@ -52,8 +52,9 @@
 		align-items: center;
 		justify-content: flex-end;
 		width: 100%;
+		-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 		button {
-			// align-self: center;
+			align-self: center;
 		}
 		button.reply,
 		button.delete,
@@ -131,6 +132,7 @@
 			-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 			position: relative;
 			// z-index: 100;
+			// padding-right: 1rem;
 			.dropdownToggle {
 				margin-left: 0.8rem;
 				height: fit-content;
@@ -141,12 +143,18 @@
 				justify-content: center;
 				padding: 0.3rem 0.3rem;
 				transform-origin: center center;
-				svg {
+				-webkit-transform-origin: center center;
+				svg.toggleDropdown {
+					min-width: 100%;
 					width: 100%;
+					min-height: 100%;
 					height: 100%;
-					// position: relative;
-					// z-index: 100;\
+					color: $darkBlue1;
+					font-size: 1rem;
+					opacity: 0.9;
+					z-index: 100;
 					transition: color 0.25s ease-in-out;
+					-webkit-transition: color 0.25s ease-in-out;
 				}
 				&::before {
 					content: '';
@@ -156,12 +164,14 @@
 					width: 0px;
 					height: 0px;
 					transition: all 0.15s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+					-webkit-transition: all 0.15s cubic-bezier(0.64, 0.57, 0.67, 1.53);
 					transform-origin: center center;
+					-webkit-transform-origin: center center;
 					// z-index: 99;
 				}
 
 				&.active {
-					svg {
+					svg.toggleDropdown {
 						// transform: rotate(90deg);
 						color: $white;
 					}
@@ -171,12 +181,12 @@
 						height: 100%;
 					}
 				}
-				.toggleDropdown {
-					color: $darkBlue1;
-					font-size: 1rem;
-					opacity: 0.9;
-					z-index: 100;
-				}
+				// .toggleDropdown {
+				// 	color: $darkBlue1;
+				// 	font-size: 1rem;
+				// 	opacity: 0.9;
+				// 	z-index: 100;
+				// }
 			}
 			// .dropdown {
 			// 	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);

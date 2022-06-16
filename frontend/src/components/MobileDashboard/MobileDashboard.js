@@ -3,7 +3,7 @@ import { VscTriangleDown } from 'react-icons/vsc';
 import FilterButtons from '../Dashboard/FilterButtons/FilterButtons';
 import Roadmap from '../Dashboard/Roadmap/Roadmap';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Modal from '../Modal/Modal';
 import UserDropdown from '../Dashboard/UserDropdown/UserDropdown';
 import BlankProfileImg from '../../assets/blank-profile-picture.png';
@@ -16,8 +16,20 @@ const menuVisibility = {
 };
 const overlayVisibility = {
 	hidden: { opacity: 0, right: -150 },
-	visible: { opacity: 0.5, right: 0 },
-	exit: { opacity: 0, right: -350 },
+	visible: {
+		opacity: 0.5,
+		right: 0,
+		transition: {
+			duration: '0.2',
+		},
+	},
+	exit: {
+		opacity: 0,
+		right: -350,
+		transition: {
+			duration: '0.2',
+		},
+	},
 };
 
 const MobileDashboard = ({ category, isVisible, logout }) => {
@@ -37,14 +49,14 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 		)
 	);
 
-	useEffect(
-		handleOutsideClick(
-			listening,
-			setListening,
-			mobileDropdownRef,
-			setUserActive
-		)
-	);
+	// useEffect(
+	// 	handleOutsideClick(
+	// 		listening,
+	// 		setListening,
+	// 		mobileDropdownRef,
+	// 		setUserActive
+	// 	)
+	// );
 
 	const openModal = e => {
 		e.preventDefault();
@@ -55,9 +67,9 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 		setLogoutModal(false);
 	};
 
-	const handleUserClick = () => {
-		setUserActive(!userActive);
-	};
+	// const handleUserClick = () => {
+	// 	setUserActive(!userActive);
+	// };
 	return (
 		<>
 			{isVisible && (
@@ -73,11 +85,7 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 							<div
 								className="userWelcome"
 								ref={mobileDropdownRef}
-								onClick={toggle}
-
-								// {...eventHandlers}
-							>
-								{/* Hi there, */}
+								onClick={toggle}>
 								{user && user.profileImg.exists ? (
 									<img
 										src={`/images/${user.profileImg.imageId}`}
@@ -97,8 +105,13 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 								</span>
 							</div>
 						</div>
-						<FilterButtons category={category} />
-						<Roadmap />
+						<div className="Dashboard__mobile--filter">
+							<h3>Filter by category</h3>
+							<FilterButtons category={category} />
+						</div>
+						<div className="Dashboard__mobile--roadmap">
+							<Roadmap />
+						</div>
 						<button className="btn btn-darkBlue" onClick={openModal}>
 							Log Out
 						</button>
