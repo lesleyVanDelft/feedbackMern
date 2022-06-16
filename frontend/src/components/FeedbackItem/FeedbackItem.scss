@@ -236,6 +236,9 @@
 		margin-top: 1rem;
 		position: relative;
 		z-index: 0;
+		&:hover {
+			box-shadow: none;
+		}
 		&__left {
 			flex-direction: column-reverse;
 
@@ -327,7 +330,7 @@
 					&__upvote {
 						&:hover {
 							background-color: $green;
-							opacity: 0.5;
+							opacity: 1;
 
 							svg {
 								color: $white;
@@ -337,7 +340,7 @@
 					&__downvote {
 						&:hover {
 							background-color: $red;
-							opacity: 0.8;
+							opacity: 1;
 
 							svg {
 								color: $white;
@@ -356,3 +359,46 @@
 		}
 	}
 }
+
+// @media (hover: none) {
+// 	.FeedbackItem {
+// 		&:hover {
+// 			box-shadow: none;
+// 		}
+
+// 		// Left side of FeedbackItem, includes vote buttons
+// 		&__left {
+// 			&--voteBtn {
+// 				.votes {
+// 					&__upvote {
+// 						&:hover {
+// 							background-color: $green;
+// 							opacity: 1;
+
+// 							svg {
+// 								color: $white;
+// 							}
+// 						}
+// 					}
+// 					&__downvote {
+// 						&:hover {
+// 							background-color: $red;
+// 							opacity: 1;
+
+// 							svg {
+// 								color: $white;
+// 							}
+// 						}
+// 					}
+// 				}
+// 			}
+// 		}
+
+// 		// Right side of FeedbackItem, includes comment count
+// 		&__right {
+// 			&:hover {
+// 				background-color: none;
+// 			}
+// 		}
+// 	}
+// }
