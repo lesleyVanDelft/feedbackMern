@@ -12,7 +12,6 @@ import {
 	toggleDownvoteDetails,
 } from '../../reducers/feedbackReducer';
 import { motion } from 'framer-motion';
-import { ToastContainer } from 'react-toastify';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import moment from 'moment';
 import 'react-toastify/dist/ReactToastify.min.css';

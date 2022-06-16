@@ -7,6 +7,10 @@
 	position: relative;
 	&::before {
 		content: '';
+		position: -webkit-absolute;
+		position: -moz-absolute;
+		position: -o-absolute;
+		position: -ms-absolute;
 		position: absolute;
 		width: 1px;
 		height: 100%;
@@ -51,9 +55,9 @@
 		button {
 			// align-self: center;
 		}
-		.reply,
-		.delete,
-		.edit {
+		button.reply,
+		button.delete,
+		button.edit {
 			border: none;
 			font-size: 13px;
 			background: none;
@@ -96,7 +100,7 @@
 @media screen and (max-width: 768px) {
 	.Reply {
 		padding-left: 1rem;
-		z-index: 100;
+		// z-index: 100;
 
 		&::before {
 			height: 75%;
@@ -104,14 +108,19 @@
 
 		&__userBar {
 			position: relative;
-			z-index: 20;
+			// z-index: 20;
 
 			// User profile image
 			.replyImg {
 				margin-right: 0.8rem;
 				width: 40px;
+				min-width: 40px;
+				max-width: 40px;
 				height: 40px;
+				min-height: 40px;
+				max-height: 40px;
 				object-fit: cover;
+				-webkit-object-fit: cover;
 			}
 		}
 		&__text {

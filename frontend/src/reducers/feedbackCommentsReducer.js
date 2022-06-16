@@ -145,10 +145,10 @@ export const updateFeedback = (id, feedbackObj) => {
 	};
 };
 
-export const addComment = (feedbackId, comment) => {
+export const addComment = (feedbackId, commentData) => {
 	return async dispatch => {
 		const addedComment = await feedbackService.postComment(feedbackId, {
-			comment,
+			commentData,
 		});
 
 		dispatch({

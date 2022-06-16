@@ -145,7 +145,7 @@ const User = () => {
 			<div className="flex-container">
 				<div className="User__information">
 					<div className="User__information--details">
-						<div className="profileImg">
+						<div className="profileImg" ref={dropdownRef}>
 							<div
 								onClick={() => setImgModal(!imgModal)}
 								className={'profileImg__container'}>

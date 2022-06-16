@@ -130,6 +130,7 @@ const FeedbackItem = ({
 					className={`FeedbackItem ${roadmap && 'roadmap'} ${
 						roadmap && status
 					}`}>
+					{/* {console.log(index)} */}
 					<div className="FeedbackItem__left">
 						<div className="FeedbackItem__left--voteBtn">
 							<div className="votes">

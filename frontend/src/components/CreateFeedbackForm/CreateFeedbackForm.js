@@ -76,17 +76,6 @@ const CreateFeedbackForm = () => {
 					<label htmlFor="feedbackType">
 						Choose a category for your feedback
 					</label>
-					{/* <select
-						name="feedbackType"
-						id="feedbackType"
-						value={feedbackType}
-						onChange={e => setFeedbackType(e.target.value)}>
-						<option value="UI">UI</option>
-						<option value="UX">UX</option>
-						<option value="Enhancement">Enhancement</option>
-						<option value="Bug">Bug</option>
-						<option value="Feature">Feature</option>
-					</select> */}
 					<DropdownMenu category={getCategory} />
 				</div>
 				<div className="Form__group">

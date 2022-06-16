@@ -8,6 +8,13 @@ const feedbackReducer = (state = [], action) => {
 		case 'GET_SINGLE_FEEDBACK':
 			return [...state];
 		case 'CREATE_NEW_FEEDBACK':
+			// return {
+			// 	...state,
+			// 	feedbacks: state.feedbacks.push(action.payload),
+			// };
+			//
+			//
+			// return state.push(...action.payload);
 			return [...state, action.payload];
 		case 'DELETE_FEEDBACK':
 			return [

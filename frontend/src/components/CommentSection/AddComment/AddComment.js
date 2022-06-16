@@ -4,10 +4,11 @@ import { addComment } from '../../../reducers/feedbackCommentsReducer';
 import { useParams } from 'react-router-dom';
 import './AddComment.css';
 
-const AddComment = ({ feedbackData }) => {
+const AddComment = ({ feedbackData, user }) => {
 	const [comment, setComment] = useState('');
 	const [charCount, setCharCount] = useState(250);
 	const dispatch = useDispatch();
+	// console.log(user);
 
 	const { id } = useParams();
 
@@ -19,6 +20,7 @@ const AddComment = ({ feedbackData }) => {
 	let data = {
 		_id: id,
 		comment: comment,
+		profileImg: user.profileImg,
 	};
 
 	const onSubmit = e => {

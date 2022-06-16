@@ -1,6 +1,7 @@
 @import '../../sass/main.scss';
 .DropdownMenu {
 	width: 100%;
+	height: fit-content;
 	border-radius: 5px;
 	z-index: 1;
 	position: relative;
@@ -31,11 +32,13 @@
 
 		svg {
 			transition: transform 0.2s ease-in-out;
+			-webkit-transition: transform 0.2s ease-in-out;
 		}
 
 		&.active {
 			svg {
 				transform: rotate(180deg);
+				-webkit-transform: rotate(180deg);
 			}
 		}
 	}

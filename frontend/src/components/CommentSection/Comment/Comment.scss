@@ -51,9 +51,9 @@
 		button {
 			align-self: center;
 		}
-		.reply,
-		.delete,
-		.edit {
+		button.reply,
+		button.delete,
+		button.edit {
 			border: none;
 			font-size: 13px;
 			background: none;
@@ -107,8 +107,13 @@
 			img {
 				margin-right: 0.8rem;
 				width: 40px;
+				min-width: 40px;
+				max-width: 40px;
 				height: 40px;
+				min-height: 40px;
+				max-height: 40px;
 				object-fit: cover;
+				-webkit-object-fit: cover;
 			}
 		}
 		&__text {
@@ -131,10 +136,12 @@
 				justify-content: center;
 				padding: 0.3rem 0.3rem;
 				transform-origin: center center;
+				-webkit-transform-origin: center center;
 				svg {
 					width: 100%;
 					height: 100%;
 					transition: color 0.25s ease-in-out;
+					-webkit-transition: color 0.25s ease-in-out;
 				}
 				&::before {
 					content: '';
@@ -144,7 +151,9 @@
 					width: 0px;
 					height: 0px;
 					transition: all 0.15s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+					-webkit-transition: all 0.15s cubic-bezier(0.64, 0.57, 0.67, 1.53);
 					transform-origin: center center;
+					-webkit-transform-origin: center center;
 				}
 
 				&.active {
@@ -156,6 +165,8 @@
 						display: block;
 						width: 100%;
 						height: 100%;
+						min-width: 100%;
+						min-height: 100%;
 					}
 				}
 				.toggleDropdown {

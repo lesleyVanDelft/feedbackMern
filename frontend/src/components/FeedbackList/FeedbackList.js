@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toggleUpvote, toggleDownvote } from '../../reducers/feedbackReducer';
 import { motion } from 'framer-motion';
@@ -10,18 +10,30 @@ import './FeedbackList.css';
 
 const FeedbackList = ({ category }) => {
 	const [sortBy, setSortBy] = useState('Most Upvotes');
-	const feedbacks = useSelector(state => state.feedbacks);
+	const feedbackList = useSelector(state => state.feedbacks);
+	// const [feedbackList, setFeedbackList] = useState(feedbacks);
 
-	if (!feedbacks) {
+	// console.log(feedbackList);
+	// useEffect(() => {
+	// 	setFeedbackList(feedbacks);
+	// 	// console.log('list updated');
+
+	// 	if (!feedbacks) {
+	// 		return <h1>Loading</h1>;
+	// 	}
+	// }, [feedbacks]);
+
+	if (!feedbackList) {
 		return <h1>Loading</h1>;
 	}
 
 	// Filter feedbacks on selected category
 	const filteredFeedbacks =
-		feedbacks.length > 0 &&
-		feedbacks.filter(feedback => {
-			return feedback.feedbackType.toString().toLowerCase() === category;
-		});
+		feedbackList.length > 0
+			? feedbackList.filter(feedback => {
+					return feedback.feedbackType.toString().toLowerCase() === category;
+			  })
+			: [];
 
 	const getSortBy = sortState => {
 		setSortBy(sortState);
@@ -31,23 +43,23 @@ const FeedbackList = ({ category }) => {
 		<motion.section className="FeedbackList">
 			{/* Contains Sort By and total feedback count */}
 			<SuggestionsHeader
-				suggestionCount={feedbacks && feedbacks.length}
+				suggestionCount={feedbackList && feedbackList.length}
 				sortBy={getSortBy}
 				roadmap={false}
 			/>
 
 			{/* If everything is empty */}
-			{feedbacks.length <= 0 && category === 'all' ? (
+			{feedbackList.length <= 0 && category === 'all' ? (
 				<div className="feedbacks">
 					<EmptyFeedback userDetails={false} />
 				</div>
 			) : null}
 
 			{/* Loop if feedbacks is true and category is ALL, else map over and render filteredFeedbacks array */}
-			{feedbacks && category === 'all' ? (
+			{feedbackList && category === 'all' ? (
 				<motion.div className="feedbacks">
 					<Sorter by={sortBy}>
-						{feedbacks.map((feedback, i) => (
+						{feedbackList.map((feedback, i) => (
 							<FeedbackItem
 								feedback={feedback}
 								key={feedback._id}
@@ -59,7 +71,7 @@ const FeedbackList = ({ category }) => {
 					</Sorter>
 				</motion.div>
 			) : (
-				<div className="feedbacks">
+				<motion.div className="feedbacks">
 					<Sorter by={sortBy}>
 						{filteredFeedbacks.length > 0 && category !== 'all' ? (
 							filteredFeedbacks.map((feedback, i) => {
@@ -77,7 +89,7 @@ const FeedbackList = ({ category }) => {
 							<EmptyFeedback userDetails={false} />
 						)}
 					</Sorter>
-				</div>
+				</motion.div>
 			)}
 			{/* {filteredFeedbacks.length <= 0 ? <EmptyFeedback /> : null} */}
 		</motion.section>

@@ -5,15 +5,19 @@ const jwt = require('jsonwebtoken');
 
 const postComment = async (req, res) => {
 	const { id } = req.params;
-	const { comment } = req.body;
+	const { commentData } = req.body;
+	const token = req.cookies.jwt;
+	const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-	if (!comment) {
+	if (!commentData) {
 		return res.status(400).send({ message: `Comment body can't be empty.` });
 	}
 
 	// current feedback id comes with comment post object
-	const feedback = await Feedback.findById(comment._id);
-	const user = await User.findById(req.user);
+	const feedback = await Feedback.findById(commentData._id);
+	const user = await User.findById(decoded.id);
+
+	// console.log(user.profileImg);
 
 	// feedback.author = user comes from auth middleware
 	if (!feedback) {
@@ -31,7 +35,8 @@ const postComment = async (req, res) => {
 		name: user.name,
 		username: user.username,
 		commentedBy: user.id,
-		commentBody: comment.comment,
+		commentBody: commentData.comment,
+		profileImg: user.profileImg,
 		// upvotedBy: [user._id],
 		// pointsCount: 1,
 	});
@@ -54,7 +59,7 @@ const deleteComment = async (req, res) => {
 
 	const feedback = await Feedback.findById(id);
 	const user = await User.findById(req.user);
-	console.log(user);
+	// console.log(user);
 
 	if (!feedback) {
 		return res.status(404).send({

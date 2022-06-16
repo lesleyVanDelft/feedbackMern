@@ -97,7 +97,7 @@ const Comment = ({
 		return <h1>loading</h1>;
 	}
 	return (
-		<article className="Comment">
+		<article className="Comment" onClick={() => console.log(commentData)}>
 			<div className="Comment__userBar">
 				<img
 					src={

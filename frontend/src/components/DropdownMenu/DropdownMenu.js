@@ -1,11 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaChevronDown, FaCheck } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { handleOutsideClick } from '../../utils/handleOutsideClick';
 import './DropdownMenu.css';
 
 const DropdownMenu = ({ category }) => {
 	const [menuActive, setMenuActive] = useState(false);
 	const [selected, setSelected] = useState('Feature');
+
+	const dropdownRef = useRef(null);
+	const [listening, setListening] = useState(false);
+	const toggle = () => setMenuActive(!menuActive);
+	useEffect(
+		handleOutsideClick(listening, setListening, dropdownRef, setMenuActive)
+	);
 
 	// const openDropdown = e => {
 	// 	setMenuActive(!menuActive);
@@ -35,11 +43,12 @@ const DropdownMenu = ({ category }) => {
 	};
 	const categoryArray = ['Feature', 'UI', 'UX', 'Enhancement', 'Bug'];
 	return (
-		<div className="DropdownMenu">
+		<div className="DropdownMenu" ref={dropdownRef}>
 			<button
 				type="button"
-				onFocus={() => setMenuActive(true)}
-				onBlur={() => setMenuActive(false)}
+				// onFocus={() => setMenuActive(true)}
+				// onBlur={() => setMenuActive(false)}
+				onClick={toggle}
 				className={`DropdownMenu__btn ${menuActive && 'active'}`}>
 				{selected} <FaChevronDown />
 			</button>

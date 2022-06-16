@@ -62,8 +62,10 @@
 					img.profileImage {
 						width: 100%;
 						height: 100%;
+						min-height: 100%;
 						border-radius: 50%;
 						object-fit: cover;
+						-webkit-object-fit: cover;
 					}
 					&:hover {
 						opacity: 0.85;
@@ -72,6 +74,7 @@
 				.editImage {
 					margin-top: 1.3rem;
 					text-transform: capitalize;
+
 					border: none;
 					background-color: $purple;
 					font-size: 1rem;
@@ -81,6 +84,7 @@
 					align-self: center;
 					cursor: pointer;
 					transition: background-color 0.1s ease-in-out;
+					-webkit-transition: background-color 0.1s ease-in-out;
 					display: flex;
 					align-items: center;
 
@@ -128,6 +132,7 @@
 					color: $black;
 					cursor: pointer;
 					transition: background-color 0.1s ease-in-out;
+					-webkit-transition: background-color 0.1s ease-in-out;
 					display: flex;
 					width: fit-content;
 					justify-content: center;
@@ -255,6 +260,7 @@
 						align-self: flex-start;
 						cursor: pointer;
 						transition: background-color 0.1s ease-in-out;
+						-webkit-transition: background-color 0.1s ease-in-out;
 						display: flex;
 						align-items: center;
 

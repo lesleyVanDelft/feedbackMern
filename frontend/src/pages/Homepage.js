@@ -14,7 +14,8 @@ import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 const Homepage = () => {
 	const feedbacks = useSelector(state => state.feedbacks);
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = useSelector(state => state.user);
+	// const user = JSON.parse(localStorage.getItem('user'));
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
