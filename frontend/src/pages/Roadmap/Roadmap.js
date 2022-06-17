@@ -39,7 +39,7 @@ const RoadmapPage = () => {
 	});
 
 	useEffect(() => {
-		document.body.style.overflow = 'unset';
+		document.body.style.overflowY = 'auto';
 	}, []);
 
 	useEffect(() => {

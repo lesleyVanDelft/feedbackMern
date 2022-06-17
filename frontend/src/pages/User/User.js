@@ -84,7 +84,7 @@ const User = () => {
 
 	// Reset body overflow
 	useEffect(() => {
-		document.body.style.overflow = 'unset';
+		document.body.style.overflowY = 'auto';
 	}, []);
 
 	// Framer motion

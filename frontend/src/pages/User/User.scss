@@ -194,6 +194,10 @@
 			justify-content: flex-start;
 			margin-top: 2rem;
 			height: fit-content;
+			padding: 0rem 0.3rem;
+			p:first-of-type {
+				margin-bottom: 0.5rem;
+			}
 		}
 
 		&__logo {
@@ -298,7 +302,7 @@
 
 			h2 {
 				text-align: center;
-				padding: 2rem 0rem 0.8rem 0rem;
+				padding: 3rem 0rem 0.8rem 0rem;
 			}
 			&--content {
 				height: 100%;

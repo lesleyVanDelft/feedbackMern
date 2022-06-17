@@ -4,23 +4,25 @@
 	background: none;
 	border: none;
 	transition: all 0.25s ease-in-out;
+	-webkit-appearance: none;
 	&:hover {
 		.sortBy {
 			transition: all 0.25s ease-in-out;
-			color: lighten($color: $skyBlue, $amount: 15%);
+			color: lighten($color: $skyBlue, $amount: 25%);
 		}
 		button {
 			transition: all 0.25s ease-in-out;
-			color: lighten($color: $skyBlue, $amount: 15%);
-			.selected {
+			color: lighten($color: $skyBlue, $amount: 25%);
+			span.selected {
 				transition: all 0.25s ease-in-out;
-				color: lighten($color: $skyBlue, $amount: 15%);
+				color: lighten($color: $skyBlue, $amount: 25%);
 			}
 		}
 	}
 
 	span {
 		color: $white;
+		-webkit-appearance: none;
 	}
 	ul.dropdown {
 		display: none;
@@ -35,6 +37,8 @@
 		width: 255px;
 		border-radius: 10px;
 		box-shadow: 0px 10px 21px -1px rgba(0, 0, 0, 0.31);
+		user-select: none;
+		-webkit-appearance: none;
 
 		&.active {
 			display: block;
@@ -63,6 +67,21 @@
 
 			&:last-child {
 				border-bottom: none;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.SuggestionSortBy {
+		&:hover {
+			.sortBy {
+				color: $white;
+			}
+			button {
+				span.selected {
+					color: $white;
+				}
 			}
 		}
 	}

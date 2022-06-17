@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addComment } from '../../../reducers/feedbackCommentsReducer';
 import { useParams } from 'react-router-dom';
@@ -7,10 +7,15 @@ import './AddComment.css';
 const AddComment = ({ feedbackData, user }) => {
 	const [comment, setComment] = useState('');
 	const [charCount, setCharCount] = useState(250);
+	const [profileImgData, setProfileImgData] = useState(user.profileImg);
 	const dispatch = useDispatch();
 	// console.log(user);
 
 	const { id } = useParams();
+
+	useEffect(() => {
+		setProfileImgData(user.profileImg);
+	}, [user.profileImg]);
 
 	const handleChange = e => {
 		setComment(e.target.value);
@@ -20,7 +25,7 @@ const AddComment = ({ feedbackData, user }) => {
 	let data = {
 		_id: id,
 		comment: comment,
-		profileImg: user.profileImg,
+		profileImg: profileImgData,
 	};
 
 	const onSubmit = e => {

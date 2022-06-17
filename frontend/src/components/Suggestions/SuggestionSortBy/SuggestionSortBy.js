@@ -70,7 +70,7 @@ const SuggestionSortBy = ({ getSortState }) => {
 			ref={dropdownRef}>
 			<span className="sortBy">Sort by: </span>
 			<button>
-				<span className="selected">{selected}</span>{' '}
+				<span className="selected">{selected}</span>
 				{active ? <HiChevronUp /> : <HiChevronDown />}
 			</button>
 			<AnimatePresence>
