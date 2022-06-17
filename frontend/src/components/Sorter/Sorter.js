@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { useSelector } from 'react-redux';
 
 const Sorter = ({ children, by, feedbackData }) => {
@@ -7,10 +7,18 @@ const Sorter = ({ children, by, feedbackData }) => {
 	// let upvoteLength = feedbackData.upvotedBy.length;
 	// let commentLength = feedbackData.commentCount;
 	// const childrenArray = React.Children.toArray(children);
+	// useEffect(() => {
 
+	// }, [])
+
+	// const getDate = (date) => {
+
+	// }
+	// createdAt(pin):"2022-04-16T14:47:11.361Z"
 	const compare = (a, b) => {
 		// console.log(a.props.feedback.upvotedBy.length);
 		// console.log(b.props.feedback.upvotedBy.length);
+		// console.log(a.props.index);
 		// return a.props[by] - b.props[by];
 		if (by === 'Most Upvotes') {
 			return (
@@ -25,6 +33,12 @@ const Sorter = ({ children, by, feedbackData }) => {
 		} else if (by === 'Least Comments') {
 			return a.props.feedback.commentCount - b.props.feedback.commentCount;
 		}
+		// else if (by === 'Newest') {
+		// 	console.log(b.props.feedback.updatedAt);
+		// 	return b.props.feedback.updatedAt - a.props.feedback.updatedAt;
+		// } else if (by === 'Oldest') {
+		// 	return a.props.feedback.updatedAt - b.props.feedback.updatedAt;
+		// }
 	};
 
 	if (!by) {
@@ -33,6 +47,7 @@ const Sorter = ({ children, by, feedbackData }) => {
 	}
 	// return React.Children.toArray(children).sort(compare);
 	return React.Children.toArray(children).sort(compare);
+	// return React.Children.toArray(children.map((value, i) => ))
 };
 
 export default Sorter;

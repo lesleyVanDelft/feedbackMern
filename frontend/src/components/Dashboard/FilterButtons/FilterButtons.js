@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import './FilterButtons.css';
 
-const FilterButtons = ({ category }) => {
+const FilterButtons = ({ category, handleClose }) => {
 	const types = ['all', 'ui', 'ux', 'enhancement', 'bug', 'feature'];
 	const [active, setActive] = useState('all');
 
-	// const handleClick = type => {
-	// 	// setActive(type);
-	// 	category(active);
-	// };
+	const handleClick = type => {
+		// setActive(type);
+		// category(active);
+		handleClose(active);
+	};
 
 	useEffect(() => {
 		category(active);

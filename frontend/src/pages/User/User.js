@@ -67,10 +67,10 @@ const User = () => {
 
 	// Get current user
 	const getUser = async () => {
-		// const response = await axios.get(
-		// 	'https://feedback-lesley.herokuapp.com/user'
-		// );
-		const response = await axios.get(`http://localhost:5000/user/${user.id}`);
+		const response = await axios.get(
+			`https://feedback-lesley.herokuapp.com/user/${user.id}`
+		);
+		// const response = await axios.get(`http://localhost:5000/user/${user.id}`);
 		return response.data;
 	};
 

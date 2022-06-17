@@ -19,6 +19,7 @@ const FeedbackItem = ({
 	const [upvoted, setUpvoted] = useState(false);
 	const [downvoted, setDownvoted] = useState(false);
 	const [count, setCount] = useState(0);
+	// const [indexList, setIndexList] = useState([]);
 	const user = useSelector(state => state.user);
 	const isUpvoted = user && feedback && feedback.upvotedBy.includes(user.id);
 	const isDownvoted =
@@ -113,11 +114,16 @@ const FeedbackItem = ({
 		animate: {
 			opacity: 1,
 			translateX: 0,
+			transition: {
+				// staggerChildren: 5,
+				delay: index ? index * 0.1 : 0,
+			},
 		},
-		transition: {
-			duration: 0.3,
-			delay: index ? index * 0.1 : 0,
-		},
+		// transition: {
+		// 	// duration: 0.3,
+		// 	staggerChildren: 10.5,
+		// delay: index ? index * 0.1 : 0,
+		// },
 	};
 
 	return (

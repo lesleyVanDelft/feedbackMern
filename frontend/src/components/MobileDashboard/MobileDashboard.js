@@ -67,6 +67,10 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 		setLogoutModal(false);
 	};
 
+	const closeOnClick = act => {
+		setUserActive(act);
+	};
+
 	// const handleUserClick = () => {
 	// 	setUserActive(!userActive);
 	// };
@@ -81,48 +85,50 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 						initial="hidden"
 						animate="visible"
 						exit="exit">
-						<div className="Dashboard__mobile--user user">
-							<div
-								className="userWelcome"
-								ref={mobileDropdownRef}
-								onClick={toggle}>
-								{user && user.profileImg.exists ? (
-									<img
-										src={`/images/${user.profileImg.imageId}`}
-										alt="user profile "
-									/>
-								) : (
-									<img src={BlankProfileImg} alt="empty profile" />
-								)}
-								<span className={`user ${userActive && 'active'}`}>
-									@{user && user.username}
-									<VscTriangleDown />
-									<AnimatePresence>
-										{userActive && (
-											<UserDropdown mobile={true} logout={logout} />
-										)}
-									</AnimatePresence>
-								</span>
+						<div className="content">
+							<div className="Dashboard__mobile--user user">
+								<div
+									className="userWelcome"
+									ref={mobileDropdownRef}
+									onClick={toggle}>
+									{user && user.profileImg.exists ? (
+										<img
+											src={`/images/${user.profileImg.imageId}`}
+											alt="user profile "
+										/>
+									) : (
+										<img src={BlankProfileImg} alt="empty profile" />
+									)}
+									<span className={`user ${userActive && 'active'}`}>
+										@{user && user.username}
+										<VscTriangleDown />
+										<AnimatePresence>
+											{userActive && (
+												<UserDropdown mobile={true} logout={logout} />
+											)}
+										</AnimatePresence>
+									</span>
+								</div>
 							</div>
+							<div className="Dashboard__mobile--filter">
+								<h3>Filter by category</h3>
+								<FilterButtons category={category} />
+							</div>
+							<div className="Dashboard__mobile--roadmap">
+								<Roadmap />
+							</div>
+							<button className="btn btn-darkBlue" onClick={openModal}>
+								Log Out
+							</button>
+							<Modal
+								active={logoutModal}
+								closeModal={closeModal}
+								handleDelete={logout}
+								isComment={true}
+								isReply={false}
+								param="logout"
+							/>
 						</div>
-						<div className="Dashboard__mobile--filter">
-							<h3>Filter by category</h3>
-							<FilterButtons category={category} />
-						</div>
-						<div className="Dashboard__mobile--roadmap">
-							<Roadmap />
-						</div>
-						<button className="btn btn-darkBlue" onClick={openModal}>
-							Log Out
-						</button>
-						<Modal
-							active={logoutModal}
-							closeModal={closeModal}
-							handleDelete={logout}
-							isComment={true}
-							isReply={false}
-							param="logout"
-						/>
 					</motion.nav>
 					<motion.div
 						className="overlay"

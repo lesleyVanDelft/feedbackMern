@@ -26,19 +26,6 @@ const Dashboard = ({ category, mobileOpen }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	useEffect(
-		handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
-	);
-
-	// NPM React query, check if user is on mobile
-	const isMobile = useMediaQuery({
-		query: '(max-width: 768px)',
-	});
-
-	useEffect(
-		handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
-	);
-	// console.log(dropdownRef);
 	useEffect(() => {
 		// if (!user) {
 		// 	return <h1>loading user</h1>;
@@ -48,9 +35,20 @@ const Dashboard = ({ category, mobileOpen }) => {
 		active
 			? (document.body.style.overflowY = 'hidden')
 			: (document.body.style.overflowY = 'auto');
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [active]);
+	useEffect(
+		handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
+	);
+
+	// NPM React query, check if user is on mobile
+	const isMobile = useMediaQuery({
+		query: '(max-width: 768px)',
+	});
+
+	// useEffect(
+	// 	handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
+	// );
+	// console.log(dropdownRef);
 
 	// get state through onclick on category buttons
 	const getCategoryState = catState => {
@@ -105,17 +103,6 @@ const Dashboard = ({ category, mobileOpen }) => {
 					<motion.div variants={framerItem} className="Dashboard__logo">
 						<div className="user" ref={dropdownRef}>
 							<div className="user__actions" onClick={toggle}>
-								{/* Welcome, */}
-								{/* <img
-									src={
-										user.profileImg.exists ? (
-											`/images/${user.profileImg.imageId}`
-										) : (
-											BlankProfileImg
-										)
-									}
-									alt=""
-								/> */}
 								{user && user.profileImg.exists ? (
 									<img
 										src={`/images/${user.profileImg.imageId}`}
@@ -170,20 +157,22 @@ const Dashboard = ({ category, mobileOpen }) => {
 					}`}
 					ref={dropdownRef}>
 					<div className="Dashboard__mobile--navigation">
-						<Link to="/">
-							<div className="text">
-								<h2>Frontend Mentor</h2>
-								<p>Feedback Board</p>
+						<div className="content">
+							<Link to="/">
+								<div className="text">
+									<h2>Frontend Mentor</h2>
+									<p>Feedback Board</p>
+								</div>
+							</Link>
+							<div
+								className={`hamburger ${active ? 'active' : ''}`}
+								onClick={() => {
+									handleMobileClick();
+								}}>
+								<span></span>
+								<span></span>
+								<span></span>
 							</div>
-						</Link>
-						<div
-							className={`hamburger ${active ? 'active' : ''}`}
-							onClick={() => {
-								handleMobileClick();
-							}}>
-							<span></span>
-							<span></span>
-							<span></span>
 						</div>
 					</div>
 
