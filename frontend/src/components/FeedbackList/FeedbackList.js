@@ -6,6 +6,7 @@ import FeedbackItem from '../FeedbackItem/FeedbackItem';
 import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
 import Sorter from '../Sorter/Sorter';
 import SuggestionsHeader from '../Suggestions/SuggestionsHeader/SuggestionsHeader';
+import Cookies from 'js-cookie';
 import './FeedbackList.css';
 
 const FeedbackList = ({ category }) => {

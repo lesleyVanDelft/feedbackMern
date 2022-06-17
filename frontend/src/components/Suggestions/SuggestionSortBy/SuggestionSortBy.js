@@ -69,7 +69,7 @@ const SuggestionSortBy = ({ getSortState }) => {
 			onClick={toggle}
 			ref={dropdownRef}>
 			<span className="sortBy">Sort by: </span>
-			<button>
+			<button className="toggleSortDropdown">
 				<span className="selected">{selected}</span>
 				{active ? <HiChevronUp /> : <HiChevronDown />}
 			</button>

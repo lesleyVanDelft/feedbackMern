@@ -27,7 +27,7 @@ const Homepage = () => {
 			Cookies.remove('jwt', { path: '/' });
 			// navigate('/login');
 		}
-		if (user) {
+		if (user !== null && Cookies.get('jwt') !== undefined) {
 			try {
 				navigate('/');
 				dispatch(getFeedbacks());
@@ -39,7 +39,7 @@ const Homepage = () => {
 		}
 
 		// dispatch(setUser());
-	}, []);
+	}, [dispatch, navigate, user]);
 
 	const initialMotion = {
 		initial: {

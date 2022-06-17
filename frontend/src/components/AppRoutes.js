@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Homepage from '../pages/Homepage';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -9,9 +9,28 @@ import Test from '../pages/Test';
 import RoadmapPage from '../pages/Roadmap/Roadmap';
 import { AnimatePresence } from 'framer-motion';
 import User from '../pages/User/User';
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../reducers/userReducer';
 
 const AppRoutes = () => {
+	const user = useSelector(state => state.user);
 	const location = useLocation();
+	const cookie = Cookies.get('jwt');
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (cookie === undefined || user === null) {
+			dispatch(logoutUser());
+			// localStorage.removeItem('root:user');
+			navigate('/login');
+		} else {
+			return;
+		}
+	}, [cookie, dispatch, navigate, user]);
+	console.log(cookie);
 
 	return (
 		<AnimatePresence exitBeforeEnter>

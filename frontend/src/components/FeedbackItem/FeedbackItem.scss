@@ -36,8 +36,12 @@
 					padding: 0.5rem 0.9rem;
 					margin: 0;
 					cursor: pointer;
-					display: grid;
-					place-items: center;
+					// display: grid;
+					// place-items: center;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					background-color: transparent;
 				}
 
 				&__upvote {
@@ -258,8 +262,11 @@
 						padding: 0.5rem 0.7rem;
 						margin: 0;
 						cursor: pointer;
-						display: grid;
-						place-items: center;
+						// display: grid;
+						// place-items: center;
+						display: flex;
+						justify-content: center;
+						align-items: center;
 					}
 
 					svg {

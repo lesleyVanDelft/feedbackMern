@@ -4,24 +4,36 @@
 	background: none;
 	border: none;
 	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
 	-webkit-appearance: none;
+	font-size: 1rem;
 	&:hover {
 		.sortBy {
 			transition: all 0.25s ease-in-out;
+			-webkit-transition: all 0.25s ease-in-out;
 			color: lighten($color: $skyBlue, $amount: 25%);
 		}
 		button {
 			transition: all 0.25s ease-in-out;
+			-webkit-transition: all 0.25s ease-in-out;
 			color: lighten($color: $skyBlue, $amount: 25%);
 			span.selected {
 				transition: all 0.25s ease-in-out;
+				-webkit-transition: all 0.25s ease-in-out;
 				color: lighten($color: $skyBlue, $amount: 25%);
 			}
 		}
 	}
 
-	span {
+	button.toggleSortDropdown {
+		svg {
+			font-size: 1rem;
+		}
+	}
+
+	span.selected {
 		color: $white;
+		font-size: 1rem;
 		-webkit-appearance: none;
 	}
 	ul.dropdown {
@@ -74,6 +86,7 @@
 
 @media screen and (max-width: 768px) {
 	.SuggestionSortBy {
+		// .sortBy
 		&:hover {
 			.sortBy {
 				color: $white;

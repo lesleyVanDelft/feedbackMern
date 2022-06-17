@@ -164,10 +164,10 @@
 			&--filter {
 				margin-top: 0.6rem;
 				h3 {
-					color: $darkBlue1;
+					color: $darkBlue2;
 					font-weight: 500;
 					margin-bottom: 0.4rem;
-					// opacity: 0.95;
+					opacity: 0.85;
 				}
 			}
 
@@ -292,6 +292,7 @@
 				min-height: calc(100vh - 4.5rem);
 				// min-height: 100%;
 				height: -webkit-fill-available;
+				-webkit-appearance: none;
 				img {
 					width: 70px;
 					height: 70px;
@@ -301,18 +302,19 @@
 				}
 				.user {
 					font-weight: bold;
-					font-size: 1.5rem;
+					// font-size: 1.5rem;
+					// font-size: clamp(1rem, 15vw, 1.51rem);
+					font-size: 6vw;
 					color: $darkBlue1;
 					cursor: pointer;
+					// width: fit-content;
+					// width: -moz-fit-content;
+					// display: inline-flex;
 
 					svg {
 						font-size: 0.9rem;
 						margin-left: 0.3rem;
 					}
-
-					// &.active {
-					// 	color: lighten($color: $darkBlue1, $amount: 20%);
-					// }
 				}
 
 				.btn {
@@ -330,6 +332,7 @@
 				z-index: 100;
 				-webkit-transform: translate3d(0, 0, 0);
 				transform: translate3d(0, 0, 0);
+				-webkit-appearance: none;
 			}
 		}
 	}

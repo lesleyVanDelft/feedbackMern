@@ -81,12 +81,16 @@ export const toggleDownvoteDetails = (id, downvotedBy, upvotedBy) => {
 // GET - all feedbacks
 export const getFeedbacks = () => {
 	return async dispatch => {
-		let feedbacks;
-		feedbacks = await feedbackService.getFeedbacks();
-		dispatch({
-			type: 'GET_ALL_FEEDBACKS',
-			payload: feedbacks,
-		});
+		try {
+			let feedbacks;
+			feedbacks = await feedbackService.getFeedbacks();
+			dispatch({
+				type: 'GET_ALL_FEEDBACKS',
+				payload: feedbacks,
+			});
+		} catch (error) {
+			console.log(error + 'feedbackReducer getFeedbacks');
+		}
 	};
 };
 
