@@ -30,7 +30,7 @@ const AppRoutes = () => {
 			return;
 		}
 	}, [cookie, dispatch, navigate, user]);
-	console.log(cookie);
+	// console.log(cookie);
 
 	return (
 		<AnimatePresence exitBeforeEnter>

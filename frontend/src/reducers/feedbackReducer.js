@@ -89,7 +89,7 @@ export const getFeedbacks = () => {
 				payload: feedbacks,
 			});
 		} catch (error) {
-			console.log(error + 'feedbackReducer getFeedbacks');
+			console.log(error + ' feedbackReducer getFeedbacks');
 		}
 	};
 };

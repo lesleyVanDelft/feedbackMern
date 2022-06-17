@@ -6,23 +6,11 @@ import FeedbackItem from '../FeedbackItem/FeedbackItem';
 import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
 import Sorter from '../Sorter/Sorter';
 import SuggestionsHeader from '../Suggestions/SuggestionsHeader/SuggestionsHeader';
-import Cookies from 'js-cookie';
 import './FeedbackList.css';
 
 const FeedbackList = ({ category }) => {
 	const [sortBy, setSortBy] = useState('Most Upvotes');
 	const feedbackList = useSelector(state => state.feedbacks);
-	// const [feedbackList, setFeedbackList] = useState(feedbacks);
-
-	// console.log(feedbackList);
-	// useEffect(() => {
-	// 	setFeedbackList(feedbacks);
-	// 	// console.log('list updated');
-
-	// 	if (!feedbacks) {
-	// 		return <h1>Loading</h1>;
-	// 	}
-	// }, [feedbacks]);
 
 	if (!feedbackList) {
 		return <h1>Loading</h1>;
@@ -38,6 +26,34 @@ const FeedbackList = ({ category }) => {
 
 	const getSortBy = sortState => {
 		setSortBy(sortState);
+	};
+
+	const framerContainer = {
+		initial: {
+			opacity: 0,
+			// translateX: -40,
+		},
+		animate: {
+			opacity: 1,
+			// translateX: 0,
+		},
+		transition: {
+			// duration: 0.3,
+		},
+	};
+
+	const framerItem = {
+		initial: {
+			opacity: 0,
+			translateX: -40,
+		},
+		animate: {
+			opacity: 1,
+			translateX: 0,
+		},
+		transition: {
+			duration: 0.3,
+		},
 	};
 
 	return (
@@ -72,7 +88,7 @@ const FeedbackList = ({ category }) => {
 					</Sorter>
 				</motion.div>
 			) : (
-				<motion.div className="feedbacks">
+				<div className="feedbacks">
 					<Sorter by={sortBy}>
 						{filteredFeedbacks.length > 0 && category !== 'all' ? (
 							filteredFeedbacks.map((feedback, i) => {
@@ -90,7 +106,7 @@ const FeedbackList = ({ category }) => {
 							<EmptyFeedback userDetails={false} />
 						)}
 					</Sorter>
-				</motion.div>
+				</div>
 			)}
 			{/* {filteredFeedbacks.length <= 0 ? <EmptyFeedback /> : null} */}
 		</motion.section>

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSingleFeedback } from '../../reducers/feedbackCommentsReducer';
 import { useParams } from 'react-router-dom';
@@ -18,17 +18,31 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import './Details.css';
 import PageLogo from '../../components/PageLogo/PageLogo';
 import BackBtn from '../../components/Buttons/BackBtn/BackBtn';
+import Cookies from 'js-cookie';
 
 const Details = () => {
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const user = useSelector(state => state.user);
+	const cookie = Cookies.get('jwt');
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	let { id } = useParams();
 
 	useEffect(() => {
-		dispatch(getSingleFeedback(id));
-		dispatch(setUser());
-	}, [dispatch, id]);
+		// dispatch(getSingleFeedback(id));
+		if (user !== null && cookie !== undefined) {
+			try {
+				// navigate('/');
+				dispatch(getSingleFeedback(id));
+				dispatch(setUser());
+			} catch (error) {
+				console.log(error);
+			}
+		} else {
+			navigate('/login');
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const initialMotion = {
 		initial: {

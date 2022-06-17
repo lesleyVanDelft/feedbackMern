@@ -26,7 +26,6 @@ const Homepage = () => {
 	useEffect(() => {
 		if (!user) {
 			Cookies.remove('jwt', { path: '/' });
-			// navigate('/login');
 		}
 		if (user !== null && cookie !== undefined) {
 			try {
