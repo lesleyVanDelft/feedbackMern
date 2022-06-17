@@ -12,6 +12,7 @@ import './Pages.css';
 const Homepage = () => {
 	const feedbacks = useSelector(state => state.feedbacks);
 	const user = useSelector(state => state.user);
+	const cookie = Cookies.get('jwt');
 	// const user = JSON.parse(localStorage.getItem('user'));
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Homepage = () => {
 			Cookies.remove('jwt', { path: '/' });
 			// navigate('/login');
 		}
-		if (user !== null && Cookies.get('jwt') !== undefined) {
+		if (user !== null && cookie !== undefined) {
 			try {
 				navigate('/');
 				dispatch(getFeedbacks());
@@ -39,7 +40,8 @@ const Homepage = () => {
 		}
 
 		// dispatch(setUser());
-	}, [dispatch, navigate, user]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const initialMotion = {
 		initial: {
