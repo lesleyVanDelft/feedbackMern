@@ -71,16 +71,19 @@ const UserModal = ({ active, getImage }) => {
 			animate="show"
 			exit="exit"
 			className={`UserModal`}>
-			<input
-				id="UserModal__input"
-				className="UserModal__input"
-				onChange={fileSelected}
-				type="file"
-				accept="image/*"
-			/>
-			<label htmlFor="UserModal__input" className="UserModal__labelButton">
-				<p>Upload an image...</p>
-			</label>
+			<div className="UserModal__upload">
+				<input
+					id="fileInput"
+					className="UserModal__upload--fileInput"
+					onChange={fileSelected}
+					type="file"
+					accept="image/*"
+				/>
+				<label htmlFor="fileInput" className="UserModal__upload--labelButton">
+					{/* <p>Upload an image...</p> */}
+					Upload an image...
+				</label>
+			</div>
 
 			<div className="UserModal__delete">
 				<button className="deleteImageBtn">Delete Image</button>

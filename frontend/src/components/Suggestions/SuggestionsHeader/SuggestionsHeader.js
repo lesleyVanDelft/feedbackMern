@@ -31,7 +31,6 @@ const SuggestionsHeader = ({ suggestionCount, sortBy, roadmap }) => {
 		<header className="SuggestionsHeader">
 			<div className="Roadmap__header">
 				<BackBtn currentPage="roadmap" />
-
 				<h3>Roadmap</h3>
 			</div>
 			<Link to="/create" className="btnLink">

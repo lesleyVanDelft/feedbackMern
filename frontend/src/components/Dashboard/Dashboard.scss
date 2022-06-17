@@ -236,6 +236,7 @@
 					width: 2rem;
 					background-color: transparent;
 					position: relative;
+					cursor: pointer;
 
 					span {
 						height: 2.5px;
@@ -302,6 +303,7 @@
 					font-weight: bold;
 					font-size: 1.5rem;
 					color: $darkBlue1;
+					cursor: pointer;
 
 					svg {
 						font-size: 0.9rem;
