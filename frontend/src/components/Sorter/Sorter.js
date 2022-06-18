@@ -9,7 +9,7 @@ const Sorter = ({ children, by, feedbackData }) => {
 	// let commentLength = feedbackData.commentCount;
 	// const childrenArray = React.Children.toArray(children);
 	// useEffect(() => {
-	console.log(children);
+	// console.log(children);
 	// }, [])
 
 	// const getDate = (date) => {

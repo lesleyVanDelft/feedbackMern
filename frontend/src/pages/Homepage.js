@@ -24,24 +24,20 @@ const Homepage = () => {
 		setCategoryState(catState);
 	};
 
-	useEffect(() => {
-		if (!user) {
-			Cookies.remove('jwt', { path: '/' });
-		}
-		if (user === null || cookie === undefined) {
-			dispatch(logoutUser());
-			navigate('/login');
-		} else {
-			try {
-				navigate('/');
-				dispatch(getFeedbacks());
-			} catch (error) {
-				console.log(error);
-			}
-		}
+	// useEffect(() => {
+	// 	if (!user) {
+	// 		Cookies.remove('jwt', { path: '/' });
+	// 	}
+	// 	if (user === null || cookie === undefined) {
+	// 		dispatch(logoutUser());
+	// 		navigate('/login');
+	// 	} else {
+	// 		navigate('/');
+	// 		dispatch(getFeedbacks());
+	// 	}
 
-		// dispatch(setUser());
-	}, [cookie, dispatch, navigate, user]);
+	// 	// dispatch(setUser());
+	// }, []);
 
 	const initialMotion = {
 		initial: {

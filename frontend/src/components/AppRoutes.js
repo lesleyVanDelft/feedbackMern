@@ -21,13 +21,13 @@ const AppRoutes = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	// useEffect(() => {
-	// 	if (cookie === undefined || user === null) {
-	// 		dispatch(logoutUser());
-	// 		// localStorage.removeItem('root:user');
-	// 		navigate('/login');
-	// 	}
-	// }, [cookie, dispatch, navigate, user]);
+	useEffect(() => {
+		if (cookie === undefined || user === null) {
+			dispatch(logoutUser());
+			// localStorage.removeItem('root:user');
+			navigate('/login');
+		}
+	}, []);
 	// console.log(cookie);
 
 	return (
