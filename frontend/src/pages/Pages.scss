@@ -97,9 +97,13 @@
 			margin-bottom: 1rem;
 			background: $inputGray2;
 			width: 100%;
+			// height: fit-content;
 
 			&:focus {
 				outline: 1px solid $blue;
+				border-radius: 5px;
+				transform: translateZ(0);
+				-webkit-transform: translateZ(0);
 			}
 
 			&::placeholder {

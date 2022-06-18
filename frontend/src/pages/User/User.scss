@@ -49,7 +49,7 @@
 				padding: 1.5rem 0;
 				border-radius: 5px;
 				position: relative;
-				height: 100%;
+				// height: 100%;
 
 				&__container {
 					width: 150px;
@@ -122,15 +122,16 @@
 				button.logoutBtn {
 					margin-top: 1.8rem;
 					text-transform: capitalize;
-					border: none;
+					// border: inherit;
 					background-color: transparent;
 					font-size: 1rem;
 					border-radius: 0.3125rem;
 					padding: 0.5rem;
 					color: $black;
 					cursor: pointer;
-					transform: translateZ(0);
-					-webkit-transform: translateZ(0);
+					// transform: translateZ(0);
+					// -webkit-transform: translateZ(0);
+					// color: red;
 					transition: background-color 0.1s ease-in-out;
 					-webkit-transition: background-color 0.1s ease-in-out;
 					display: flex;
@@ -147,7 +148,7 @@
 					}
 				}
 				button.editDetails {
-					outline: 1px solid $darkBlue1;
+					border: 1px solid $darkBlue1;
 					padding: 0.5rem 1rem;
 					-webkit-appearance: none;
 					svg {
@@ -155,6 +156,8 @@
 					}
 					&:hover {
 						background-color: lighten($color: $darkBlue1, $amount: 10%);
+						// outline: none;
+						// border: 1px solid $darkBlue1;
 						color: $white;
 						svg {
 							color: $white;
@@ -162,7 +165,7 @@
 					}
 				}
 				button.logoutBtn {
-					outline: 1px solid $red;
+					border: 1px solid $red;
 					padding: 0.5rem 1rem;
 					-webkit-appearance: none;
 					&:active,
@@ -273,7 +276,7 @@
 					button.editDetails {
 						margin-top: 1.8rem;
 						text-transform: capitalize;
-						border: none;
+						border: 1px solid $darkBlue1;
 						background-color: transparent;
 						font-size: 1rem;
 						border-radius: 5px;
@@ -294,7 +297,7 @@
 						}
 					}
 					button.logoutBtn {
-						outline: 1px solid $red;
+						border: 1px solid $red;
 						padding: 0.5rem 1rem;
 						-webkit-appearance: none;
 					}

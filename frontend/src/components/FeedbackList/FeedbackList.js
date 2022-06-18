@@ -18,7 +18,11 @@ const FeedbackList = ({ category }) => {
 		setSortList(feedbackList);
 	}, [feedbackList]);
 
-	console.log(sortList);
+	// useEffect(() => {
+
+	// }, [])
+
+	// console.log(sortList);
 
 	// console.log(feedbackList.sort((a,b) => ));
 	// const listSorter = list => {
