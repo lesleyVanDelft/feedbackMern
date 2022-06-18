@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import moment from 'moment';
 // import { useSelector } from 'react-redux';
 
 const Sorter = ({ children, by, feedbackData }) => {
@@ -8,7 +9,7 @@ const Sorter = ({ children, by, feedbackData }) => {
 	// let commentLength = feedbackData.commentCount;
 	// const childrenArray = React.Children.toArray(children);
 	// useEffect(() => {
-
+	console.log(children);
 	// }, [])
 
 	// const getDate = (date) => {
@@ -20,7 +21,10 @@ const Sorter = ({ children, by, feedbackData }) => {
 		// console.log(b.props.feedback.upvotedBy.length);
 		// console.log(a.props.index);
 		// return a.props[by] - b.props[by];
+		// let sort = [];
 		if (by === 'Most Upvotes') {
+			// console.log(a.props);
+			// console.log('++++++++++');
 			return (
 				b.props.feedback.upvotedBy.length - a.props.feedback.upvotedBy.length
 			);
@@ -32,10 +36,10 @@ const Sorter = ({ children, by, feedbackData }) => {
 			return b.props.feedback.commentCount - a.props.feedback.commentCount;
 		} else if (by === 'Least Comments') {
 			return a.props.feedback.commentCount - b.props.feedback.commentCount;
+		} else if (by === 'Newest') {
+			// console.log(b.props.feedback.updatedAt);
+			return b.props.feedback.updatedAt - a.props.feedback.updatedAt;
 		}
-		// else if (by === 'Newest') {
-		// 	console.log(b.props.feedback.updatedAt);
-		// 	return b.props.feedback.updatedAt - a.props.feedback.updatedAt;
 		// } else if (by === 'Oldest') {
 		// 	return a.props.feedback.updatedAt - b.props.feedback.updatedAt;
 		// }
@@ -46,7 +50,12 @@ const Sorter = ({ children, by, feedbackData }) => {
 		return children;
 	}
 	// return React.Children.toArray(children).sort(compare);
-	return React.Children.toArray(children).sort(compare);
+	return React.Children.toArray(children)
+		.sort(compare)
+		.map((fb, i) => {
+			// console.log(fb);
+			return fb;
+		});
 	// return React.Children.toArray(children.map((value, i) => ))
 };
 

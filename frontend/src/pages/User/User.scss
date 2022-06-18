@@ -70,7 +70,7 @@
 						opacity: 0.85;
 					}
 				}
-				.editImage {
+				button.editImage {
 					// margin-top: 1.3rem;
 					text-transform: capitalize;
 					border: none;
@@ -85,6 +85,7 @@
 					-webkit-transition: background-color 0.1s ease-in-out;
 					display: flex;
 					align-items: center;
+					-webkit-appearance: none;
 
 					svg.editSvg {
 						margin-right: 0.2rem;
@@ -244,6 +245,9 @@
 					&__container {
 						-webkit-tap-highlight-color: transparent;
 					}
+					button.editImage {
+						-webkit-appearance: none;
+					}
 				}
 
 				.userInfo {
@@ -279,6 +283,7 @@
 						-webkit-transition: background-color 0.1s ease-in-out;
 						display: flex;
 						align-items: center;
+						-webkit-appearance: none;
 
 						svg {
 							margin-right: 0.4rem;
@@ -289,6 +294,7 @@
 					button.logoutBtn {
 						outline: 1px solid $red;
 						padding: 0.5rem 1rem;
+						-webkit-appearance: none;
 					}
 				}
 			}

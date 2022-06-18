@@ -7,11 +7,24 @@ import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
 import Sorter from '../Sorter/Sorter';
 import SuggestionsHeader from '../Suggestions/SuggestionsHeader/SuggestionsHeader';
 import './FeedbackList.css';
+import moment from 'moment';
 
 const FeedbackList = ({ category }) => {
 	const [sortBy, setSortBy] = useState('Most Upvotes');
 	const [sortList, setSortList] = useState([]);
 	const feedbackList = useSelector(state => state.feedbacks);
+
+	// console.log(feedbackList.sort((a,b) => ));
+	// const listSorter = list => {
+	// 	const date = moment().format(list.upd)
+	// 	const sorted = list.sort((a, b) => {
+	// 		console.log(a);
+	// 		return b - a;
+	// 	});
+	// 	return sorted;
+	// };
+
+	// listSorter(feedbackList);
 
 	// useEffect(() => {
 	// 	setSortList(
@@ -117,6 +130,7 @@ const FeedbackList = ({ category }) => {
 						<Sorter by={sortBy}>
 							{filteredFeedbacks.length > 0 && category !== 'all' ? (
 								filteredFeedbacks.map((feedback, i) => {
+									// console.log(moment.format(feedback.updatedAt));
 									return (
 										<FeedbackItem
 											// variants={framerItem}

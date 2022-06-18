@@ -81,14 +81,14 @@ const SuggestionSortBy = ({ getSortState }) => {
 						animate={active ? 'show' : 'hidden'}
 						exit="exit"
 						className={`dropdown  ${active ? 'active' : null}`}>
-						{/* <li onClick={() => setSelected('Newest')}>
+						<li onClick={() => setSelected('Newest')}>
 							<span>Newest</span>
 							{selected === 'Newest' && <FiCheck />}
 						</li>
 						<li onClick={() => setSelected('Oldest')}>
 							<span>Oldest</span>
 							{selected === 'Oldest' && <FiCheck />}
-						</li> */}
+						</li>
 						<li onClick={() => setSelected('Most Upvotes')}>
 							<span>Most Upvotes</span>
 							{selected === 'Most Upvotes' && <FiCheck />}

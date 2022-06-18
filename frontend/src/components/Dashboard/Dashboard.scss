@@ -164,6 +164,7 @@
 
 			&--filter {
 				margin-top: 1rem;
+				margin-bottom: 1rem;
 				h3 {
 					color: $darkBlue2;
 					font-weight: 500;
@@ -294,6 +295,7 @@
 				gap: 1rem;
 				width: 291px;
 				right: 0;
+				height: 100%;
 				min-height: calc(100vh - 4.5rem);
 				// min-height: 100%;
 				height: -webkit-fill-available;
@@ -336,17 +338,29 @@
 				}
 			}
 			.overlay {
-				position: fixed;
-				left: 0;
-				bottom: 0;
-				top: 4.5rem;
-				right: 0;
-				background-color: $black;
+				// position: fixed;
+				// left: 0;
+				// bottom: 0;
+				// top: 4.5rem;
+				// right: 0;
+				// background-color: $black;
 				opacity: 0.5;
 				z-index: 100;
 				transform: translate3d(0, 0, 0);
 				-webkit-transform: translate3d(0, 0, 0);
 				-webkit-appearance: none;
+
+				position: absolute;
+				z-index: 100;
+				background-color: lighten($color: $black, $amount: 10%);
+				display: block;
+				// padding: 1.5rem;
+				// gap: 1rem;
+				width: 291px;
+				width: 100%;
+				right: 0;
+				min-height: calc(100vh - 4.5rem);
+				height: 100%;
 			}
 		}
 	}
