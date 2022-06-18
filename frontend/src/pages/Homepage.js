@@ -41,8 +41,7 @@ const Homepage = () => {
 		}
 
 		// dispatch(setUser());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [cookie, dispatch, navigate, user]);
 
 	const initialMotion = {
 		initial: {
