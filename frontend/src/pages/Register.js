@@ -43,10 +43,10 @@ const Register = () => {
 	});
 
 	useEffect(() => {
-		if (user) {
+		if (user !== null) {
 			navigate('/');
 		}
-	}, [user, navigate]);
+	}, [user]);
 
 	const initialMotion = {
 		initial: {

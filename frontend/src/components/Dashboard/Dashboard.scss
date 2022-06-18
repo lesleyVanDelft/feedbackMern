@@ -244,7 +244,7 @@
 						width: 2rem;
 						background-color: transparent;
 						position: relative;
-						cursor: pointer;
+						// cursor: pointer;
 
 						span {
 							height: 2.5px;
@@ -286,8 +286,9 @@
 				}
 			}
 
+			// MobileDashboard component, needs relocating
 			.MobileDashboard {
-				position: absolute;
+				position: fixed;
 				z-index: 101;
 				background: $lightGray;
 				display: block;
@@ -300,6 +301,9 @@
 				// min-height: 100%;
 				height: -webkit-fill-available;
 				-webkit-appearance: none;
+				-webkit-tap-highlight-color: none;
+				// -webkit-overflow
+
 				// box-shadow: -47px 46px 0px 46px #000000;
 				.content {
 					display: flex;
@@ -338,29 +342,29 @@
 				}
 			}
 			.overlay {
-				// position: fixed;
-				// left: 0;
-				// bottom: 0;
-				// top: 4.5rem;
-				// right: 0;
-				// background-color: $black;
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				top: 4.5rem;
+				right: 0;
+				background-color: $black;
 				opacity: 0.5;
 				z-index: 100;
 				transform: translate3d(0, 0, 0);
 				-webkit-transform: translate3d(0, 0, 0);
 				-webkit-appearance: none;
 
-				position: absolute;
-				z-index: 100;
-				background-color: lighten($color: $black, $amount: 10%);
-				display: block;
-				// padding: 1.5rem;
-				// gap: 1rem;
-				width: 291px;
-				width: 100%;
-				right: 0;
-				min-height: calc(100vh - 4.5rem);
-				height: 100%;
+				// position: absolute;
+				// z-index: 100;
+				// background-color: lighten($color: $black, $amount: 10%);
+				// display: block;
+				// // padding: 1.5rem;
+				// // gap: 1rem;
+				// width: 291px;
+				// width: 100%;
+				// right: 0;
+				// min-height: calc(100vh - 4.5rem);
+				// height: 100%;
 			}
 		}
 	}

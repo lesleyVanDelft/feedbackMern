@@ -14,11 +14,11 @@ const feedbackReducer = (state = [], action) => {
 			// };
 			//
 			//
-			const oldArray = [...state];
-			const newFeedback = [action.payload];
-			const newArray = oldArray.concat(newFeedback);
-			return newArray;
-		// return [...state, action.payload];
+			// const oldArray = [...state];
+			// const newFeedback = [action.payload];
+			// const newArray = oldArray.concat(newFeedback);
+			// return newArray;
+			return [...state, action.payload];
 		case 'DELETE_FEEDBACK':
 			return [
 				...state.feedbacks,

@@ -8,6 +8,7 @@ import FeedbackList from '../components/FeedbackList/FeedbackList';
 import Cookies from 'js-cookie';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import './Pages.css';
+import { logoutUser } from '../reducers/userReducer';
 
 const Homepage = () => {
 	const feedbacks = useSelector(state => state.feedbacks);
@@ -27,15 +28,16 @@ const Homepage = () => {
 		if (!user) {
 			Cookies.remove('jwt', { path: '/' });
 		}
-		if (user !== null && cookie !== undefined) {
+		if (user === null || cookie === undefined) {
+			dispatch(logoutUser());
+			navigate('/login');
+		} else {
 			try {
 				navigate('/');
 				dispatch(getFeedbacks());
 			} catch (error) {
 				console.log(error);
 			}
-		} else {
-			navigate('/login');
 		}
 
 		// dispatch(setUser());

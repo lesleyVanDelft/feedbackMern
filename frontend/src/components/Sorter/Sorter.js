@@ -49,13 +49,13 @@ const Sorter = ({ children, by, feedbackData }) => {
 		// console.log(children);
 		return children;
 	}
-	// return React.Children.toArray(children).sort(compare);
-	return React.Children.toArray(children)
-		.sort(compare)
-		.map((fb, i) => {
-			// console.log(fb);
-			return fb;
-		});
+	return React.Children.toArray(children).sort(compare);
+	// return React.Children.toArray(children)
+	// 	.sort(compare)
+	// 	.map((fb, i) => {
+	// 		// console.log(fb);
+	// 		return fb;
+	// 	});
 	// return React.Children.toArray(children.map((value, i) => ))
 };
 

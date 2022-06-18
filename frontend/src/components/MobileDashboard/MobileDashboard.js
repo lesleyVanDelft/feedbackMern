@@ -8,11 +8,24 @@ import Modal from '../Modal/Modal';
 import UserDropdown from '../Dashboard/UserDropdown/UserDropdown';
 import BlankProfileImg from '../../assets/blank-profile-picture.png';
 import { handleOutsideClick } from '../../utils/handleOutsideClick';
+import './MobileDashboard.css';
 
 const menuVisibility = {
 	hidden: { opacity: 0, right: -150 },
-	visible: { opacity: 1, right: 0 },
-	exit: { opacity: 0, right: -350 },
+	visible: {
+		opacity: 1,
+		right: 0,
+		transition: {
+			duration: 0.3,
+		},
+	},
+	exit: {
+		opacity: 0,
+		right: -350,
+		transition: {
+			duration: 0.2,
+		},
+	},
 };
 const overlayVisibility = {
 	hidden: { opacity: 0, right: -150 },
@@ -33,13 +46,14 @@ const overlayVisibility = {
 };
 
 const MobileDashboard = ({ category, isVisible, logout }) => {
+	// Handle outside dropdown click
 	const mobileDropdownRef = useRef(null);
 	const [listening, setListening] = useState(false);
 	const [userActive, setUserActive] = useState(false);
 	const toggle = () => setUserActive(!userActive);
+	// Logout modal state
 	const [logoutModal, setLogoutModal] = useState(false);
 	const user = useSelector(state => state.user);
-	// const toggle = () => setUserActive(!userActive);
 	useEffect(
 		handleOutsideClick(
 			listening,
@@ -48,15 +62,6 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 			setUserActive
 		)
 	);
-
-	// useEffect(
-	// 	handleOutsideClick(
-	// 		listening,
-	// 		setListening,
-	// 		mobileDropdownRef,
-	// 		setUserActive
-	// 	)
-	// );
 
 	const openModal = e => {
 		e.preventDefault();
@@ -71,9 +76,6 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 		setUserActive(act);
 	};
 
-	// const handleUserClick = () => {
-	// 	setUserActive(!userActive);
-	// };
 	return (
 		<>
 			{isVisible && (

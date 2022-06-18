@@ -11,8 +11,14 @@ import moment from 'moment';
 
 const FeedbackList = ({ category }) => {
 	const [sortBy, setSortBy] = useState('Most Upvotes');
-	const [sortList, setSortList] = useState([]);
 	const feedbackList = useSelector(state => state.feedbacks);
+	const [sortList, setSortList] = useState(feedbackList);
+
+	useEffect(() => {
+		setSortList(feedbackList);
+	}, [feedbackList]);
+
+	console.log(sortList);
 
 	// console.log(feedbackList.sort((a,b) => ));
 	// const listSorter = list => {
@@ -99,56 +105,56 @@ const FeedbackList = ({ category }) => {
 			) : null}
 
 			{/* Loop if feedbacks is true and category is ALL, else map over and render filteredFeedbacks array */}
-			<AnimatePresence>
-				{feedbackList && category === 'all' ? (
-					<motion.div
-						className="feedbacks"
-						// variants={framerContainer}
-						// initial="initial"
-						// animate="animate"
-					>
-						<Sorter by={sortBy}>
-							{feedbackList.map((feedback, i) => (
-								<FeedbackItem
-									// variants={framerItem}
-									feedback={feedback}
-									key={feedback._id}
-									index={i}
-									toggleUpvote={toggleUpvote}
-									toggleDownvote={toggleDownvote}
-								/>
-							))}
-						</Sorter>
-					</motion.div>
-				) : (
-					<div
-						className="feedbacks"
-						// variants={framerContainer}
-						// initial="initial"
-						// animate="animate"
-					>
-						<Sorter by={sortBy}>
-							{filteredFeedbacks.length > 0 && category !== 'all' ? (
-								filteredFeedbacks.map((feedback, i) => {
-									// console.log(moment.format(feedback.updatedAt));
-									return (
-										<FeedbackItem
-											// variants={framerItem}
-											feedback={feedback}
-											key={feedback._id}
-											index={i}
-											toggleUpvote={toggleUpvote}
-											toggleDownvote={toggleDownvote}
-										/>
-									);
-								})
-							) : (
-								<EmptyFeedback userDetails={false} />
-							)}
-						</Sorter>
-					</div>
-				)}
-			</AnimatePresence>
+			{/* <AnimatePresence> */}
+			{feedbackList && category === 'all' ? (
+				<motion.div
+					className="feedbacks"
+					// variants={framerContainer}
+					// initial="initial"
+					// animate="animate"
+				>
+					<Sorter by={sortBy}>
+						{feedbackList.map((feedback, i) => (
+							<FeedbackItem
+								// variants={framerItem}
+								feedback={feedback}
+								key={feedback._id}
+								index={i}
+								toggleUpvote={toggleUpvote}
+								toggleDownvote={toggleDownvote}
+							/>
+						))}
+					</Sorter>
+				</motion.div>
+			) : (
+				<div
+					className="feedbacks"
+					// variants={framerContainer}
+					// initial="initial"
+					// animate="animate"
+				>
+					<Sorter by={sortBy}>
+						{filteredFeedbacks.length > 0 && category !== 'all' ? (
+							filteredFeedbacks.map((feedback, i) => {
+								// console.log(moment.format(feedback.updatedAt));
+								return (
+									<FeedbackItem
+										// variants={framerItem}
+										feedback={feedback}
+										key={feedback._id}
+										index={i}
+										toggleUpvote={toggleUpvote}
+										toggleDownvote={toggleDownvote}
+									/>
+								);
+							})
+						) : (
+							<EmptyFeedback userDetails={false} />
+						)}
+					</Sorter>
+				</div>
+			)}
+			{/* </AnimatePresence> */}
 			{/* {filteredFeedbacks.length <= 0 ? <EmptyFeedback /> : null} */}
 		</motion.section>
 	);

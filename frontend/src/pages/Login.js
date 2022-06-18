@@ -31,7 +31,7 @@ const Login = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (user) {
+		if (user !== null) {
 			navigate('/');
 		}
 	}, [user]);

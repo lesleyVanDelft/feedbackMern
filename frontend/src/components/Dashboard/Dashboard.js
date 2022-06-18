@@ -15,11 +15,17 @@ import './Dashboard.css';
 // import { handleOutsideClick } from '../../utils/handleOutsideClick';
 
 const Dashboard = ({ category, mobileOpen }) => {
+	const rootElement = document.getElementById('root');
+	// Outside click handling
 	const dropdownRef = useRef(null);
 	const [listening, setListening] = useState(false);
 	const [userActive, setUserActive] = useState(false);
 	const toggle = () => setUserActive(!userActive);
+
+	// Filter category
 	const [categoryState, setCategoryState] = useState('all');
+
+	// Mobile menu state
 	const [active, setActive] = useState(false);
 	// const [userImage, setUserImage] = useState()
 	const user = useSelector(state => state.user);
@@ -30,11 +36,27 @@ const Dashboard = ({ category, mobileOpen }) => {
 		// if (!user) {
 		// 	return <h1>loading user</h1>;
 		// }
-
+		// switch (active) {
+		// 	case true:
+		// 		document.body.style.overflowY = 'hidden';
+		// 		break;
+		// 	case false:
+		// 		document.body.style.removeProperty('overflow-y');
+		// 		break;
+		// 	default:
+		// 		break;
+		// }
 		// lock body scrolling when mobile menu is open
 		active
 			? (document.body.style.overflowY = 'hidden')
 			: (document.body.style.overflowY = 'auto');
+		// if (active) {
+		// 	document.body.style.overflowX = 'auto';
+		// 	document.body.style.overflowY = 'hidden';
+		// } else if(!active) {
+		// 	document.body.style.overflowX = 'hidden';
+		// 	document.body.style.overflowY = 'auto';
+		// }
 	}, [active]);
 	useEffect(
 		handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
@@ -152,9 +174,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 
 			{isMobile && (
 				<div
-					className={`mobileNavigation Dashboard__mobile ${
-						active ? 'active' : null
-					}`}
+					className={`Dashboard__mobile ${active ? 'active' : ''}`}
 					ref={dropdownRef}>
 					<div className="Dashboard__mobile--navigation">
 						<div className="content">

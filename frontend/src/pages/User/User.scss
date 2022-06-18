@@ -64,7 +64,7 @@
 						min-height: 100%;
 						border-radius: 50%;
 						object-fit: cover;
-						-webkit-object-fit: cover;
+						// -webkit-object-fit: cover;
 					}
 					&:hover {
 						opacity: 0.85;
@@ -125,10 +125,12 @@
 					border: none;
 					background-color: transparent;
 					font-size: 1rem;
-					border-radius: 5px;
+					border-radius: 0.3125rem;
 					padding: 0.5rem;
 					color: $black;
 					cursor: pointer;
+					transform: translateZ(0);
+					-webkit-transform: translateZ(0);
 					transition: background-color 0.1s ease-in-out;
 					-webkit-transition: background-color 0.1s ease-in-out;
 					display: flex;
