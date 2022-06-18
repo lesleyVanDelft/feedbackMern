@@ -48,8 +48,37 @@ const Dashboard = ({ category, mobileOpen }) => {
 		// }
 		// lock body scrolling when mobile menu is open
 		active
-			? (document.body.style.overflowY = 'hidden')
-			: (document.body.style.overflowY = 'auto');
+			? (document.body.style.overflowY = 'hidden ')
+			: (document.body.style.overflowY = '');
+
+		active &&
+			document.addEventListener(
+				'mousedown',
+				e => e.which === (2 || 3) && e.preventDefault()
+			);
+
+		// active &&
+		// 	document.addEventListener('mousedown', e => {
+		// 		if (e.which === 2 || 3) {
+		// 			// alert('middleclick');
+		// 			return e.preventDefault();
+		// 		}
+		// 	});
+
+		// if (active) {
+		// 	document.addEventListener('touchstart' || 'mousedown', e => {
+		// 		if (e.which === 2 || 3) {
+		// 			// alert('middleclick');
+		// 			return e.preventDefault();
+		// 		}
+		// 	});
+		// } else {
+		// 	document.addEventListener('mousedown', e => {
+		// 		return e;
+		// 	});
+		// }
+
+		// document.body.style.overflow = 'scroll';
 		// if (active) {
 		// 	document.body.style.overflowX = 'auto';
 		// 	document.body.style.overflowY = 'hidden';
