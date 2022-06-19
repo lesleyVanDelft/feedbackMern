@@ -176,25 +176,25 @@ const FeedbackList = ({ category }) => {
 				</motion.div>
 			) : (
 				<motion.div className="feedbacks">
-					<Sorter by={sortBy}>
-						{filteredFeedbacks.length > 0 && category !== 'all' ? (
-							filteredFeedbacks.map((feedback, i) => {
-								console.log(i);
-								return (
-									<FeedbackItem
-										key={feedback._id}
-										// variants={framerItem}
-										feedback={feedback}
-										index={i}
-										toggleUpvote={toggleUpvote}
-										toggleDownvote={toggleDownvote}
-									/>
-								);
-							})
-						) : (
-							<EmptyFeedback userDetails={false} />
-						)}
-					</Sorter>
+					{/* <Sorter by={sortBy}> */}
+					{filteredFeedbacks.length > 0 && category !== 'all' ? (
+						filteredFeedbacks.map((feedback, i) => {
+							// console.log(i);
+							return (
+								<FeedbackItem
+									key={feedback._id}
+									// variants={framerItem}
+									feedback={feedback}
+									index={i}
+									toggleUpvote={toggleUpvote}
+									toggleDownvote={toggleDownvote}
+								/>
+							);
+						})
+					) : (
+						<EmptyFeedback userDetails={false} />
+					)}
+					{/* </Sorter> */}
 				</motion.div>
 			)}
 		</motion.section>
