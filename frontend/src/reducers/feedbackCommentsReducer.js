@@ -7,8 +7,8 @@ const feedbackPageReducer = (state = null, action) => {
 			return { ...state, ...action.payload };
 		case 'UPDATE_FEEDBACK':
 			return { ...state, ...action.payload };
-		case 'DELETE_FEEDBACK':
-			return state.filter(fb => fb.id !== action.payload);
+		// case 'DELETE_FEEDBACK':
+		// 	return state.filter(fb => fb.id !== action.payload);
 
 		case 'TOGGLE_UPVOTE_DETAILS':
 			return {
@@ -141,7 +141,6 @@ export const updateFeedback = (id, feedbackObj) => {
 			type: 'UPDATE_FEEDBACK',
 			payload: updatedFeedback,
 		});
-		toast.success('Feedback updated');
 	};
 };
 
@@ -155,6 +154,11 @@ export const addComment = (feedbackId, commentData) => {
 			type: 'ADD_COMMENT',
 			payload: addedComment,
 		});
+
+		toast.success('Comment added!', {
+			icon: '😀',
+			autoClose: 2000,
+		});
 	};
 };
 
@@ -167,6 +171,11 @@ export const addReply = (feedbackId, commentId, reply) => {
 		dispatch({
 			type: 'ADD_REPLY',
 			payload: { commentId, addedReply },
+		});
+
+		toast.success('Reply added!', {
+			icon: '🐱‍👓',
+			autoClose: 2000,
 		});
 	};
 };

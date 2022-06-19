@@ -52,9 +52,10 @@ const Reply = ({
 		handleOutsideClick(listening, setListening, dropdownRef, setMobileDropdown)
 	);
 	useEffect(() => {
-		// console.log(replyData);
+		// setEditValue(replyData.replyBody);
+		setRepliedBy(replyingTo);
 		setEditValue(replyData.replyBody);
-	}, [replyData.replyBody]);
+	}, [replyData.replyBody, replyingTo]);
 
 	// Edit change handler
 	const editChangeHandler = e => {
@@ -166,7 +167,13 @@ const Reply = ({
 					{/* // )} */}
 
 					{/* {trimmedText} */}
-					{editValue.split(' ')[1]}
+					{/* {editValue.split(' ').splice(0, 1)} */}
+
+					{/* {editValue.shift()} */}
+					{editValue
+						.split(' ')
+						.filter(text => !text.includes(replyingTo))
+						.join(' ')}
 				</p>
 			) : (
 				<form className="EditForm" onSubmit={handleSubmit}>

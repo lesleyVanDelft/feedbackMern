@@ -14,16 +14,14 @@ const feedbackReducer = (state = [], action) => {
 			// };
 			//
 			//
-			// const oldArray = [...state];
-			// const newFeedback = [action.payload];
-			// const newArray = oldArray.concat(newFeedback);
-			// return newArray;
-			return [...state, action.payload];
+			const oldArray = [...state];
+			const newFeedback = [action.payload];
+			const newArray = oldArray.concat(newFeedback);
+			return newArray;
+		// return [...state, action.payload];
 		case 'DELETE_FEEDBACK':
-			return [
-				...state.feedbacks,
-				state.feedbacks.filter(fb => fb.id !== action.payload),
-			];
+			// return state.feedbacks.filter(fb => fb.id !== action.payload);
+			return state.feedbacks.filter(fb => fb.id !== action.payload.id);
 		case 'TOGGLE_UPVOTE':
 			return state.map(fb => {
 				return fb._id !== action.payload.id
@@ -162,7 +160,10 @@ export const removeFeedback = id => {
 			type: 'DELETE_FEEDBACK',
 			payload: id,
 		});
-		toast.warn('Feedback Deleted');
+		toast.warn('Feedback successfully deleted', {
+			icon: '👋',
+			autoClose: 1500,
+		});
 	};
 };
 
