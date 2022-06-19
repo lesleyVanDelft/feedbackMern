@@ -178,19 +178,43 @@ const FeedbackList = ({ category }) => {
 				<motion.div className="feedbacks">
 					{/* <Sorter by={sortBy}> */}
 					{filteredFeedbacks.length > 0 && category !== 'all' ? (
-						filteredFeedbacks.map((feedback, i) => {
-							// console.log(i);
-							return (
-								<FeedbackItem
-									key={feedback._id}
-									// variants={framerItem}
-									feedback={feedback}
-									index={i}
-									toggleUpvote={toggleUpvote}
-									toggleDownvote={toggleDownvote}
-								/>
-							);
-						})
+						filteredFeedbacks
+							.sort((a, b) => {
+								if (sortBy === 'Most Upvotes') {
+									return b.upvotedBy.length - a.upvotedBy.length;
+								} else if (sortBy === 'Least Upvotes') {
+									return a.upvotedBy.length - b.upvotedBy.length;
+								} else if (sortBy === 'Most Comments') {
+									return b.upvotedBy.length - a.upvotedBy.length;
+								} else if (sortBy === 'Least Comments') {
+									return a.upvotedBy.length - b.upvotedBy.length;
+								} else if (sortBy === 'Newest') {
+									return (
+										new Date(b.createdAt).getTime() -
+										new Date(a.createdAt).getTime()
+									);
+								} else if (sortBy === 'Oldest') {
+									return (
+										new Date(a.createdAt).getTime() -
+										new Date(b.createdAt).getTime()
+									);
+								} else {
+									return null;
+								}
+							})
+							.map((feedback, i) => {
+								// console.log(i);
+								return (
+									<FeedbackItem
+										key={feedback._id}
+										// variants={framerItem}
+										feedback={feedback}
+										index={i}
+										toggleUpvote={toggleUpvote}
+										toggleDownvote={toggleDownvote}
+									/>
+								);
+							})
 					) : (
 						<EmptyFeedback userDetails={false} />
 					)}

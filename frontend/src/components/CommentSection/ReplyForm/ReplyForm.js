@@ -1,8 +1,9 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { ReplyContext } from '../Comment/Comment';
 import { useFormik } from 'formik';
 import { addReply } from '../../../reducers/feedbackCommentsReducer';
 import './ReplyForm.css';
+import { useEffect, useState } from 'react';
 
 const ReplyForm = ({
 	currentFeedback,
@@ -13,18 +14,24 @@ const ReplyForm = ({
 	replyToReply,
 	getReplyName,
 }) => {
+	const user = useSelector(state => state.user);
+	const [profileImgData, setProfileImgData] = useState(user.profileImg);
 	const dispatch = useDispatch();
+	useEffect(() => {
+		setProfileImgData(user.profileImg);
+	}, [user.profileImg]);
 
 	const formik = useFormik({
 		initialValues: {
 			// replyBody: `@${comment.username }`,
 			replyBody: `@${replyToReply ? replyData.username : comment.username} `,
+			profileImg: profileImgData,
 		},
 		onSubmit: values => {
 			// e.preventDefault();
 			// console.log(comment._id);
 			replyToReply ? getReplyActive(false) : setActive(false);
-			dispatch(addReply(currentFeedback._id, comment._id, values.replyBody));
+			dispatch(addReply(currentFeedback._id, comment._id, values));
 		},
 	});
 	// const handleClick = e => {

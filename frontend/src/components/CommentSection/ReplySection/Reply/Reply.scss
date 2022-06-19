@@ -20,11 +20,13 @@
 	}
 
 	img {
+		min-width: 40px;
 		width: 40px;
+		min-height: 40px;
 		height: 40px;
 		object-fit: cover;
 		border-radius: 100vh;
-		margin-right: 2rem;
+		margin-right: 1rem;
 	}
 
 	&__userBar {
@@ -112,17 +114,24 @@
 			// z-index: 20;
 
 			// User profile image
-			.replyImg {
-				margin-right: 0.8rem;
+			img.profileImg {
 				width: 40px;
-				min-width: 40px;
-				max-width: 40px;
 				height: 40px;
-				min-height: 40px;
-				max-height: 40px;
+				border-radius: 100%;
 				object-fit: cover;
-				-webkit-object-fit: cover;
+				margin: 0;
 			}
+			// .replyImg {
+			// 	margin-right: 0.8rem;
+			// 	width: 40px;
+			// 	min-width: 40px;
+			// 	max-width: 40px;
+			// 	height: 40px;
+			// 	min-height: 40px;
+			// 	max-height: 40px;
+			// 	object-fit: cover;
+			// 	-webkit-object-fit: cover;
+			// }
 		}
 		&__text {
 			padding-left: 0rem;

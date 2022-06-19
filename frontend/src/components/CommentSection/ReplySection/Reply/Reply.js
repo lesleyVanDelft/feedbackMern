@@ -34,7 +34,22 @@ const Reply = ({
 	// const singleFeedback = useSelector(state => state.singleFeedback)
 
 	const dispatch = useDispatch();
-
+	//
+	//
+	//
+	//
+	//
+	//
+	// need to change mongodb
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	// Set Edit active state through dropdown menu
 	const setEdit = edt => {
 		setEditActive(edt);
@@ -44,7 +59,8 @@ const Reply = ({
 	const [listening, setListening] = useState(false);
 	const toggle = () => setMobileDropdown(!mobileDropdown);
 
-	// text trim
+	// text trim\
+	// console.log(replyData);
 	const replyingTo = replyData.replyBody.split(' ')[0];
 	const trimmedText = replyData.replyBody.split(' ').slice(1).join(' ');
 
@@ -99,6 +115,7 @@ const Reply = ({
 		e.preventDefault();
 		setShowModal(false);
 	};
+	// console.log(replyData);
 
 	// useEffect(() => {
 
@@ -117,12 +134,12 @@ const Reply = ({
 			<div className="Reply__userBar">
 				<img
 					src={
-						user.profileImg.exists && replyData.repliedBy === user.id
-							? `/images/${user.profileImg.imageId}`
+						replyData.profileImg && replyData.profileImg.exists
+							? `/images/${replyData.profileImg.imageId}`
 							: BlankProfilePic
 					}
-					alt="empty profile img"
-					className="replyImg"
+					alt=""
+					className="profileImage"
 				/>
 				<div className="Reply__usernames">
 					<h4 className="name">{replyData.name}</h4>

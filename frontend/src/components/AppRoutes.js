@@ -42,6 +42,11 @@ const AppRoutes = () => {
 				<Route path="/roadmap" element={<RoadmapPage />} />
 				<Route path="/test" element={<Test />} />
 				<Route path="/user" element={<User />} />
+				<Route path="/user/:userId" element={<User />} />
+				{/* TRYING TO LINK TO USER PROFILE  */}
+				{/*  */}
+				{/*  */}
+				{/*  */}
 			</Routes>
 		</AnimatePresence>
 	);

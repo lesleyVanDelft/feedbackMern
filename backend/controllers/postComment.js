@@ -16,6 +16,7 @@ const postComment = async (req, res) => {
 	// current feedback id comes with comment post object
 	const feedback = await Feedback.findById(commentData._id);
 	const user = await User.findById(decoded.id);
+	console.log(commentData.profileImg);
 
 	// console.log(user.profileImg);
 
@@ -152,63 +153,18 @@ const updateComment = async (req, res) => {
 	res.status(202).send('hi');
 };
 
-// const postComment = async (req, res) => {
-// 	const { id } = req.params;
-// 	const { comment } = req.body;
-
-// 	if (!comment) {
-// 		return res.status(400).send({ message: `Comment body can't be empty.` });
-// 	}
-
-// 	// current feedback id comes with comment post object
-// 	const feedback = await Feedback.findById(comment._id);
-// 	const user = await User.findById(feedback.author);
-
-// 	// feedback.author = user comes from auth middleware
-// 	if (!feedback) {
-// 		return res.status(404).send({
-// 			message: `feedback with ID: ${id} does not exist in database.`,
-// 		});
-// 	}
-// 	if (!user) {
-// 		return res
-// 			.status(404)
-// 			.send({ message: 'User does not exist in database.' });
-// 	}
-
-// 	feedback.comments = feedback.comments.concat({
-// 		name: user.name,
-// 		username: user.username,
-// 		commentedBy: user,
-// 		commentBody: comment.comment,
-// 		// upvotedBy: [user._id],
-// 		pointsCount: 1,
-// 	});
-// 	feedback.commentCount = numOfComments(feedback.comments);
-// 	const savedFeedback = await feedback.save();
-// 	const populatedFeedback = await Feedback.findById(feedback._id).populate([
-// 		{
-// 			path: 'comments.commentedBy',
-// 			populate: 'username',
-// 		},
-// 	]);
-
-// 	const addedComment =
-// 		populatedFeedback.comments[savedFeedback.comments.length - 1];
-
-// 	res.status(201).json(addedComment).end();
-// };
-
 const postReply = async (req, res) => {
 	const { id, commentId } = req.params;
-	const { reply } = req.body;
+	const { replyData } = req.body;
 
-	if (!reply) {
+	const token = req.cookies.jwt;
+	const decoded = jwt.verify(token, process.env.JWT_SECRET);
+	if (!replyData) {
 		return res.status(400).send({ message: `Reply body can't be empty.` });
 	}
 
 	const feedback = await Feedback.findById(id);
-	const user = await User.findById(req.user);
+	const user = await User.findById(decoded.id);
 
 	if (!feedback) {
 		return res.status(404).send({
@@ -231,15 +187,21 @@ const postReply = async (req, res) => {
 			message: `Comment with ID: '${commentId}'  does not exist in database.`,
 		});
 	}
+	// name: user.name,
+	// username: user.username,
+	// commentedBy: user.id,
+	// commentBody: commentData.comment,
+	// profileImg: user.profileImg,
 
 	targetComment.replies = targetComment.replies.concat({
-		replyBody: reply,
-		repliedBy: user._id,
-		upvotedBy: [user._id],
-		pointsCount: 1,
 		name: user.name,
 		username: user.username,
-		commentedBy: user,
+		repliedBy: user.id,
+		replyBody: replyData.replyBody,
+		// upvotedBy: [user._id],
+		// pointsCount: 1,
+		// repliedBy: user.id,
+		profileImg: user.profileImg,
 	});
 
 	feedback.comments = feedback.comments.map(c =>

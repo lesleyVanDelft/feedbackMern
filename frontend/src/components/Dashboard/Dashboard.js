@@ -80,9 +80,9 @@ const Dashboard = ({ category, mobileOpen }) => {
 		setActive(false);
 
 		setTimeout(() => {
-			dispatch(logoutUser());
 			navigate('/login');
-		}, 100);
+			dispatch(logoutUser());
+		}, 120);
 	};
 
 	// framer motion

@@ -162,10 +162,10 @@ export const addComment = (feedbackId, commentData) => {
 	};
 };
 
-export const addReply = (feedbackId, commentId, reply) => {
+export const addReply = (feedbackId, commentId, replyData) => {
 	return async dispatch => {
 		const addedReply = await feedbackService.postReply(feedbackId, commentId, {
-			reply,
+			replyData,
 		});
 
 		dispatch({

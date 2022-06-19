@@ -21,6 +21,10 @@ const replySchema = new mongoose.Schema(
 			type: String,
 			trim: true,
 		},
+		profileImg: {
+			type: Object,
+			ref: 'User',
+		},
 
 		// upvotedBy: [
 		// 	{
@@ -57,6 +61,10 @@ const commentSchema = new mongoose.Schema(
 			trim: true,
 		},
 		replies: [replySchema],
+		profileImg: {
+			type: Object,
+			ref: 'User',
+		},
 	},
 	{ timestamps: true }
 );

@@ -32,6 +32,7 @@ const Comment = ({
 	let { id } = useParams;
 	const dispatch = useDispatch();
 
+	// console.log(commentData);
 	// Outside click handling
 	const dropdownRef = useRef(null);
 	const [listening, setListening] = useState(false);
@@ -110,8 +111,8 @@ const Comment = ({
 			<div className="Comment__userBar">
 				<img
 					src={
-						user.profileImg.exists && commentData.commentedBy === user.id
-							? `/images/${user.profileImg.imageId}`
+						commentData.profileImg && commentData.profileImg.exists
+							? `/images/${commentData.profileImg.imageId}`
 							: BlankProfilePic
 					}
 					alt=""
