@@ -11,95 +11,50 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser, setUser } from '../../reducers/userReducer';
 import UserDropdown from './UserDropdown/UserDropdown';
 import { handleOutsideClick } from '../../utils/handleOutsideClick';
+import {
+	disableBodyScroll,
+	enableBodyScroll,
+	clearAllBodyScrollLocks,
+} from 'body-scroll-lock';
 import './Dashboard.css';
 // import { handleOutsideClick } from '../../utils/handleOutsideClick';
 
 const Dashboard = ({ category, mobileOpen }) => {
-	const rootElement = document.getElementById('root');
+	// Lock body scroll
+	let lockBodyRef = useRef(null);
+	const targetElement = lockBodyRef.current;
+
 	// Outside click handling
 	const dropdownRef = useRef(null);
 	const [listening, setListening] = useState(false);
 	const [userActive, setUserActive] = useState(false);
 	const toggle = () => setUserActive(!userActive);
 
+	// Scroll to top on opening menu or arrow button
+	const toTopRef = useRef(null);
+	const handleScroll = () => toTopRef.current.scrollIntoView();
+
 	// Filter category
 	const [categoryState, setCategoryState] = useState('all');
 
 	// Mobile menu state
 	const [active, setActive] = useState(false);
-	// const [userImage, setUserImage] = useState()
-	const user = useSelector(state => state.user);
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		// if (!user) {
-		// 	return <h1>loading user</h1>;
-		// }
-		// switch (active) {
-		// 	case true:
-		// 		document.body.style.overflowY = 'hidden';
-		// 		break;
-		// 	case false:
-		// 		document.body.style.removeProperty('overflow-y');
-		// 		break;
-		// 	default:
-		// 		break;
-		// }
-		// lock body scrolling when mobile menu is open
-		active
-			? (document.body.style.overflowY = 'hidden ')
-			: (document.body.style.overflowY = '');
-
-		active &&
-			document.addEventListener(
-				'mousedown',
-				e => e.which === (2 || 3) && e.preventDefault()
-			);
-
-		// active &&
-		// 	document.addEventListener('mousedown', e => {
-		// 		if (e.which === 2 || 3) {
-		// 			// alert('middleclick');
-		// 			return e.preventDefault();
-		// 		}
-		// 	});
-
-		// if (active) {
-		// 	document.addEventListener('touchstart' || 'mousedown', e => {
-		// 		if (e.which === 2 || 3) {
-		// 			// alert('middleclick');
-		// 			return e.preventDefault();
-		// 		}
-		// 	});
-		// } else {
-		// 	document.addEventListener('mousedown', e => {
-		// 		return e;
-		// 	});
-		// }
-
-		// document.body.style.overflow = 'scroll';
-		// if (active) {
-		// 	document.body.style.overflowX = 'auto';
-		// 	document.body.style.overflowY = 'hidden';
-		// } else if(!active) {
-		// 	document.body.style.overflowX = 'hidden';
-		// 	document.body.style.overflowY = 'auto';
-		// }
-	}, [active]);
-	useEffect(
-		handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
-	);
 
 	// NPM React query, check if user is on mobile
 	const isMobile = useMediaQuery({
 		query: '(max-width: 768px)',
 	});
 
-	// useEffect(
-	// 	handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
-	// );
-	// console.log(dropdownRef);
+	const user = useSelector(state => state.user);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		active === false && clearAllBodyScrollLocks();
+	}, [active]);
+	useEffect(
+		handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
+	);
 
 	// get state through onclick on category buttons
 	const getCategoryState = catState => {
@@ -109,7 +64,11 @@ const Dashboard = ({ category, mobileOpen }) => {
 
 	const handleMobileClick = () => {
 		setActive(!active);
-		// mobileOpen(active);
+		handleScroll();
+		disableBodyScroll(targetElement);
+		// console.log(targetElement);
+		// active ? disableBodyScroll(targetElement) : clearAllBodyScrollLocks();
+		// active ? disableBodyScroll(targetElement) : enableBodyScroll(targetElement);
 	};
 
 	// const handleUserClick = () => {
@@ -177,11 +136,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 							</div>
 						</div>
 
-						<div
-							className="hamburger"
-							onClick={() => {
-								setActive(!active);
-							}}></div>
+						<div className="hamburger" onClick={handleMobileClick}></div>
 					</motion.div>
 
 					<motion.div variants={framerItem} className="Dashboard__buttons ">
@@ -204,9 +159,9 @@ const Dashboard = ({ category, mobileOpen }) => {
 			{isMobile && (
 				<div
 					className={`Dashboard__mobile ${active ? 'active' : ''}`}
-					ref={dropdownRef}>
-					<div className="Dashboard__mobile--navigation">
-						<div className="content">
+					ref={lockBodyRef}>
+					<div className="Dashboard__mobile--navigation" ref={toTopRef}>
+						<div className="content" ref={dropdownRef}>
 							<Link to="/">
 								<div className="text">
 									<h2>Frontend Mentor</h2>

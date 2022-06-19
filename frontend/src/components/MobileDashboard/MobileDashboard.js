@@ -8,6 +8,11 @@ import Modal from '../Modal/Modal';
 import UserDropdown from '../Dashboard/UserDropdown/UserDropdown';
 import BlankProfileImg from '../../assets/blank-profile-picture.png';
 import { handleOutsideClick } from '../../utils/handleOutsideClick';
+import {
+	disableBodyScroll,
+	enableBodyScroll,
+	clearAllBodyScrolls,
+} from 'body-scroll-lock';
 import './MobileDashboard.css';
 
 const menuVisibility = {
@@ -46,6 +51,8 @@ const overlayVisibility = {
 };
 
 const MobileDashboard = ({ category, isVisible, logout }) => {
+	// body scroll lock
+	// const menuRef = useRef(null);
 	// Handle outside dropdown click
 	const mobileDropdownRef = useRef(null);
 	const [listening, setListening] = useState(false);
@@ -62,6 +69,14 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 			setUserActive
 		)
 	);
+
+	// useEffect(() => {
+	// 	if (isVisible) {
+	// 		disableBodyScroll(menuRef.current);
+	// 	} else {
+	// 		enableBodyScroll(menuRef.current);
+	// 	}
+	// }, [isVisible]);
 
 	const openModal = e => {
 		e.preventDefault();
@@ -82,6 +97,8 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 				<>
 					<motion.nav
 						className="MobileDashboard"
+						id="MobileDashboard"
+						// ref={menuRef}
 						key="mobileNav"
 						variants={menuVisibility}
 						initial="hidden"

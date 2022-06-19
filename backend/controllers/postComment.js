@@ -281,9 +281,11 @@ const postReply = async (req, res) => {
 
 const deleteReply = async (req, res) => {
 	const { id, commentId, replyId } = req.params;
+	const token = req.cookies.jwt;
+	const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
 	const feedback = await Feedback.findById(id);
-	const user = await User.findById(req.user);
+	const user = await User.findById(decoded.id);
 
 	if (!feedback) {
 		return res.status(404).send({
@@ -331,7 +333,7 @@ const deleteReply = async (req, res) => {
 	feedback.commentCount = numOfComments(feedback.comments);
 
 	await feedback.save();
-	res.status(204).end();
+	res.status(204).send('deleted');
 };
 
 const updateReply = async (req, res) => {

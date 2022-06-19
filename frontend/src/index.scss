@@ -46,7 +46,7 @@ body {
 		border-radius: 5px;
 		border: 1px solid darken($color: $blue, $amount: 0%);
 	}
-	-webkit-overflow-scrolling: touch;
+	// -webkit-overflow-scrolling: touch;
 }
 
 #root {
@@ -204,7 +204,7 @@ a {
 			border: 1px solid darken($color: $blue, $amount: 0%);
 		}
 		// -webkit-overflow-scrolling: touch;
-		-webkit-overflow-scrolling: touch;
+		// -webkit-overflow-scrolling: touch;
 	}
 	.App {
 		padding: 0;
