@@ -6,8 +6,14 @@
 
 @media screen and (max-width: 768px) {
 	.FeedbackList {
+		// overflow-y: scroll;
 		.feedbacks {
 			padding: 0 1rem;
+		}
+
+		.EmptyFeedback {
+			// display: none;
+			padding: 0;
 		}
 	}
 }

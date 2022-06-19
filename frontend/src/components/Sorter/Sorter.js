@@ -11,23 +11,28 @@ const Sorter = ({ children, by, feedbackData }) => {
 	// useEffect(() => {
 	// console.log(children);
 	// }, [])
+	// let array = Array.from(children)
+
+	useEffect(() => {}, []);
 
 	// const getDate = (date) => {
 
 	// }
 	// createdAt(pin):"2022-04-16T14:47:11.361Z"
 	const compare = (a, b) => {
+		// console.log(children.slice().sort());
 		// console.log(a.props.feedback.upvotedBy.length);
 		// console.log(b.props.feedback.upvotedBy.length);
 		// console.log(a.props.index);
 		// return a.props[by] - b.props[by];
 		// let sort = [];
 		if (by === 'Most Upvotes') {
-			// console.log(a.props);
-			// console.log('++++++++++');
-			return (
-				b.props.feedback.upvotedBy.length - a.props.feedback.upvotedBy.length
-			);
+			// const sorted = children.slice().sort(a, b)
+			return children.slice().sort((a, b) => {
+				return (
+					b.props.feedback.upvotedBy.length - a.props.feedback.upvotedBy.length
+				);
+			});
 		} else if (by === 'Least Upvotes') {
 			return (
 				a.props.feedback.upvotedBy.length - b.props.feedback.upvotedBy.length
@@ -45,11 +50,14 @@ const Sorter = ({ children, by, feedbackData }) => {
 		// }
 	};
 
-	if (!by) {
-		// console.log(children);
-		return children;
-	}
+	// if (!by) {
+	// 	return children;
+	// }
+
+	// return children.sort(compare);
+
 	return React.Children.toArray(children).sort(compare);
+
 	// return React.Children.toArray(children)
 	// 	.sort(compare)
 	// 	.map((fb, i) => {
