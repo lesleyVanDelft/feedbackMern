@@ -7,16 +7,24 @@ import EmptyFeedback from '../../components/EmptyFeedback/EmptyFeedback';
 import Sorter from '../Sorter/Sorter';
 import SuggestionsHeader from '../Suggestions/SuggestionsHeader/SuggestionsHeader';
 import './FeedbackList.css';
-import moment from 'moment';
+import * as dayjs from 'dayjs';
 
 const FeedbackList = ({ category }) => {
 	const [sortBy, setSortBy] = useState('Most Upvotes');
-	const feedbackList = useSelector(state => state.feedbacks);
-	const [sortList, setSortList] = useState(feedbackList);
-
+	const feedbacks = useSelector(state => state.feedbacks);
+	// const [sortList, setSortList] = useState(feedbackList);
+	const [feedbackList, setFeedbackList] = useState([...feedbacks]);
 	useEffect(() => {
-		setSortList(feedbackList);
-	}, [feedbackList]);
+		setFeedbackList([...feedbacks]);
+	}, [feedbacks, sortBy]);
+	// useEffect(() => {
+	// 	// setSortList([...feedbackList, ...sortList]);
+	// 	// setSortList(prevState => {
+	// 	// 	const newStateValue = [...prevState.sortList];
+
+	// 	// });
+	// 	setSortList(...feedbackList)
+	// }, [feedbackList, sortBy]);
 
 	// useEffect(() => {
 
@@ -70,7 +78,7 @@ const FeedbackList = ({ category }) => {
 			translateX: 0,
 			transition: {
 				// duration: 0.3,
-				staggerChildren: 21.5,
+				// staggerChildren: 5.5,
 			},
 		},
 		// transition: {
@@ -91,6 +99,19 @@ const FeedbackList = ({ category }) => {
 		// 	duration: 0.3,
 		// },
 	};
+	const dynamicVariant = {
+		hidden: {
+			opacity: 0,
+			translateX: -40,
+		},
+		animate: i => ({
+			opacity: 1,
+			translateX: 0,
+			transition: {
+				delay: i * 0.1,
+			},
+		}),
+	};
 
 	return (
 		<motion.section className="FeedbackList">
@@ -108,44 +129,62 @@ const FeedbackList = ({ category }) => {
 				</div>
 			) : null}
 
-			{/* Loop if feedbacks is true and category is ALL, else map over and render filteredFeedbacks array */}
-			{/* <AnimatePresence> */}
+			{/* Loop and sort if feedbacks is true and category is ALL, else map over and render filteredFeedbacks array */}
 			{feedbackList && category === 'all' ? (
 				<motion.div
 					className="feedbacks"
-					// variants={framerContainer}
-					// initial="initial"
-					// animate="animate"
-				>
-					<Sorter by={sortBy}>
-						{feedbackList.map((feedback, i) => (
+					variants={framerContainer}
+					initial="initial"
+					animate="animate">
+					{/* <Sorter by={sortBy}> */}
+					{feedbackList
+						.sort((a, b) => {
+							if (sortBy === 'Most Upvotes') {
+								return b.upvotedBy.length - a.upvotedBy.length;
+							} else if (sortBy === 'Least Upvotes') {
+								return a.upvotedBy.length - b.upvotedBy.length;
+							} else if (sortBy === 'Most Comments') {
+								return b.upvotedBy.length - a.upvotedBy.length;
+							} else if (sortBy === 'Least Comments') {
+								return a.upvotedBy.length - b.upvotedBy.length;
+							} else if (sortBy === 'Newest') {
+								return (
+									new Date(b.createdAt).getTime() -
+									new Date(a.createdAt).getTime()
+								);
+							} else if (sortBy === 'Oldest') {
+								return (
+									new Date(a.createdAt).getTime() -
+									new Date(b.createdAt).getTime()
+								);
+							} else {
+								return null;
+							}
+						})
+						.map((feedback, i) => (
 							<FeedbackItem
 								// variants={framerItem}
-								feedback={feedback}
+								// variants={dynamicVariant}
 								key={feedback._id}
+								feedback={feedback}
 								index={i}
 								toggleUpvote={toggleUpvote}
 								toggleDownvote={toggleDownvote}
 							/>
 						))}
-					</Sorter>
+					{/* </Sorter> */}
 				</motion.div>
 			) : (
-				<div
-					className="feedbacks"
-					// variants={framerContainer}
-					// initial="initial"
-					// animate="animate"
-				>
+				<motion.div className="feedbacks">
 					<Sorter by={sortBy}>
 						{filteredFeedbacks.length > 0 && category !== 'all' ? (
 							filteredFeedbacks.map((feedback, i) => {
-								// console.log(moment.format(feedback.updatedAt));
+								console.log(i);
 								return (
 									<FeedbackItem
+										key={feedback._id}
 										// variants={framerItem}
 										feedback={feedback}
-										key={feedback._id}
 										index={i}
 										toggleUpvote={toggleUpvote}
 										toggleDownvote={toggleDownvote}
@@ -156,10 +195,8 @@ const FeedbackList = ({ category }) => {
 							<EmptyFeedback userDetails={false} />
 						)}
 					</Sorter>
-				</div>
+				</motion.div>
 			)}
-			{/* </AnimatePresence> */}
-			{/* {filteredFeedbacks.length <= 0 ? <EmptyFeedback /> : null} */}
 		</motion.section>
 	);
 };

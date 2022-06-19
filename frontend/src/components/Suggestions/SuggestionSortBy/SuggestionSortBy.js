@@ -21,29 +21,11 @@ const SuggestionSortBy = ({ getSortState }) => {
 		getSortState(selected);
 	}, [getSortState, selected]);
 
-	const handleClick = e => {
-		e.preventDefault();
-		active ? setActive(false) : setActive(true);
-	};
-
-	const handleFocus = e => {
-		e.preventDefault();
-		setActive(!active);
-	};
-	const handleBlur = e => {
-		e.preventDefault();
-		setActive(false);
-	};
-
 	// framer motion
 	const framerList = {
 		hidden: {
 			translateY: -30,
 			opacity: 0,
-			transition: {
-				duration: 0.2,
-				delay: 0,
-			},
 		},
 		show: {
 			translateY: 0,
@@ -81,14 +63,6 @@ const SuggestionSortBy = ({ getSortState }) => {
 						animate={active ? 'show' : 'hidden'}
 						exit="exit"
 						className={`dropdown  ${active ? 'active' : null}`}>
-						<li onClick={() => setSelected('Newest')}>
-							<span>Newest</span>
-							{selected === 'Newest' && <FiCheck />}
-						</li>
-						<li onClick={() => setSelected('Oldest')}>
-							<span>Oldest</span>
-							{selected === 'Oldest' && <FiCheck />}
-						</li>
 						<li onClick={() => setSelected('Most Upvotes')}>
 							<span>Most Upvotes</span>
 							{selected === 'Most Upvotes' && <FiCheck />}
@@ -104,6 +78,14 @@ const SuggestionSortBy = ({ getSortState }) => {
 						<li onClick={() => setSelected('Least Comments')}>
 							<span>Least Comments</span>
 							{selected === 'Least Comments' && <FiCheck />}
+						</li>
+						<li onClick={() => setSelected('Newest')}>
+							<span>Newest</span>
+							{selected === 'Newest' && <FiCheck />}
+						</li>
+						<li onClick={() => setSelected('Oldest')}>
+							<span>Oldest</span>
+							{selected === 'Oldest' && <FiCheck />}
 						</li>
 					</motion.ul>
 				)}

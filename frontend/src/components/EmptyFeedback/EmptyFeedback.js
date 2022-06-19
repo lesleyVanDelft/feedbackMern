@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 const framerList = {
 	hidden: {
 		opacity: 0,
-		translateX: 40,
+		translateX: -40,
 	},
 	show: {
 		opacity: 1,

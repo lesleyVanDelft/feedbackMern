@@ -52,6 +52,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 	useEffect(() => {
 		active === false && clearAllBodyScrollLocks();
 	}, [active]);
+
 	useEffect(
 		handleOutsideClick(listening, setListening, dropdownRef, setUserActive)
 	);

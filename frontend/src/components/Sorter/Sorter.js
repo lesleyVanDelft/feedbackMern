@@ -1,38 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 // import { useSelector } from 'react-redux';
 
-const Sorter = ({ children, by, feedbackData }) => {
-	// const feedbacks = useSelector(state => state.feedbacks);
-	// console.log(feedbackData.upvotedBy.length);
-	// let upvoteLength = feedbackData.upvotedBy.length;
-	// let commentLength = feedbackData.commentCount;
-	// const childrenArray = React.Children.toArray(children);
-	// useEffect(() => {
-	// console.log(children);
-	// }, [])
-	// let array = Array.from(children)
-
-	useEffect(() => {}, []);
-
-	// const getDate = (date) => {
-
-	// }
-	// createdAt(pin):"2022-04-16T14:47:11.361Z"
+const Sorter = ({ children, by }) => {
 	const compare = (a, b) => {
-		// console.log(children.slice().sort());
-		// console.log(a.props.feedback.upvotedBy.length);
-		// console.log(b.props.feedback.upvotedBy.length);
-		// console.log(a.props.index);
-		// return a.props[by] - b.props[by];
-		// let sort = [];
 		if (by === 'Most Upvotes') {
-			// const sorted = children.slice().sort(a, b)
-			return children.slice().sort((a, b) => {
-				return (
-					b.props.feedback.upvotedBy.length - a.props.feedback.upvotedBy.length
-				);
-			});
+			// console.log(children);
+			return (
+				b.props.feedback.upvotedBy.length - a.props.feedback.upvotedBy.length
+			);
+			// });
 		} else if (by === 'Least Upvotes') {
 			return (
 				a.props.feedback.upvotedBy.length - b.props.feedback.upvotedBy.length
@@ -54,17 +31,8 @@ const Sorter = ({ children, by, feedbackData }) => {
 	// 	return children;
 	// }
 
-	// return children.sort(compare);
-
-	return React.Children.toArray(children).sort(compare);
-
-	// return React.Children.toArray(children)
-	// 	.sort(compare)
-	// 	.map((fb, i) => {
-	// 		// console.log(fb);
-	// 		return fb;
-	// 	});
-	// return React.Children.toArray(children.map((value, i) => ))
+	// return React.Children.toArray(children).sort(compare);
+	return children.sort(compare);
 };
 
 export default Sorter;

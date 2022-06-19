@@ -10,6 +10,7 @@
 		"autoprefixer": "^10.4.7",
 		"axios": "^0.26.0",
 		"body-scroll-lock": "^4.0.0-beta.0",
+		"dayjs": "^1.11.3",
 		"formik": "^2.2.9",
 		"framer-motion": "^6.2.8",
 		"js-cookie": "^3.0.1",

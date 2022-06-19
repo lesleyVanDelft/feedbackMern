@@ -116,14 +116,9 @@ const FeedbackItem = ({
 			translateX: 0,
 			transition: {
 				// staggerChildren: 5,
-				delay: index ? index * 0.1 : 0,
+				delay: index ? index * 0.25 : 0,
 			},
 		},
-		// transition: {
-		// 	// duration: 0.3,
-		// 	staggerChildren: 10.5,
-		// delay: index ? index * 0.1 : 0,
-		// },
 	};
 
 	return (

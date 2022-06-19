@@ -19,6 +19,11 @@ import axios from 'axios';
 import './User.css';
 import PasswordModal from './PasswordModal/PasswordModal';
 import { handleOutsideClick } from '../../utils/handleOutsideClick';
+import {
+	disableBodyScroll,
+	enableBodyScroll,
+	clearAllBodyScrollLocks,
+} from 'body-scroll-lock';
 
 const User = () => {
 	const [active, setActive] = useState(false);
@@ -84,7 +89,7 @@ const User = () => {
 
 	// Reset body overflow
 	useEffect(() => {
-		document.body.style.overflowY = 'auto';
+		clearAllBodyScrollLocks();
 	}, []);
 
 	// Framer motion

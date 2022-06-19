@@ -2,6 +2,10 @@
 
 .FeedbackList {
 	padding: 0;
+
+	ul {
+		list-style: none;
+	}
 }
 
 @media screen and (max-width: 768px) {
@@ -13,7 +17,8 @@
 
 		.EmptyFeedback {
 			// display: none;
-			padding: 0;
+			// padding: 0;
+			height: 35.2rem;
 		}
 	}
 }
