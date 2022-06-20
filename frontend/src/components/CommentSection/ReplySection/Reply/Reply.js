@@ -138,7 +138,7 @@ const Reply = ({
 					className="Reply__userBar--details"
 					onClick={() => {
 						user.id === replyData.repliedBy
-							? navigate('/user')
+							? navigate(`/user/${user.id}`)
 							: navigate(`/user/${replyData.repliedBy}`);
 					}}>
 					<img

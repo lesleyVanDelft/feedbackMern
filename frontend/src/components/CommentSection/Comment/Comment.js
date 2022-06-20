@@ -116,7 +116,7 @@ const Comment = ({
 					onClick={() => {
 						// navigate(`/user/${commentData.commentedBy}`);
 						user.id === commentData.commentedBy
-							? navigate('/user')
+							? navigate(`/user/${user.id}`)
 							: navigate(`/user/${commentData.commentedBy}`);
 					}}>
 					<img

@@ -97,7 +97,7 @@ const User = () => {
 
 		// console.log(userId);
 	}, [tempUser, user, userId]);
-	// console.log(userData);
+	// console.log(tempUserData.profileImg);
 
 	// useEffect(() => {
 	// 	userId === undefined
@@ -152,7 +152,7 @@ const User = () => {
 
 	return (
 		<motion.main
-			className="User"
+			className={`${tempUser !== null ? 'User profile' : 'User'} `}
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
@@ -217,13 +217,18 @@ const User = () => {
 							<AnimatePresence>
 								{active && <UserModal getImage={getImage} />}
 							</AnimatePresence>
+
 							{imgModal && (
 								<ImageModal
 									active={imgModal}
 									getState={getImageModal}
 									image={
-										user.profileImg.exists
-											? `/images/${user.profileImg.imageId}`
+										tempUser === null
+											? user.profileImg.exists
+												? `/images/${user.profileImg.imageId}`
+												: BlankProfilePic
+											: tempUser.profileImg.exists
+											? `/images/${tempUser.profileImg.imageId}`
 											: BlankProfilePic
 									}
 								/>
@@ -238,7 +243,7 @@ const User = () => {
 								</span>
 							</p>
 							<p>
-								Name:{' '}
+								Name:
 								<span>{tempUser !== null ? tempUser.name : user.username}</span>
 							</p>
 							<p>
@@ -250,7 +255,7 @@ const User = () => {
 								</span>
 							</p>
 							<p>
-								Email: <span>{tempUser ? tempUser.email : 'not found'}</span>
+								Email: <span>{tempUser ? tempUser.email : user.email}</span>
 							</p>
 
 							{userId === user.id && (
@@ -302,7 +307,7 @@ const User = () => {
 
 					{userId !== user.id && (
 						<>
-							<h2>Feedbacks posted by {tempUser.name}:</h2>
+							<h2>Feedbacks posted by {tempUser !== null && tempUser.name}:</h2>
 							<div className="User__userFeedbackList--content">
 								{!tempUserFeedbacks.length ? (
 									<EmptyFeedback userDetails={true} />

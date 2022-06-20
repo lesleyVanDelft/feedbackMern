@@ -192,6 +192,31 @@
 		justify-content: flex-start;
 		padding-bottom: 3rem;
 
+		&.profile {
+			.User__welcome {
+				.bold {
+					background-image: url('../../assets/suggestions/desktop/background-header.png');
+					background-size: cover;
+					background-clip: text;
+					background-position: 50%;
+					-webkit-background-clip: text;
+					color: transparent;
+				}
+			}
+			.User__information {
+				// display: flex;
+				// padding: 0;
+				// height: 100%;
+				&--details {
+					.profileImg {
+						&__container {
+							margin: 0;
+						}
+					}
+				}
+			}
+		}
+
 		.flex-container {
 			flex-direction: column;
 		}

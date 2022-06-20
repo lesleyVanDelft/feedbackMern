@@ -67,9 +67,6 @@ const ReplyForm = ({
 				onChange={formik.handleChange}
 			/>
 			<div className="ReplyForm__buttons">
-				<button className="btn btn-purple" type="submit">
-					Reply
-				</button>
 				<button
 					className="btn btn-darkBlue"
 					type="button"
@@ -77,6 +74,9 @@ const ReplyForm = ({
 						replyToReply ? getReplyActive(false) : setActive(false)
 					}>
 					Cancel
+				</button>
+				<button className="btn btn-purple" type="submit">
+					Reply
 				</button>
 			</div>
 		</form>
