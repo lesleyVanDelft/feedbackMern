@@ -14,104 +14,97 @@ const FeedbackList = ({ category }) => {
 	const feedbacks = useSelector(state => state.feedbacks);
 	// const [sortList, setSortList] = useState(feedbackList);
 	const [feedbackList, setFeedbackList] = useState([...feedbacks]);
+	const [filteredList, setFilteredList] = useState([...feedbackList]);
 	useEffect(() => {
 		setFeedbackList([...feedbacks]);
 	}, [feedbacks, sortBy]);
-	// useEffect(() => {
-	// 	// setSortList([...feedbackList, ...sortList]);
-	// 	// setSortList(prevState => {
-	// 	// 	const newStateValue = [...prevState.sortList];
 
-	// 	// });
-	// 	setSortList(...feedbackList)
-	// }, [feedbackList, sortBy]);
-
-	// useEffect(() => {
-
-	// }, [])
-
-	// console.log(sortList);
-
-	// console.log(feedbackList.sort((a,b) => ));
-	// const listSorter = list => {
-	// 	const date = moment().format(list.upd)
-	// 	const sorted = list.sort((a, b) => {
-	// 		console.log(a);
-	// 		return b - a;
-	// 	});
-	// 	return sorted;
-	// };
-
-	// listSorter(feedbackList);
-
-	// useEffect(() => {
-	// 	setSortList(
-	// 		feedbackList.sort((a, b) => {
-	// 			return b.upvotedBy.length - a.upvotedBy.length;
-	// 		})
-	// 	);
-	// }, [feedbackList]);
-
+	useEffect(() => {
+		setFilteredList([
+			...feedbackList
+				.filter(feedback => {
+					return feedback.feedbackType.toString().toLowerCase() === category;
+				})
+				.sort((a, b) => {
+					if (sortBy === 'Most Upvotes') {
+						return b.upvotedBy.length - a.upvotedBy.length;
+					} else if (sortBy === 'Least Upvotes') {
+						return a.upvotedBy.length - b.upvotedBy.length;
+					} else if (sortBy === 'Most Comments') {
+						return b.upvotedBy.length - a.upvotedBy.length;
+					} else if (sortBy === 'Least Comments') {
+						return a.upvotedBy.length - b.upvotedBy.length;
+					} else if (sortBy === 'Newest') {
+						return (
+							new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+						);
+					} else if (sortBy === 'Oldest') {
+						return (
+							new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+						);
+					} else {
+						return null;
+					}
+				}),
+		]);
+	}, [category, feedbackList, sortBy]);
 	if (!feedbackList) {
 		return <h1>Loading</h1>;
 	}
 
 	// Filter feedbacks on selected category
-	const filteredFeedbacks =
-		feedbackList.length > 0
-			? feedbackList.filter(feedback => {
-					return feedback.feedbackType.toString().toLowerCase() === category;
-			  })
-			: [];
+	// const filteredFeedbacks =
+	// 	feedbackList.length > 0
+	// 		? feedbackList
+	// 				.filter(feedback => {
+	// 					return feedback.feedbackType.toString().toLowerCase() === category;
+	// 				})
+	// 				.sort((a, b) => {
+	// 					if (sortBy === 'Most Upvotes') {
+	// 						return b.upvotedBy.length - a.upvotedBy.length;
+	// 					} else if (sortBy === 'Least Upvotes') {
+	// 						return a.upvotedBy.length - b.upvotedBy.length;
+	// 					} else if (sortBy === 'Most Comments') {
+	// 						return b.upvotedBy.length - a.upvotedBy.length;
+	// 					} else if (sortBy === 'Least Comments') {
+	// 						return a.upvotedBy.length - b.upvotedBy.length;
+	// 					} else if (sortBy === 'Newest') {
+	// 						return (
+	// 							new Date(b.createdAt).getTime() -
+	// 							new Date(a.createdAt).getTime()
+	// 						);
+	// 					} else if (sortBy === 'Oldest') {
+	// 						return (
+	// 							new Date(a.createdAt).getTime() -
+	// 							new Date(b.createdAt).getTime()
+	// 						);
+	// 					} else {
+	// 						return null;
+	// 					}
+	// 				})
+	// 		: [];
 
 	const getSortBy = sortState => {
 		setSortBy(sortState);
 	};
 
-	const framerContainer = {
-		initial: {
-			opacity: 0,
-			translateX: -40,
-		},
-		animate: {
-			opacity: 1,
-			translateX: 0,
-			transition: {
-				// duration: 0.3,
-				// staggerChildren: 5.5,
-			},
-		},
-		// transition: {
-		// 	// duration: 0.3,
-		// },
-	};
-
-	const framerItem = {
-		initial: {
-			opacity: 0,
-			translateX: -40,
-		},
-		animate: {
-			opacity: 1,
-			translateX: 0,
-		},
-		// transition: {
-		// 	duration: 0.3,
-		// },
-	};
-	const dynamicVariant = {
-		hidden: {
-			opacity: 0,
-			translateX: -40,
-		},
-		animate: i => ({
-			opacity: 1,
-			translateX: 0,
-			transition: {
-				delay: i * 0.1,
-			},
-		}),
-	};
+	// const framerContainer = {
+	// 	initial: {
+	// 		opacity: 0,
+	// 		translateX: -40,
+	// 	},
+	// 	animate: {
+	// 		opacity: 1,
+	// 		translateX: 0,
+	// 		transition: {
+	// 			// duration: 0.3,
+	// 			// staggerChildren: 5.5,
+	// 		},
+	// 	},
+	// 	// transition: {
+	// 	// 	// duration: 0.3,
+	// 	// },
+	// };
 
 	return (
 		<motion.section className="FeedbackList">
@@ -133,10 +126,9 @@ const FeedbackList = ({ category }) => {
 			{feedbackList && category === 'all' ? (
 				<motion.div
 					className="feedbacks"
-					variants={framerContainer}
+					// variants={framerContainer}
 					initial="initial"
 					animate="animate">
-					{/* <Sorter by={sortBy}> */}
 					{feedbackList
 						.sort((a, b) => {
 							if (sortBy === 'Most Upvotes') {
@@ -163,8 +155,6 @@ const FeedbackList = ({ category }) => {
 						})
 						.map((feedback, i) => (
 							<FeedbackItem
-								// variants={framerItem}
-								// variants={dynamicVariant}
 								key={feedback._id}
 								feedback={feedback}
 								index={i}
@@ -172,53 +162,25 @@ const FeedbackList = ({ category }) => {
 								toggleDownvote={toggleDownvote}
 							/>
 						))}
-					{/* </Sorter> */}
 				</motion.div>
 			) : (
 				<motion.div className="feedbacks">
-					{/* <Sorter by={sortBy}> */}
-					{filteredFeedbacks.length > 0 && category !== 'all' ? (
-						filteredFeedbacks
-							.sort((a, b) => {
-								if (sortBy === 'Most Upvotes') {
-									return b.upvotedBy.length - a.upvotedBy.length;
-								} else if (sortBy === 'Least Upvotes') {
-									return a.upvotedBy.length - b.upvotedBy.length;
-								} else if (sortBy === 'Most Comments') {
-									return b.upvotedBy.length - a.upvotedBy.length;
-								} else if (sortBy === 'Least Comments') {
-									return a.upvotedBy.length - b.upvotedBy.length;
-								} else if (sortBy === 'Newest') {
-									return (
-										new Date(b.createdAt).getTime() -
-										new Date(a.createdAt).getTime()
-									);
-								} else if (sortBy === 'Oldest') {
-									return (
-										new Date(a.createdAt).getTime() -
-										new Date(b.createdAt).getTime()
-									);
-								} else {
-									return null;
-								}
-							})
-							.map((feedback, i) => {
-								// console.log(i);
-								return (
-									<FeedbackItem
-										key={feedback._id}
-										// variants={framerItem}
-										feedback={feedback}
-										index={i}
-										toggleUpvote={toggleUpvote}
-										toggleDownvote={toggleDownvote}
-									/>
-								);
-							})
+					{filteredList.length > 0 && category !== 'all' ? (
+						filteredList.map((feedback, i) => {
+							return (
+								<FeedbackItem
+									key={feedback._id}
+									// variants={framerItem}
+									feedback={feedback}
+									index={i}
+									toggleUpvote={toggleUpvote}
+									toggleDownvote={toggleDownvote}
+								/>
+							);
+						})
 					) : (
 						<EmptyFeedback userDetails={false} />
 					)}
-					{/* </Sorter> */}
 				</motion.div>
 			)}
 		</motion.section>

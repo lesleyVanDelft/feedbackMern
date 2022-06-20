@@ -116,7 +116,7 @@ const FeedbackItem = ({
 			translateX: 0,
 			transition: {
 				// staggerChildren: 5,
-				delay: index ? index * 0.25 : 0,
+				delay: index ? index * 0.2 : 0,
 			},
 		},
 	};
