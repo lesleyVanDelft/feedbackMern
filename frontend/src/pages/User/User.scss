@@ -242,6 +242,15 @@
 
 		&__welcome {
 			text-align: center;
+
+			.bold {
+				background-image: url('../../assets/suggestions/desktop/background-header.png');
+				background-size: cover;
+				background-clip: text;
+				background-position: 0%;
+				-webkit-background-clip: text;
+				color: transparent;
+			}
 		}
 		&__information {
 			width: 100%;

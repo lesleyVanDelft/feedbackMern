@@ -135,7 +135,11 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 							</div>
 							<div className="Dashboard__mobile--filter">
 								<h3>Filter by category</h3>
-								<FilterButtons category={category} />
+								<FilterButtons
+									category={category}
+									handleClose={toggle}
+									isVisible={isVisible}
+								/>
 							</div>
 							<div className="Dashboard__mobile--roadmap">
 								<Roadmap />

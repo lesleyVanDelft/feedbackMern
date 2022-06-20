@@ -6,9 +6,9 @@ const FilterButtons = ({ category, handleClose }) => {
 	const [active, setActive] = useState('all');
 
 	const handleClick = type => {
-		// setActive(type);
+		setActive(type);
 		// category(active);
-		handleClose(active);
+		handleClose();
 	};
 
 	useEffect(() => {
@@ -21,7 +21,9 @@ const FilterButtons = ({ category, handleClose }) => {
 				return (
 					<button
 						key={i}
-						onClick={() => setActive(type)}
+						onClick={() => {
+							setActive(type);
+						}}
 						className={`FilterButtons__button ${
 							active === type ? 'active' : null
 						}`}>
