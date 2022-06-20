@@ -4,15 +4,23 @@ const User = require('../models/userModel');
 
 const getUser = async (req, res) => {
 	const token = req.cookies.jwt;
+	const decoded = jwt.verify(token, process.env.JWT_SECRET);
+	const currentUser = await User.findById(decoded.id);
 
-	if (token) {
-		res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
+	if (!token) {
+		return res.status(401).send('getUser user.js no token');
 	}
-	try {
-		const decoded = jwt.verify(token, process.env.JWT_SECRET);
-		const user = await User.findById(req.params.userId);
 
-		res.status(200).json(user);
+	try {
+		if (currentUser) {
+			// const user = await User.findById(req.params.userId);
+			console.log(currentUser);
+			res.status(200).json(currentUser);
+		} else {
+			const user = await User.findById(req.params.userId);
+			console.log(req.params.userId);
+			res.status(200).json(user);
+		}
 	} catch (error) {
 		console.log(error);
 	}

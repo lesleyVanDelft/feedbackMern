@@ -26,6 +26,12 @@
 
 	&__userBar {
 		display: flex;
+
+		&--details {
+			display: flex;
+			// background-color: red;
+			cursor: pointer;
+		}
 	}
 	&__usernames {
 		display: flex;

@@ -115,7 +115,6 @@ const FeedbackItem = ({
 			opacity: 1,
 			translateX: 0,
 			transition: {
-				// staggerChildren: 5,
 				delay: index ? index * 0.2 : 0,
 			},
 		},
@@ -131,7 +130,6 @@ const FeedbackItem = ({
 					className={`FeedbackItem ${roadmap && 'roadmap'} ${
 						roadmap && status
 					}`}>
-					{/* {console.log(index)} */}
 					<div className="FeedbackItem__left">
 						<div className="FeedbackItem__left--voteBtn">
 							<div className="votes">

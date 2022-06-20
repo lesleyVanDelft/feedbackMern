@@ -16,6 +16,7 @@ const userReducer = (state = null, action) => {
 			return null;
 		case 'SET_USER':
 			return action.payload;
+
 		case 'CHANGE_PASSWORD':
 			return action.payload;
 		case 'SET_PROFILE_IMG':
@@ -107,6 +108,12 @@ export const setUser = () => {
 		}
 	};
 };
+
+// export const getUserDetails = () => {
+// 	return async dispatch => {
+
+// 	}
+// }
 
 export const setProfileImage = img => {
 	return async dispatch => {

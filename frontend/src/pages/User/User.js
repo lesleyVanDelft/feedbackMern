@@ -25,7 +25,7 @@ import {
 	clearAllBodyScrollLocks,
 } from 'body-scroll-lock';
 
-const User = () => {
+const User = ({ currentUser }) => {
 	const [active, setActive] = useState(false);
 	const [imgModal, setImgModal] = useState(false);
 	const [logoutModal, setLogoutModal] = useState(false);
@@ -72,10 +72,11 @@ const User = () => {
 
 	// Get current user
 	const getUser = async () => {
-		const response = await axios.get(
-			`https://feedback-lesley.herokuapp.com/user/${user.id}`
-		);
-		// const response = await axios.get(`http://localhost:5000/user/${user.id}`);
+		// const response = await axios
+		// 	.get
+		// 	// `https://feedback-lesley.herokuapp.com/user/${user.id}`
+		// 	();
+		const response = await axios.get(`http://localhost:5000/user/${user.id}`);
 		return response.data;
 	};
 
@@ -143,8 +144,8 @@ const User = () => {
 				<BackBtn currentPage="details" />
 			</div>
 			<h2 className="User__welcome">
-				Hello again,{' '}
-				<span className="bold">@{user ? user.username : 'not found'}</span>!
+				{currentUser && <span>Hello again,</span>}
+				<span className="bold"> @{user ? user.username : 'not found'}</span>!
 			</h2>
 
 			<div className="flex-container">

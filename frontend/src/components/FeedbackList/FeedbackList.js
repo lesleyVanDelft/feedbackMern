@@ -12,99 +12,80 @@ import * as dayjs from 'dayjs';
 const FeedbackList = ({ category }) => {
 	const [sortBy, setSortBy] = useState('Most Upvotes');
 	const feedbacks = useSelector(state => state.feedbacks);
-	// const [sortList, setSortList] = useState(feedbackList);
 	const [feedbackList, setFeedbackList] = useState([...feedbacks]);
 	const [filteredList, setFilteredList] = useState([...feedbackList]);
 	useEffect(() => {
 		setFeedbackList([...feedbacks]);
 	}, [feedbacks, sortBy]);
 
-	useEffect(() => {
-		setFilteredList([
-			...feedbackList
-				.filter(feedback => {
-					return feedback.feedbackType.toString().toLowerCase() === category;
-				})
-				.sort((a, b) => {
-					if (sortBy === 'Most Upvotes') {
-						return b.upvotedBy.length - a.upvotedBy.length;
-					} else if (sortBy === 'Least Upvotes') {
-						return a.upvotedBy.length - b.upvotedBy.length;
-					} else if (sortBy === 'Most Comments') {
-						return b.upvotedBy.length - a.upvotedBy.length;
-					} else if (sortBy === 'Least Comments') {
-						return a.upvotedBy.length - b.upvotedBy.length;
-					} else if (sortBy === 'Newest') {
-						return (
-							new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-						);
-					} else if (sortBy === 'Oldest') {
-						return (
-							new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-						);
-					} else {
-						return null;
-					}
-				}),
-		]);
-	}, [category, feedbackList, sortBy]);
+	// useEffect(() => {
+	// 	setFilteredList([
+	// 		...feedbackList
+	// 			.filter(feedback => {
+	// 				return feedback.feedbackType.toString().toLowerCase() === category;
+	// 			})
+	// 			.sort((a, b) => {
+	// 				if (sortBy === 'Most Upvotes') {
+	// 					return b.upvotedBy.length - a.upvotedBy.length;
+	// 				} else if (sortBy === 'Least Upvotes') {
+	// 					return a.upvotedBy.length - b.upvotedBy.length;
+	// 				} else if (sortBy === 'Most Comments') {
+	// 					return b.upvotedBy.length - a.upvotedBy.length;
+	// 				} else if (sortBy === 'Least Comments') {
+	// 					return a.upvotedBy.length - b.upvotedBy.length;
+	// 				} else if (sortBy === 'Newest') {
+	// 					return (
+	// 						new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+	// 					);
+	// 				} else if (sortBy === 'Oldest') {
+	// 					return (
+	// 						new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+	// 					);
+	// 				} else {
+	// 					return null;
+	// 				}
+	// 			}),
+	// 	]);
+	// }, [category, feedbackList, sortBy]);
 	if (!feedbackList) {
 		return <h1>Loading</h1>;
 	}
 
 	// Filter feedbacks on selected category
-	// const filteredFeedbacks =
-	// 	feedbackList.length > 0
-	// 		? feedbackList
-	// 				.filter(feedback => {
-	// 					return feedback.feedbackType.toString().toLowerCase() === category;
-	// 				})
-	// 				.sort((a, b) => {
-	// 					if (sortBy === 'Most Upvotes') {
-	// 						return b.upvotedBy.length - a.upvotedBy.length;
-	// 					} else if (sortBy === 'Least Upvotes') {
-	// 						return a.upvotedBy.length - b.upvotedBy.length;
-	// 					} else if (sortBy === 'Most Comments') {
-	// 						return b.upvotedBy.length - a.upvotedBy.length;
-	// 					} else if (sortBy === 'Least Comments') {
-	// 						return a.upvotedBy.length - b.upvotedBy.length;
-	// 					} else if (sortBy === 'Newest') {
-	// 						return (
-	// 							new Date(b.createdAt).getTime() -
-	// 							new Date(a.createdAt).getTime()
-	// 						);
-	// 					} else if (sortBy === 'Oldest') {
-	// 						return (
-	// 							new Date(a.createdAt).getTime() -
-	// 							new Date(b.createdAt).getTime()
-	// 						);
-	// 					} else {
-	// 						return null;
-	// 					}
-	// 				})
-	// 		: [];
+	const filteredFeedbacks =
+		feedbackList.length > 0
+			? feedbackList
+					.filter(feedback => {
+						return feedback.feedbackType.toString().toLowerCase() === category;
+					})
+					.sort((a, b) => {
+						if (sortBy === 'Most Upvotes') {
+							return b.upvotedBy.length - a.upvotedBy.length;
+						} else if (sortBy === 'Least Upvotes') {
+							return a.upvotedBy.length - b.upvotedBy.length;
+						} else if (sortBy === 'Most Comments') {
+							return b.upvotedBy.length - a.upvotedBy.length;
+						} else if (sortBy === 'Least Comments') {
+							return a.upvotedBy.length - b.upvotedBy.length;
+						} else if (sortBy === 'Newest') {
+							return (
+								new Date(b.createdAt).getTime() -
+								new Date(a.createdAt).getTime()
+							);
+						} else if (sortBy === 'Oldest') {
+							return (
+								new Date(a.createdAt).getTime() -
+								new Date(b.createdAt).getTime()
+							);
+						} else {
+							return null;
+						}
+					})
+			: [];
 
 	const getSortBy = sortState => {
 		setSortBy(sortState);
 	};
-
-	// const framerContainer = {
-	// 	initial: {
-	// 		opacity: 0,
-	// 		translateX: -40,
-	// 	},
-	// 	animate: {
-	// 		opacity: 1,
-	// 		translateX: 0,
-	// 		transition: {
-	// 			// duration: 0.3,
-	// 			// staggerChildren: 5.5,
-	// 		},
-	// 	},
-	// 	// transition: {
-	// 	// 	// duration: 0.3,
-	// 	// },
-	// };
 
 	return (
 		<motion.section className="FeedbackList">
@@ -150,7 +131,7 @@ const FeedbackList = ({ category }) => {
 									new Date(b.createdAt).getTime()
 								);
 							} else {
-								return null;
+								return [];
 							}
 						})
 						.map((feedback, i) => (
@@ -165,8 +146,8 @@ const FeedbackList = ({ category }) => {
 				</motion.div>
 			) : (
 				<motion.div className="feedbacks">
-					{filteredList.length > 0 && category !== 'all' ? (
-						filteredList.map((feedback, i) => {
+					{filteredFeedbacks.length > 0 && category !== 'all' ? (
+						filteredFeedbacks.map((feedback, i) => {
 							return (
 								<FeedbackItem
 									key={feedback._id}

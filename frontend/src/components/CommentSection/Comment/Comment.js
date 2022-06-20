@@ -12,7 +12,7 @@ import Modal from '../../Modal/Modal';
 import DropdownEdit from '../DropdownEdit/DropdownEdit';
 import { handleOutsideClick } from '../../../utils/handleOutsideClick';
 import './Comment.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Comment = ({
 	commentData,
@@ -29,7 +29,8 @@ const Comment = ({
 	// const [replyEditValue, setReplyEditValue] = useState(commentData.replies);
 	const [replyValues, setReplyValues] = useState(commentData.replies);
 	// console.log(commentData.replies);
-	let { id } = useParams;
+	// let { id } = useParams;
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	// console.log(commentData);
@@ -98,6 +99,7 @@ const Comment = ({
 		return <h1>loading</h1>;
 	}
 	//  onClick={() => console.log(commentData)}
+	// console.log(commentData);
 	return (
 		<article className="Comment">
 			<Modal
@@ -109,18 +111,27 @@ const Comment = ({
 				param="comment"
 			/>
 			<div className="Comment__userBar">
-				<img
-					src={
-						commentData.profileImg && commentData.profileImg.exists
-							? `/images/${commentData.profileImg.imageId}`
-							: BlankProfilePic
-					}
-					alt=""
-					className="profileImage"
-				/>
-				<div className="Comment__usernames">
-					<h4 className="name">{commentData.name}</h4>
-					<span className="username">@{commentData.username}</span>
+				<div
+					className="Comment__userBar--details"
+					onClick={() => {
+						// navigate(`/user/${commentData.commentedBy}`);
+						user.id === commentData.commentedBy
+							? navigate('/user')
+							: navigate(`/user/${commentData.commentedBy}`);
+					}}>
+					<img
+						src={
+							commentData.profileImg && commentData.profileImg.exists
+								? `/images/${commentData.profileImg.imageId}`
+								: BlankProfilePic
+						}
+						alt="User profile"
+						className="profileImage"
+					/>
+					<div className="Comment__usernames">
+						<h4 className="name">{commentData.name}</h4>
+						<span className="username">@{commentData.username}</span>
+					</div>
 				</div>
 				<div className="Comment__buttons">
 					<button
