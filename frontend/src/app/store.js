@@ -67,6 +67,7 @@ import userReducer from '../reducers/userReducer';
 import feedbackReducer from '../reducers/feedbackReducer';
 import feedbackPageReducer from '../reducers/feedbackCommentsReducer';
 import errorReducer from '../reducers/errorReducer';
+import tempUserReducer from '../reducers/tempUserReducer';
 
 const persistConfig = {
 	key: 'root',
@@ -84,6 +85,7 @@ const reducer = combineReducers({
 	feedbacks: feedbackReducer,
 	singleFeedback: feedbackPageReducer,
 	errorMessage: errorReducer,
+	tempUser: tempUserReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

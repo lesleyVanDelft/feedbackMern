@@ -11,6 +11,7 @@ import {
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import DropdownEdit from '../../DropdownEdit/DropdownEdit';
 import { handleOutsideClick } from '../../../../utils/handleOutsideClick';
+import { useNavigate } from 'react-router-dom';
 
 const Reply = ({
 	replyData,
@@ -33,6 +34,7 @@ const Reply = ({
 	const user = useSelector(state => state.user);
 	// const singleFeedback = useSelector(state => state.singleFeedback)
 
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	//
 	//
@@ -132,18 +134,26 @@ const Reply = ({
 				param="reply"
 			/>
 			<div className="Reply__userBar">
-				<img
-					src={
-						replyData.profileImg && replyData.profileImg.exists
-							? `/images/${replyData.profileImg.imageId}`
-							: BlankProfilePic
-					}
-					alt=""
-					className="profileImage"
-				/>
-				<div className="Reply__usernames">
-					<h4 className="name">{replyData.name}</h4>
-					<span className="username">@{replyData.username}</span>
+				<div
+					className="Reply__userBar--details"
+					onClick={() => {
+						user.id === replyData.repliedBy
+							? navigate('/user')
+							: navigate(`/user/${replyData.repliedBy}`);
+					}}>
+					<img
+						src={
+							replyData.profileImg && replyData.profileImg.exists
+								? `/images/${replyData.profileImg.imageId}`
+								: BlankProfilePic
+						}
+						alt=""
+						className="profileImage"
+					/>
+					<div className="Reply__usernames">
+						<h4 className="name">{replyData.name}</h4>
+						<span className="username">@{replyData.username}</span>
+					</div>
 				</div>
 				<div className="Reply__buttons">
 					<button

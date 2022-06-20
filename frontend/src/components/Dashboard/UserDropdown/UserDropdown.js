@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './UserDropdown.css';
 
-const UserDropdown = ({ logout, mobile }) => {
+const UserDropdown = ({ logout, mobile, user }) => {
 	// framer motion
 	const framerList = {
 		hidden: {
@@ -40,7 +40,7 @@ const UserDropdown = ({ logout, mobile }) => {
 			exit="exit">
 			<ul className="UserDropdown__list">
 				<li className="UserDropdown__list--item">
-					<Link to="/user">My Account</Link>
+					<Link to={`/user/${user.id}`}>My Account</Link>
 				</li>
 				<li className="UserDropdown__list--item" onClick={logout}>
 					Logout

@@ -6,24 +6,35 @@ const getUser = async (req, res) => {
 	const token = req.cookies.jwt;
 	const decoded = jwt.verify(token, process.env.JWT_SECRET);
 	const currentUser = await User.findById(decoded.id);
+	const user = await User.findById(req.params.userId).select('-password');
 
 	if (!token) {
 		return res.status(401).send('getUser user.js no token');
 	}
 
-	try {
-		if (currentUser) {
-			// const user = await User.findById(req.params.userId);
-			console.log(currentUser);
-			res.status(200).json(currentUser);
-		} else {
-			const user = await User.findById(req.params.userId);
-			console.log(req.params.userId);
-			res.status(200).json(user);
-		}
-	} catch (error) {
-		console.log(error);
+	if (decoded.id === req.params.userId) {
+		// console.log(currentUser);
+		return res.status(200).json(currentUser);
+	} else {
+		// console.log(user);
+		return res.status(201).json(user);
 	}
+
+	// try {
+	// 	if (user) {
+	// 		// const user = await User.findById(req.params.userId);
+	// 		console.log(user);
+	// 		return res.status(200).json(user);
+	// 	} else if (currentUser) {
+	// 		// const user = await User.findById(req.params.userId);
+	// 		// console.log(req.params.userId);
+	// 		return res.status(200).json(currentUser);
+	// 	}
+	// } catch (error) {
+	// 	console.log(error);
+	// 	return res.send('error?');
+	// }
+
 	// if (!user) {
 	// 	return res
 	// 		.status(404)

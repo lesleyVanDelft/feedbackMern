@@ -32,6 +32,11 @@
 	&__userBar {
 		display: flex;
 		width: 100%;
+
+		&--details {
+			display: flex;
+			cursor: pointer;
+		}
 	}
 	&__usernames {
 		display: flex;

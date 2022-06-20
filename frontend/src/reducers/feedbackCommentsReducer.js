@@ -7,8 +7,8 @@ const feedbackPageReducer = (state = null, action) => {
 			return { ...state, ...action.payload };
 		case 'UPDATE_FEEDBACK':
 			return { ...state, ...action.payload };
-		// case 'DELETE_FEEDBACK':
-		// 	return state.filter(fb => fb.id !== action.payload);
+		case 'GET_ALL_FEEDBACKS':
+			return (state = null);
 
 		case 'TOGGLE_UPVOTE_DETAILS':
 			return {

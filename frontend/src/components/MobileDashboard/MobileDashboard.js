@@ -123,7 +123,11 @@ const MobileDashboard = ({ category, isVisible, logout }) => {
 										<VscTriangleDown />
 										<AnimatePresence>
 											{userActive && (
-												<UserDropdown mobile={true} logout={logout} />
+												<UserDropdown
+													mobile={true}
+													logout={logout}
+													user={user}
+												/>
 											)}
 										</AnimatePresence>
 									</span>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { FaLock } from 'react-icons/fa';
 import { GoPencil } from 'react-icons/go';
@@ -16,16 +16,13 @@ import PageLogo from '../../components/PageLogo/PageLogo';
 import Modal from '../../components/Modal/Modal';
 import UserModal from './UserModal/UserModal';
 import axios from 'axios';
-import './User.css';
 import PasswordModal from './PasswordModal/PasswordModal';
 import { handleOutsideClick } from '../../utils/handleOutsideClick';
-import {
-	disableBodyScroll,
-	enableBodyScroll,
-	clearAllBodyScrollLocks,
-} from 'body-scroll-lock';
+import { getUserDetails } from '../../reducers/tempUserReducer';
+import './User.css';
+import { clearAllBodyScrollLocks } from 'body-scroll-lock';
 
-const User = ({ currentUser }) => {
+const User = () => {
 	const [active, setActive] = useState(false);
 	const [imgModal, setImgModal] = useState(false);
 	const [logoutModal, setLogoutModal] = useState(false);
@@ -43,14 +40,20 @@ const User = ({ currentUser }) => {
 	const [image, setImage] = useState();
 	const [userImage, setUserImage] = useState();
 	const user = useSelector(state => state.user);
+	const tempUser = useSelector(state => state.tempUser);
+	const [tempUserData, setTempUserData] = useState(tempUser);
+	const { userId } = useParams();
+
 	const feedbacks = useSelector(state => state.feedbacks);
 	const userFeedbacks = feedbacks.filter(
 		feedback => feedback.author === user.id
 	);
+	const tempUserFeedbacks = feedbacks.filter(
+		feedback => feedback.author === userId
+	);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
 	const isMobile = useMediaQuery({
 		query: '(max-width: 768px)',
 	});
@@ -71,22 +74,36 @@ const User = ({ currentUser }) => {
 	};
 
 	// Get current user
-	const getUser = async () => {
-		// const response = await axios
-		// 	.get
-		// 	// `https://feedback-lesley.herokuapp.com/user/${user.id}`
-		// 	();
-		const response = await axios.get(`http://localhost:5000/user/${user.id}`);
-		return response.data;
+	const currentUser = async () => {
+		// const response = await axios.get(
+		// 	`https://feedback-lesley.herokuapp.com/user/${user.id}`
+		// );
+		// const response = await axios.get(`http://localhost:5000/user/${user.id}`);
+		// return response.data;
 	};
 
+	// useEffect(() => {
+	// 	getUser();
+	// }, []);
 	useEffect(() => {
-		getUser();
-	}, []);
+		userId !== user.id && dispatch(getUserDetails(userId));
+	}, [dispatch, user.id, userId]);
 
 	useEffect(() => {
-		setUserImage(user.profileImg.imageId);
-	}, [user.profileImg.imageId]);
+		// dispatch(getUserDetails(user.id));
+		return userId === user.id
+			? setTempUserData(user)
+			: setTempUserData(tempUser);
+
+		// console.log(userId);
+	}, [tempUser, user, userId]);
+	// console.log(userData);
+
+	// useEffect(() => {
+	// 	userId === undefined
+	// 		? setUserImage(user.profileImg.imageId)
+	// 		: setUserImage(tempUser.profileImg.imageId);
+	// }, [user.profileImg.imageId]);
 
 	// Reset body overflow
 	useEffect(() => {
@@ -144,8 +161,19 @@ const User = ({ currentUser }) => {
 				<BackBtn currentPage="details" />
 			</div>
 			<h2 className="User__welcome">
-				{currentUser && <span>Hello again,</span>}
-				<span className="bold"> @{user ? user.username : 'not found'}</span>!
+				{tempUser === null && (
+					<>
+						<span>Hello again,</span>
+						<span className="bold"> @{user && user.username}</span>!
+					</>
+				)}
+				{tempUser && (
+					<>
+						<span className="bold">
+							@{tempUser && tempUser.username}'s profile
+						</span>
+					</>
+				)}
 			</h2>
 
 			<div className="flex-container">
@@ -155,19 +183,36 @@ const User = ({ currentUser }) => {
 							<div
 								onClick={() => setImgModal(!imgModal)}
 								className={'profileImg__container'}>
-								<img
-									src={
-										user.profileImg.exists
-											? `/images/${user.profileImg.imageId}`
-											: BlankProfilePic
-									}
-									alt="User profile"
-									className="profileImage"
-								/>
+								{tempUser === null && (
+									<img
+										src={
+											user.profileImg.exists
+												? `/images/${user.profileImg.imageId}`
+												: BlankProfilePic
+										}
+										alt="User profile"
+										className="profileImage"
+									/>
+								)}
+
+								{tempUser !== null && (
+									<img
+										src={
+											tempUser.profileImg.exists
+												? `/images/${tempUser.profileImg.imageId}`
+												: BlankProfilePic
+										}
+										alt="User profile"
+										className="profileImage"
+									/>
+								)}
 							</div>
-							<button onClick={toggle} className="editImage">
-								<GoPencil className="editSvg" /> edit profile image
-							</button>
+
+							{userId !== user.id ? null : (
+								<button onClick={toggle} className="editImage">
+									<GoPencil className="editSvg" /> edit profile image
+								</button>
+							)}
 
 							<AnimatePresence>
 								{active && <UserModal getImage={getImage} />}
@@ -187,39 +232,41 @@ const User = ({ currentUser }) => {
 
 						<div className="userInfo">
 							<p>
-								Username: <span>@{user ? user.username : 'not found'}</span>
+								Username:
+								<span>
+									@{tempUser !== null ? tempUser.username : user.username}
+								</span>
 							</p>
 							<p>
-								Name: <span>{user ? user.name : 'not found'}</span>
+								Name:{' '}
+								<span>{tempUser !== null ? tempUser.name : user.username}</span>
 							</p>
 							<p>
-								Feedbacks posted: <span>{user ? userFeedbacks.length : 0}</span>
+								Feedbacks posted:
+								<span>
+									{tempUser !== null
+										? tempUserFeedbacks.length
+										: userFeedbacks.length}
+								</span>
 							</p>
 							<p>
-								Email: <span>{user ? user.email : 'not found'}</span>
+								Email: <span>{tempUser ? tempUser.email : 'not found'}</span>
 							</p>
 
-							<>
-								<button className="editDetails" onClick={openPasswordModal}>
-									<FaLock />
-									Change Password
-								</button>
-								{/* {passwordModal && (
-									<Modal
-										active={passwordModal}
-										closeModal={closePasswordModal}
-										handleDelete={handleLogout}
-										getPasswordData={getPasswordData}
-										param="password"
-									/>
-								)} */}
-								{passwordModal && (
-									<PasswordModal
-										active={passwordModal}
-										closeModal={closePasswordModal}
-									/>
-								)}
-							</>
+							{userId === user.id && (
+								<>
+									<button className="editDetails" onClick={openPasswordModal}>
+										<FaLock />
+										Change Password
+									</button>
+									{passwordModal && (
+										<PasswordModal
+											active={passwordModal}
+											closeModal={closePasswordModal}
+										/>
+									)}
+								</>
+							)}
 							<>
 								<button onClick={openLogoutModal} className="logoutBtn">
 									Logout
@@ -238,16 +285,35 @@ const User = ({ currentUser }) => {
 				</div>
 
 				<div className="User__userFeedbackList">
-					<h2>Feedbacks posted by you:</h2>
-					<div className="User__userFeedbackList--content">
-						{!userFeedbacks.length ? (
-							<EmptyFeedback userDetails={true} />
-						) : (
-							userFeedbacks.map((feedback, i) => {
-								return <FeedbackItem key={i} feedback={feedback} />;
-							})
-						)}
-					</div>
+					{userId === user.id && (
+						<>
+							<h2>Feedbacks posted by you:</h2>
+							<div className="User__userFeedbackList--content">
+								{!userFeedbacks.length ? (
+									<EmptyFeedback userDetails={true} />
+								) : (
+									userFeedbacks.map((feedback, i) => {
+										return <FeedbackItem key={i} feedback={feedback} />;
+									})
+								)}
+							</div>
+						</>
+					)}
+
+					{userId !== user.id && (
+						<>
+							<h2>Feedbacks posted by {tempUser.name}:</h2>
+							<div className="User__userFeedbackList--content">
+								{!tempUserFeedbacks.length ? (
+									<EmptyFeedback userDetails={true} />
+								) : (
+									tempUserFeedbacks.map((feedback, i) => {
+										return <FeedbackItem key={i} feedback={feedback} />;
+									})
+								)}
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 		</motion.main>

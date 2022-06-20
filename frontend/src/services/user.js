@@ -12,9 +12,13 @@ const setConfig = () => {
 };
 
 const getUser = async id => {
-	const response = await axios.get(`${API_URL}/user/${id}`);
+	const response = await axios.get(`${API_URL}/user/${id}`, setConfig());
 	return response.data;
 };
+// async id => {
+// 	const response = await axios.get(`${API_URL}/user/${id}`);
+// 	return response.data;
+// };
 
 // Upload profile picture
 const postImage = async img => {
