@@ -26,6 +26,36 @@ body {
 	// overflow-x: hidden;
 	scroll-behavior: smooth;
 	// scrollbar itself
+	// &::-webkit-scrollbar {
+	// 	background-color: transparent;
+	// 	width: 10px;
+	// }
+	// // scrollbar track
+	// &::-webkit-scrollbar-track {
+	// 	background: rgb(173, 31, 234);
+	// 	background: linear-gradient(
+	// 		180deg,
+	// 		rgba(173, 31, 234, 0.5) 0%,
+	// 		rgba(244, 159, 134, 0.7) 38%
+	// 	);
+	// 	border-radius: 5px;
+	// }
+	// // scrollbar moving part
+	// &::-webkit-scrollbar-thumb {
+	// 	background-color: lighten($color: $blue, $amount: 20%);
+	// 	border-radius: 5px;
+	// 	border: 1px solid darken($color: $blue, $amount: 0%);
+	// }
+	// -webkit-overflow-scrolling: touch;
+}
+
+#root {
+	// min-height: 100%;
+	height: 100%;
+	width: 100%;
+	background: $lightGray;
+	// overflow-x: hidden;
+	overflow-y: scroll;
 	&::-webkit-scrollbar {
 		background-color: transparent;
 		width: 10px;
@@ -46,15 +76,6 @@ body {
 		border-radius: 5px;
 		border: 1px solid darken($color: $blue, $amount: 0%);
 	}
-	// -webkit-overflow-scrolling: touch;
-}
-
-#root {
-	// min-height: 100%;
-	height: 100%;
-	width: 100%;
-	background: $lightGray;
-	// overflow-x: hidden;
 }
 
 a {
@@ -176,6 +197,39 @@ a {
 @media screen and (max-width: 768px) {
 	body {
 		// overflow-y: scroll;
+		// overflow-x: hidden;
+		// overflow-x: hidden;
+		scroll-behavior: smooth;
+		// scrollbar itself
+		// &::-webkit-scrollbar {
+		// 	background-color: transparent;
+		// 	width: 0px;
+		// 	display: none;
+		// }
+		// // scrollbar track
+		// &::-webkit-scrollbar-track {
+		// 	display: none;
+		// 	background: rgb(173, 31, 234);
+		// 	background: linear-gradient(
+		// 		180deg,
+		// 		rgba(173, 31, 234, 0.5) 0%,
+		// 		rgba(244, 159, 134, 0.7) 38%
+		// 	);
+		// 	border-radius: 5px;
+		// }
+		// // scrollbar moving part
+		// &::-webkit-scrollbar-thumb {
+		// 	display: none;
+		// 	background-color: lighten($color: $blue, $amount: 20%);
+		// 	border-radius: 5px;
+		// 	border: 1px solid darken($color: $blue, $amount: 0%);
+		// }
+		// -webkit-overflow-scrolling: touch;
+		// -webkit-overflow-scrolling: touch;
+	}
+	#root {
+		// overflow-y: scroll;
+		overflow-y: auto;
 		// overflow-x: hidden;
 		// overflow-x: hidden;
 		scroll-behavior: smooth;
