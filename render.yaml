@@ -17,4 +17,7 @@ services:
         value: mongodb+srv://adminLesley:zQtK5Glq6YuVQh0l@cluster0.rmnsa.mongodb.net/feedbackboard?retryWrites&#x3D;true&amp;w&#x3D;majority
       - key: NODE_ENV # Imported from Heroku app
         value: production
+        - AWS_ACCESS_KEY: AKIAY5YLF4JZWPQYUAEP
+- AWS_SECRET_KEY: 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
+- JWT_SECRET: abc123
 
