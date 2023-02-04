@@ -4,10 +4,10 @@
 services:
   - type: web # valid values: https://render.com/docs/yaml-spec#type
     name: feedback-lesley
-    env: docker # valid values: https://render.com/docs/yaml-spec#environment
+    env: node # valid values: https://render.com/docs/yaml-spec#environment
     dockerfilePath: Dockerfile.render
     plan: free # optional; defaults to starter
-    numInstances: 3
+    numInstances: 1
     envVars:
       - key: AWS_BUCKET_NAME # Imported from Heroku app
         value: feedback-lesley
@@ -17,3 +17,11 @@ services:
         value: mongodb+srv://adminLesley:zQtK5Glq6YuVQh0l@cluster0.rmnsa.mongodb.net/feedbackboard?retryWrites&#x3D;true&amp;w&#x3D;majority
       - key: NODE_ENV # Imported from Heroku app
         value: production
+      - key: PORT
+        value: 5000
+      - key: AWS_ACCESS_KEY
+        value: AKIAY5YLF4JZWPQYUAEP
+      - key: AWS_SECRET_KEY
+        value: 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
+      - key: JWT_SECRET
+        value: abc123
