@@ -25,3 +25,5 @@ services:
         value: NAwAfPqc38Aw7fDKr0mg7sAyl0f+0QTQe5s4B9B6
       - key: JWT_SECRET
         value: abc123
+      -key: API_URL
+        value: https://feedback-lesley.onrender.com
