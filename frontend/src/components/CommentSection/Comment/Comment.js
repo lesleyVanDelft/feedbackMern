@@ -120,6 +120,11 @@ const Comment = ({
 							: navigate(`/user/${commentData.commentedBy}`);
 					}}>
 					<img
+						src={BlankProfilePic}
+						alt="User profile"
+						className="profileImage"
+					/>
+					{/* <img
 						src={
 							commentData.profileImg && commentData.profileImg.exists
 								? `/images/${commentData.profileImg.imageId}`
@@ -127,7 +132,7 @@ const Comment = ({
 						}
 						alt="User profile"
 						className="profileImage"
-					/>
+					/> */}
 					<div className="Comment__usernames">
 						<h4 className="name">{commentData.name}</h4>
 						<span className="username">@{commentData.username}</span>

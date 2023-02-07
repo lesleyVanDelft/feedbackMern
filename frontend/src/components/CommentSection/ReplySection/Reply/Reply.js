@@ -141,7 +141,8 @@ const Reply = ({
 							? navigate(`/user/${user.id}`)
 							: navigate(`/user/${replyData.repliedBy}`);
 					}}>
-					<img
+					<img src={BlankProfilePic} alt="" className="profileImage" />
+					{/* <img
 						src={
 							replyData.profileImg && replyData.profileImg.exists
 								? `/images/${replyData.profileImg.imageId}`
@@ -149,7 +150,7 @@ const Reply = ({
 						}
 						alt=""
 						className="profileImage"
-					/>
+					/> */}
 					<div className="Reply__usernames">
 						<h4 className="name">{replyData.name}</h4>
 						<span className="username">@{replyData.username}</span>

@@ -27,7 +27,7 @@ const AppRoutes = () => {
 			// localStorage.removeItem('root:user');
 			navigate('/login');
 		}
-	}, []);
+	}, [cookie, dispatch, navigate, user]);
 	// console.log(cookie);
 
 	return (

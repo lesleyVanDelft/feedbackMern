@@ -197,11 +197,12 @@ const User = () => {
 
 								{tempUser !== null && (
 									<img
-										src={
-											tempUser.profileImg.exists
-												? `/images/${tempUser.profileImg.imageId}`
-												: BlankProfilePic
-										}
+										// src={
+										// 	tempUser.profileImg.exists
+										// 		? `/images/${tempUser.profileImg.imageId}`
+										// 		: BlankProfilePic
+										// }
+										src={BlankProfilePic}
 										alt="User profile"
 										className="profileImage"
 									/>

@@ -46,6 +46,7 @@ const Dashboard = ({ category, mobileOpen }) => {
 	});
 
 	const user = useSelector(state => state.user);
+	// console.log(user.name);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
