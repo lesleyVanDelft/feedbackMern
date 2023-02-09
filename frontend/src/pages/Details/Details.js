@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSingleFeedback } from '../../reducers/feedbackCommentsReducer';
@@ -22,12 +22,16 @@ import Cookies from 'js-cookie';
 
 const Details = () => {
 	const singleFeedback = useSelector(state => state.singleFeedback);
+	const [feedback, setFeedback] = useState(singleFeedback);
 	const user = useSelector(state => state.user);
 	const cookie = Cookies.get('jwt');
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	let { id } = useParams();
 
+	useEffect(() => {
+		setFeedback(singleFeedback);
+	}, [singleFeedback]);
 	useEffect(() => {
 		// dispatch(getSingleFeedback(id));
 		if (user !== null && cookie !== undefined) {
