@@ -48,7 +48,7 @@ const CommentSection = ({ comments, feedbackId, currentFeedback }) => {
 		<section className="CommentSection">
 			<h2 className="CommentSection__count">{commentCount} Comments</h2>
 			<div className="CommentSection__comments">
-				{commentList.comments.map((comment, i) => {
+				{comments.map((comment, i) => {
 					return (
 						<Comment
 							commentData={comment}

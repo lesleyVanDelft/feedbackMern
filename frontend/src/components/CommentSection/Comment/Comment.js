@@ -22,7 +22,9 @@ const Comment = ({ commentData, currentFeedback, user, isMobile }) => {
 	const [editValue, setEditValue] = useState(commentData.commentBody);
 	const [replyValues, setReplyValues] = useState(commentData.replies);
 
-	console.log(commentData);
+	const userId = useSelector(state => state.user);
+	// console.log(commentData);
+	console.log(user.profileImg.imageId);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -99,6 +101,7 @@ const Comment = ({ commentData, currentFeedback, user, isMobile }) => {
 				isReply={false}
 				param="comment"
 			/>
+			{/* <img src={`/images/${user.profileImg.imageId}`} alt="fuku"></img> */}
 			<div className="Comment__userBar">
 				<div
 					className="Comment__userBar--details"
@@ -114,8 +117,8 @@ const Comment = ({ commentData, currentFeedback, user, isMobile }) => {
 					/> */}
 					<img
 						src={
-							commentData.profileImg
-								? `/images/${commentData.profileImg.imageId}`
+							user.profileImg.exists
+								? `/images/${user.profileImg.imageId}`
 								: BlankProfilePic
 						}
 						alt="User profile"
