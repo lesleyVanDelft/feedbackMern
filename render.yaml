@@ -5,14 +5,14 @@ services:
   - type: web # valid values: https://render.com/docs/yaml-spec#type
     name: feedback-lesley
     env: node # valid values: https://render.com/docs/yaml-spec#environment
-    startCommand: npm run render-postbuild
+    startCommand: npm run start
     plan: free # optional; defaults to starter
     numInstances: 1
     envVars:
       - key: AWS_BUCKET_NAME # Imported from Heroku app
-        value: feedback-lesley
+        value: feedback-board
       - key: AWS_BUCKET_REGION # Imported from Heroku app
-        value: eu-west-2
+        value: eu-west-1
       - key: MONGO_URI # Imported from Heroku app
         value: mongodb+srv://adminLesley:zQtK5Glq6YuVQh0l@cluster0.rmnsa.mongodb.net/feedbackboard?retryWrites&#x3D;true&amp;w&#x3D;majority
       - key: NODE_ENV # Imported from Heroku app
