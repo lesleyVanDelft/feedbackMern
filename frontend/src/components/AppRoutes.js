@@ -35,16 +35,12 @@ const AppRoutes = () => {
 		<AnimatePresence exitBeforeEnter>
 			<Routes location={location} key={location.pathname}>
 				<Route exact path="/" element={<Homepage />} />
-				<Route path="/login" element={<AuthPage loc={'login'} />} />
-				{/* <Route path="/login" element={<Login loc={location.pathname} />} /> */}
-				{/* <Route path="/register" element={<AuthPage loc={'register'} />} /> */}
-				{/* <Route path="/register" element={<Register />} /> */}
+				<Route path="/login" element={<AuthPage />} />
 				<Route exact path="/details/:id" element={<Details />} />
 				<Route path="/edit/:id" element={<Edit />} />
 				<Route path="/create" element={<Create />} />
 				<Route path="/roadmap" element={<RoadmapPage />} />
 				<Route path="/test" element={<Test />} />
-				{/* <Route path="/user" element={<User currentUser={true} />} /> */}
 				<Route path="/user/:userId" element={<User currentUser={false} />} />
 			</Routes>
 		</AnimatePresence>

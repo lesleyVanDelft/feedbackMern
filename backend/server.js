@@ -78,12 +78,12 @@ app.get('/login', (req, res) => {
 	// console.log(req.params);
 	// console.log('login test');
 
-	// res.status(301).redirect('https://feedback-lesley.onrender.com');
-	res.status(301).redirect('http://localhost:3000/login');
+	res.status(301).redirect('https://feedback-lesley.onrender.com/login');
+	// res.status(301).redirect('http://localhost:3000/login');
 });
 app.get('/register', (req, res) => {
-	// res.status(301).redirect('https://feedback-lesley.onrender.com');
-	res.status(301).redirect('http://localhost:3000/register');
+	res.status(301).redirect('https://feedback-lesley.onrender.com/login');
+	// res.status(301).redirect('http://localhost:3000/login');
 });
 
 app.get('/roadmap', getFeedbacks);
