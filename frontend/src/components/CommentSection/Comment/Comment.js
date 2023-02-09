@@ -82,9 +82,6 @@ const Comment = ({
 	const setActive = actv => {
 		setReplyActive(actv);
 	};
-	const handleDelete = () => {
-		dispatch(deleteComment(currentFeedback._id, commentData._id));
-	};
 	const openModal = e => {
 		e.preventDefault();
 		setShowModal(true);
@@ -92,6 +89,10 @@ const Comment = ({
 	const closeModal = e => {
 		e.preventDefault();
 		setShowModal(false);
+	};
+	const handleDelete = e => {
+		dispatch(deleteComment(currentFeedback._id, commentData._id));
+		closeModal(e);
 	};
 
 	if (!commentData) {
@@ -112,17 +113,16 @@ const Comment = ({
 				<div
 					className="Comment__userBar--details"
 					onClick={() => {
-						// navigate(`/user/${commentData.commentedBy}`);
 						user.id === commentData.commentedBy
 							? navigate(`/user/${user.id}`)
 							: navigate(`/user/${commentData.commentedBy}`);
 					}}>
-					<img
+					{/* <img
 						src={BlankProfilePic}
 						alt="User profile"
 						className="profileImage"
-					/>
-					{/* <img
+					/> */}
+					<img
 						src={
 							commentData.profileImg && commentData.profileImg.exists
 								? `/images/${commentData.profileImg.imageId}`
@@ -130,7 +130,7 @@ const Comment = ({
 						}
 						alt="User profile"
 						className="profileImage"
-					/> */}
+					/>
 					<div className="Comment__usernames">
 						<h4 className="name">{commentData.name}</h4>
 						<span className="username">@{commentData.username}</span>
