@@ -38,9 +38,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan('tiny'));
 
-// app.get('/user', auth, (req, res) => {
-// 	res.status(304).send(req.user);
-// });
 // checkUser sets req.user
 // app.post('/user', changePassword);
 app.use('/api/feedbacks', checkUser, feedbackRoutes);

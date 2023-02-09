@@ -16,9 +16,6 @@ const postComment = async (req, res) => {
 	// current feedback id comes with comment post object
 	const feedback = await Feedback.findById(commentData._id);
 	const user = await User.findById(decoded.id);
-	console.log(commentData.profileImg);
-
-	// console.log(user.profileImg);
 
 	// feedback.author = user comes from auth middleware
 	if (!feedback) {
@@ -38,17 +35,9 @@ const postComment = async (req, res) => {
 		commentedBy: user.id,
 		commentBody: commentData.comment,
 		profileImg: user.profileImg,
-		// upvotedBy: [user._id],
-		// pointsCount: 1,
 	});
 	feedback.commentCount = numOfComments(feedback.comments);
 	const savedFeedback = await feedback.save();
-	// const populatedFeedback = await Feedback.findById(feedback._id).populate([
-	// 	{
-	// 		path: 'comments.commentedBy',
-	// 		populate: 'username',
-	// 	},
-	// ]);
 
 	const addedComment = feedback.comments[savedFeedback.comments.length - 1];
 
@@ -60,7 +49,6 @@ const deleteComment = async (req, res) => {
 
 	const feedback = await Feedback.findById(id);
 	const user = await User.findById(req.user);
-	// console.log(user);
 
 	if (!feedback) {
 		return res.status(404).send({
@@ -136,14 +124,8 @@ const updateComment = async (req, res) => {
 	if (targetComment.commentedBy.toString() !== user._id.toString()) {
 		return res.status(401).send({ message: 'Access is denied.' });
 	}
-	// const updatedComment = feedback.comments.findByIdAndUpdate(
-	// 	targetComment._id,
-	// 	comment.editValue,
-	// 	{ new: true }
-	// );
 
 	targetComment.commentBody = comment.editValue;
-	// targetComment.updatedAt = Date.now();
 
 	feedback.comments = feedback.comments.map(comment =>
 		comment._id.toString() !== commentId ? comment : targetComment
@@ -187,20 +169,12 @@ const postReply = async (req, res) => {
 			message: `Comment with ID: '${commentId}'  does not exist in database.`,
 		});
 	}
-	// name: user.name,
-	// username: user.username,
-	// commentedBy: user.id,
-	// commentBody: commentData.comment,
-	// profileImg: user.profileImg,
 
 	targetComment.replies = targetComment.replies.concat({
 		name: user.name,
 		username: user.username,
 		repliedBy: user.id,
 		replyBody: replyData.replyBody,
-		// upvotedBy: [user._id],
-		// pointsCount: 1,
-		// repliedBy: user.id,
 		profileImg: user.profileImg,
 	});
 
@@ -210,28 +184,6 @@ const postReply = async (req, res) => {
 	feedback.commentCount = numOfComments(feedback.comments);
 
 	await feedback.save();
-
-	// const populatedFeedback = await savedFeedback
-	// 	.populate('comments.replies.repliedBy', 'username')
-	// 	.execPopulate();
-
-	// const populatedFeedback = await Feedback.findById(feedback._id).populate([
-	// 	{
-	// 		path: 'comments.replies.repliedBy',
-	// 		populate: 'username',
-	// 	},
-	// ]);
-
-	// const populatedFeedback = await Feedback.findById(feedback._id).populate([
-	// 	{
-	// 		path: 'comments.commentedBy',
-	// 		populate: 'username',
-	// 	},
-	// ]);
-
-	// user.karmaPoints.commentKarma++;
-	// user.totalComments++;
-	// await user.save();
 
 	const commentToReply = feedback.comments.find(
 		c => c._id.toString() === commentId
@@ -348,7 +300,6 @@ const updateReply = async (req, res) => {
 	}
 
 	targetReply.replyBody = reply.editValue;
-	// targetReply.updatedAt = Date.now();
 
 	targetComment.replies = targetComment.replies.map(reply =>
 		reply._id.toString() !== replyId ? reply : targetReply
