@@ -25,11 +25,9 @@ const AppRoutes = () => {
 	useEffect(() => {
 		if (cookie === undefined || user === null) {
 			dispatch(logoutUser());
-			// localStorage.removeItem('root:user');
 			navigate('/login');
 		}
 	}, [cookie, dispatch, navigate, user]);
-	// console.log(cookie);
 
 	return (
 		<AnimatePresence exitBeforeEnter>
