@@ -14,7 +14,7 @@ services:
       - key: AWS_BUCKET_REGION # Imported from Heroku app
         value: eu-west-1
       - key: MONGO_URI # Imported from Heroku app
-        value: mongodb+srv://adminLesley:zQtK5Glq6YuVQh0l@cluster0.rmnsa.mongodb.net/feedbackboard?retryWrites&#x3D;true&amp;w&#x3D;majority
+        value: mongodb+srv://adminLesley:zQtK5Glq6YuVQh0l@cluster0.rmnsa.mongodb.net/feedbackboard?retryWrites=true&w=majority
       - key: NODE_ENV # Imported from Heroku app
         value: production
       - key: PORT
