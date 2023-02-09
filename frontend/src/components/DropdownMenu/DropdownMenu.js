@@ -11,14 +11,10 @@ const DropdownMenu = ({ category }) => {
 	const dropdownRef = useRef(null);
 	const [listening, setListening] = useState(false);
 	const toggle = () => setMenuActive(!menuActive);
+
 	useEffect(
 		handleOutsideClick(listening, setListening, dropdownRef, setMenuActive)
 	);
-
-	// const openDropdown = e => {
-	// 	setMenuActive(!menuActive);
-	// };
-	// category(selected);
 
 	const handleSelect = select => {
 		setSelected(select);
@@ -41,13 +37,13 @@ const DropdownMenu = ({ category }) => {
 			opacity: 0,
 		},
 	};
+
 	const categoryArray = ['Feature', 'UI', 'UX', 'Enhancement', 'Bug'];
+
 	return (
 		<div className="DropdownMenu" ref={dropdownRef}>
 			<button
 				type="button"
-				// onFocus={() => setMenuActive(true)}
-				// onBlur={() => setMenuActive(false)}
 				onClick={toggle}
 				className={`DropdownMenu__btn ${menuActive && 'active'}`}>
 				{selected} <FaChevronDown />

@@ -22,7 +22,8 @@ const Modal = ({
 
 	// Handle all password input changes
 	const [passwordValues, setPasswordValues] = useState(initialPasswordValues);
-	const [newPassword, setNewPassword] = useState('');
+	// const [newPassword, setNewPassword] = useState('');
+
 	const handleChange = e => {
 		const { name, value } = e.target;
 		setPasswordValues({
@@ -31,50 +32,8 @@ const Modal = ({
 		});
 	};
 
-	// useEffect(() => {
-	// 	return getPasswordData(passwordValues);
-	// }, [getPasswordData, passwordValues]);
-
-	// useEffect(() => {
-	// 	getPasswordData(passwordValues);
-	// }, [passwordValues]);
-	// axios post
-	// const updatePassword = async () => {
-	// 	const response = await axios.post(
-	// 		'https://feedback-lesley.herokuapp.com/user',
-	// 		passwordValues
-	// 	);
-	// 	return response.data;
-	// };
-
-	const setConfig = () => {
-		const tokenCookie = Cookies.get('jwt');
-		return {
-			headers: { Authorization: `Bearer ${tokenCookie}` },
-		};
-	};
 	// Handle password change form submit
-	const handleSubmit = async e => {
-		// e.preventDefault();
-		// // getPasswordData(passwordValues);
-		// const { currentPassword, newPassword } = passwordValues;
-		// if (passwordValues.newPassword === passwordValues.confirmNewPassword) {
-		// 	// const response = await axios.post(
-		// 	// 	'https://feedback-lesley.herokuapp.com/user',
-		// 	// 	{
-		// 	// 		currentPassword,
-		// 	// 		newPassword,
-		// 	// 	},
-		// 	// 	setConfig()
-		// 	// );
-		// 	// console.log(newPassword);
-		// 	// return response.data;
-		// 	setNewPassword()
-		// 	// return dispatch(changePassword({ currentPassword, newPassword }));
-		// } else {
-		// 	console.log('passwords do not match');
-		// }
-	};
+	const handleSubmit = async e => {};
 
 	return (
 		<div className={`Modal ${active ? 'active' : ''}`}>

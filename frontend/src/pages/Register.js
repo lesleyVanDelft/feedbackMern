@@ -45,8 +45,10 @@ const Register = () => {
 	useEffect(() => {
 		if (user !== null) {
 			navigate('/');
+		} else {
+			navigate('/register');
 		}
-	}, [user]);
+	}, [navigate, user]);
 
 	const initialMotion = {
 		initial: {

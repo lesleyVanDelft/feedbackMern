@@ -77,7 +77,6 @@ const Comment = ({
 		}
 		setEditActive(false);
 	};
-	// console.log(currentFeedback._id);
 
 	// Set Reply active
 	const setActive = actv => {
@@ -98,8 +97,9 @@ const Comment = ({
 	if (!commentData) {
 		return <h1>loading</h1>;
 	}
-	//  onClick={() => console.log(commentData)}
-	// console.log(commentData);
+
+	console.log(commentData);
+
 	return (
 		<article className="Comment">
 			<Modal

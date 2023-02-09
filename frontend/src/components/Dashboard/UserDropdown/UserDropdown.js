@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import './UserDropdown.css';
 import { useSelector } from 'react-redux';
+import './UserDropdown.css';
 
 const UserDropdown = ({ logout, mobile }) => {
 	const user = useSelector(state => state.user);
+
 	// framer motion
 	const framerList = {
 		hidden: {
@@ -33,7 +34,6 @@ const UserDropdown = ({ logout, mobile }) => {
 		},
 	};
 	return (
-		// <AnimatePresence>
 		<motion.div
 			className={`UserDropdown ${mobile ? 'mobile' : 'desktop'}`}
 			variants={framerList}
@@ -42,9 +42,6 @@ const UserDropdown = ({ logout, mobile }) => {
 			exit="exit">
 			<ul className="UserDropdown__list">
 				<li className="UserDropdown__list--item">
-					{/* <span to={`/user/${``}`} onClick={() => console.log(user.name)}>
-						My Account
-					</span> */}
 					<Link to={`/user/${user.id}`}>My Account</Link>
 				</li>
 				<li className="UserDropdown__list--item" onClick={logout}>
@@ -52,7 +49,6 @@ const UserDropdown = ({ logout, mobile }) => {
 				</li>
 			</ul>
 		</motion.div>
-		// </AnimatePresence>
 	);
 };
 
