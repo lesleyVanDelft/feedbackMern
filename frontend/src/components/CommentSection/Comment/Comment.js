@@ -22,7 +22,7 @@ const Comment = ({ commentData, currentFeedback, user, isMobile }) => {
 	const [editValue, setEditValue] = useState(commentData.commentBody);
 	const [replyValues, setReplyValues] = useState(commentData.replies);
 
-	console.log(currentFeedback);
+	console.log(commentData);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -114,7 +114,7 @@ const Comment = ({ commentData, currentFeedback, user, isMobile }) => {
 					/> */}
 					<img
 						src={
-							commentData.profileImg && commentData.profileImg.exists
+							commentData.profileImg
 								? `/images/${commentData.profileImg.imageId}`
 								: BlankProfilePic
 						}

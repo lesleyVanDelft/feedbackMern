@@ -12,10 +12,11 @@ import * as dayjs from 'dayjs';
 const FeedbackList = ({ category }) => {
 	const [sortBy, setSortBy] = useState('Most Upvotes');
 	const feedbacks = useSelector(state => state.feedbacks);
-	const [feedbackList, setFeedbackList] = useState([...feedbacks]);
+	const [feedbackList, setFeedbackList] = useState(feedbacks);
 	const [filteredList, setFilteredList] = useState([...feedbackList]);
 	useEffect(() => {
-		setFeedbackList([...feedbacks]);
+		setFeedbackList(feedbacks);
+		// setFeedbackList([...feedbacks]);
 	}, [feedbacks, sortBy]);
 
 	useEffect(() => {
