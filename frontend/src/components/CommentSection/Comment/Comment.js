@@ -3,7 +3,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import Reply from '../ReplySection/Reply/Reply';
 import BlankProfilePic from '../../../assets/blank-profile-picture.png';
 import ReplyForm from '../ReplyForm/ReplyForm';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	deleteComment,
 	editComment,
@@ -12,28 +12,21 @@ import Modal from '../../Modal/Modal';
 import DropdownEdit from '../DropdownEdit/DropdownEdit';
 import { handleOutsideClick } from '../../../utils/handleOutsideClick';
 import './Comment.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Comment = ({
-	commentData,
-	currentFeedback,
-	user,
-	username,
-	isMobile,
-}) => {
+const Comment = ({ commentData, currentFeedback, user, isMobile }) => {
 	const [replyActive, setReplyActive] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [mobileDropdown, setMobileDropdown] = useState(false);
 	const [editActive, setEditActive] = useState(false);
 	const [editValue, setEditValue] = useState(commentData.commentBody);
-	// const [replyEditValue, setReplyEditValue] = useState(commentData.replies);
 	const [replyValues, setReplyValues] = useState(commentData.replies);
-	// console.log(commentData.replies);
-	// let { id } = useParams;
+
+	console.log(currentFeedback);
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	// console.log(commentData);
 	// Outside click handling
 	const dropdownRef = useRef(null);
 	const [listening, setListening] = useState(false);
@@ -41,16 +34,13 @@ const Comment = ({
 	useEffect(
 		handleOutsideClick(listening, setListening, dropdownRef, setMobileDropdown)
 	);
+
 	useEffect(() => {
 		setEditValue(commentData.commentBody);
 	}, [commentData.commentBody]);
 
-	// useEffect(() => {
-	// 	setReplyEditValue(commentData.replies);
-	// }, [commentData.replies]);
 	useEffect(() => {
 		setReplyValues(commentData.replies);
-		// console.log(replyValues);
 	}, [commentData.replies]);
 
 	// Set Edit active state through dropdown menu
@@ -131,6 +121,15 @@ const Comment = ({
 						alt="User profile"
 						className="profileImage"
 					/>
+					{/* <img
+						src={
+							user.profileImg && user.profileImg.exists
+								? `/images/${user.profileImg.imageId}`
+								: BlankProfilePic
+						}
+						alt="User profile"
+						className="profileImage"
+					/> */}
 					<div className="Comment__usernames">
 						<h4 className="name">{commentData.name}</h4>
 						<span className="username">@{commentData.username}</span>

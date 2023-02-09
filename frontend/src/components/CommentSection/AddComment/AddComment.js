@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addComment } from '../../../reducers/feedbackCommentsReducer';
 import { useParams } from 'react-router-dom';
 import './AddComment.css';
@@ -10,6 +10,7 @@ const AddComment = ({ feedbackData, user }) => {
 	const [profileImgData, setProfileImgData] = useState(user.profileImg);
 	const dispatch = useDispatch();
 	// console.log(user);
+	const userId = useSelector(state => state.user.id);
 
 	const { id } = useParams();
 
@@ -32,6 +33,7 @@ const AddComment = ({ feedbackData, user }) => {
 		e.preventDefault();
 		dispatch(addComment(id, data));
 		setComment('');
+		// console.log(data);
 	};
 
 	return (

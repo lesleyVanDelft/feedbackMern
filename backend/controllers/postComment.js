@@ -37,6 +37,7 @@ const postComment = async (req, res) => {
 		profileImg: user.profileImg,
 	});
 	feedback.commentCount = numOfComments(feedback.comments);
+
 	const savedFeedback = await feedback.save();
 
 	const addedComment = feedback.comments[savedFeedback.comments.length - 1];
