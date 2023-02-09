@@ -46,7 +46,7 @@ const Register = () => {
 		if (user !== null) {
 			navigate('/');
 		} else {
-			navigate('/register');
+			return;
 		}
 	}, [navigate, user]);
 

@@ -30,14 +30,14 @@ const Homepage = () => {
 		}
 		if (user === null || cookie === undefined) {
 			dispatch(logoutUser());
-			navigate('/');
+			navigate('/login');
 		} else {
 			navigate('/');
 			dispatch(getFeedbacks());
 		}
 
 		// dispatch(setUser());
-	}, [cookie, dispatch, navigate, user]);
+	}, [cookie, user]);
 
 	const initialMotion = {
 		initial: {

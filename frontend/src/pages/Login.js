@@ -34,7 +34,7 @@ const Login = () => {
 		if (user !== null) {
 			navigate('/');
 		} else {
-			navigate('/login');
+			return;
 		}
 	}, [navigate, user]);
 

@@ -98,8 +98,6 @@ const Comment = ({
 		return <h1>loading</h1>;
 	}
 
-	console.log(commentData);
-
 	return (
 		<article className="Comment">
 			<Modal
