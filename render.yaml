@@ -20,9 +20,9 @@ services:
       - key: PORT
         value: 5000
       - key: AWS_ACCESS_KEY
-        value: AKIAY5YLF4JZWPQYUAEP
+        value: AKIAZAQAYOH63LUF4DHN
       - key: AWS_SECRET_KEY
-        value: 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
+        value: 2Y1kUk3ORKapiTVLyshqYr32akQV5tmNehDhqHoL
       - key: JWT_SECRET
         value: abc123
       - key: API_URL
