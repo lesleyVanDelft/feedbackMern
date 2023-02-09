@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
-import { loginUser, registerUser } from '../reducers/userReducer';
+import { registerUser } from '../reducers/userReducer';
 import { useFormik } from 'formik';
 import PageLogo from '../components/PageLogo/PageLogo';
 import * as Yup from 'yup';
@@ -45,8 +44,6 @@ const Register = () => {
 	useEffect(() => {
 		if (user !== null) {
 			navigate('/');
-		} else {
-			return;
 		}
 	}, [navigate, user]);
 
@@ -68,8 +65,8 @@ const Register = () => {
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
-			<PageLogo />
-			<Header login={false} />
+			{/* <PageLogo />
+			<Header login={false} /> */}
 			<section className="Register__form">
 				<form onSubmit={formik.handleSubmit}>
 					<div className="heading">

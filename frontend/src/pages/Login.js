@@ -8,8 +8,9 @@ import * as Yup from 'yup';
 import { loginUser } from '../reducers/userReducer';
 import Header from '../components/Header/Header';
 import PageLogo from '../components/PageLogo/PageLogo';
+import Register from './Register';
 
-const Login = () => {
+const Login = ({ loc }) => {
 	const user = useSelector(state => state.user);
 	const [error, setError] = useState(null);
 	const errorMessage = useSelector(state => state.errorMessage);
@@ -33,8 +34,6 @@ const Login = () => {
 	useEffect(() => {
 		if (user !== null) {
 			navigate('/');
-		} else {
-			return;
 		}
 	}, [navigate, user]);
 
@@ -60,8 +59,8 @@ const Login = () => {
 			variants={initialMotion}
 			initial="initial"
 			animate="animate">
-			<PageLogo className="logo" />
-			<Header login={true} />
+			{/* <PageLogo className="logo" />
+			<Header login={true} /> */}
 			<section className="Login__form form">
 				<div className="heading">
 					<h2>

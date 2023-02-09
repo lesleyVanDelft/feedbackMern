@@ -13,6 +13,7 @@ import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../reducers/userReducer';
+import AuthPage from '../pages/AuthPage';
 
 const AppRoutes = () => {
 	const user = useSelector(state => state.user);
@@ -34,8 +35,10 @@ const AppRoutes = () => {
 		<AnimatePresence exitBeforeEnter>
 			<Routes location={location} key={location.pathname}>
 				<Route exact path="/" element={<Homepage />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/register" element={<Register />} />
+				<Route path="/login" element={<AuthPage loc={'login'} />} />
+				{/* <Route path="/login" element={<Login loc={location.pathname} />} /> */}
+				{/* <Route path="/register" element={<AuthPage loc={'register'} />} /> */}
+				{/* <Route path="/register" element={<Register />} /> */}
 				<Route exact path="/details/:id" element={<Details />} />
 				<Route path="/edit/:id" element={<Edit />} />
 				<Route path="/create" element={<Create />} />

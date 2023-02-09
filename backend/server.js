@@ -76,14 +76,14 @@ app.post('/images', upload.single('image'), async (req, res) => {
 app.get('/login', (req, res) => {
 	// const location = req.params.userLocation;
 	// console.log(req.params);
-	console.log('login test');
+	// console.log('login test');
 
-	res.status(301).redirect('https://feedback-lesley.onrender.com');
-	// res.status(301).redirect('http://localhost:3000/login');
+	// res.status(301).redirect('https://feedback-lesley.onrender.com');
+	res.status(301).redirect('http://localhost:3000/login');
 });
 app.get('/register', (req, res) => {
-	res.status(301).redirect('https://feedback-lesley.onrender.com');
-	// res.status(301).redirect('http://localhost:3000/register');
+	// res.status(301).redirect('https://feedback-lesley.onrender.com');
+	res.status(301).redirect('http://localhost:3000/register');
 });
 
 app.get('/roadmap', getFeedbacks);

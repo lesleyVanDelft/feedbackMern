@@ -18,29 +18,8 @@ const checkUser = async (req, res, next) => {
 			console.log(error + ' checkUser mw');
 		}
 	} else {
-		res.status(401).redirect('https://feedback-lesley.herokuapp.com/login');
+		res.status(401).redirect('https://feedback-lesley.onrender.com/login');
 	}
-
-	// if (token) {
-	// 	jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
-	// 		if (err) {
-	// 			console.log(err.message + 'checkUser mw');
-
-	// 		} else {
-
-	// 			let user = await User.findById(decodedToken.id);
-
-	// 			req.user = user;
-	// 			console.log(user + 'checkUser');
-
-	// 			next();
-	// 		}
-	// 	});
-	// } else {
-	// 	res.status(401).redirect('http://localhost:3000/login');
-	// }
-
-	// next();
 };
 
 const protect = asyncHandler(async (req, res, next) => {
@@ -62,11 +41,6 @@ const protect = asyncHandler(async (req, res, next) => {
 	} else {
 		res.status(401).redirect('http://localhost:3000/login');
 	}
-
-	// if (!token) {
-	// 	res.status(401).send('No token.');
-	// }
 });
-// const refresh = asyncHandler(async (req, res, next) => {});
 
 module.exports = { checkUser, protect };
