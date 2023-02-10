@@ -42,6 +42,11 @@ const userModel = mongoose.Schema(
 				default: '',
 			},
 		},
+		imageId: {
+			type: String,
+			trim: true,
+			default: '',
+		},
 		feedbacksPosted: [
 			{
 				type: mongoose.Schema.Types.ObjectId,

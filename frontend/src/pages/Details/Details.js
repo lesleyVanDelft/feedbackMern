@@ -22,6 +22,7 @@ import Cookies from 'js-cookie';
 
 const Details = () => {
 	const singleFeedback = useSelector(state => state.singleFeedback);
+	const feedbacks = useSelector(state => state.feedbacks);
 	const [feedback, setFeedback] = useState(singleFeedback);
 	const user = useSelector(state => state.user);
 	const cookie = Cookies.get('jwt');
@@ -29,9 +30,12 @@ const Details = () => {
 	const dispatch = useDispatch();
 	let { id } = useParams();
 
+	// console.log(feedbacks.filter(el => el._id === id));
+
 	useEffect(() => {
 		setFeedback(singleFeedback);
 	}, [singleFeedback]);
+
 	useEffect(() => {
 		// dispatch(getSingleFeedback(id));
 		if (user !== null && cookie !== undefined) {

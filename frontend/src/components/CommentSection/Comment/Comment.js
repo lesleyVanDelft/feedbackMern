@@ -21,12 +21,12 @@ const Comment = ({ commentData, currentFeedback, user, isMobile }) => {
 	const [editActive, setEditActive] = useState(false);
 	const [editValue, setEditValue] = useState(commentData.commentBody);
 	const [replyValues, setReplyValues] = useState(commentData.replies);
-	const [userImage, setUserImage] = useState(commentData.profileImg.imageId);
+	const [userImage, setUserImage] = useState();
 	const userId = useSelector(state => state.user);
 	// console.log(commentData);
 	// console.log(user.profileImg.imageId
 	// console.log(commentData);
-	// console.log();
+	console.log(commentData.imageId);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();

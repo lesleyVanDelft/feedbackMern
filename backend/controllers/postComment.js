@@ -41,6 +41,7 @@ const postComment = async (req, res) => {
 			imageId: commentData.profileImg.imageId,
 		},
 		// profileImg: user.profileImg,
+		imageId: user.imageId,
 	});
 	feedback.commentCount = numOfComments(feedback.comments);
 
