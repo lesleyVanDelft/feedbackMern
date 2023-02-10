@@ -21,6 +21,7 @@ const userReducer = (state = null, action) => {
 			return action.payload;
 		case 'SET_PROFILE_IMG':
 			return {
+				imageId: action.payload.imageId,
 				...state,
 				...action.payload,
 
@@ -127,6 +128,7 @@ export const setProfileImage = img => {
 					imageLink: uploadedImage.imagePath,
 					imageId: uploadedImage.imagePath.split('/')[2],
 				},
+				imageId: uploadedImage.imagePath.split('/')[2],
 			};
 
 			storageService.saveUser({ ...user, ...updatedLocalStorage });

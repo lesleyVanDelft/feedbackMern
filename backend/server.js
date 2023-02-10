@@ -22,8 +22,10 @@ const { checkUser } = require('./middleware/authMiddleware');
 const { setProfileImage, changePassword } = require('./controllers/user');
 // const { setProfileImage } = require('./controllers/user');
 const User = require('./models/userModel');
+const Feedback = require('./models/feedbackModel');
 const { uploadFile, getFileStream } = require('./s3');
 const { auth } = require('./utils/middleware');
+// const feedbackModel = require('./models/');
 
 connectDB();
 
@@ -49,6 +51,7 @@ app.get('/images/:key', (req, res) => {
 
 	readStream.pipe(res);
 });
+
 app.post('/images', upload.single('image'), async (req, res) => {
 	// Uploaded file
 	const file = req.file;
@@ -56,20 +59,31 @@ app.post('/images', upload.single('image'), async (req, res) => {
 	// JWT token
 	const token = req.cookies.jwt;
 	const decoded = jwt.verify(token, process.env.JWT_SECRET);
+	const user = await User.findById(decoded.id);
 
 	// AWS S3 upload
 	const result = await uploadFile(file);
+	// console.log(typeof result.Key);
 
 	// Updates user imageId with new AWS S3 result
-	await User.findByIdAndUpdate(decoded.id, {
+	await User.findByIdAndUpdate(user._id, {
 		profileImg: {
 			exists: true,
 			imageLink: '',
 			imageId: result.Key,
 		},
+		imageId: result.Key,
 	});
+
+	// await Feedback.upda
+
+	// const comments = await Feedback.findByIdAndUpdate(user./_id);
+	// const testt = await
+	// console.log(result.Key);
+
 	// Removes uploaded file from multer folder: uploads/
 	await unlinkFile(file.path);
+	// await User.save();
 	res.send({ imagePath: `/images/${result.Key}` });
 });
 
@@ -78,11 +92,11 @@ app.get('/login', (req, res) => {
 	// console.log(req.params);
 	// console.log('login test');
 
-	res.status(301).redirect('https://feedback-lesley.onrender.com/login');
+	res.status(301);
 	// res.status(301).redirect('http://localhost:3000/login');
 });
 app.get('/register', (req, res) => {
-	res.status(301).redirect('https://feedback-lesley.onrender.com/login');
+	res.status(301);
 	// res.status(301).redirect('http://localhost:3000/login');
 });
 

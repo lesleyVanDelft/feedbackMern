@@ -21,10 +21,12 @@ const Comment = ({ commentData, currentFeedback, user, isMobile }) => {
 	const [editActive, setEditActive] = useState(false);
 	const [editValue, setEditValue] = useState(commentData.commentBody);
 	const [replyValues, setReplyValues] = useState(commentData.replies);
-
+	const [userImage, setUserImage] = useState();
 	const userId = useSelector(state => state.user);
 	// console.log(commentData);
-	console.log(user.profileImg.imageId);
+	// console.log(user.profileImg.imageId
+	// console.log(commentData);
+	console.log(commentData.imageId);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -36,6 +38,10 @@ const Comment = ({ commentData, currentFeedback, user, isMobile }) => {
 	useEffect(
 		handleOutsideClick(listening, setListening, dropdownRef, setMobileDropdown)
 	);
+
+	useEffect(() => {
+		setUserImage(commentData.profileImg.imageId);
+	}, [commentData.profileImg.imageId]);
 
 	useEffect(() => {
 		setEditValue(commentData.commentBody);
@@ -117,8 +123,8 @@ const Comment = ({ commentData, currentFeedback, user, isMobile }) => {
 					/> */}
 					<img
 						src={
-							user.profileImg.exists
-								? `/images/${user.profileImg.imageId}`
+							commentData.profileImg.exists
+								? `/images/${userImage}`
 								: BlankProfilePic
 						}
 						alt="User profile"

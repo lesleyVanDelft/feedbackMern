@@ -65,6 +65,10 @@ const commentSchema = new mongoose.Schema(
 			type: Object,
 			ref: 'User',
 		},
+		imageId: {
+			type: String,
+			trim: true,
+		},
 	},
 	{ timestamps: true }
 );

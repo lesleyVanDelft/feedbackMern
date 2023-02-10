@@ -13,7 +13,10 @@ const router = express.Router();
 // router.post('/register', registerUser);
 // router.post('/login', loginUser);
 // router.get('/:username', getUser);
-router.post('/avatar', auth, setUserAvatar);
+// router.post('/images', (req, res) => {
+// 	console.log('image test');
+// });
+router.post('/avatar', setUserAvatar);
 router.delete('/avatar', auth, removeUserAvatar);
 
 module.exports = router;

@@ -18,14 +18,23 @@ const s3 = new S3({
 });
 
 // uploads file to s3
-exports.uploadFile = file => {
+exports.uploadFile = async file => {
 	const fileStream = fs.createReadStream(file.path);
-	// console.log(file);
+
 	const uploadParams = {
 		Bucket: bucketName,
 		Body: fileStream,
 		Key: file.filename,
 	};
+
+	// await User.findByIdAndUpdate(user._id, {
+	// 	profileImg: {
+	// 		exists: true,
+	// 		imageLink: '',
+	// 		imageId: result.Key,
+	// 	},
+	// 	imageId: result.Key,
+	// });
 
 	return s3.upload(uploadParams).promise();
 };

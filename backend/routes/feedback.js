@@ -29,7 +29,7 @@ const router = express.Router();
 app.use(function (req, res, next) {
 	res.header(
 		'Access-Control-Allow-Origin',
-		'https://feedback-lesley.herokuapp.com/api/feedbacks'
+		'https://feedback-lesley.onrender.com/api/feedbacks'
 		// 'http:localhost:5000/api/feedbacks'
 	); // update to match the domain you will make the request from
 	res.header(

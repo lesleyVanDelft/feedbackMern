@@ -7,7 +7,7 @@ import './CommentSection.css';
 
 const CommentSection = ({ comments, feedbackId, currentFeedback }) => {
 	const [commentCount, setCommentCount] = useState(0);
-	const [commentList, setCommentList] = useState(comments);
+	const [commentList, setCommentList] = useState([...comments]);
 	const singleFeedback = useSelector(state => state.singleFeedback);
 	const user = useSelector(state => state.user);
 
@@ -25,10 +25,11 @@ const CommentSection = ({ comments, feedbackId, currentFeedback }) => {
 		return commentsArray.length + commentRepliesLength;
 	};
 
-	// set comment list
 	useEffect(() => {
 		setCommentList(comments);
 	}, [comments]);
+
+	// console.log(commentList);
 
 	// sets total comment count
 	useEffect(() => {
@@ -48,7 +49,7 @@ const CommentSection = ({ comments, feedbackId, currentFeedback }) => {
 		<section className="CommentSection">
 			<h2 className="CommentSection__count">{commentCount} Comments</h2>
 			<div className="CommentSection__comments">
-				{comments.map((comment, i) => {
+				{commentList?.map((comment, i) => {
 					return (
 						<Comment
 							commentData={comment}

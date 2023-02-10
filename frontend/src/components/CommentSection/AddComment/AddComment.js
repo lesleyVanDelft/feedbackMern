@@ -27,6 +27,7 @@ const AddComment = ({ feedbackData, user }) => {
 		_id: id,
 		comment: comment,
 		profileImg: profileImgData,
+		imageId: user.imageId,
 	};
 
 	const onSubmit = e => {
