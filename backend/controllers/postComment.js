@@ -16,6 +16,7 @@ const postComment = async (req, res) => {
 	// current feedback id comes with comment post object
 	const feedback = await Feedback.findById(commentData._id);
 	const user = await User.findById(decoded.id);
+	// console.log(user);
 
 	// feedback.author = user comes from auth middleware
 	if (!feedback) {
@@ -34,7 +35,12 @@ const postComment = async (req, res) => {
 		username: user.username,
 		commentedBy: user.id,
 		commentBody: commentData.comment,
-		profileImg: user.profileImg,
+		profileImg: {
+			exists: user.profileImg.exists,
+			imageLink: '',
+			imageId: commentData.profileImg.imageId,
+		},
+		// profileImg: user.profileImg,
 	});
 	feedback.commentCount = numOfComments(feedback.comments);
 

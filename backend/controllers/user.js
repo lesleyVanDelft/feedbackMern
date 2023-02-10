@@ -13,33 +13,10 @@ const getUser = async (req, res) => {
 	}
 
 	if (decoded.id === req.params.userId) {
-		// console.log(currentUser);
 		return res.status(200).json(currentUser);
 	} else {
-		// console.log(user);
 		return res.status(201).json(user);
 	}
-
-	// try {
-	// 	if (user) {
-	// 		// const user = await User.findById(req.params.userId);
-	// 		console.log(user);
-	// 		return res.status(200).json(user);
-	// 	} else if (currentUser) {
-	// 		// const user = await User.findById(req.params.userId);
-	// 		// console.log(req.params.userId);
-	// 		return res.status(200).json(currentUser);
-	// 	}
-	// } catch (error) {
-	// 	console.log(error);
-	// 	return res.send('error?');
-	// }
-
-	// if (!user) {
-	// 	return res
-	// 		.status(404)
-	// 		.send({ message: `Username '${username}' does not exist on server.` });
-	// }
 };
 
 const setUserAvatar = async (req, res) => {
@@ -98,27 +75,12 @@ const removeUserAvatar = async (req, res) => {
 	res.status(204).end();
 };
 
-// const upload = bucketName => {
-// 	multer({
-// 		storage: multerS3({
-// 			s3,
-// 			bucket: bucketName,
-// 			metadata: function (req, file, cb) {
-// 				cb(null, { fieldName: file.fieldname });
-// 			},
-// 			key: function (req, file, cb) {
-// 				cb(null, `image-${Date.now()}.jpeg`);
-// 			},
-// 		}),
-// 	});
-// };
-
 const setProfileImage = async key => {
 	return async (req, res, next) => {
 		const token = req.cookies.jwt;
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-		// console.log(decoded);
+		console.log(decoded);
 		const updatedUser = await User.findByIdAndUpdate(decoded.id, {
 			profileImg: {
 				exists: true,

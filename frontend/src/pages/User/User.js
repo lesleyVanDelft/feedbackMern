@@ -224,12 +224,8 @@ const User = () => {
 									active={imgModal}
 									getState={getImageModal}
 									image={
-										tempUser === null
-											? user.profileImg.exists
-												? `/images/${user.profileImg.imageId}`
-												: BlankProfilePic
-											: tempUser.profileImg.exists
-											? `/images/${tempUser.profileImg.imageId}`
+										tempUser === null && user.profileImg.exists
+											? `/images/${user.profileImg.imageId}`
 											: BlankProfilePic
 									}
 								/>

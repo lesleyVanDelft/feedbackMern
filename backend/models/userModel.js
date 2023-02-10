@@ -34,12 +34,12 @@ const userModel = mongoose.Schema(
 			imageLink: {
 				type: String,
 				trim: true,
-				default: 'null',
+				default: '',
 			},
 			imageId: {
 				type: String,
 				trim: true,
-				default: 'null',
+				default: '',
 			},
 		},
 		feedbacksPosted: [
